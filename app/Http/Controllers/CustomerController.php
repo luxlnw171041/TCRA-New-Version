@@ -133,10 +133,11 @@ class CustomerController extends Controller
 
     public function customer_test()
     {
-        $data = Customer::where('c_name', '!=' , null)->get();
+        $customer = Customer::latest()->get();
 
         echo "<pre>";
-        print_f($data);
+        print_r($customer);
+        pri
         echo "<pre>";
         exit();
     }
