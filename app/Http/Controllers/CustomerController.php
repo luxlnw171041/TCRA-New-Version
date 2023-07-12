@@ -137,7 +137,6 @@ class CustomerController extends Controller
 
         echo "<pre>";
         print_r($customer);
-        pri
         echo "<pre>";
         exit();
     }
