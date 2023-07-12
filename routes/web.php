@@ -20,9 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::middleware(['auth'])->group(function () {
+Route::get('/home_test', 'HomeController@home_test');
 
+Route::middleware(['auth'])->group(function () {
+	Route::resource('customer', 'CustomerController');
 });
-Route::resource('customer', 'CustomerController');
 
 
