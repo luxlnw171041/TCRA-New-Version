@@ -130,4 +130,15 @@ class CustomerController extends Controller
 
         return redirect('customer')->with('flash_message', 'Customer deleted!');
     }
+
+    public function customer_test(){
+
+        $test_data = Customer::where('c_name' , '!=' , null)->get();
+
+        echo "<pre>";
+        print_r($test_data);
+        echo "<pre>";
+        exit();
+
+    }
 }

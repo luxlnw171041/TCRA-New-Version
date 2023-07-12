@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Customer;
 
 class HomeController extends Controller
 {
@@ -27,14 +26,4 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function home_test(){
-
-        $test_data = Customer::where('c_name' , '!=' , null)->get();
-
-        echo "<pre>";
-        print_r($test_data);
-        echo "<pre>";
-        exit();
-
-    }
 }
