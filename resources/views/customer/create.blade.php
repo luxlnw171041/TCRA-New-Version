@@ -115,7 +115,7 @@
 </style>
 
 
-<form method="POST" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+<form id="formCreateCustomer" method="POST" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
     {{ csrf_field() }}
 
     @include ('customer.form', ['formMode' => 'create'])

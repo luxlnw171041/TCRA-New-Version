@@ -64,7 +64,25 @@ class CustomerController extends Controller
     {
         
         $requestData = $request->all();
-        ddd($requestData);
+        if ($request->hasFile('c_pic_id_card')) {
+            $requestData['c_pic_id_card'] = $request->file('c_pic_id_card')->store('uploads', 'public');
+        }
+        if ($request->hasFile('c_pic_lease')) {
+            $requestData['c_pic_lease'] = $request->file('c_pic_lease')->store('uploads', 'public');
+        }
+        if ($request->hasFile('c_pic_execution')) {
+            $requestData['c_pic_execution'] = $request->file('c_pic_execution')->store('uploads', 'public');
+        }
+        if ($request->hasFile('c_pic_cap')) {
+            $requestData['c_pic_cap'] = $request->file('c_pic_cap')->store('uploads', 'public');
+        }
+        if ($request->hasFile('c_pic_other')) {
+            $requestData['c_pic_other'] = $request->file('c_pic_other')->store('uploads', 'public');
+        }
+        $demerit = implode(',', $request->demerit);
+        
+        $requestData['demerit'] = $demerit;
+        // ddd($requestData);
         Customer::create($requestData);
 
         return redirect('customer')->with('flash_message', 'Customer added!');

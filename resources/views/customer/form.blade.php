@@ -236,7 +236,7 @@
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label">แนบหลักฐานกระทำความผิด <span class="text-danger">*</span></label>
                     </div>
-                    <style>
+                    <!-- <style>
                         .selectPhoto {
                             margin: 0;
                         }
@@ -255,7 +255,7 @@
                             font-weight: 300;
                             height: 200px;
                         }
-                    </style>
+                    </style> -->
                     <style>
                         .file-upload-box {
                             position: relative;
@@ -404,7 +404,9 @@
                         .owl-prev *,
                         .owl-next * {
                             font-size: 20px;
-                        }.infoImg .imgName {
+                        }
+
+                        .infoImg .imgName {
                             white-space: nowrap;
                             width: 100%;
                             overflow: hidden;
@@ -606,7 +608,7 @@
                                 const imgName = fileUploadBox.querySelector('.imgName');
                                 const imgSize = fileUploadBox.querySelector('.imgSize');
                                 const imgFile = fileUploadBox.querySelector('.imgFile');
-                                
+
                                 // ลบนามสกุลไฟล์
                                 const lastDotIndex = fileName.lastIndexOf('.');
                                 const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
@@ -641,7 +643,7 @@
 
                                     } else {
                                         // console.log("ไม่รูป");
-                                        upload_file_error()
+                                        upload_file_error();
                                     }
                                 } else {
                                     // กรณีไม่มีการเลือกไฟล์ใหม่
@@ -651,7 +653,7 @@
                                     clearButton.style.display = 'none';
                                 }
 
-                                
+
 
 
                             });
@@ -744,22 +746,25 @@
                             </li>
                         </ul>
                         <style>
-                            .groupOffense{
+                            .groupOffense {
                                 display: flex;
                                 flex-wrap: wrap;
-                            }.groupOffense .radio-label{
-                                padding: 0 20px ;
-                               
-                            }.groupOffense > label{
-                                 margin: 6px 6px;
                             }
 
+                            .groupOffense .radio-label {
+                                padding: 0 20px;
+
+                            }
+
+                            .groupOffense>label {
+                                margin: 6px 6px;
+                            }
                         </style>
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade active show" id="corrupt" role="tabpanel">
-                                <div class="groupOffense"> 
+                                <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="ลักลอบนำรถยนต์ไปใช้ส่วนตัว" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ลักลอบนำรถยนต์ไปใช้ส่วนตัว">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
@@ -767,7 +772,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="ทุจริตโอที/บิลน้ำมัน" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทุจริตโอที/บิลน้ำมัน">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
@@ -775,7 +780,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="เสพสารเสพติด" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="เสพสารเสพติด">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
@@ -783,7 +788,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="เมาสุรา" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="เมาสุรา">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
@@ -791,7 +796,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="เล่นการพนัน" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="เล่นการพนัน">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
@@ -799,7 +804,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="อื่นๆ" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
@@ -809,49 +814,57 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="discipline" role="tabpanel">
-                                <div class="groupOffense"> 
+                                <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="ลักลอบนำรถยนต์ไปใช้ส่วนตัว" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ยืมเงินลูกค้า">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">1.ลักลอบนำรถยนต์ไปใช้ส่วนตัว</span>
+                                            <span class="radio-label">6.ยืมเงินลูกค้า</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="ทุจริตโอที/บิลน้ำมัน" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทิ้งงาน">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">2.ทุจริตโอที/บิลน้ำมัน</span>
+                                            <span class="radio-label">7.ทิ้งงาน</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="เสพสารเสพติด" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทะเลาะวิวาท">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">3.เสพสารเสพติด</span>
+                                            <span class="radio-label">8.ทะเลาะวิวาท</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="เมาสุรา" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="โกหกบ่อยครั้ง">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">4.เมาสุรา</span>
+                                            <span class="radio-label">9.โกหกบ่อยครั้ง</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="เล่นการพนัน" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่เก็บความลับ">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">5.เล่นการพนัน</span>
+                                            <span class="radio-label">10.ไม่เก็บความลับ</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit" id="demerit" value="อื่นๆ" required>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ปิดมือถือติดต่อไม่ได้">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">11.ปิดมือถือติดต่อไม่ได้</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
@@ -861,7 +874,91 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="service" role="tabpanel">
-                                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+                                <div class="groupOffense">
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ขับรถอันตราย">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">12.ขับรถอันตราย</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="มาสาย">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">13.มาสาย</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่รู้เส้นทาง">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">14.ไม่รู้เส้นทาง</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="สตาร์ทรถรอลูกค้า">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">15.สตาร์ทรถรอลูกค้า</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทัศนะคติ/การบริการไม่ดี">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">16.ทัศนะคติ/การบริการไม่ดี</span>
+                                        </span>
+                                    </label>
+
+                                    <div class="col-12 mt-3">
+                                        <label for="inputLastName1" class="form-label">ลักษณะกระทำความผิด <span class="text-danger">*</span></label>
+                                    </div>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ขัดคำสั่ง ลูกค้า/นายจ้าง">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">17.ขัดคำสั่ง ลูกค้า/นายจ้าง</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="แต่งกาย/คำพูด ไม่สุภาพ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">18.แต่งกาย/คำพูด ไม่สุภาพ</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ฟ้องนายจ้าง หรือ ร้องตรวจแรงงานที่เป็นเท็จ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">19.ฟ้องนายจ้าง หรือ ร้องตรวจแรงงานที่เป็นเท็จ</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">อื่นๆ</span>
+                                        </span>
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="row col-12 my-3" id="divdemeritdetail" style="display: none;">
+                                <label for="demeritdetail" class="col-sm-12 col-form-label">รายละเอียดการกระทำความผิด</label>
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" id="demeritdetail" name="demeritdetail" rows="3" placeholder="กรอกรายละเอียดการกระทำความผิด"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -872,6 +969,55 @@
             </div>
         </div>
 
+        <script>
+            const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]');
+            const otherDiv = document.getElementById('divdemeritdetail');
+            const otherInput = document.getElementById('demeritdetail');
+            const formCreateCustomer = document.getElementById('formCreateCustomer');
+
+            demeritCheckboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
+                    const checkedOtherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]:checked');
+
+                    if (checkedOtherCheckboxes.length > 0) {
+                        otherDiv.style.display = 'block';
+                        otherInput.required = true;
+
+                    } else {
+                        otherDiv.style.display = 'none';
+                        otherInput.required = false;
+                    }
+                });
+            });
+
+
+            // demeritCheckboxes.forEach(function(checkbox) {
+            // checkbox.addEventListener('change', function() {
+            //     const demeritCheckboxes = document.querySelectorAll('input[name="demerit[]"]:checked');
+
+            //     if (checkedCheckboxes.length > 0) {
+            //         errorText.style.display = 'none';
+            //     } else {
+            //         errorText.style.display = 'block';
+            //     }
+            // });
+            // });
+
+
+            formCreateCustomer.addEventListener('submit', function(event) {
+                const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
+
+                if (demeritCheckboxes.length === 0) {
+                    console.log('โปรดเลือก');
+                    event.preventDefault(); // ป้องกันการส่งฟอร์ม   
+                    dangerAlert("กรุณาเลือกลักษณะกระทำความผิดอย่างน้อย 1 อย่าง");
+                } else {
+                    console.log('ยืนยัน')
+
+                }
+            });
+        </script>
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -917,7 +1063,7 @@
 </div>
 <div class="form-group {{ $errors->has('demerit') ? 'has-error' : '' }}">
     <label for="demerit" class="control-label">{{ 'Demerit' }}</label>
-    <input class="form-control" name="demerit" type="text" id="demerit" value="{{ isset($customer->demerit) ? $customer->demerit : '' }}">
+    <input class="form-control" name="demerit[]" type="text" id="demerit" value="{{ isset($customer->demerit) ? $customer->demerit : '' }}">
     {!! $errors->first('demerit', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('demeritdetail') ? 'has-error' : '' }}">
@@ -955,8 +1101,8 @@
     <input class="form-control" name="c_date" type="text" id="c_date" value="{{ isset($customer->c_date) ? $customer->c_date : '' }}">
     {!! $errors->first('c_date', '<p class="help-block">:message</p>') !!}
 </div> -->
-
+<!-- 
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">
-</div>
+</div> -->

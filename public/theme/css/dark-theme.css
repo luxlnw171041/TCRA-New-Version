@@ -761,6 +761,20 @@ html.dark-theme .inputGroup :is(input:focus, input:valid)~label{
     margin-left: 1.3em;
     padding: 0.4em;
 }
+
+html.dark-theme .textOR {
+	width: 70px;
+	text-align: center;
+	border-bottom: 1px solid #fff;
+	line-height: 0.1em;
+	margin: 0 20px;
+	
+}
+
+html.dark-theme .textOR span {
+	background: #171717 ;
+	padding: 0 10px;
+}
 /*Responsive*/
 
 @media screen and (max-width: 1024px) {
