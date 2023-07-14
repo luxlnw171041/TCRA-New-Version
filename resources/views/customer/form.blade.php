@@ -141,7 +141,11 @@
                     ID : {{Auth::user()->id}}
                 </span>
                 <div class="d-flex flex-column align-items-center text-center">
-                    <img src="{{asset('img/logo/tcra.png')}}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
+                    @if(!empty(Auth::user()->member_pic))
+                        <img src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
+                    @else
+                        <img src="{{asset('img/icon/user.jpg')}}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
+                    @endif
                     <div class="mt-3">
                         <h4>{{Auth::user()->name}}</h4>
 
