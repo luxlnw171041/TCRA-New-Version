@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ Route::get('/customer_test', 'CustomerController@customer_test');
 
 Route::middleware(['auth'])->group(function () {
 	Route::resource('customer', 'CustomerController');
+	Route::resource('user', 'UserController');
+
 });
 
 

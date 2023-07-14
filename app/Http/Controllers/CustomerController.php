@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -20,27 +21,30 @@ class CustomerController extends Controller
         $keyword = $request->get('search');
         $perPage = 25;
 
-        if (!empty($keyword)) {
-            $customer = Customer::where('user_id', 'LIKE', "%$keyword%")
-                ->orWhere('rentname', 'LIKE', "%$keyword%")
-                ->orWhere('compname', 'LIKE', "%$keyword%")
-                ->orWhere('c_name', 'LIKE', "%$keyword%")
-                ->orWhere('c_surname', 'LIKE', "%$keyword%")
-                ->orWhere('c_idno', 'LIKE', "%$keyword%")
-                ->orWhere('demerit', 'LIKE', "%$keyword%")
-                ->orWhere('demeritdetail', 'LIKE', "%$keyword%")
-                ->orWhere('c_pic_id_card', 'LIKE', "%$keyword%")
-                ->orWhere('c_pic_lease', 'LIKE', "%$keyword%")
-                ->orWhere('c_pic_execution', 'LIKE', "%$keyword%")
-                ->orWhere('c_pic_cap', 'LIKE', "%$keyword%")
-                ->orWhere('c_pic_other', 'LIKE', "%$keyword%")
-                ->orWhere('c_date', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $customer = Customer::latest()->paginate($perPage);
+        $requestData = $request->all();
+        if (!empty($requestData['c_idno'])) {
+            $c_id_no = $requestData['c_idno'];
+            $customers = Customer::where('c_idno', $c_id_no)->first();
+
+            // ddd($customers);
+                return view('customer.index', compact('customers'));
+            
+
+        } elseif (!empty($requestData['c_name']) and !empty($requestData['c_surname'])) {
+
+            $name = $requestData['c_name'];
+            $surname = $requestData['c_surname'];
+
+            $customers = Customer::where('c_name', $name)
+                ->Where('c_surname',  $surname)
+                ->first();
+
+                return view('customer.index', compact('customers'));
+        }else{
+
+            return view('customer.index');
         }
 
-        return view('customer.index', compact('customer'));
     }
 
     /**
@@ -62,7 +66,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $requestData = $request->all();
         if ($request->hasFile('c_pic_id_card')) {
             $requestData['c_pic_id_card'] = $request->file('c_pic_id_card')->store('uploads', 'public');
@@ -79,8 +83,9 @@ class CustomerController extends Controller
         if ($request->hasFile('c_pic_other')) {
             $requestData['c_pic_other'] = $request->file('c_pic_other')->store('uploads', 'public');
         }
-        $demerit = implode(',', $request->demerit);
         
+        $demerit = implode(',', array_unique($request->demerit));
+
         $requestData['demerit'] = $demerit;
         // ddd($requestData);
         Customer::create($requestData);
@@ -126,9 +131,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+
         $customer = Customer::findOrFail($id);
         $customer->update($requestData);
 
@@ -158,5 +163,4 @@ class CustomerController extends Controller
         echo "<pre>";
         exit();
     }
-
 }

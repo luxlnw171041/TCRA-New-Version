@@ -147,7 +147,7 @@
 
                         <p class="text-secondary mb-1">{{Auth::user()->username}}</p>
                         <p class="text-muted font-size-sm">{{Auth::user()->member_co}}</p>
-                        <button class="btn btn-outline-primary px-5 ">แก้ไข</button>
+                        <a class="btn btn-outline-primary px-5 " href="{{ url('/user/' . Auth::user()->id . '/edit') }}">แก้ไข</a>
                     </div>
                 </div>
                 <!-- <hr class="my-4"> -->
@@ -720,7 +720,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navDanger active" data-bs-toggle="pill" href="#corrupt" role="tab" aria-selected="true">
                                     <div class="d-flex align-items-center">
-                                        <div class="tab-icon"><i class="bx bxs-home font-18 me-1"></i>
+                                        <div class="tab-icon"><i class="fa-solid fa-user-police font-18 me-1"></i>
                                         </div>
                                         <div class="tab-title">หมวดทุจริต</div>
                                     </div>
@@ -729,7 +729,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navWarning" data-bs-toggle="pill" href="#discipline" role="tab" aria-selected="false">
                                     <div class="d-flex align-items-center">
-                                        <div class="tab-icon"><i class="bx bxs-user-pin font-18 me-1"></i>
+                                        <div class="tab-icon"><i class="fa-solid fa-user-xmark font-18 me-1"></i>
                                         </div>
                                         <div class="tab-title">หมวดวินัย</div>
                                     </div>
@@ -738,7 +738,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navSuccess" data-bs-toggle="pill" href="#service" role="tab" aria-selected="false">
                                     <div class="d-flex align-items-center">
-                                        <div class="tab-icon"><i class="bx bxs-microphone font-18 me-1"></i>
+                                        <div class="tab-icon"><i class="fa-solid fa-user-headset font-18 me-1"></i>
                                         </div>
                                         <div class="tab-title">หมวดบริการ</div>
                                     </div>
@@ -974,23 +974,28 @@
             const otherDiv = document.getElementById('divdemeritdetail');
             const otherInput = document.getElementById('demeritdetail');
             const formCreateCustomer = document.getElementById('formCreateCustomer');
+            const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
 
-            demeritCheckboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
-                    const checkedOtherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]:checked');
 
-                    if (checkedOtherCheckboxes.length > 0) {
-                        otherDiv.style.display = 'block';
+            otherCheckboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    // ตั้งค่า checked เป็น true สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                    otherDiv.style.display = 'block';
                         otherInput.required = true;
-
-                    } else {
-                        otherDiv.style.display = 'none';
+                    otherCheckboxes.forEach(function (otherCheckbox) {
+                    otherCheckbox.checked = true;
+                    });
+                } else {
+                    // ตั้งค่า checked เป็น false สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                    otherDiv.style.display = 'none';
                         otherInput.required = false;
-                    }
+                    otherCheckboxes.forEach(function (otherCheckbox) {
+                    otherCheckbox.checked = false;
+                    });
+                }
                 });
             });
-
 
             // demeritCheckboxes.forEach(function(checkbox) {
             // checkbox.addEventListener('change', function() {
