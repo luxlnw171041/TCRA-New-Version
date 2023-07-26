@@ -643,6 +643,31 @@
 
         });
 
+        let update_last_time_active ;
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+
+            update_last_time_active = setInterval(function() {
+                let user_id = "{{ Auth::user()->id }}";
+
+                fetch( "{{ url('/') }}/api/update_last_time_active/" + user_id )
+                    .then(response => response.text())
+                    .then(result => {
+                        // console.log(result);
+                        if(result =="OK"){
+                            // console.log("update time active >> " + Date.now());
+                        }
+                });
+            }, 180000);
+
+        });
+
+        function myStop_update_last_time_active() {
+            clearInterval(update_last_time_active);
+            // console.log("STOP LOOP");
+        }
+
+
         function before_logout(){
 
             let user_id = "{{ Auth::user()->id }}";
@@ -652,7 +677,10 @@
                 .then(result => {
                     // console.log(result);
                     if(result =="OK"){
-                        document.querySelector('#btn_go_to_logout').click();
+                        myStop_update_last_time_active();
+                        setTimeout(function() {
+                            document.querySelector('#btn_go_to_logout').click();
+                        }, 1000);
                     }
             });
         }

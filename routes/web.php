@@ -18,10 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login_fail', function () {
+    return view('login_fail');
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/login_fail', 'HomeController@login_fail')->name('login_fail');
 Route::get('/customer_test', 'CustomerController@customer_test');
 
 // auth

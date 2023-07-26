@@ -46,8 +46,10 @@ class LoginController extends Controller
             $data_user = Auth::user();
 
             if ($data_user->member_status !== 'Active') {
+
                 Auth::logout();
-                return redirect('login_fail');
+                return redirect('/login_fail');
+
             }else{
 
                 if ( !empty($data_user->member_count_login) ) {
@@ -74,4 +76,5 @@ class LoginController extends Controller
         }
           
     }
+
 }
