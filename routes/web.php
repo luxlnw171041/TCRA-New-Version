@@ -23,14 +23,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/customer_test', 'CustomerController@customer_test');
 
-// auth
 Route::middleware(['auth'])->group(function () {
 	Route::resource('customer', 'CustomerController');
 	Route::resource('user', 'UserController');
 
 });
 
-// admin
-Route::middleware(['auth', 'member_role:admin'])->group(function () {
-	Route::resource('create_member', 'Create_memberController');
-});
+
