@@ -74,7 +74,7 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="{{ url('/create_member') }}"><i class="fa-solid fa-user-plus"></i>เพิ่มสมาชิก</a>
+                                <a href="{{ url('/create_user_by_admin') }}"><i class="fa-solid fa-user-plus"></i>เพิ่มสมาชิก</a>
                             </li>
                         </ul>
                     </li>
