@@ -52,7 +52,111 @@
         -webkit-transform: rotate(-360deg);
     }
 }
+
+.div_alert {
+    position: fixed;
+    top: -10%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+    z-index: 9999;
+    font-size: 18px;
+
+}
+
+.div_alert span {
+    background-color: #2DD284;
+    border-radius: 10px;
+    color: white;
+    padding: 15px;
+    font-family: 'Kanit', sans-serif;
+    z-index: 9999;
+    font-size: 1em;
+}
+
+.up_down {
+    animation-name: slideDownAndUp;
+    animation-duration:3s;
+}
+
+@keyframes slideDownAndUp {
+        0% {
+            transform: translateY(0);
+        }
+        10% {
+            transform: translateY(100px);
+        }
+        90% {
+            transform: translateY(100px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+*{
+    font-family: 'Mitr', sans-serif;
+}
+    
+    #userpass{
+        resize: none;
+    }
+
+
+.checkmark {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #29cc39;
+    stroke-miterlimit: 10;
+    margin: 10% auto;
+    box-shadow: inset 0px 0px 0px #ffffff;
+    animation: fill 0.9s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0
+    }
+}
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1)
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 60px #fff
+    }
+}
+
 </style>
+
+<div id="alert_copy" class="div_alert" role="alert">
+    <span id="alert_text">
+        คัดลอกเรียบร้อย
+    </span>
+</div>
 
 <div class="row">
     <div class="col-md-3">
@@ -96,7 +200,7 @@
                     <div class="tab-pane fade active show" id="success-pills-inputdata" role="tabpanel">
 
                         <!-- กรอกข้อมูลสมาชิก -->
-                        <div class="border border-3 p-4 rounded">
+                        <div class="border border-3 p-4 rounded div_input_data">
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="Username" class="form-label">
@@ -133,7 +237,8 @@
                                     <select class="form-select" id="member_role" name="member_role" required oninput="on_inputData();">
                                         <option selected value="">เลือกบทบาทสมาชิก</option>
                                         <option value="admin">admin</option>
-                                        <option value="member">member</option>
+                                        <option value="customer">กลุ่มมิจฉาชีพ</option>
+                                        <option value="driver">พนักงานขับรถ</option>
                                       </select>
                                 </div>
                                 <div class="col-12">
@@ -164,7 +269,7 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane fade" id="success-pills-copydata" role="tabpanel">
+                    <div class="tab-pane fade success_copydata" id="success-pills-copydata" role="tabpanel">
                         
                         <!-- Copy DATA -->
                         <div id="div_loading" class="text-center">
@@ -173,6 +278,16 @@
                                 <div class="cube2"></div>
                             </div>
                             <h5>กำลังโหลด..</h5>
+                        </div>
+
+                        <div id="div_load_success" class="d-none">
+                            <svg class="checkmark d-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                            <center>
+                                <h5>เสร็จสิ้น</h5>
+                            </center>
                         </div>
 
                     </div>
@@ -305,8 +420,117 @@
         let member_addr = document.querySelector('#member_addr').value ;
         let member_tel = document.querySelector('#member_tel').value ;
 
-        
+        let data_arr = [];
 
+        data_arr = {
+            "username" : Username,
+            "name" : Name,
+            "email" : email,
+            "member_status" : member_status,
+            "member_role" : member_role,
+            "member_co" : member_co,
+            "member_addr" : member_addr,
+            "member_tel" : member_tel,
+        };
+
+        fetch("{{ url('/') }}/api/create_member", {
+            method: 'post',
+            body: JSON.stringify(data_arr),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response){
+            return response.json();
+        }).then(function(data){
+
+            // console.log(data);
+            // console.log(data.check_data);
+
+            if(data.check_data == "OK"){
+
+                document.querySelector('#div_loading').classList.add('d-none');
+                document.querySelector('#div_load_success').classList.remove('d-none');
+                document.querySelector('.checkmark').classList.remove('d-none');
+
+                setTimeout(function() {
+
+                    let html = `
+                        <div class="row g-0">
+                            <div class="p-5">
+                                <h4 class="font-weight-bold">สร้างบัญชีสำเร็จ</h4>
+                                <div class="mb-3 mt-4">
+                                    <label class="form-label">ชื่อผู้ใช้และรหัสผ่าน</label>
+                                    <textarea class="form-control" name="userpass" id="userpass" readonly>สวัสดีครับ</textarea>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-primary" onclick="CopyToClipboard('userpass')">
+                                        คัดลอก
+                                    </button>
+                                    <button type="button" class="btn btn-success" onclick="create_success();">
+                                            เสร็จสิ้น
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    let div_copydata = document.querySelector('.success_copydata');
+                        div_copydata.insertAdjacentHTML('afterbegin', html); // แทรกบนสุด
+
+                    let str = "Username : " + data.username + "\n" + "Password : " + data.pass_code
+                    // console.log(str);
+                    let userpass = document.querySelector("#userpass");
+                        userpass.value = str;
+
+                    document.querySelector('#div_load_success').classList.add('d-none');
+                    document.querySelector('.checkmark').classList.add('d-none');
+
+                }, 2000);
+
+
+            }
+        }).catch(function(error){
+            // console.error(error);
+        });
+
+    }
+
+    function create_success(){
+
+        document.querySelector('#Username').value = "" ;
+        document.querySelector('#Name').value = "" ;
+        document.querySelector('#email').value = "" ;
+        document.querySelector('#member_status').value = "" ;
+        document.querySelector('#member_role').value = "" ;
+
+        document.querySelector('#member_co').value = "" ;
+        document.querySelector('#member_addr').value = "" ;
+        document.querySelector('#member_tel').value = "" ;
+
+        document.querySelector('#btn_a_inputdata').click();
+    }
+
+    function CopyToClipboard(containerid) {
+      if (document.selection) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById(containerid));
+        range.select().createTextRange();
+        document.execCommand("copy");
+        document.querySelector('#go_back').classList.remove('d-none');
+      } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(document.getElementById(containerid));
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+
+        document.querySelector('#alert_text').innerHTML = "คัดลอกเรียบร้อย";
+            document.querySelector('#alert_copy').classList.add('up_down');
+
+            const animated = document.querySelector('.up_down');
+            animated.onanimationend = () => {
+                document.querySelector('#alert_copy').classList.remove('up_down');
+            };
+      }
     }
 
     function checkConditions(Username , Name , email , member_status , member_role) {

@@ -166,7 +166,7 @@
         <footer class="bg-white shadow-sm border-top p-2 text-center fixed-bottom">
             <p class="mb-0">
                 <img src="{{asset('img/logo/tcra.png')}}" width="20" alt="" />
-                TCRA © Power by ViiCHECK
+                TCRA © Power by 2B-Green
             </p>
         </footer>
     </div>

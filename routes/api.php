@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/update_last_time_active/{user_id}', 'UserController@update_last_time_active');
+Route::post('/create_member', 'UserController@create_member');
 

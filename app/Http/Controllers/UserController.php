@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Create_user_by_admin;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -80,6 +82,29 @@ class UserController extends Controller
 
         return "OK" ;
 
+    }
+
+    public function create_member(Request $request){
+
+        $requestData = $request->all();
+
+        $password = uniqid();
+
+        $requestData['password'] = Hash::make($password);
+
+        User::create($requestData);
+
+        $last_user = User::latest()->first();
+
+        $data_create = [];
+        $data_create['check_data'] = "OK" ;
+        $data_create['user_id'] = $last_user->id;
+        $data_create['username'] = $requestData['username'];
+        $data_create['pass_code'] = $password;
+
+        Create_user_by_admin::create($data_create);
+
+        return $data_create;
     }
 
 }
