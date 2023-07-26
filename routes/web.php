@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login_fail', 'HomeController@login_fail')->name('login_fail');
 Route::get('/customer_test', 'CustomerController@customer_test');
 
 // auth

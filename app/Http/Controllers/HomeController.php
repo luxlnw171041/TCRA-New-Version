@@ -26,4 +26,8 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function login_fail(){
+        return view('login_fail');
+    }
+
 }
