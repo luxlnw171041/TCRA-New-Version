@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -63,6 +64,22 @@ class UserController extends Controller
         $users->update($requestData);
 
         return back();
+    }
+
+    public function update_last_time_active($user_id){
+
+        $date_now = date("Y-m-d h:i:s") ;
+
+        DB::table('users')
+            ->where([ 
+                    ['id', $user_id],
+                ])
+            ->update([
+                    'last_time_active' => $date_now,
+                ]);
+
+        return "OK" ;
+
     }
 
 }

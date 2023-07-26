@@ -462,15 +462,17 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ url('/user/' . Auth::user()->id . '/edit') }}"><i class="bx bx-user"></i><span>Profile</span></a>
+                            <li><a class="dropdown-item btn" href="{{ url('/user/' . Auth::user()->id . '/edit') }}"><i class="bx bx-user"></i><span>Profile</span></a>
                             </li>
                             <div class="dropdown-divider mb-0"></div>
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+                            <li><a class="dropdown-item btn" onclick="before_logout();"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+
+                                <a id="btn_go_to_logout" href="{{ route('logout') }}"  class="dropdown-item d-none" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                @csrf
+                            </form>
                             </li>
                         </ul>
                     </div>
@@ -640,6 +642,20 @@
 
 
         });
+
+        function before_logout(){
+
+            let user_id = "{{ Auth::user()->id }}";
+
+            fetch( "{{ url('/') }}/api/update_last_time_active/" + user_id )
+                .then(response => response.text())
+                .then(result => {
+                    // console.log(result);
+                    if(result =="OK"){
+                        document.querySelector('#btn_go_to_logout').click();
+                    }
+            });
+        }
     </script>
 </body>
 
