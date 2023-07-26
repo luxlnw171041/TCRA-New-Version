@@ -65,6 +65,20 @@
             </div>
             <!--navigation-->
             <ul class="metismenu" id="menu">
+                @if(Auth::user()->member_role == "admin")
+                    <li>
+                        <a href="javascript:;" class="has-arrow">
+                            <div class="parent-icon"><i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <div class="menu-title">Admin</div>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ url('/create_member') }}"><i class="fa-solid fa-user-plus"></i>เพิ่มสมาชิก</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-user-ninja"></i>
