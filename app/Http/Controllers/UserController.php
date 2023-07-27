@@ -107,4 +107,17 @@ class UserController extends Controller
         return $data_create;
     }
 
+    function check_email($email){
+
+        $data_check = User::where('email',$email)->first();
+
+        if ( !empty($data_check->id) ) {
+            $text_return = "มีข้อมูลอีเมลนี้แล้ว" ;
+        }else{
+            $text_return = "อีเมลนี้สามารถใช้งานได้" ;
+        }
+
+        return $text_return ;
+    }
+
 }

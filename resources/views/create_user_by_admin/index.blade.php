@@ -218,7 +218,8 @@
                                     <label for="email" class="form-label">
                                         E-Mail <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter E-Mail" required oninput="on_inputData();">
+                                    <span id="div_text_alert_email" class="text-danger d-none">มี EMail นี้ในระบบแล้ว</span>
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Enter E-Mail" required oninput="on_inputData();" onchange="check_email();">
                                 </div>
                                 <div class="col-12">
                                     <label for="member_status" class="form-label">
@@ -255,7 +256,7 @@
                                 </div>
                                 <div id="div_text_alert_input" class="col-12 d-none">
                                     <span class="text-danger d-">
-                                        กรุณากรอกข้อมูล <span id="text_alert_input"></span>
+                                        <span id="text_alert_input"></span>
                                     </span>
                                 </div>
                                 <div class="col-12">
@@ -385,6 +386,7 @@
 
     function on_inputData(){
         document.querySelector('#div_text_alert_input').classList.add('d-none');
+        document.querySelector('#div_text_alert_email').classList.add('d-none');
     }
     
     function check_create_member(){
@@ -533,22 +535,38 @@
       }
     }
 
+    function check_email(){
+        let email = document.querySelector('#email').value ;
+
+        fetch("{{ url('/') }}/api/check_email/"+email)
+            .then(response => response.text())
+            .then(result => {
+                // console.log(result);
+                if(result == "มีข้อมูลอีเมลนี้แล้ว"){
+                    document.querySelector('#div_text_alert_email').classList.remove('d-none');
+                    document.querySelector('#email').value = '' ;
+                    document.querySelector('#email').focus() ;
+
+                }
+            });
+    }
+
     function checkConditions(Username , Name , email , member_status , member_role) {
 
         if (!Username) {
-            document.querySelector('#text_alert_input').innerHTML = 'Username';
+            document.querySelector('#text_alert_input').innerHTML = 'กรุณากรอกข้อมูล : Username';
             return false;
         } else if (!Name) {
-            document.querySelector('#text_alert_input').innerHTML = 'Name';
+            document.querySelector('#text_alert_input').innerHTML = 'กรุณากรอกข้อมูล : Name';
             return false;
         }else if (!email) {
-            document.querySelector('#text_alert_input').innerHTML = 'email';
+            document.querySelector('#text_alert_input').innerHTML = 'กรุณากรอกข้อมูล : email';
             return false;
         }else if (!member_status) {
-            document.querySelector('#text_alert_input').innerHTML = 'สถานะลงชื่อเข้าใช้';
+            document.querySelector('#text_alert_input').innerHTML = 'กรุณากรอกข้อมูล : สถานะลงชื่อเข้าใช้';
             return false;
         }else if (!member_role) {
-            document.querySelector('#text_alert_input').innerHTML = 'บทบาทสมาชิก';
+            document.querySelector('#text_alert_input').innerHTML = 'กรุณากรอกข้อมูล : บทบาทสมาชิก';
             return false;
         }
 
