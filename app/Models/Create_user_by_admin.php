@@ -27,5 +27,8 @@ class Create_user_by_admin extends Model
      */
     protected $fillable = ['user_id', 'username', 'pass_code'];
 
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id', 'id'); 
+    }
     
 }

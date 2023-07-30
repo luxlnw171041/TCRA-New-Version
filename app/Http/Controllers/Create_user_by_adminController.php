@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use App\User;
 use App\Models\Create_user_by_admin;
 use Illuminate\Http\Request;
+
+Use Carbon\Carbon;
 
 class Create_user_by_adminController extends Controller
 {
@@ -29,7 +31,9 @@ class Create_user_by_adminController extends Controller
             $create_user_by_admin = Create_user_by_admin::latest()->paginate($perPage);
         }
 
-        return view('create_user_by_admin.index', compact('create_user_by_admin'));
+        $data_member = User::orderBy('id','DESC')->get();
+
+        return view('create_user_by_admin.index', compact('create_user_by_admin','data_member'));
     }
 
     /**

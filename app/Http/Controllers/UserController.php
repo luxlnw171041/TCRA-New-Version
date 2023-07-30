@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Create_user_by_admin;
+Use Carbon\Carbon;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -48,11 +49,16 @@ class UserController extends Controller
         return view('customer.create');
     }
 
-    public function edit()
+    public function edit(Request $request, $id)
     {
         $user = Auth::user();
 
-        return view('profile.edit', compact('user'));
+        if ($user->id == $id || $user->member_role == "admin") {
+            return view('profile.edit', compact('user'));
+        }else{
+            return view('404');
+        }
+
     }
 
     public function update(Request $request, $id)
@@ -96,9 +102,10 @@ class UserController extends Controller
 
         $last_user = User::latest()->first();
 
-        $data_create = [];
+        $data_create = $requestData;
         $data_create['check_data'] = "OK" ;
         $data_create['user_id'] = $last_user->id;
+        $data_create['member_pic'] = $last_user->member_pic;
         $data_create['username'] = $requestData['username'];
         $data_create['pass_code'] = $password;
 
@@ -118,6 +125,20 @@ class UserController extends Controller
         }
 
         return $text_return ;
+    }
+
+    function change_status_to($change_to , $user_id){
+
+        DB::table('users')
+            ->where([ 
+                    ['id', $user_id],
+                ])
+            ->update([
+                    'member_status' => $change_to,
+                ]);
+
+        return "OK" ;
+
     }
 
 }

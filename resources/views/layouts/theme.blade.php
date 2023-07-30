@@ -493,7 +493,7 @@
         <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
         <!--End Back To Top Button-->
         <footer class="page-footer">
-            <p class="mb-0">TCRA © Power by 2B-Green</p>
+            <p class="mb-0">TCRA © Power by <a href="mailto:contact.viicheck.com" class="link text-secondary">2B-Green</a></p>
         </footer>
     </div>
     <!--end wrapper-->

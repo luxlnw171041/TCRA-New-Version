@@ -21,4 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/update_last_time_active/{user_id}', 'UserController@update_last_time_active');
 Route::get('/check_email/{email}', 'UserController@check_email');
 Route::post('/create_member', 'UserController@create_member');
-
+Route::get('/change_status_to/{change_to}/{user_id}', 'UserController@change_status_to');

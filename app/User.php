@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function create_member(){
+        return $this->hasOne('App\Models\Create_user_by_admin', 'user_id' ,'id');
+    }
+
 }

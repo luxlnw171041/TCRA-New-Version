@@ -37,5 +37,5 @@ Route::middleware(['auth'])->group(function () {
 
 // admin
 Route::middleware(['auth', 'member_role:admin'])->group(function () {
-	Route::resource('create_user_by_admin', 'Create_user_by_adminController');
+	Route::resource('create_user_by_admin', 'Create_user_by_adminController')->except(['show','create','edit','view']);
 });
