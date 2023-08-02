@@ -29,8 +29,7 @@ class CreateDriversTable extends Migration
             $table->string('d_pic_cap')->nullable();
             $table->string('d_pic_other')->nullable();
             $table->string('d_date')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            });
+        });
     }
 
     /**
