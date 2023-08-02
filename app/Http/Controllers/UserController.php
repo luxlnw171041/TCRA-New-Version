@@ -52,9 +52,10 @@ class UserController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $user = Auth::user();
+        $user_login = Auth::user();
+        $user = User::where('id' , $id)->first();
 
-        if ($user->id == $id || $user->member_role == "admin") {
+        if ($user_login->id == $id || $user_login->member_role == "admin") {
             return view('profile.edit', compact('user'));
         }else{
             return view('404');
@@ -64,9 +65,10 @@ class UserController extends Controller
 
     public function show_profile($id)
     {
-        $user = Auth::user();
+        $user_login = Auth::user();
+        $user = User::where('id' , $id)->first();
 
-        if ($user->id == $id || $user->member_role == "admin") {
+        if ($user_login->id == $id || $user_login->member_role == "admin") {
 
             if( $user->member_role == "customer" ){
 
@@ -94,13 +96,23 @@ class UserController extends Controller
     {
         
         $requestData = $request->all();
+
+        if( !empty($requestData['member_status']) ){
+            return view('404');
+        }
+
+        if( !empty($requestData['member_role']) ){
+            return view('404');
+        }
+
         if ($request->hasFile('member_pic')) {
             $requestData['member_pic'] = $request->file('member_pic')->store('uploads', 'public');
         }
         $users = User::findOrFail($id);
         $users->update($requestData);
 
-        return back();
+        // return back();
+        return redirect('show_profile/' . $id);
     }
 
     public function update_last_time_active($user_id){

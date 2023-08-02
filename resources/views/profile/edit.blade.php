@@ -64,7 +64,7 @@
 </style>
 
 
-<form method="POST" action="{{ url('/user/' .Auth::user()->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+<form method="POST" action="{{ url('/user/' .$user->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
     {{ method_field('PATCH') }}
     {{ csrf_field() }}
 
@@ -88,8 +88,8 @@
                             @endif
                             <div class="d-flex flex-column align-items-center text-center">
                                 <div class="profile-pic-container">
-                                    @if(!empty(Auth::user()->member_pic))
-                                        <img class="profile-pic" src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="Profile Picture">
+                                    @if(!empty($user->member_pic))
+                                        <img class="profile-pic" src="{{ url('storage')}}/{{ $user->member_pic }}" alt="Profile Picture">
                                     @else
                                         <img class="profile-pic" src="{{asset('img/icon/user.jpg')}}" alt="Profile Picture">
                                     @endif
@@ -138,16 +138,6 @@
                             <!-- <hr class="my-4"> -->
                         </div>
 
-                        @if( Auth::user()->member_role == "admin" )
-                        <center>
-                            <hr class="text-primary" style="width:90%;">
-                        </center>
-
-                        <div class="p-2 text-center">
-                            <h5>เฉพาะแอดมิน</h5>
-                        </div>
-                        @endif
-
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -168,12 +158,12 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">ชื่อเต็ม</p>
-                                            <h4 class="mb-0">{{ $user->member_name }}</h4>
                                         </div>
                                         <div class="widgets-icons bg-light-primary text-primary ms-auto">
                                             <i class="fa-solid fa-signature"></i>
                                         </div>
                                     </div>
+                                    <input type="text" style="width:90%;" class="form-control" name="member_name" value="{{ $user->member_name }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
@@ -181,12 +171,12 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">ชื่อ</p>
-                                            <h4 class="mb-0">{{ $user->name }}</h4>
                                         </div>
                                         <div class="widgets-icons bg-light-success text-success ms-auto">
                                             <i class="fa-sharp fa-solid fa-input-text"></i>
                                         </div>
                                     </div>
+                                    <input type="text" style="width:90%;" class="form-control" name="name" value="{{ $user->name }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
@@ -194,12 +184,12 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">เบอร์ติดต่อ</p>
-                                            <h4 class="mb-0">{{ $user->member_tel }}</h4>
                                         </div>
                                         <div class="widgets-icons bg-light-danger text-danger ms-auto">
                                             <i class="fa-solid fa-phone"></i>
                                         </div>
                                     </div>
+                                    <input type="text" style="width:90%;" class="form-control" name="member_tel" value="{{ $user->member_tel }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
@@ -207,12 +197,12 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">อีเมล</p>
-                                            <h4 class="mb-0">{{ $user->email }}</h4>
                                         </div>
                                         <div class="widgets-icons bg-light-warning text-warning ms-auto">
                                             <i class="fa-solid fa-at"></i>
                                         </div>
                                     </div>
+                                    <input type="text" style="width:90%;" class="form-control" name="email" value="{{ $user->email }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
@@ -220,12 +210,12 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">บริษัท</p>
-                                            <h4 class="mb-0">{{ $user->member_co }}</h4>
                                         </div>
                                         <div class="widgets-icons bg-light-info text-info ms-auto">
                                             <i class="fa-regular fa-building"></i>
                                         </div>
                                     </div>
+                                    <input type="text" style="width:90%;" class="form-control" name="member_co" value="{{ $user->member_co }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
@@ -233,57 +223,17 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">ที่อยู่</p>
-                                            <h4 class="mb-0">{{ $user->member_addr }}</h4>
                                         </div>
                                         <div class="widgets-icons bg-light-secondary text-secondary ms-auto">
                                             <i class="fa-sharp fa-solid fa-map-location-dot"></i>
                                         </div>
                                     </div>
+                                    <textarea style="width:90%;" rows="4" class="form-control" name="member_addr">{{ $user->member_addr }}</textarea>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- อันเก่า -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="name" value="{{Auth::user()->name}}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">เบอร์</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="member_tel" value="{{Auth::user()->member_tel}}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">บริษัท</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="member_co" value="{{Auth::user()->member_co}}">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">ที่อยู่</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="member_addr" value="{{Auth::user()->member_addr}}">
-                                </div>
-                            </div>
-
                             <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="submit" class="btn btn-primary px-4" value="Save Changes">
+                                <div class="col-12 text-secondary">
+                                    <input type="submit" class="btn btn-primary px-4 float-end" value="Save Changes">
                                 </div>
                             </div>
                         </div>

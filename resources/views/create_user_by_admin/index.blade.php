@@ -158,6 +158,178 @@
     </span>
 </div>
 
+<div id="list_member_modal" class="notranslate">
+    @foreach($data_member as $item_modal)
+    <!-- Modal -->
+    <div class="modal fade" id="view_data_mamber_{{ $item_modal->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Label_view_data_mamber_{{ $item_modal->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Label_view_data_mamber_{{ $item_modal->id }}">ข้อมูลสมาชิก</h5>
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                @if( empty($item_modal->member_pic))
+                                    <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="110">
+                                @else
+                                    <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="profile-pic" width="110">
+                                @endif
+                                <div class="mt-3">
+                                    <h4>{{ $item_modal->name }}</h4>
+                                    <p class="text-secondary mb-1">
+                                        {{ $item_modal->member_tel }}
+                                    </p>
+                                    <p class="text-muted font-size-sm">
+                                        {{ $item_modal->member_addr }}
+                                    </p>
+                                </div>
+                                <div class="mt-3">
+                                    <!-- สถานะลงชื่อเข้าใช้ -->
+                                    @if($item_modal->member_status == "Active")
+                                        <span  class="btn bg-light-success text-success" style="font-size:12px;">
+                                            Active
+                                        </span>
+                                    @else
+                                        <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                            Inactive
+                                        </span>
+                                    @endif
+                                    <!-- บทบาทของสมาชิก -->
+                                    @if($item_modal->member_role == "admin")
+                                        <span class="btn bg-light-info text-info" style="font-size:12px;">
+                                            แอดมิน
+                                        </span>
+                                    @elseif($item_modal->member_role == "customer")
+                                        <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                            ดูข้อมูลมิจฉาชีพ
+                                        </span>
+                                    @else
+                                        <span class="btn bg-light-warning text-warning" style="font-size:12px;">
+                                            ดูข้อมูลพนักงานขับรถ
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <b>Username</b>
+                                    </h6>
+                                    <span class="text-secondary">{{ $item_modal->username }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <b>E-Mail</b>
+                                    </h6>
+                                    <span class="text-secondary">{{ $item_modal->email }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <b>บริษัท</b>
+                                    </h6>
+                                    <span class="text-secondary">
+                                        {{ $item_modal->member_co }}
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <b>ลงชื่อเข้าใช้</b>
+                                    </h6>
+                                    <span class="text-secondary">
+                                        {{ intval($item_modal->member_count_login) }} ครั้ง
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <b>ใช้งานล่าสุด</b>
+                                    </h6>
+                                    <span class="text-secondary">
+                                        @if( !empty($item_modal->last_time_active) )
+                                            {{ $item_modal->last_time_active }}
+                                        @else
+                                            ..
+                                        @endif
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <b>ลงข้อมูล</b>
+                                    </h6>
+                                    <span class="text-secondary">
+                                        @php
+                                            $count_add_data = 0 ;
+
+                                            if( $item_modal->member_role == "customer" ){
+                                                $data_add = App\Models\Customer::where('user_id',$item_modal->id)->get();
+                                                $count_add_data = count($data_add);
+                                            }else if( $item_modal->member_role == "driver" ){
+                                                // รอ ตาราง driver
+                                            }else{
+                                                $data_add_Cus = App\Models\Customer::where('user_id',$item_modal->id)->get();
+                                                $count_Cus = count($data_add_Cus);
+
+                                                // รอ ตาราง driver
+                                                $count_Dri = 0;
+                                                
+                                                $count_add_data = intval($count_Cus + $count_Dri);
+                                            }
+
+                                        @endphp
+
+                                        {{ $count_add_data }} ครั้ง
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0">
+                                        <b>ค้นหาข้อมูล</b>
+                                    </h6>
+                                    <span class="text-secondary">
+                                       {{ intval(0) }} ครั้ง
+                                    </span>
+                                </li>
+                                
+                                <div class="row text-center mt-3">
+                                    <div class="col-6">
+                                        <a href="{{ url('/user/' . $item_modal->id .'/edit') }}" class="btn btn-warning" style="width:90%;">
+                                            แก้ไขข้อมูล
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_{{ $item_modal->id }}');">
+                                            Copy Username
+                                        </span>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <div class="text-center pt-2 pb-2">
+                                            @php
+                                                $text_username = "";
+                                                
+                                                if( !empty($item_modal->create_member->username) ){
+                                                    $text_username = "Username : " . $item_modal->create_member->username . "\n" . "Password : " . $item_modal->create_member->pass_code ;
+                                                }
+                                                
+                                            @endphp
+                                            <textarea class="form-control" name="copy_username_{{ $item_modal->id }}" id="copy_username_{{ $item_modal->id }}" readonly>{{ $text_username }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    </div>
+
 <div class="row">
     <div class="col-md-3">
         <div class="card sticky">
@@ -380,176 +552,7 @@
                                 </tbody>
                             </table>
 
-                            <div id="list_member_modal" class="notranslate">
-                            @foreach($data_member as $item_modal)
-                            <!-- Modal -->
-                            <div class="modal fade" id="view_data_mamber_{{ $item_modal->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Label_view_data_mamber_{{ $item_modal->id }}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="Label_view_data_mamber_{{ $item_modal->id }}">ข้อมูลสมาชิก</h5>
-                                            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                                                <i class="fa-solid fa-circle-xmark"></i>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="d-flex flex-column align-items-center text-center">
-                                                        @if( empty($item_modal->member_pic))
-                                                            <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="110">
-                                                        @else
-                                                            <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="profile-pic" width="110">
-                                                        @endif
-                                                        <div class="mt-3">
-                                                            <h4>{{ $item_modal->name }}</h4>
-                                                            <p class="text-secondary mb-1">
-                                                                {{ $item_modal->member_tel }}
-                                                            </p>
-                                                            <p class="text-muted font-size-sm">
-                                                                {{ $item_modal->member_addr }}
-                                                            </p>
-                                                        </div>
-                                                        <div class="mt-3">
-                                                            <!-- สถานะลงชื่อเข้าใช้ -->
-                                                            @if($item_modal->member_status == "Active")
-                                                                <span  class="btn bg-light-success text-success" style="font-size:12px;">
-                                                                    Active
-                                                                </span>
-                                                            @else
-                                                                <span class="btn bg-light-danger text-danger" style="font-size:12px;">
-                                                                    Inactive
-                                                                </span>
-                                                            @endif
-                                                            <!-- บทบาทของสมาชิก -->
-                                                            @if($item_modal->member_role == "admin")
-                                                                <span class="btn bg-light-info text-info" style="font-size:12px;">
-                                                                    แอดมิน
-                                                                </span>
-                                                            @elseif($item_modal->member_role == "customer")
-                                                                <span class="btn bg-light-danger text-danger" style="font-size:12px;">
-                                                                    ดูข้อมูลมิจฉาชีพ
-                                                                </span>
-                                                            @else
-                                                                <span class="btn bg-light-warning text-warning" style="font-size:12px;">
-                                                                    ดูข้อมูลพนักงานขับรถ
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <hr class="my-4">
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>Username</b>
-                                                            </h6>
-                                                            <span class="text-secondary">{{ $item_modal->username }}</span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>E-Mail</b>
-                                                            </h6>
-                                                            <span class="text-secondary">{{ $item_modal->email }}</span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>บริษัท</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                                {{ $item_modal->member_co }}
-                                                            </span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ลงชื่อเข้าใช้</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                                {{ intval($item_modal->member_count_login) }} ครั้ง
-                                                            </span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ใช้งานล่าสุด</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                                @if( !empty($item_modal->last_time_active) )
-                                                                    {{ $item_modal->last_time_active }}
-                                                                @else
-                                                                    ..
-                                                                @endif
-                                                            </span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ลงข้อมูล</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                                @php
-                                                                    $count_add_data = 0 ;
-
-                                                                    if( $item_modal->member_role == "customer" ){
-                                                                        $data_add = App\Models\Customer::where('user_id',$item_modal->id)->get();
-                                                                        $count_add_data = count($data_add);
-                                                                    }else if( $item_modal->member_role == "driver" ){
-                                                                        // รอ ตาราง driver
-                                                                    }else{
-                                                                        $data_add_Cus = App\Models\Customer::where('user_id',$item_modal->id)->get();
-                                                                        $count_Cus = count($data_add_Cus);
-
-                                                                        // รอ ตาราง driver
-                                                                        $count_Dri = 0;
-                                                                        
-                                                                        $count_add_data = intval($count_Cus + $count_Dri);
-                                                                    }
-
-                                                                @endphp
-
-                                                                {{ $count_add_data }} ครั้ง
-                                                            </span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ค้นหาข้อมูล</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                               {{ intval(0) }} ครั้ง
-                                                            </span>
-                                                        </li>
-                                                        
-                                                        <div class="row text-center mt-3">
-                                                            <div class="col-6">
-                                                                <a href="{{ url('/user/' . $item_modal->id .'/edit') }}" class="btn btn-warning" style="width:90%;">
-                                                                    แก้ไขข้อมูล
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_{{ $item_modal->id }}');">
-                                                                    Copy Username
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-12 mt-2">
-                                                                <div class="text-center pt-2 pb-2">
-                                                                    @php
-                                                                        $text_username = "";
-                                                                        
-                                                                        if( !empty($item_modal->create_member->username) ){
-                                                                            $text_username = "Username : " . $item_modal->create_member->username . "\n" . "Password : " . $item_modal->create_member->pass_code ;
-                                                                        }
-                                                                        
-                                                                    @endphp
-                                                                    <textarea class="form-control" name="copy_username_{{ $item_modal->id }}" id="copy_username_{{ $item_modal->id }}" readonly>{{ $text_username }}</textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                            </div>
+                            
                     </div>
                 </div>
             </div>
