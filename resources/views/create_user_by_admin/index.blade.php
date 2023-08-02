@@ -55,7 +55,7 @@
 
 .div_alert {
     position: fixed;
-    top: -10%;
+    top: -100px;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -87,10 +87,10 @@
             transform: translateY(0);
         }
         10% {
-            transform: translateY(100px);
+            transform: translateY(120px);
         }
         90% {
-            transform: translateY(100px);
+            transform: translateY(120px);
         }
         100% {
             transform: translateY(0);
