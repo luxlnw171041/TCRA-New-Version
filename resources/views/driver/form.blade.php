@@ -715,6 +715,15 @@
                                     <div class="d-flex align-items-center font-tab">
                                         <div class="tab-icon"><i class="fa-solid fa-user-xmark  me-1"></i>
                                         </div>
+                                        <div class="tab-title">หมวดวินัย</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link navSuccess" data-bs-toggle="pill" href="#blacklist" role="tab" aria-selected="false">
+                                    <div class="d-flex align-items-center font-tab">
+                                        <div class="tab-icon"><i class="fa-solid fa-user-xmark  me-1"></i>
+                                        </div>
                                         <div class="tab-title">หมวดบัญชีดำ</div>
                                     </div>
                                 </a>
@@ -743,27 +752,43 @@
                             <div class="tab-pane fade active show" id="corrupt" role="tabpanel">
                                 <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ฉ้อโกงหรือยักยอกรถยนต์">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ปลอมแปลงเอกสารใบลงเวลา/บิลน้ำมัน">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">1.ฉ้อโกงหรือยักยอกรถยนต์</span>
+                                            <span class="radio-label">1.ปลอมแปลงเอกสารใบลงเวลา/บิลน้ำมัน</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ลักทรัพย์นายจ้าง">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">2.ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์</span>
+                                            <span class="radio-label">2.ลักทรัพย์นายจ้าง</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ความผิดในคดีอาญาอื่นๆ">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ยักยอกรถยนต์หรือทรัพย์สิน">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">3.ความผิดในคดีอาญาอื่นๆ</span>
+                                            <span class="radio-label">3.ยักยอกรถยนต์หรือทรัพย์สิน</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทำร้ายร่างกาย">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">4.ทำร้ายร่างกาย</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ความผิดคดีอาญาหรือทุจริตอื่นๆ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">5.ความผิดคดีอาญาหรือทุจริตอื่นๆ</span>
                                         </span>
                                     </label>
                                     <label>
@@ -779,19 +804,127 @@
                             <div class="tab-pane fade" id="discipline" role="tabpanel">
                                 <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่บำรุงรักษารถยนต์">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทิ้งงาน">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">4.ไม่บำรุงรักษารถยนต์</span>
+                                            <span class="radio-label">6.ทิ้งงาน</span>
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่ชำระค่าเช่า">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทะเลาะวิวาท">
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">5.ไม่ชำระค่าเช่า</span>
+                                            <span class="radio-label">7.ทะเลาะวิวาท</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ยืมเงินลูกค้า">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">8.ยืมเงินลูกค้า</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่เก็บรักษาความลับ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">9.ไม่เก็บรักษาความลับ</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ปิดมือถือติดต่อไม่ได้">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">10.ปิดมือถือติดต่อไม่ได้</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="โกหกบ่อยครั้ง">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">11.โกหกบ่อยครั้ง</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ฟ้องร้องนายจ้างหรือร้องตรวจแรงงานที่เป็นเท็จ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">12.ฟ้องร้องนายจ้างหรือร้องตรวจแรงงานที่เป็นเท็จ</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">อื่นๆ</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="blacklist" role="tabpanel">
+                                <div class="groupOffense">
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ขับรถอันตราย">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">14.ขับรถอันตราย</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="มาสาย">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">15.มาสาย</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="สตาร์ทรถรอลูกค้า">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">16.สตาร์ทรถรอลูกค้า</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทัศนคติ/การบริการไม่ดี">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">17.ทัศนคติ/การบริการไม่ดี</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่รู้เส้นทาง">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">18.ไม่รู้เส้นทาง</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ขัดคำสั่งลูกค้า/นายจ้าง">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">19.ขัดคำสั่งลูกค้า/นายจ้าง</span>
+                                        </span>
+                                    </label>
+                                    <label>
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="แต่งกาย/พูดจา ไม่สุภาพ">
+                                        <span class="radio-tile">
+                                            <span class="radio-icon">
+                                            </span>
+                                            <span class="radio-label">20.แต่งกาย/พูดจา ไม่สุภาพ</span>
                                         </span>
                                     </label>
                                     <label>
