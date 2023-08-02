@@ -306,7 +306,7 @@
                     </div>
                     <h5 class="mb-0 text-danger">ข้อมูลสมาชิก</h5>
                     <div class="position-relative ms-auto">
-                        <input type="text" class="form-control ps-5 radius-30" placeholder="ค้นหาสมาชิก..">
+                        <input type="text" id="input_search_member" class="form-control ps-5 radius-30" placeholder="ค้นหาสมาชิก.." oninput="before_search_member();">
                         <span class="position-absolute top-50 product-show translate-middle-y">
                             <i class="bx bx-search"></i>
                         </span>
@@ -380,6 +380,7 @@
                                 </tbody>
                             </table>
 
+                            <div id="list_member_modal" class="notranslate">
                             @foreach($data_member as $item_modal)
                             <!-- Modal -->
                             <div class="modal fade" id="view_data_mamber_{{ $item_modal->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Label_view_data_mamber_{{ $item_modal->id }}" aria-hidden="true">
@@ -396,9 +397,9 @@
                                                 <div class="card-body">
                                                     <div class="d-flex flex-column align-items-center text-center">
                                                         @if( empty($item_modal->member_pic))
-                                                            <img src="{{ url('/img/avatars/avatar-1.png') }}" class="rounded-circle p-1 bg-primary" width="110">
+                                                            <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="110">
                                                         @else
-                                                            <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="rounded-circle p-1 bg-primary" width="110">
+                                                            <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="profile-pic" width="110">
                                                         @endif
                                                         <div class="mt-3">
                                                             <h4>{{ $item_modal->name }}</h4>
@@ -543,8 +544,6 @@
                                 </div>
                             </div>
                             @endforeach
-                            <div id="list_member_modal" class="notranslate">
-
                             </div>
                     </div>
                 </div>
@@ -616,7 +615,7 @@
             return response.json();
         }).then(function(data){
 
-            console.log(data);
+            // console.log(data);
             // console.log(data.check_data);
 
             if(data.check_data == "OK"){
@@ -781,7 +780,7 @@
                         `;
                     }else{
                         html_member_pic = `
-                            <img src="{{ url('/img/avatars/avatar-1.png') }}" class="rounded-circle p-1 bg-primary" width="110">
+                            <img src="{{ url('/img/icon/businessman.png') }}" class="rounded-circle p-1 bg-primary" width="110">
                         `;
                     }
 
@@ -876,6 +875,302 @@
 
     }
 
+    let delay_search_member ;
+
+    function before_search_member(){
+
+        clearTimeout(delay_search_member);
+        delay_search_member = setTimeout(function() {
+            search_member();
+        }, 1000);
+
+    }
+
+    function search_member(){
+
+        let input_search_member = document.querySelector('#input_search_member').value ;
+
+        if (!input_search_member) {
+            input_search_member = 'all';
+        }
+
+        // console.log(input_search_member);
+
+        fetch("{{ url('/') }}/api/search_member?search="+input_search_member)
+            .then(response => response.json())
+            .then(result => {
+                // console.log(result);
+
+                let list_member = document.querySelector('#list_member');
+                    list_member.innerHTML = '';
+                let list_member_modal = document.querySelector('#list_member_modal');
+                    list_member_modal.innerHTML = '';
+
+                let html = '' ;
+                if (result.length == 0) {
+                    html = `
+                        <h5 class="text-secondary mt-3 float-start">ไม่พบข้อมูลที่ค้นหา</h5>
+                    `;
+                }else{
+                    for (let i = 0; i < result.length; i++) {
+
+                        for (const [key, value ] of Object.entries(result[i])) {
+                            if(value == null){
+                                result[i][key] = '';
+                            }
+                        }
+
+                        let html_member_role ;
+                        let html_member_role_modal ;
+                        if (result[i].member_role == "admin") {
+                            html_member_role = `
+                                <span class="badge bg-light-info text-info" style="font-size:13px;">
+                                    แอดมิน
+                                </span>
+                            `;
+
+                            html_member_role_modal = `
+                                <span class="btn bg-light-info text-info" style="font-size:12px;">
+                                    แอดมิน
+                                </span>
+                            `;
+
+                        }else if(result[i].member_role == "customer"){
+                            html_member_role = `
+                                <span class="badge bg-light-danger text-danger" style="font-size:13px;">
+                                    ดูข้อมูลมิจฉาชีพ
+                                </span>
+                            `;
+
+                            html_member_role_modal = `
+                                <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                    ดูข้อมูลมิจฉาชีพ
+                                </span>
+                            `;
+
+                        }else{
+                            html_member_role = `
+                                <span class="badge bg-light-warning text-warning" style="font-size:13px;">
+                                    ดูข้อมูลพนักงานขับรถ
+                                </span>
+                            `;
+
+                            html_member_role_modal = `
+                                <span class="btn bg-light-warning text-warning" style="font-size:12px;">
+                                    ดูข้อมูลพนักงานขับรถ
+                                </span>
+                            `;
+
+                        }
+
+                        let html_member_status ;
+                        let html_member_status_modal ;
+                        if(result[i].member_status == "Active"){
+                            html_member_status = `
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-success" onclick="change_status_to('Active','`+result[i].id+`');">Active</button>
+                                    <button type="button" class="btn btn-outline-danger" onclick="change_status_to('Inactive','`+result[i].id+`');">Inactive</button>
+                                </div>
+                            `;
+
+                            html_member_status_modal = `
+                                <span class="btn bg-light-success text-success" style="font-size:12px;">
+                                    Active
+                                </span>
+                            `;
+                        }else{
+                            html_member_status = `
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-outline-success" onclick="change_status_to('Active','`+result[i].id+`');">Active</button>
+                                    <button type="button" class="btn btn-danger" onclick="change_status_to('Inactive','`+result[i].id+`');">Inactive</button>
+                                </div>
+                            `;
+
+                            html_member_status_modal = `
+                                <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                    Inactive
+                                </span>
+                            `;
+                        }
+
+                        list_html = `
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-2">
+                                                <h6 class="mb-1 font-22">`+result[i].name+`</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        `+html_member_role+`
+                                    </td>
+                                    <td class="text-center">
+                                        `+result[i].member_co+`
+                                    </td>
+                                    <td class="text-center" id="td_status_member_`+result[i].id+`">
+                                        `+html_member_status+`
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex order-actions">
+                                            <a href="javascript:;" class="ms-2 text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_`+result[i].id+`">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+
+                        html = html + list_html ;
+
+                        // -------------------- MODAL ------------------
+
+                        let str = "Username : " + result[i].username + "\n" + "Password : " + result[i].pass_code
+
+                        if (result[i].member_count_login == "") {
+                            result[i].member_count_login = 0 ;
+                        }
+
+                        if(result[i].last_time_active == ""){
+                            result[i].last_time_active = ".." ;
+                        }
+
+                        let url_edit_profile = "{{ url('/') }}" + "/user/" + result[i].id + "/edit" ;
+
+                        let html_member_pic ;
+                        if (result[i].member_pic) {
+                            html_member_pic = `
+                                <img src="{{ url('storage')}}/`+result[i].member_pic+`" class="rounded-circle p-1 bg-primary" width="110">
+                            `;
+                        }else{
+                            html_member_pic = `
+                                <img src="{{ url('/img/icon/businessman.png') }}" class="rounded-circle p-1 bg-primary" width="110">
+                            `;
+                        }
+
+                        let html_list_member_modal = `
+                            <div class="modal fade" id="view_data_mamber_`+result[i].id+`" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Label_view_data_mamber_`+result[i].id+`" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="Label_view_data_mamber_`+result[i].id+`">ข้อมูลสมาชิก</h5>
+                                            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="d-flex flex-column align-items-center text-center">
+                                                        `+html_member_pic+`
+                                                        <div class="mt-3">
+                                                            <h4>`+result[i].name+`</h4>
+                                                            <p class="text-secondary mb-1">
+                                                                `+result[i].member_tel+`
+                                                            </p>
+                                                            <p class="text-muted font-size-sm">
+                                                                `+result[i].member_addr+`
+                                                            </p>
+                                                        </div>
+                                                        <div class="mt-3">
+                                                            <!-- สถานะลงชื่อเข้าใช้ -->
+                                                            `+html_member_status_modal+`
+                                                            <!-- บทบาทของสมาชิก -->
+                                                            `+html_member_role_modal+`
+                                                        </div>
+                                                    </div>
+                                                    <hr class="my-4">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <b>Username</b>
+                                                            </h6>
+                                                            <span class="text-secondary">`+result[i].username+`</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <b>E-Mail</b>
+                                                            </h6>
+                                                            <span class="text-secondary">`+result[i].email+`</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <b>บริษัท</b>
+                                                            </h6>
+                                                            <span class="text-secondary">`+result[i].member_co+`</span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <b>ลงชื่อเข้าใช้</b>
+                                                            </h6>
+                                                            <span class="text-secondary">
+                                                                `+result[i].member_count_login+` ครั้ง
+                                                            </span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <b>ใช้งานล่าสุด</b>
+                                                            </h6>
+                                                            <span class="text-secondary">
+                                                                `+result[i].last_time_active+`
+                                                            </span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <b>ลงข้อมูล</b>
+                                                            </h6>
+                                                            <span class="text-secondary">
+                                                                `+result[i].count_add_data+` ครั้ง
+                                                            </span>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                            <h6 class="mb-0">
+                                                                <b>ค้นหาข้อมูล</b>
+                                                            </h6>
+                                                            <span class="text-secondary">
+                                                               `+result[i].last_time_active+` ครั้ง
+                                                            </span>
+                                                        </li>
+
+                                                        <div class="row text-center mt-3">
+                                                            <div class="col-6">
+                                                                <a href="`+url_edit_profile+`" class="btn btn-warning" style="width:90%;">
+                                                                    แก้ไขข้อมูล
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_`+result[i].id+`');">
+                                                                    Copy Username
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-12 mt-2">
+                                                                <div class="text-center pt-2 pb-2">
+                                                                    <textarea class="form-control" name="copy_username_`+result[i].id+`" id="copy_username_`+result[i].id+`" readonly>`+str+`</textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        list_member_modal.insertAdjacentHTML('beforeend', html_list_member_modal); // แทรกล่างสุด
+
+                    }
+                }
+
+                list_member.insertAdjacentHTML('beforeend', html); // แทรกล่างสุด
+
+
+            });
+
+
+    }
+
     function create_success(){
 
         document.querySelector('#Username').value = "" ;
@@ -892,26 +1187,31 @@
     }
 
     function CopyToClipboard(containerid) {
-      if (document.selection) {
-        var range = document.body.createTextRange();
-        range.moveToElementText(document.getElementById(containerid));
-        range.select().createTextRange();
-        document.execCommand("copy");
-        document.querySelector('#go_back').classList.remove('d-none');
-      } else if (window.getSelection) {
-        var range = document.createRange();
-        range.selectNode(document.getElementById(containerid));
-        window.getSelection().addRange(range);
-        document.execCommand("copy");
 
-        document.querySelector('#alert_text').innerHTML = "คัดลอกเรียบร้อย";
+        window.getSelection().removeAllRanges();
+
+        let range ;
+        if (document.selection) {
+            range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+            document.querySelector('#go_back').classList.remove('d-none');
+        } else if (window.getSelection) {
+            range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+
+            document.querySelector('#alert_text').innerHTML = "คัดลอกเรียบร้อย";
             document.querySelector('#alert_copy').classList.add('up_down');
 
             const animated = document.querySelector('.up_down');
             animated.onanimationend = () => {
                 document.querySelector('#alert_copy').classList.remove('up_down');
             };
-      }
+        }
+
     }
 
     function check_email(){

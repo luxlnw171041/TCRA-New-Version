@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Create_user_by_admin;
 Use Carbon\Carbon;
+use App\Models\Customer;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -59,6 +60,34 @@ class UserController extends Controller
             return view('404');
         }
 
+    }
+
+    public function show_profile($id)
+    {
+        $user = Auth::user();
+
+        if ($user->id == $id || $user->member_role == "admin") {
+
+            if( $user->member_role == "customer" ){
+
+                $data_add_Cus = Customer::where('user_id',$user->id)->get();
+
+            }else if( $user->member_role == "driver" ){
+
+                // รอ ตาราง driver
+
+            }else{
+
+                $data_add_Cus = Customer::where('user_id',$user->id)->get();
+
+                // รอ ตาราง driver
+
+            }
+
+            return view('profile.show', compact('user','data_add_Cus','id'));
+        }else{
+            return view('404');
+        }
     }
 
     public function update(Request $request, $id)
@@ -138,6 +167,100 @@ class UserController extends Controller
                 ]);
 
         return "OK" ;
+
+    }
+
+    function search_member(Request $request){
+
+        $requestData = $request->all();
+        $keyword = $requestData['search'];
+
+        if ($keyword == 'all') {
+            $data_user = User::orderBy('id','DESC')->get();
+        }else{
+            $data_user = User::where('name', 'LIKE', "%$keyword%")
+                ->orWhere('username', 'LIKE', "%$keyword%")
+                ->orWhere('email', 'LIKE', "%$keyword%")
+                ->orWhere('member_co', 'LIKE', "%$keyword%")
+                ->orWhere('member_addr', 'LIKE', "%$keyword%")
+                ->orWhere('member_tel', 'LIKE', "%$keyword%")
+                ->orWhere('member_status', 'LIKE', "%$keyword%")
+                ->orWhere('member_role', 'LIKE', "%$keyword%")
+                ->orderBy('id','DESC')
+                ->get();
+        }
+
+        for ($i=0; $i < count($data_user) ; $i++) { 
+            // echo $data_user[$i]['id'] ;
+
+            // PASSCODE
+            $data_create = Create_user_by_admin::where('user_id' , $data_user[$i]['id'])->first();
+            $data_user[$i]['pass_code'] = $data_create->pass_code ;
+
+            // ลงข้อมูล
+            $count_add_data = 0 ;
+
+            if( $data_user[$i]['member_role'] == "customer" ){
+                $data_add = Customer::where('user_id',$data_user[$i]['id'])->get();
+                $count_add_data = count($data_add);
+            }else if( $data_user[$i]['member_role'] == "driver" ){
+                // รอ ตาราง driver
+            }else{
+                $data_add_Cus = Customer::where('user_id',$data_user[$i]['id'])->get();
+                $count_Cus = count($data_add_Cus);
+
+                // รอ ตาราง driver
+                $count_Dri = 0;
+                
+                $count_add_data = intval($count_Cus + $count_Dri);
+            }
+
+            $data_user[$i]['count_add_data'] = $count_add_data ;
+
+        }
+
+        return $data_user ;
+
+    }
+
+    function submit_change_pass(Request $request){
+
+        $requestData = $request->all();
+        $text_return = '' ;
+
+        $user_id = $requestData['user_id'];
+        $old_key = $requestData['old_key'];
+        $new_key = $requestData['new_key'];
+        $new_key_again = $requestData['new_key_again'];
+
+        $data_create = Create_user_by_admin::where('user_id' , $user_id)->first();
+
+        if( $old_key != $data_create->pass_code ){
+            $text_return = 'รหัสผ่านเดิมไม่ถูกต้อง' ;
+        }else{
+
+            $new_pass = Hash::make($new_key);
+
+            DB::table('users')
+                ->where([ 
+                        ['id', $user_id],
+                    ])
+                ->update([
+                        'password' => $new_pass,
+                    ]);
+
+            DB::table('create_user_by_admins')
+                ->where([ 
+                        ['user_id', $user_id],
+                    ])
+                ->update([
+                        'pass_code' => $new_key,
+                    ]);
+
+            $text_return = 'เสร็จสิ้น' ;
+        }
+
+        return $text_return ;
 
     }
 
