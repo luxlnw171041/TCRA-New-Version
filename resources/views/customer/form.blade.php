@@ -153,7 +153,7 @@
                 </span>
                 <div class="d-flex flex-column align-items-center text-center">
                     @if(!empty(Auth::user()->member_pic))
-                        <img src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="User" class="rounded-circle p-1 bg-danger" width="110">
+                        <img src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="User" class="rounded-circle profileImg p-1" width="110">
                     @else
                         <img src="{{asset('img/icon/user.jpg')}}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
                     @endif
