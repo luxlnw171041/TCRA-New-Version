@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Driver extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'customers';
+    protected $table = 'drivers';
 
     /**
     * The database primary key value.
@@ -25,7 +25,7 @@ class Customer extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'rentname', 'compname', 'c_name', 'c_surname', 'c_idno', 'demerit', 'demeritdetail', 'c_pic_id_card', 'c_pic_lease', 'c_pic_execution', 'c_pic_cap', 'c_pic_other', 'c_date','c_company_name','commercial_registration'];
+    protected $fillable = ['user_id', 'compname', 'commercial_registration', 'd_name', 'd_surname', 'd_idno', 'demerit', 'demeritdetail', 'd_pic_id_card', 'd_pic_lease', 'd_pic_cap', 'd_pic_other', 'd_date'];
 
     public function user()
     {

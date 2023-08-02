@@ -39,3 +39,4 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'member_role:admin'])->group(function () {
 	Route::resource('create_user_by_admin', 'Create_user_by_adminController')->except(['show','create','edit','view']);
 });
+Route::resource('driver', 'DriverController');

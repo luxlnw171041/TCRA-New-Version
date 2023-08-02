@@ -24,7 +24,7 @@
         margin-left: 0.5em;
         pointer-events: none;
         transition: all 0.3s ease;
-        color: #e62e2e;
+        color: #0a58ca;
     }
 
     .inputGroup label i {
@@ -40,7 +40,7 @@
     }
 
     .inputGroup :is(input:focus, input:valid) {
-        border-color: #e62e2e;
+        border-color: #0a58ca;
     }
 
     .group {
@@ -76,7 +76,7 @@
 
     input[type="datetime-local"]:focus.selectDate {
         outline: none;
-        border-color: #e62e2e;
+        border-color: #0a58ca;
         box-shadow: 0 0 0 0.25rem  rgb(230, 46, 46, 0.6);
     }
 
@@ -122,7 +122,7 @@
         top: 5px;
         right: 5px;
         padding: 1px 20px;
-        background-color: #e62e2e;
+        background-color: #0a58ca;
         border-radius: 15px;
         color: #fff;
     }.headerCustomer{
@@ -131,11 +131,6 @@
     }.subHeaderCustomer{
         font-weight: bolder !important;
         font-size: 16px !important;
-    } .text-overflow{
-        max-width: 92%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 </style>
 
@@ -162,7 +157,7 @@
 
                         <p class="text-secondary mb-1">{{Auth::user()->username}}</p>
                         <p class="text-muted font-size-sm">{{Auth::user()->member_co}}</p>
-                        <a class="btn btn-outline-danger px-5 " href="{{ url('/user/' . Auth::user()->id . '/edit') }}">แก้ไข</a>
+                        <a class="btn btn-outline-primary px-5 " href="{{ url('/user/' . Auth::user()->id . '/edit') }}">แก้ไข</a>
                     </div>
                 </div>
                 <!-- <hr class="my-4"> -->
@@ -170,134 +165,48 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div class="card border-top border-0 border-4 border-danger">
+        <div class="card border-top border-0 border-4 border-primary">
             <div class="card-body p-5">
                 <div class="card-title d-flex align-items-center">
-                    <div><i class="bx bxs-user me-1 font-22 text-danger"></i>
+                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
                     </div>
-                    <h5 class="mb-0 text-danger headerCustomer">เพิ่มข้อมูลมิจฉาชีพ</h5>
+                    <h5 class="mb-0 text-primary headerCustomer">เพิ่มข้อมูลพนักงานขับรถ</h5>
                 </div>
                 <hr>
                 <div class="row g-3">
-                    <div class="col-12">
-                        <label for="inputLastName1" class="form-label subHeaderCustomer ">ติดต่อในนาม <span class="text-danger">*</span></label>
-                    </div>
-                    <div class="col-md-4 m-0">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="w-100">
-                                    <label class="w-100">
-                                        <input class="radio-input" type="radio" name="rentname" id="rentname" value="บุคคล" required>
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">บุคคล</span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="w-100">
-                                    <label class="w-100">
-                                        <input class="radio-input" type="radio" name="rentname" id="rentname" value="บริษัท" required>
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">บริษัท</span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mt-md-0" id="input_c_name">
+                    <div class="col-md-4 mt-md-4 ">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group">
                             <div class="inputGroup w-100">
-                                <input name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}" required=""  autocomplete="off">
-                                <label for="c_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                                <input name="compname" type="text" id="compname" value="{{ isset($customer->compname) ? $customer->compname : '' }}" required="" autocomplete="off">
+                                <label for="compname"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mt-md-0" id="input_c_surname">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input name="c_surname" type="text" id="c_surname" value="{{ isset($customer->c_surname) ? $customer->c_surname : '' }}" required="" autocomplete="off">
-                                <label for="c_surname"><i class="fa-solid fa-user"></i> นามสกุล <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-md-0 d-none" id="input_c_company_name">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
-                        <div class="input-group">
-                            <div class="inputGroup w-100">
-                                <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off">
-                                <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-md-0 d-none" id="input_commercial_registration">
+                    <div class="col-md-4 mt-md-4 " >
                         <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
                                 <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off">
-                                <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขทะเบียนพาณิชย์/เลขนิติบุคคล <span class="text-danger">*</span></label>
+                                <label for="commercial_registration"><i class="fa-solid fa-user"></i> เลขทะเบียนพาณิชย์/เลขนิติบุคคล <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
-                    <script>
-
-
-                          const radioInputs = document.querySelectorAll('.radio-input');
-                          const input_c_name = document.querySelector('#input_c_name');
-                          const input_c_surname = document.querySelector('#input_c_surname');
-                          const input_c_company_name = document.querySelector('#input_c_company_name');
-                          const input_commercial_registration = document.querySelector('#input_commercial_registration');
-
-                            radioInputs.forEach((input) => {
-                            input.addEventListener('change', function() {
-                            if (this.checked) {
-                                if (this.value === 'บุคคล') {
-                                    
-                                    input_c_name.classList.remove('d-none');
-                                    input_c_surname.classList.remove('d-none');
-                                    input_c_company_name.classList.add('d-none');
-                                    input_commercial_registration.classList.add('d-none');
-
-                                    document.querySelector('#c_company_name').required = false;
-                                    document.querySelector('#commercial_registration').required = false;
-                                    document.querySelector('#c_company_name').value = "";
-                                    document.querySelector('#commercial_registration').value = "";
-                                    document.querySelector('#c_surname').required = true;
-                                    document.querySelector('#c_name').required = true;
-
-                                } else if (this.value === 'บริษัท') {
-                                    input_c_name.classList.add('d-none');
-                                    input_c_surname.classList.add('d-none');
-                                    input_c_company_name.classList.remove('d-none');
-                                    input_commercial_registration.classList.remove('d-none');
-
-                                    document.querySelector('#c_surname').required = false;
-                                    document.querySelector('#c_name').required = false;
-                                    document.querySelector('#c_surname').value = "";
-                                    document.querySelector('#c_name').value = "";
-                                    document.querySelector('#c_company_name').required = true;
-                                    document.querySelector('#commercial_registration').required = true;
-                                    
-                                    
-                                }
-                            }
-                            });
-                        });
-                    </script>
+                    <div class="col-md-4 mt-md-4 " >
+                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
+                        <div class="input-group ">
+                            <div class="inputGroup w-100">
+                                <input name="d_name" type="text" id="d_name" value="{{ isset($customer->d_name) ? $customer->d_name : '' }}" required="" autocomplete="off">
+                                <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อพนักงานขับรถ <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-6 mt-md-4">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
-                                <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}">
-                                <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตร <span class="text-danger">*</span></label>
+                                <input type="text" required="" autocomplete="off" name="d_idno" id="d_idno" value="{{ isset($customer->d_idno) ? $customer->d_idno : '' }}">
+                                <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตร <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
@@ -364,7 +273,7 @@
                             width: 40px;
                             height: 40px;
                             border: 4px solid #f3f3f3;
-                            border-top: 4px solid #e62e2e;
+                            border-top: 4px solid #0a58ca;
                             border-radius: 50%;
                             animation: spin 2s linear infinite;
                             /* เพิ่มคำสั่งต่อไปนี้เพื่อจัดให้สปินเป็นตรงกลาง */
@@ -414,7 +323,7 @@
                             justify-content: start;
                             padding: 5px;
                             position: absolute;
-                            color: #e62e2e;
+                            color: #0a58ca;
                             transition: all .15s ease-in-out;
                             transform: translateY(200px);
                             background-color: #fff;
@@ -457,18 +366,17 @@
                             top: 40%;
                             width: 30px;
                             height: 30px;
-                            background-color: rgb(230, 46, 46) !important;
+                            background-color: rgb(10, 88, 202) !important;
                             color: #fff !important;
                             border-radius: 50% !important;
                         }
-
                         .owl-next {
                             position: absolute;
                             right: 0;
                             top: 40%;
                             width: 30px;
                             height: 30px;
-                            background-color: rgb(230, 46, 46) !important;
+                            background-color: rgb(10, 88, 202) !important;
                             color: #fff !important;
                             border-radius: 50% !important;
                         }
@@ -534,7 +442,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_id_card" name="c_pic_id_card" value="{{ isset($pet->c_pic_id_card) ? $pet->c_pic_id_card : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_id_card" name="d_pic_id_card" value="{{ isset($pet->d_pic_id_card) ? $pet->d_pic_id_card : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -564,7 +472,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_lease" name="c_pic_lease" value="{{ isset($pet->c_pic_lease) ? $pet->c_pic_lease : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_lease" name="d_pic_lease" value="{{ isset($pet->d_pic_lease) ? $pet->d_pic_lease : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -587,37 +495,6 @@
                             </div>
 
                             <div class="item">
-                                <!-- <h6>สัญญาเช่า</h6> -->
-                                <div class="file-upload-box upload-execution">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="c_pic_execution" name="c_pic_execution" value="{{ isset($pet->c_pic_execution) ? $pet->c_pic_execution : ''}}" accept="image/*" style="display: none;">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/signature.png')}}" alt="User" class="imgUpLoad" width="50">
-                                        </div>
-                                       <span>สัญญาเช่า</span> 
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="item">
                                 <!-- <h6>ภาพแคป</h6> -->
                                 <div class="file-upload-box upload-capture">
                                     <div id="clear-button" style="display: none;">
@@ -625,7 +502,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_cap" name="c_pic_cap" value="{{ isset($pet->c_pic_cap) ? $pet->c_pic_cap : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_cap" name="d_pic_cap" value="{{ isset($pet->d_pic_cap) ? $pet->d_pic_cap : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -654,7 +531,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_other" name="c_pic_other" value="{{ isset($pet->c_pic_other) ? $pet->c_pic_other : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_other" name="d_pic_other" value="{{ isset($pet->d_pic_other) ? $pet->d_pic_other : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -1151,7 +1028,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-danger px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</button>
+                        <button type="submit" class="btn btn-primary px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</button>
                     </div>
                 </div>
             </div>
@@ -1220,74 +1097,100 @@
     </div>
 </div>
 
-<!-- 
-{{-- <div class="form-group {{ $errors->has('rentname') ? 'has-error' : ''}}">
-<label for="rentname" class="control-label">{{ 'Rentname' }}</label>
-<input class="form-control" name="rentname" type="text" id="rentname" value="{{ isset($customer->rentname) ? $customer->rentname : ''}}">
-{!! $errors->first('rentname', '<p class="help-block">:message</p>') !!}
-</div> --}}
 
-<div class="form-group {{ $errors->has('compname') ? 'has-error' : '' }}">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div class="form-group {{ $errors->has('user_id') ? 'has-error' : ''}}">
+    <label for="user_id" class="control-label">{{ 'User Id' }}</label>
+    <input class="form-control" name="user_id" type="number" id="user_id" value="{{ isset($driver->user_id) ? $driver->user_id : ''}}" >
+    {!! $errors->first('user_id', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('compname') ? 'has-error' : ''}}">
     <label for="compname" class="control-label">{{ 'Compname' }}</label>
-    <input class="form-control" name="compname" type="text" id="compname" value="{{ isset($customer->compname) ? $customer->compname : '' }}">
+    <input class="form-control" name="compname" type="text" id="compname" value="{{ isset($driver->compname) ? $driver->compname : ''}}" >
     {!! $errors->first('compname', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_name') ? 'has-error' : '' }}">
-    <label for="c_name" class="control-label">{{ 'C Name' }}</label>
-    <input class="form-control" name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}">
-    {!! $errors->first('c_name', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('commercial_registration') ? 'has-error' : ''}}">
+    <label for="commercial_registration" class="control-label">{{ 'Commercial Registration' }}</label>
+    <input class="form-control" name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($driver->commercial_registration) ? $driver->commercial_registration : ''}}" >
+    {!! $errors->first('commercial_registration', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_surname') ? 'has-error' : '' }}">
-    <label for="c_surname" class="control-label">{{ 'C Surname' }}</label>
-    <input class="form-control" name="c_surname" type="text" id="c_surname" value="{{ isset($customer->c_surname) ? $customer->c_surname : '' }}">
-    {!! $errors->first('c_surname', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('d_name') ? 'has-error' : ''}}">
+    <label for="d_name" class="control-label">{{ 'D Name' }}</label>
+    <input class="form-control" name="d_name" type="text" id="d_name" value="{{ isset($driver->d_name) ? $driver->d_name : ''}}" >
+    {!! $errors->first('d_name', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_idno') ? 'has-error' : '' }}">
-    <label for="c_idno" class="control-label">{{ 'C Idno' }}</label>
-    <input class="form-control" name="c_idno" type="text" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}">
-    {!! $errors->first('c_idno', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('d_surname') ? 'has-error' : ''}}">
+    <label for="d_surname" class="control-label">{{ 'D Surname' }}</label>
+    <input class="form-control" name="d_surname" type="text" id="d_surname" value="{{ isset($driver->d_surname) ? $driver->d_surname : ''}}" >
+    {!! $errors->first('d_surname', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('demerit') ? 'has-error' : '' }}">
+<div class="form-group {{ $errors->has('d_idno') ? 'has-error' : ''}}">
+    <label for="d_idno" class="control-label">{{ 'D Idno' }}</label>
+    <input class="form-control" name="d_idno" type="text" id="d_idno" value="{{ isset($driver->d_idno) ? $driver->d_idno : ''}}" >
+    {!! $errors->first('d_idno', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('demerit') ? 'has-error' : ''}}">
     <label for="demerit" class="control-label">{{ 'Demerit' }}</label>
-    <input class="form-control" name="demerit[]" type="text" id="demerit" value="{{ isset($customer->demerit) ? $customer->demerit : '' }}">
+    <input class="form-control" name="demerit" type="text" id="demerit" value="{{ isset($driver->demerit) ? $driver->demerit : ''}}" >
     {!! $errors->first('demerit', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('demeritdetail') ? 'has-error' : '' }}">
+<div class="form-group {{ $errors->has('demeritdetail') ? 'has-error' : ''}}">
     <label for="demeritdetail" class="control-label">{{ 'Demeritdetail' }}</label>
-    <input class="form-control" name="demeritdetail" type="text" id="demeritdetail" value="{{ isset($customer->demeritdetail) ? $customer->demeritdetail : '' }}">
+    <input class="form-control" name="demeritdetail" type="text" id="demeritdetail" value="{{ isset($driver->demeritdetail) ? $driver->demeritdetail : ''}}" >
     {!! $errors->first('demeritdetail', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_pic_id_card') ? 'has-error' : '' }}">
-    <label for="c_pic_id_card" class="control-label">{{ 'C Pic Id Card' }}</label>
-    <input class="form-control" name="c_pic_id_card" type="text" id="c_pic_id_card" value="{{ isset($customer->c_pic_id_card) ? $customer->c_pic_id_card : '' }}">
-    {!! $errors->first('c_pic_id_card', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('d_pic_id_card') ? 'has-error' : ''}}">
+    <label for="d_pic_id_card" class="control-label">{{ 'D Pic Id Card' }}</label>
+    <input class="form-control" name="d_pic_id_card" type="text" id="d_pic_id_card" value="{{ isset($driver->d_pic_id_card) ? $driver->d_pic_id_card : ''}}" >
+    {!! $errors->first('d_pic_id_card', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_pic_lease') ? 'has-error' : '' }}">
-    <label for="c_pic_lease" class="control-label">{{ 'C Pic Lease' }}</label>
-    <input class="form-control" name="c_pic_lease" type="text" id="c_pic_lease" value="{{ isset($customer->c_pic_lease) ? $customer->c_pic_lease : '' }}">
-    {!! $errors->first('c_pic_lease', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('d_pic_lease') ? 'has-error' : ''}}">
+    <label for="d_pic_lease" class="control-label">{{ 'D Pic Lease' }}</label>
+    <input class="form-control" name="d_pic_lease" type="text" id="d_pic_lease" value="{{ isset($driver->d_pic_lease) ? $driver->d_pic_lease : ''}}" >
+    {!! $errors->first('d_pic_lease', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_pic_execution') ? 'has-error' : '' }}">
-    <label for="c_pic_execution" class="control-label">{{ 'C Pic Execution' }}</label>
-    <input class="form-control" name="c_pic_execution" type="text" id="c_pic_execution" value="{{ isset($customer->c_pic_execution) ? $customer->c_pic_execution : '' }}">
-    {!! $errors->first('c_pic_execution', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('d_pic_cap') ? 'has-error' : ''}}">
+    <label for="d_pic_cap" class="control-label">{{ 'D Pic Cap' }}</label>
+    <input class="form-control" name="d_pic_cap" type="text" id="d_pic_cap" value="{{ isset($driver->d_pic_cap) ? $driver->d_pic_cap : ''}}" >
+    {!! $errors->first('d_pic_cap', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_pic_cap') ? 'has-error' : '' }}">
-    <label for="c_pic_cap" class="control-label">{{ 'C Pic Cap' }}</label>
-    <input class="form-control" name="c_pic_cap" type="text" id="c_pic_cap" value="{{ isset($customer->c_pic_cap) ? $customer->c_pic_cap : '' }}">
-    {!! $errors->first('c_pic_cap', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('d_pic_other') ? 'has-error' : ''}}">
+    <label for="d_pic_other" class="control-label">{{ 'D Pic Other' }}</label>
+    <input class="form-control" name="d_pic_other" type="text" id="d_pic_other" value="{{ isset($driver->d_pic_other) ? $driver->d_pic_other : ''}}" >
+    {!! $errors->first('d_pic_other', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_pic_other') ? 'has-error' : '' }}">
-    <label for="c_pic_other" class="control-label">{{ 'C Pic Other' }}</label>
-    <input class="form-control" name="c_pic_other" type="text" id="c_pic_other" value="{{ isset($customer->c_pic_other) ? $customer->c_pic_other : '' }}">
-    {!! $errors->first('c_pic_other', '<p class="help-block">:message</p>') !!}
+<div class="form-group {{ $errors->has('d_date') ? 'has-error' : ''}}">
+    <label for="d_date" class="control-label">{{ 'D Date' }}</label>
+    <input class="form-control" name="d_date" type="text" id="d_date" value="{{ isset($driver->d_date) ? $driver->d_date : ''}}" >
+    {!! $errors->first('d_date', '<p class="help-block">:message</p>') !!}
 </div>
-<div class="form-group {{ $errors->has('c_date') ? 'has-error' : '' }}">
-    <label for="c_date" class="control-label">{{ 'C Date' }}</label>
-    <input class="form-control" name="c_date" type="text" id="c_date" value="{{ isset($customer->c_date) ? $customer->c_date : '' }}">
-    {!! $errors->first('c_date', '<p class="help-block">:message</p>') !!}
-</div> -->
-<!-- 
+
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">

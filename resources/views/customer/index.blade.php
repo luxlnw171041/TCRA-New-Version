@@ -382,6 +382,129 @@
         color: #2260ff;
         transform: translateY(75px);
     }
+
+    .checkbox-wrapper-35 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .checkbox-wrapper-35 .switch {
+        display: none;
+    }
+
+    .checkbox-wrapper-35 .switch+label {
+        width: 100%;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        color: #78768d;
+        cursor: pointer;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        line-height: 15px;
+        position: relative;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+    }
+
+    .checkbox-wrapper-35 .switch+label::before,
+    .checkbox-wrapper-35 .switch+label::after {
+        content: '';
+        display: block;
+    }
+
+    .checkbox-wrapper-35 .switch+label::before {
+        background-color: #05012c;
+        border-radius: 500px;
+        height: 15px;
+        margin-right: 8px;
+        -webkit-transition: background-color 0.125s ease-out;
+        transition: background-color 0.125s ease-out;
+        width: 25px;
+    }
+
+    .checkbox-wrapper-35 .switch+label::after {
+        background-color: #fff;
+        border-radius: 13px;
+        box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
+        height: 13px;
+        left: 1px;
+        position: absolute;
+        top: 1px;
+        -webkit-transition: -webkit-transform 0.125s ease-out;
+        transition: -webkit-transform 0.125s ease-out;
+        transition: transform 0.125s ease-out;
+        transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
+        width: 13px;
+    }
+
+
+    .checkbox-wrapper-35 .switch+label .switch-x-toggletext {
+        display: block;
+        font-weight: bold;
+        height: 15px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    .checkbox-wrapper-35 .switch+label .switch-x-unchecked,
+    .checkbox-wrapper-35 .switch+label .switch-x-checked {
+        left: 0;
+        position: absolute;
+        top: 0;
+        -webkit-transition: opacity 0.125s ease-out, -webkit-transform 0.125s ease-out;
+        transition: opacity 0.125s ease-out, -webkit-transform 0.125s ease-out;
+        transition: transform 0.125s ease-out, opacity 0.125s ease-out;
+        transition: transform 0.125s ease-out, opacity 0.125s ease-out, -webkit-transform 0.125s ease-out;
+    }
+
+    .checkbox-wrapper-35 .switch+label .switch-x-unchecked {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    .checkbox-wrapper-35 .switch+label .switch-x-checked {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    .checkbox-wrapper-35 .switch+label .switch-x-hiddenlabel {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .checkbox-wrapper-35 .switch:checked+label::before {
+        background-color: #ffb500;
+    }
+
+    .checkbox-wrapper-35 .switch:checked+label::after {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+    }
+
+    .checkbox-wrapper-35 .switch:checked+label .switch-x-unchecked {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    .checkbox-wrapper-35 .switch:checked+label .switch-x-checked {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
 </style>
 <div class="container">
     <div class="col-12 d-">
@@ -389,7 +512,22 @@
             <div class="card-body">
                 <form method="GET" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                     <div class="align-items-center searchBar">
-                        <div class="breadcrumb-title pe-3" style="margin-right:50px ;">ข้อมูลลูกค้า</div>
+                        <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
+                            <div class="w-100 d-flex justify-content-center">
+                                <div>
+                                     ค้นหาข้อมูล <br>
+                                <div class="checkbox-wrapper-35">
+                                    <input value="private" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch" value="asdas">
+                                    <label for="switchforSearch">
+                                        <span class="switch-x-toggletext">
+                                            <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel"></span>มิจฉาชีพ</span>
+                                            <span class="switch-x-checked"><span class="switch-x-hiddenlabel"></span>พนักงานขับรถ</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-sm-12 col-lg-3 col-xl-2 mx-2 divInputSearch">
                             <div class="input-group">
                                 <div class="inputGroup w-100">
@@ -430,7 +568,7 @@
                         <div class="btn-group btnGroupSearch h-100" role="group" aria-label="Button group with nested dropdown">
                             <div>
                                 <button type="submit" class="btn btn-primary  h-100 m-0"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
-                                <button type="submit" class="btn btn-danger  h-100 m-0" onclick="clearInput()"><i class="fa-solid fa-trash" ></i> ล้าง</button>
+                                <button type="submit" class="btn btn-danger  h-100 m-0" onclick="clearInput()"><i class="fa-solid fa-trash"></i> ล้าง</button>
                             </div>
                         </div>
                     </div>
@@ -516,67 +654,67 @@
                     </div>
                 </div>
                 @if(!empty($customers->c_pic_id_card) || !empty($customers->c_pic_lease) || !empty($customers->c_pic_execution) || !empty($customers->c_pic_cap) || !empty($customers->c_pic_other))
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="d-flex align-items-center mb-3">หลักฐานกระทำความผิด</h5>
-                                    <div class="owl-carousel owl-theme carouselSPhoto">
-                                        @if(!empty($customers->c_pic_id_card))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
-                                                <div class="infoImg">
-                                                    <span class="m-0">ภาพบัตรประชาชน</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        @endif
-                                        @if(!empty($customers->c_pic_lease))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_lease }}" alt="ภาพใบบังคับคดี">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_lease }}" alt="ใบบังคับคดี">
-                                                <div class="infoImg">
-                                                    <span class="m-0">ใบบังคับคดี</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        @endif
-                                        @if(!empty($customers->c_pic_execution))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_execution }}" alt="ภาพสัญญาเช่า">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_execution }}" alt="สัญญาเช่า">
-                                                <div class="infoImg">
-                                                    <span class="m-0">สัญญาเช่า</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        @endif
-                                        @if(!empty($customers->c_pic_cap))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
-                                                <div class="infoImg">
-                                                    <span class="m-0">หลักฐานการพูด-คุย</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        @endif
-                                        @if(!empty($customers->c_pic_other))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
-                                                <div class="infoImg">
-                                                    <span class="m-0">อื่นๆ</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        @endif
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="d-flex align-items-center mb-3">หลักฐานกระทำความผิด</h5>
+                                <div class="owl-carousel owl-theme carouselSPhoto">
+                                    @if(!empty($customers->c_pic_id_card))
+                                    <div class="item">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
+                                            <div class="infoImg">
+                                                <span class="m-0">ภาพบัตรประชาชน</span>
+                                            </div>
+                                        </a>
                                     </div>
+                                    @endif
+                                    @if(!empty($customers->c_pic_lease))
+                                    <div class="item">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_lease }}" alt="ภาพใบบังคับคดี">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_lease }}" alt="ใบบังคับคดี">
+                                            <div class="infoImg">
+                                                <span class="m-0">ใบบังคับคดี</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($customers->c_pic_execution))
+                                    <div class="item">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_execution }}" alt="ภาพสัญญาเช่า">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_execution }}" alt="สัญญาเช่า">
+                                            <div class="infoImg">
+                                                <span class="m-0">สัญญาเช่า</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($customers->c_pic_cap))
+                                    <div class="item">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
+                                            <div class="infoImg">
+                                                <span class="m-0">หลักฐานการพูด-คุย</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    @endif
+                                    @if(!empty($customers->c_pic_other))
+                                    <div class="item">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
+                                            <div class="infoImg">
+                                                <span class="m-0">อื่นๆ</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endif
             </div>
         </div>
@@ -584,7 +722,6 @@
 </div>
 @endif
 <script>
-
     function clearInputID() {
         document.getElementById("c_idno").value = "";
     }

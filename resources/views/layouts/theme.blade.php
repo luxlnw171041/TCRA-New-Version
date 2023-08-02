@@ -83,12 +83,12 @@
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-user-ninja"></i>
                         </div>
-                        <div class="menu-title">ข้อมูลลูกค้า</div>
+                        <div class="menu-title">ข้อมูลมิจฉาชีพ</div>
                     </a>
                     <ul>
                         <li> <a href="{{ url('/customer/create') }}"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
                         </li>
-                        <li> <a href="{{ url('/customer/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูล</a>
+                        <li> <a href="{{ url('/customer/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูลมิจฉาชีพ</a>
                         </li>
                     </ul>
                 </li>
@@ -96,12 +96,12 @@
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="menu-title">ข้อมูลพนักงาน </div>
+                        <div class="menu-title">ข้อมูลพนักงานขับรถ </div>
                     </a>
                     <ul>
-                        <li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
+                        <li> <a href="{{ url('/driver/create') }}"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
                         </li>
-                        <li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูล</a>
+                        <li> <a href="{{ url('/driver/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูลพนักงานขับรถ</a>
                         </li>
                     </ul>
                 </li>

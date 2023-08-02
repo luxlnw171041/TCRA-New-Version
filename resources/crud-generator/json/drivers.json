@@ -1,0 +1,72 @@
+{
+    "fields": [
+        {
+            "name": "user_id",
+            "type": "integer"
+        },
+        {
+            "name": "compname",
+            "type": "string"
+        }, {
+            "name": "commercial_registration",
+            "type": "string"
+        },
+        {
+            "name": "d_name",
+            "type": "string"
+        },
+        {
+            "name": "d_surname",
+            "type": "string"
+        },
+        {
+            "name": "d_idno",
+            "type": "string"
+        },
+        {
+            "name": "demerit",
+            "type": "string"
+        },
+        {
+            "name": "demeritdetail",
+            "type": "string"
+        },
+        {
+            "name": "d_pic_id_card",
+            "type": "string"
+        },
+        {
+            "name": "d_pic_lease",
+            "type": "string"
+        },
+        {
+            "name": "d_pic_cap",
+            "type": "string"
+        },
+        {
+            "name": "d_pic_other",
+            "type": "string"
+        },
+        {
+            "name": "d_date",
+            "type": "string"
+        }
+
+    ],
+    "foreign_keys": [
+        {
+            "column": "user_id",
+            "references": "id",
+            "on": "users",
+            "onDelete": "cascade"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\User"
+        }
+    ]
+
+}

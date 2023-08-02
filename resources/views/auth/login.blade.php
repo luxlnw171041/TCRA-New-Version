@@ -297,13 +297,13 @@
 							<div class="overlay-panel overlay-left">
 								<img src="{{asset('img/icon/iconCustomer.png')}}" class="mb-2" width="90" alt="">
 								<h1 class="headerLogin">กลุ่มมิจฉาชีพ</h1>
-								<p class="detailLogin">จัดการข้อมูล Black List รายชื่อกลุ่มมิจฉาชีพ <br>(เฉพาะสมาชิกสมาคม)</p>
+								<p class="detailLogin">จัดการข้อมูล Black List รายชื่อกลุ่มมิจฉาชีพ <br>(เฉพาะสมาชิกสามัญสมาคม)</p>
 							</div>
 							<div class="overlay-panel overlay-right">
 								<img src="{{asset('img/icon/iconDrivers.png')}}" class="mb-2" width="90" alt="">
 
 								<h1 class="headerLogin">พนักงานขับรถ</h1>
-								<p class="detailLogin">จัดการข้อมูลพนักงานขับรถที่มีประวัติ <br>(เฉพาะสมาชิกสมาคม)</p>
+								<p class="detailLogin">จัดการข้อมูลพนักงานขับรถที่มีประวัติ <br>(เฉพาะสมาชิกสามัญสมาคม)</p>
 							</div>
 						</div>
 					</div>
@@ -312,7 +312,7 @@
 		</div>
 	</div>
 	<!--end wrapper-->
-	
+
 	<script>
 		$(document).ready(function() {
 			$("#show_hide_password a").on('click', function(event) {

@@ -76,7 +76,7 @@
                                     @else
                                         <img class="profile-pic" src="{{asset('img/icon/user.jpg')}}" alt="Profile Picture">
                                     @endif
-                                    <label for="member_pic" class="icon-overlay">
+                                    <label for="member_pic" class="icon-overlay" >
                                         <i class="fa-solid fa-pen-to-square text-white"></i>
                                     </label>
                                     <input type="file" name="member_pic" id="member_pic" class="d-none">
