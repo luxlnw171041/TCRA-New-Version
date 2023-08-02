@@ -530,7 +530,12 @@
                                                             <div class="col-12 mt-2">
                                                                 <div class="text-center pt-2 pb-2">
                                                                     @php
-                                                                        $text_username = "Username : " . $item_modal->create_member->username . "\n" . "Password : " . $item_modal->create_member->pass_code ;
+                                                                        $text_username = "";
+                                                                        
+                                                                        if( !empty($item_modal->create_member->username) ){
+                                                                            $text_username = "Username : " . $item_modal->create_member->username . "\n" . "Password : " . $item_modal->create_member->pass_code ;
+                                                                        }
+                                                                        
                                                                     @endphp
                                                                     <textarea class="form-control" name="copy_username_{{ $item_modal->id }}" id="copy_username_{{ $item_modal->id }}" readonly>{{ $text_username }}</textarea>
                                                                 </div>
