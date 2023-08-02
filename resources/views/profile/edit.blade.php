@@ -11,6 +11,14 @@
         border-radius: 15px;
         color: #fff;
     }
+    .status_user {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        padding: 1px 20px;
+        border-radius: 15px;
+        color: #fff;
+    }
 </style>
 <style>
     .profile-pic-container {
@@ -63,12 +71,21 @@
     <div class="container">
         <div class="main-body">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card sticky">
-                        <div class=" p-5">
+                        <div class="p-5 pb-2">
                             <span class="userID">
-                                ID : {{Auth::user()->id}}
+                                ID : {{ $user->id }}
                             </span>
+                            @if($user->member_status == 'Active')
+                                <span class="status_user" style="background-color: #18f29b;">
+                                    {{ $user->member_status }}
+                                </span>
+                            @else
+                                <span class="status_user" style="background-color: #eb2d17;">
+                                    {{ $user->member_status }}
+                                </span>
+                            @endif
                             <div class="d-flex flex-column align-items-center text-center">
                                 <div class="profile-pic-container">
                                     @if(!empty(Auth::user()->member_pic))
@@ -76,11 +93,30 @@
                                     @else
                                         <img class="profile-pic" src="{{asset('img/icon/user.jpg')}}" alt="Profile Picture">
                                     @endif
-                                    <label for="member_pic" class="icon-overlay" >
+
+                                    <label for="member_pic" class="icon-overlay">
                                         <i class="fa-solid fa-pen-to-square text-white"></i>
                                     </label>
                                     <input type="file" name="member_pic" id="member_pic" class="d-none">
                                 </div>
+                                <h4 class="mb-1 mt-3">
+                                    U-name : <b>{{ $user->username }}</b>
+                                </h4>
+                                <p class="mb-1 mt-2">
+                                    @if( $user->member_role == "customer" )
+                                        <span class="badge bg-light-danger text-danger" style="font-size:13px;">
+                                            ดูข้อมูลมิจฉาชีพ
+                                        </span>
+                                    @elseif($user->member_role == "driver")
+                                        <span class="btn bg-light-warning text-warning" style="font-size:13px;">
+                                            ดูข้อมูลพนักงานขับรถ
+                                        </span>
+                                    @else
+                                        <span class="btn bg-light-info text-info" style="font-size:12px;">
+                                            แอดมิน
+                                        </span>
+                                    @endif
+                                </p>
 
                                 <script>
                                     const fileInput = document.getElementById('member_pic');
@@ -97,12 +133,118 @@
                                         }
                                     });
                                 </script>
+
                             </div>
                             <!-- <hr class="my-4"> -->
                         </div>
+
+                        @if( Auth::user()->member_role == "admin" )
+                        <center>
+                            <hr class="text-primary" style="width:90%;">
+                        </center>
+
+                        <div class="p-2 text-center">
+                            <h5>เฉพาะแอดมิน</h5>
+                        </div>
+                        @endif
+
                     </div>
                 </div>
                 <div class="col-lg-8">
+
+                    <div class="card radius-10">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h4 class="mb-0 mt-2">ข้อมูลทั่วไป</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 mb-3">
+                            
+                            <div class="card radius-10 border shadow-none">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <p class="mb-0 text-secondary">ชื่อเต็ม</p>
+                                            <h4 class="mb-0">{{ $user->member_name }}</h4>
+                                        </div>
+                                        <div class="widgets-icons bg-light-primary text-primary ms-auto">
+                                            <i class="fa-solid fa-signature"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card radius-10 border shadow-none">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <p class="mb-0 text-secondary">ชื่อ</p>
+                                            <h4 class="mb-0">{{ $user->name }}</h4>
+                                        </div>
+                                        <div class="widgets-icons bg-light-success text-success ms-auto">
+                                            <i class="fa-sharp fa-solid fa-input-text"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card radius-10 border shadow-none">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <p class="mb-0 text-secondary">เบอร์ติดต่อ</p>
+                                            <h4 class="mb-0">{{ $user->member_tel }}</h4>
+                                        </div>
+                                        <div class="widgets-icons bg-light-danger text-danger ms-auto">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card radius-10 border shadow-none">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <p class="mb-0 text-secondary">อีเมล</p>
+                                            <h4 class="mb-0">{{ $user->email }}</h4>
+                                        </div>
+                                        <div class="widgets-icons bg-light-warning text-warning ms-auto">
+                                            <i class="fa-solid fa-at"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card radius-10 border shadow-none">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <p class="mb-0 text-secondary">บริษัท</p>
+                                            <h4 class="mb-0">{{ $user->member_co }}</h4>
+                                        </div>
+                                        <div class="widgets-icons bg-light-info text-info ms-auto">
+                                            <i class="fa-regular fa-building"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card radius-10 border shadow-none">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <p class="mb-0 text-secondary">ที่อยู่</p>
+                                            <h4 class="mb-0">{{ $user->member_addr }}</h4>
+                                        </div>
+                                        <div class="widgets-icons bg-light-secondary text-secondary ms-auto">
+                                            <i class="fa-sharp fa-solid fa-map-location-dot"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- อันเก่า -->
                     <div class="card">
                         <div class="card-body">
                             <div class="row mb-3">
@@ -146,6 +288,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

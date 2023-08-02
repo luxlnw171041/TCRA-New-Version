@@ -462,7 +462,7 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item btn" href="{{ url('/user/' . Auth::user()->id . '/edit') }}"><i class="bx bx-user"></i><span>Profile</span></a>
+                            <li><a class="dropdown-item btn" href="{{ url('/show_profile/' . Auth::user()->id ) }}"><i class="bx bx-user"></i><span>Profile</span></a>
                             </li>
                             <div class="dropdown-divider mb-0"></div>
                             </li>
