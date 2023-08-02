@@ -568,7 +568,8 @@
                         <div class="btn-group btnGroupSearch h-100" role="group" aria-label="Button group with nested dropdown">
                             <div>
                                 <button type="submit" class="btn btn-primary  h-100 m-0"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
-                                <button type="submit" class="btn btn-danger  h-100 m-0" onclick="clearInput()"><i class="fa-solid fa-trash"></i> ล้าง</button>
+                                <!-- <button type="submit" class="btn btn-danger  h-100 m-0" onclick="clearInput()"><i class="fa-solid fa-trash"></i> ล้าง</button> -->
+                                <a href="{{ url('/customer') }}" type="submit" class="btn btn-danger  h-100 m-0"><i class="fa-solid fa-trash"></i> ล้าง</a>
                             </div>
                         </div>
                     </div>
@@ -720,6 +721,37 @@
         </div>
     </div>
 </div>
+@else
+    @php
+        $text_show = '';
+
+        $full_url =  url()->full() ;
+        $c_idno = explode("c_idno=",$full_url);
+
+        if( !empty($c_idno[1]) ){
+            $c_idno = explode("&",$c_idno[1])[0];
+
+            $c_name = explode("c_name=",$full_url);
+            $c_name = explode("&",$c_name[1])[0];
+
+            $c_surname = explode("c_surname=",$full_url)[1];
+
+            if( !empty($c_idno) ){
+                $text_show = $c_idno ;
+            }else{
+                $text_show = $c_name . " " . $c_surname ;
+            }
+
+            $text_show = urldecode($text_show); // ใส่คำสั่งในการถอดรหัส URL-encoded ก่อนแสดงผล
+
+            $class_show = '' ;
+        }else{
+            $class_show = 'd-none' ;
+        }
+
+    @endphp
+
+<h4 style="margin-left: 170px;" class="{{ $class_show }}">ไม่พบข้อมูลที่คุณค้นหา <span class="text-danger">"{{ $text_show }}"</span> กรุณาตรวจสอบอีกครั้ง</h4>
 @endif
 <script>
     function clearInputID() {

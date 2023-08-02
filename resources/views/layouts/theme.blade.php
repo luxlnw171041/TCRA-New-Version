@@ -53,16 +53,18 @@
     <div class="wrapper">
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
-            <div class="sidebar-header">
-                <div>
-                    <img src="{{asset('img/logo/tcra.png')}}" class="logo-icon" alt="logo icon">
+            <a href="{{ url('/home') }}" class="has-arrow">
+                <div class="sidebar-header">
+                    <div>
+                        <img src="{{asset('img/logo/tcra.png')}}" class="logo-icon" alt="logo icon">
+                    </div>
+                    <div>
+                        <h6 class="logo-text">สมาคม<br>รถเช่าไทย</h6>
+                    </div>
+                    <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
+                    </div>
                 </div>
-                <div>
-                    <h6 class="logo-text">สมาคมรถเช่าไทย</h6>
-                </div>
-                <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
-                </div>
-            </div>
+            </a>
             <!--navigation-->
             <ul class="metismenu" id="menu">
                 @if(Auth::user()->member_role == "admin")
@@ -79,6 +81,7 @@
                         </ul>
                     </li>
                 @endif
+                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-user-ninja"></i>
@@ -92,6 +95,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "driver" )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-user-tie"></i>
@@ -105,6 +110,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
             <!--end navigation-->
         </div>

@@ -261,6 +261,11 @@
 							@enderror
 
 							<button class="btnSwip" type="submit">Login</button>
+							@if (Route::has('password.request'))
+                                <a class="btn btn-link text-muted float-right" href="{{ route('password.request') }}?back={{ url()->full() }}">
+                                    {{ __('ลืมรหัสผ่าน ?') }}
+                                </a>
+                            @endif
 						</form>
 					</div>
 					<div class="form-container sign-in-container">
@@ -290,6 +295,11 @@
 							@enderror
 
 							<button class="btnSwip" type="submit">Login</button>
+							@if (Route::has('password.request'))
+                                <a class="btn btn-link text-muted float-right" href="{{ route('password.request') }}?back={{ url()->full() }}">
+                                    {{ __('ลืมรหัสผ่าน ?') }}
+                                </a>
+                            @endif
 						</form>
 					</div>
 					<div class="overlay-container">

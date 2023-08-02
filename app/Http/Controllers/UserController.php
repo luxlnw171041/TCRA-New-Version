@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Create_user_by_admin;
 Use Carbon\Carbon;
 use App\Models\Customer;
+use App\Models\Driver;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -70,23 +71,31 @@ class UserController extends Controller
 
         if ($user_login->id == $id || $user_login->member_role == "admin") {
 
+            $count_data_add = 0 ;
+
             if( $user->member_role == "customer" ){
 
                 $data_add_Cus = Customer::where('user_id',$user->id)->get();
+                $count_data_add = count($data_add_Cus);
 
             }else if( $user->member_role == "driver" ){
 
-                // รอ ตาราง driver
+                $data_add_Dri = Driver::where('user_id',$user->id)->get();
+                $count_data_add = count($data_add_Dri);
 
             }else{
 
                 $data_add_Cus = Customer::where('user_id',$user->id)->get();
+                $count_Cus = count($data_add_Cus);
 
-                // รอ ตาราง driver
+                $data_add_Dri = Driver::where('user_id',$user->id)->get();
+                $count_Dri = count($data_add_Dri);
+                
+                $count_data_add = intval($count_Cus + $count_Dri);
 
             }
 
-            return view('profile.show', compact('user','data_add_Cus','id'));
+            return view('profile.show', compact('user','count_data_add','id'));
         }else{
             return view('404');
         }
@@ -216,13 +225,14 @@ class UserController extends Controller
                 $data_add = Customer::where('user_id',$data_user[$i]['id'])->get();
                 $count_add_data = count($data_add);
             }else if( $data_user[$i]['member_role'] == "driver" ){
-                // รอ ตาราง driver
+                $data_add_Dri = Driver::where('user_id',$data_user[$i]['id'])->get();
+                $count_add_data = count($data_add_Dri);
             }else{
                 $data_add_Cus = Customer::where('user_id',$data_user[$i]['id'])->get();
                 $count_Cus = count($data_add_Cus);
 
-                // รอ ตาราง driver
-                $count_Dri = 0;
+                $data_add_Dri = Driver::where('user_id',$data_user[$i]['id'])->get();
+                $count_Dri = count($data_add_Dri);
                 
                 $count_add_data = intval($count_Cus + $count_Dri);
             }

@@ -270,13 +270,14 @@
                                                 $data_add = App\Models\Customer::where('user_id',$item_modal->id)->get();
                                                 $count_add_data = count($data_add);
                                             }else if( $item_modal->member_role == "driver" ){
-                                                // รอ ตาราง driver
+                                                $data_add = App\Models\Driver::where('user_id',$item_modal->id)->get();
+                                                $count_add_data = count($data_add);
                                             }else{
                                                 $data_add_Cus = App\Models\Customer::where('user_id',$item_modal->id)->get();
                                                 $count_Cus = count($data_add_Cus);
 
-                                                // รอ ตาราง driver
-                                                $count_Dri = 0;
+                                                $data_add_Dri = App\Models\Driver::where('user_id',$item_modal->id)->get();
+                                                $count_Dri = count($data_add_Dri);
                                                 
                                                 $count_add_data = intval($count_Cus + $count_Dri);
                                             }
@@ -291,7 +292,7 @@
                                         <b>ค้นหาข้อมูล</b>
                                     </h6>
                                     <span class="text-secondary">
-                                       {{ intval(0) }} ครั้ง
+                                       {{ intval($item_modal->count_search) }} ครั้ง
                                     </span>
                                 </li>
                                 
@@ -926,6 +927,10 @@
                             if(value == null){
                                 result[i][key] = '';
                             }
+
+                            if (key == 'count_search' && (value == '' || value == null) ) {
+                                result[i][key] = 0;
+                            }
                         }
 
                         let html_member_role ;
@@ -1136,7 +1141,7 @@
                                                                 <b>ค้นหาข้อมูล</b>
                                                             </h6>
                                                             <span class="text-secondary">
-                                                               `+result[i].last_time_active+` ครั้ง
+                                                               `+result[i].count_search+` ครั้ง
                                                             </span>
                                                         </li>
 

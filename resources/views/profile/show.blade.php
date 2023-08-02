@@ -189,7 +189,7 @@
                             <div class="ps-3">
                                 <h6 class="mb-0 font-weight-bold">ลงข้อมูล</h6>
                             </div>
-                            <p class="ms-auto mb-0 text-purple">{{ count($data_add_Cus) }} ครั้ง</p>
+                            <p class="ms-auto mb-0 text-purple">{{ $count_data_add }} ครั้ง</p>
                         </div>
                         <div class="p-2 d-flex align-items-center">
                             <div class="product-img">
@@ -198,7 +198,7 @@
                             <div class="ps-3">
                                 <h6 class="mb-0 font-weight-bold">ค้นหาข้อมูล</h6>
                             </div>
-                            <p class="ms-auto mb-0 text-purple">.. ครั้ง</p>
+                            <p class="ms-auto mb-0 text-purple">{{ intval($user->count_search) }} ครั้ง</p>
                         </div>
 
                         @if($id == $user->id)
