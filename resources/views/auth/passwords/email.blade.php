@@ -13,8 +13,8 @@
                     </div>
 
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                        <div class="alert alert-success mt-3" role="alert">
+                            เราได้ส่งลิงก์รีเซ็ตรหัสผ่านของคุณทางอีเมลแล้ว!
                         </div>
                     @endif
 
