@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="color-sidebar sidebarcolor1">
 
 <head>
     <!-- Required meta tags -->
@@ -617,37 +617,37 @@
 	<script src="{{ asset('/theme/plugins/notifications/js/notification-custom-script.js') }}"></script>
     
     <script>
-        $(document).ready(function() {
-            var sideBar = localStorage.getItem('sideBar');
-            if (sideBar) {
-                // console.log(sideBar);
+        // $(document).ready(function() {
+        //     var sideBar = localStorage.getItem('sideBar');
+        //     if (sideBar) {
+        //         // console.log(sideBar);
 
-                $('html').attr('class', sideBar);
-            }
-
-
-            var selectedTheme = localStorage.getItem('selectedTheme');
-            if (selectedTheme) {
-                // console.log(selectedTheme);
-                themeClassId = selectedTheme.replace("-", "");
-                document.getElementById(themeClassId).checked = true ;
-                $('html').attr('class', selectedTheme);
-            }
-
-            var selectedHeaderColor = localStorage.getItem('selectedHeaderColor');
-
-            if (selectedHeaderColor) {
-                for (let i = 1; i <= 8; i++) {
-                    if (selectedHeaderColor !== "headercolor" +i) {
-
-                        $("html").removeClass("headercolor" +i);
-                    }
-                }
-                $("html").addClass("color-header " + selectedHeaderColor);
-            }
+        //         $('html').attr('class', sideBar);
+        //     }
 
 
-        });
+        //     var selectedTheme = localStorage.getItem('selectedTheme');
+        //     if (selectedTheme) {
+        //         // console.log(selectedTheme);
+        //         themeClassId = selectedTheme.replace("-", "");
+        //         document.getElementById(themeClassId).checked = true ;
+        //         $('html').attr('class', selectedTheme);
+        //     }
+
+        //     var selectedHeaderColor = localStorage.getItem('selectedHeaderColor');
+
+        //     if (selectedHeaderColor) {
+        //         for (let i = 1; i <= 8; i++) {
+        //             if (selectedHeaderColor !== "headercolor" +i) {
+
+        //                 $("html").removeClass("headercolor" +i);
+        //             }
+        //         }
+        //         $("html").addClass("color-header " + selectedHeaderColor);
+        //     }
+
+
+        // });
 
         let update_last_time_active ;
 
