@@ -18,29 +18,29 @@
     }
 
     .radio-input:checked+.radio-tile {
-        border-color: #e62e2e;
+        border-color: #0a58ca;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        color: #e62e2e;
+        color: #0a58ca;
     }
 
     .radio-input:checked+.radio-tile:before {
         transform: scale(1);
         opacity: 1;
-        background-color: #e62e2e;
-        border-color: #e62e2e;
+        background-color: #0a58ca;
+        border-color: #0a58ca;
     }
 
     .radio-input:checked+.radio-tile .radio-icon svg {
-        fill: #e62e2e;
+        fill: #0a58ca;
     }
 
     .radio-input:checked+.radio-tile .radio-label {
-        color: #e62e2e;
+        color: #0a58ca;
     }
 
     .radio-input:focus+.radio-tile {
-        border-color: #e62e2e;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgb(230, 46, 46, 0.3);
+        border-color: #0a58ca;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgb(10, 88, 202, 0.3);
         ;
     }
 
@@ -82,7 +82,7 @@
     }
 
     .radio-tile:hover {
-        border-color: #e62e2e;
+        border-color: #0a58ca;
     }
 
     .radio-tile:hover:before {
@@ -115,7 +115,7 @@
     }
 </style>
 
- <form method="POST" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+ <form id="formCreateDriver" method="POST" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         @include ('driver.form', ['formMode' => 'create'])

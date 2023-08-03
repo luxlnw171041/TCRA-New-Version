@@ -20,26 +20,49 @@ class DriverController extends Controller
         $keyword = $request->get('search');
         $perPage = 25;
 
-        if (!empty($keyword)) {
-            $driver = Driver::where('user_id', 'LIKE', "%$keyword%")
-                ->orWhere('compname', 'LIKE', "%$keyword%")
-                ->orWhere('commercial_registration', 'LIKE', "%$keyword%")
-                ->orWhere('d_name', 'LIKE', "%$keyword%")
-                ->orWhere('d_surname', 'LIKE', "%$keyword%")
-                ->orWhere('d_idno', 'LIKE', "%$keyword%")
-                ->orWhere('demerit', 'LIKE', "%$keyword%")
-                ->orWhere('demeritdetail', 'LIKE', "%$keyword%")
-                ->orWhere('d_pic_id_card', 'LIKE', "%$keyword%")
-                ->orWhere('d_pic_lease', 'LIKE', "%$keyword%")
-                ->orWhere('d_pic_cap', 'LIKE', "%$keyword%")
-                ->orWhere('d_pic_other', 'LIKE', "%$keyword%")
-                ->orWhere('d_date', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $driver = Driver::latest()->paginate($perPage);
+        $requestData = $request->all();
+        if (!empty($requestData['d_idno'])) {
+            $d_id_no = $requestData['d_idno'];
+            $driver = Driver::where('d_idno', $d_id_no)->first();
+
+            return view('driver.index', compact('driver'));
+            
+
+        } elseif (!empty($requestData['compname']) and !empty($requestData['d_name'])) {
+
+            $compname = $requestData['compname'];
+            $driver_name = $requestData['d_name'];
+
+            $driver = Driver::where('compname', $compname)
+                ->Where('d_name',  $driver_name)
+                ->first();
+
+                return view('driver.index', compact('driver'));
+        }else{
+
+            return view('driver.index');
         }
 
-        return view('driver.index', compact('driver'));
+        // if (!empty($keyword)) {
+        //     $driver = Driver::where('user_id', 'LIKE', "%$keyword%")
+        //         ->orWhere('compname', 'LIKE', "%$keyword%")
+        //         ->orWhere('commercial_registration', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_name', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_surname', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_idno', 'LIKE', "%$keyword%")
+        //         ->orWhere('demerit', 'LIKE', "%$keyword%")
+        //         ->orWhere('demeritdetail', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_pic_id_card', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_pic_lease', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_pic_cap', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_pic_other', 'LIKE', "%$keyword%")
+        //         ->orWhere('d_date', 'LIKE', "%$keyword%")
+        //         ->latest()->paginate($perPage);
+        // } else {
+        //     $driver = Driver::latest()->paginate($perPage);
+        // }
+
+        // return view('driver.index', compact('driver'));
     }
 
     /**

@@ -207,11 +207,11 @@
                                         </span>
                                     @elseif($item_modal->member_role == "customer")
                                         <span class="btn bg-light-danger text-danger" style="font-size:12px;">
-                                            ดูข้อมูลมิจฉาชีพ
+                                            customer
                                         </span>
                                     @else
                                         <span class="btn bg-light-warning text-warning" style="font-size:12px;">
-                                            ดูข้อมูลพนักงานขับรถ
+                                            driver
                                         </span>
                                     @endif
                                 </div>
@@ -252,7 +252,7 @@
                                     </h6>
                                     <span class="text-secondary">
                                         @if( !empty($item_modal->last_time_active) )
-                                            {{ $item_modal->last_time_active }}
+                                            {{ \Carbon\Carbon::parse($item_modal->last_time_active)->locale('th')->diffForHumans() }}
                                         @else
                                             ..
                                         @endif
@@ -516,11 +516,11 @@
                                                 </span>
                                             @elseif($item->member_role == "customer")
                                                 <span class="badge bg-light-danger text-danger" style="font-size:13px;">
-                                                    ดูข้อมูลมิจฉาชีพ
+                                                    customer
                                                 </span>
                                             @else
                                                 <span class="badge bg-light-warning text-warning" style="font-size:13px;">
-                                                    ดูข้อมูลพนักงานขับรถ
+                                                    driver
                                                 </span>
                                             @endif
                                             
@@ -560,7 +560,8 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.3.2/moment-duration-format.min.js"></script>
 <script>
 
     function on_inputData(){
@@ -692,26 +693,26 @@
                     }else if(data.member_role == "customer"){
                         html_member_role = `
                             <span class="badge bg-light-danger text-danger" style="font-size:13px;">
-                                ดูข้อมูลมิจฉาชีพ
+                                customer
                             </span>
                         `;
 
                         html_member_role_modal = `
                             <span class="btn bg-light-danger text-danger" style="font-size:12px;">
-                                ดูข้อมูลมิจฉาชีพ
+                                customer
                             </span>
                         `;
 
                     }else{
                         html_member_role = `
                             <span class="badge bg-light-warning text-warning" style="font-size:13px;">
-                                ดูข้อมูลพนักงานขับรถ
+                                driver
                             </span>
                         `;
 
                         html_member_role_modal = `
                             <span class="btn bg-light-warning text-warning" style="font-size:12px;">
-                                ดูข้อมูลพนักงานขับรถ
+                                driver
                             </span>
                         `;
 
@@ -951,26 +952,26 @@
                         }else if(result[i].member_role == "customer"){
                             html_member_role = `
                                 <span class="badge bg-light-danger text-danger" style="font-size:13px;">
-                                    ดูข้อมูลมิจฉาชีพ
+                                    customer
                                 </span>
                             `;
 
                             html_member_role_modal = `
                                 <span class="btn bg-light-danger text-danger" style="font-size:12px;">
-                                    ดูข้อมูลมิจฉาชีพ
+                                    customer
                                 </span>
                             `;
 
                         }else{
                             html_member_role = `
                                 <span class="badge bg-light-warning text-warning" style="font-size:13px;">
-                                    ดูข้อมูลพนักงานขับรถ
+                                    driver
                                 </span>
                             `;
 
                             html_member_role_modal = `
                                 <span class="btn bg-light-warning text-warning" style="font-size:12px;">
-                                    ดูข้อมูลพนักงานขับรถ
+                                    driver
                                 </span>
                             `;
 
@@ -1046,6 +1047,17 @@
 
                         if(result[i].last_time_active == ""){
                             result[i].last_time_active = ".." ;
+                        }else{
+                            var dateString = "2023-08-03 12:34:56";
+
+  // แปลงเวลาให้กลายเป็นวัตถุของ moment.js
+  var dateTime = moment(dateString);
+
+  // แสดงผลรูปแบบความเปลี่ยนแปลงตามเวลาในรูปแบบของภาษาไทย
+  var diffForHumans = dateTime.fromNow();
+
+  // แสดงผลลัพธ์ในคอนโซลหรือที่ทำการแสดงผลอื่น ๆ
+  console.log(diffForHumans); 
                         }
 
                         let url_edit_profile = "{{ url('/') }}" + "/user/" + result[i].id + "/edit" ;

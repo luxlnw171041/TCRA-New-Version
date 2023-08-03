@@ -77,7 +77,7 @@
     input[type="datetime-local"]:focus.selectDate {
         outline: none;
         border-color: #0a58ca;
-        box-shadow: 0 0 0 0.25rem  rgb(230, 46, 46, 0.6);
+        box-shadow: 0 0 0 0.25rem  rgb(10, 88, 202, 0.4);
     }
 
     .selectDate::-webkit-datetime-edit-month-field:hover,
@@ -105,7 +105,7 @@
         bottom: 0;
         opacity: 0;
         cursor: pointer;
-        color: rgb(230, 46, 46);
+        color: rgb(10, 88, 202);
         border: 2px solid rgb(200, 200, 200);
     }
 
@@ -216,26 +216,6 @@
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">แนบหลักฐานกระทำความผิด <span class="text-danger">*</span></label>
                     </div>
-                    <!-- <style>
-                        .selectPhoto {
-                            margin: 0;
-                        }
-
-                        .selectPhoto label {
-                            background: #ff3f4d;
-                            border-radius: 15px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            color: #FFF;
-                            text-align: center;
-                            padding: 4rem 0;
-                            margin: 0;
-                            font-style: italic;
-                            font-weight: 300;
-                            height: 200px;
-                        }
-                    </style> -->
                     <style>
                         .file-upload-box {
                             position: relative;
@@ -314,7 +294,7 @@
                         }
 
                         input {
-                            caret-color: #ff4e33;
+                            caret-color: #0a58ca;
                             caret-shape: 50px;
                         }
 
@@ -332,7 +312,7 @@
                         }
 
                         .file-upload-box:hover .infoImg {
-                            color: #ff4e33;
+                            color: #0a58ca;
                             transform: translateY(60px);
                         }
 
@@ -1156,7 +1136,7 @@
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup ">
-                                <input name="c_date" id="c_date" class="selectDate" type="datetime-local" min="2005-01-01" max="201101-01" required>
+                                <input name="d_date" id="d_date" class="selectDate" type="datetime-local" min="2005-01-01" max="201101-01" required>
                             </div>
                         </div>
                     </div>
@@ -1169,7 +1149,7 @@
 
         <script>
             const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]');
-            const formCreateCustomer = document.getElementById('formCreateCustomer');
+            const formCreateDriver = document.getElementById('formCreateDriver');
             const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
 
 
@@ -1202,7 +1182,7 @@
             // });
 
 
-            formCreateCustomer.addEventListener('submit', function(event) {
+            formCreateDriver.addEventListener('submit', function(event) {
                 const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
 
                 if (demeritCheckboxes.length === 0) {

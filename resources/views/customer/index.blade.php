@@ -413,7 +413,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-
+        
     }
 
     .checkbox-wrapper-35 .switch+label::before,
@@ -515,13 +515,13 @@
                         <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
                             <div class="w-100 d-flex justify-content-center">
                                 <div>
-                                     ค้นหาข้อมูล <br>
+                                     ค้นหาข้อมูลมิฉาชีพ <br>
                                 <div class="checkbox-wrapper-35">
                                     <input value="private" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch" value="asdas">
                                     <label for="switchforSearch">
                                         <span class="switch-x-toggletext">
-                                            <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel"></span>มิจฉาชีพ</span>
-                                            <span class="switch-x-checked"><span class="switch-x-hiddenlabel"></span>พนักงานขับรถ</span>
+                                            <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel"></span>บุคคล</span>
+                                            <span class="switch-x-checked"><span class="switch-x-hiddenlabel"></span>บริษัท</span>
                                         </span>
                                     </label>
                                 </div>
@@ -724,34 +724,27 @@
 @else
     @php
         $text_show = '';
+        $class_show = 'd-none';
 
-        $full_url =  url()->full() ;
-        $c_idno = explode("c_idno=",$full_url);
+        $full_url = url()->full();
+        $query_params = request()->query();
 
-        if( !empty($c_idno[1]) ){
-            $c_idno = explode("&",$c_idno[1])[0];
-
-            $c_name = explode("c_name=",$full_url);
-            $c_name = explode("&",$c_name[1])[0];
-
-            $c_surname = explode("c_surname=",$full_url)[1];
-
-            if( !empty($c_idno) ){
-                $text_show = $c_idno ;
-            }else{
-                $text_show = $c_name . " " . $c_surname ;
-            }
-
-            $text_show = urldecode($text_show); // ใส่คำสั่งในการถอดรหัส URL-encoded ก่อนแสดงผล
-
-            $class_show = '' ;
-        }else{
-            $class_show = 'd-none' ;
+        if (!empty($query_params['c_idno'])) {
+            $c_idno = urldecode($query_params['c_idno']);
+            $text_show = $c_idno;
+            $class_show = '';
+        } elseif (!empty($query_params['c_name']) || !empty($query_params['c_surname'])) {
+            $c_name = urldecode($query_params['c_name']);
+            $c_surname = urldecode($query_params['c_surname']);
+            $text_show = $c_name . ' ' . $c_surname;
+            $class_show = '';
         }
-
     @endphp
-
-<h4 style="margin-left: 170px;" class="{{ $class_show }}">ไม่พบข้อมูลที่คุณค้นหา <span class="text-danger">"{{ $text_show }}"</span> กรุณาตรวจสอบอีกครั้ง</h4>
+        <div class="text-center {{ $class_show }}" style="margin-top: 8vh;">
+            <img src="{{asset('img/icon/no-results.png')}}" alt="User" class="" width="310">
+            <h2 class=" mt-5">ไม่พบข้อมูลที่คุณค้นหา <span class="text-danger">"{{ $text_show }}"</span> </h2>
+            <h5 class="mt-3">กรุณาปรับการค้นหาและตรวจสอบอีกครั้ง</h5>
+        </div>
 @endif
 <script>
     function clearInputID() {

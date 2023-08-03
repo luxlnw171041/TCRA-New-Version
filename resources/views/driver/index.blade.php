@@ -1,63 +1,698 @@
-@extends('layouts.app')
+@extends('layouts.theme')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            @include('admin.sidebar')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<style>
+    .inputGroup {
+        font-family: 'Segoe UI', sans-serif;
+        max-width: 100%;
+        display: flex;
+        align-items: center
+    }
 
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Driver</div>
-                    <div class="card-body">
-                        <a href="{{ url('/driver/create') }}" class="btn btn-success btn-sm" title="Add New Driver">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
+    .inputGroup input {
+        font-size: 100%;
+        padding: 0.8em;
+        outline: none;
+        border: 2px solid rgb(200, 200, 200);
+        background-color: transparent;
+        border-radius: 10px;
+        width: 100%;
+    }
 
-                        <form method="GET" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-append">
-                                    <button class="btn btn-secondary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+    .inputGroup label {
+        font-size: 100%;
+        position: absolute;
+        left: 0;
+        padding: 0.8em 0.8em 0.8em 0.5em;
+        margin-left: 0.5em;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        color: rgb(10, 88, 202);
+    }
+
+    .inputGroup label i {
+        margin: 6px 8px
+    }
+
+    .inputGroup :is(input:focus, input:valid)~label {
+        transform: translateY(-80%) scale(.9);
+        margin: 0em;
+        margin-left: 1.3em;
+        padding: 0.1em;
+        background-color: #fff;
+    }
+
+    .inputGroup :is(input:focus, input:valid) {
+        border-color: rgb(10, 88, 202);
+    }
+
+    .group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center
+    }
+
+    .input-group-top {
+        margin-top: 29px;
+    }
+
+    .textOR {
+        width: 70px;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        line-height: 0.1em;
+        margin: 0 20px;
+    }
+
+    .textOR span {
+        background: #fff;
+        padding: 0 10px;
+    }
+
+    .searchBar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mr-2 {
+        margin-right: 20px;
+    }
+
+    @media (max-width: 320px) {
+
+        /* สำหรับอุปกรณ์เคลื่อนที่ที่มีความกว้างไม่เกิน 320px */
+        .breadcrumb-title {
+            width: 100%;
+            border-right: none;
+            margin: 10px 0 !important;
+            padding: 0 !important;
+            text-align: center;
+        }
+
+        .inputGroup {
+            margin: 10px 0 !important;
+        }
+
+        .btnGroupSearch {
+            float: left;
+        }
+
+        .btn-group {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
+    }
+
+
+    @media (min-width: 321px) and (max-width: 480px) {
+
+        /* สำหรับอุปกรณ์เคลื่อนที่ที่มีความกว้างระหว่าง 321px ถึง 480px */
+        .breadcrumb-title {
+            width: 100%;
+            border-right: none;
+            margin: 10px 0 !important;
+            padding: 0 !important;
+            text-align: center;
+        }
+
+        .inputGroup {
+            margin: 10px 0 !important;
+        }
+
+        .btnGroupSearch {
+            float: left;
+        }
+
+        .btn-group {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+
+        /* สำหรับแท็บเล็ตและอุปกรณ์เคลื่อนที่ที่มีความกว้างระหว่าง 481px ถึง 768px */
+        .breadcrumb-title {
+            border-right: none;
+            margin: 10px 0 !important;
+            padding: 0 !important;
+        }
+
+        .inputGroup {
+            margin: 10px 0 !important;
+        }
+
+        .btnGroupSearch {
+            float: left;
+        }
+
+        .searchBar .divInputSearch:nth-child(2) {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            padding: 0 5px;
+        }
+
+        .searchBar div:nth-child(3) {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            display: flex;
+            justify-content: center;
+        }
+
+        .searchBar .divInputSearch:nth-child(4) {
+            flex: 0 0 auto;
+            width: 49%;
+            margin: 0 !important;
+            padding-right: 5px;
+        }
+
+        .searchBar .divInputSearch:nth-child(5) {
+            flex: 0 0 auto;
+            width: 49%;
+            margin: 0 !important;
+            padding-left: 5px;
+        }
+
+        .btn-group {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 990px) {
+
+        /* สำหรับหน้าจอเดสก์ท็อปที่มีความกว้างระหว่าง 769px ถึง 1024px */
+        .breadcrumb-title {
+            border-right: none;
+            margin: 10px 0 !important;
+            padding: 0 !important;
+        }
+
+        .inputGroup {
+            margin: 10px 0 !important;
+        }
+
+        .btnGroupSearch {
+            float: left;
+        }
+
+        .searchBar .divInputSearch:nth-child(2) {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            padding: 0 5px;
+        }
+
+        .searchBar div:nth-child(3) {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            display: flex;
+            justify-content: center;
+        }
+
+        .searchBar .divInputSearch:nth-child(4) {
+            flex: 0 0 auto;
+            width: 49%;
+            margin: 0 !important;
+            padding-right: 5px;
+        }
+
+        .searchBar .divInputSearch:nth-child(5) {
+            flex: 0 0 auto;
+            width: 49%;
+            margin: 0 !important;
+            padding-left: 5px;
+        }
+
+        .btn-group {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
+    }
+
+    @media (min-width: 991px) and (max-width: 1440px) {
+
+        /* สำหรับหน้าจอเดสก์ท็อปที่มีความกว้างมากกว่าหรือเท่ากับ 1025px */
+        .breadcrumb-title {
+            width: 100%;
+            border-right: none;
+            margin: 10px 0 !important;
+            padding: 0 !important;
+            text-align: center;
+        }
+
+        .inputGroup {
+            margin: 10px 0 !important;
+        }
+
+
+        .searchBar .divInputSearch:nth-child(2) {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            padding: 0 5px;
+        }
+
+        .searchBar div:nth-child(3) {
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            display: flex;
+            justify-content: center;
+        }
+
+        .searchBar .divInputSearch:nth-child(4) {
+            flex: 0 0 auto;
+            width: 49%;
+            margin: 0 !important;
+            padding-right: 5px;
+        }
+
+        .searchBar .divInputSearch:nth-child(5) {
+            flex: 0 0 auto;
+            width: 49%;
+            margin: 0 !important;
+            padding-left: 5px;
+        }
+
+        .btnGroupSearch {
+            float: left;
+        }
+
+        .btn-group {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
+    }
+
+    @media (min-width: 1441px) {
+        /* สำหรับหน้าจอเดสก์ท็อปที่มีความกว้างมากกว่าหรือเท่ากับ 1025px */
+
+    }
+
+    .social-logo {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        transition: background-image .2s;
+    }
+
+    .show-img-box {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        /* text-align: center; */
+        cursor: pointer;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center !important;
+    }
+
+    .show-img-box h1 {
+        text-align: center;
+    }
+
+    .show-img-box a img {
+        object-fit: contain;
+    }
+
+    .show-img-box:hover {
+        background-color: #f5f5f5;
+    }
+
+    .file-preview {
+        max-width: 100%;
+        max-height: 100%;
+        display: none;
+        cursor: pointer;
+        object-fit: contain;
+    }
+
+    .owl-prev {
+        position: absolute;
+        left: 0;
+        top: 40%;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(17, 112, 204) !important;
+        color: #fff !important;
+        border-radius: 50% !important;
+    }
+
+    .owl-next {
+        position: absolute;
+        right: 0;
+        top: 40%;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(17, 112, 204) !important;
+        color: #fff !important;
+        border-radius: 50% !important;
+    }
+
+    .owl-prev *,
+    .owl-next * {
+        font-size: 20px;
+    }
+
+    .infoImg {
+        display: block;
+        justify-content: start;
+        padding: 5px;
+        position: absolute;
+        color: #2260ff;
+        transition: all .15s ease-in-out;
+        transform: translateY(200px);
+        background-color: #fff;
+        width: 95%;
+        border-radius: 10px;
+    }
+
+    .show-img-box:hover .infoImg {
+        color: #2260ff;
+        transform: translateY(75px);
+    }
+</style>
+<div class="container">
+    <div class="col-12 d-">
+        <div class="card">
+            <div class="card-body">
+                <form method="GET" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                    <div class="align-items-center searchBar">
+                        <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
+                            <div class="w-100 d-flex justify-content-center">
+                                <div>
+                                    ข้อมูลพนักงานขับรถ
+                                </div>
                             </div>
-                        </form>
-
-                        <br/>
-                        <br/>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th><th>User Id</th><th>Compname</th><th>Commercial Registration</th><th>D Name</th><th>D Surname</th><th>D Idno</th><th>Demerit</th><th>Demeritdetail</th><th>D Pic Id Card</th><th>D Pic Lease</th><th>D Pic Cap</th><th>D Pic Other</th><th>D Date</th><th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($driver as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->user_id }}</td><td>{{ $item->compname }}</td><td>{{ $item->commercial_registration }}</td><td>{{ $item->d_name }}</td><td>{{ $item->d_surname }}</td><td>{{ $item->d_idno }}</td><td>{{ $item->demerit }}</td><td>{{ $item->demeritdetail }}</td><td>{{ $item->d_pic_id_card }}</td><td>{{ $item->d_pic_lease }}</td><td>{{ $item->d_pic_cap }}</td><td>{{ $item->d_pic_other }}</td><td>{{ $item->d_date }}</td>
-                                        <td>
-                                            <a href="{{ url('/driver/' . $item->id) }}" title="View Driver"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/driver/' . $item->id . '/edit') }}" title="Edit Driver"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
-                                            <form method="POST" action="{{ url('/driver' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Driver" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="pagination-wrapper"> {!! $driver->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
-
+                        <div class="col-sm-12 col-lg-3 col-xl-2 mx-2 divInputSearch">
+                            <div class="input-group">
+                                <div class="inputGroup w-100">
+                                    <input name="d_idno" id="d_idno" type="number" value="{{ request('d_idno') }}" autocomplete="off" oninput="clearInputName()">
+                                    <label for="d_idno"><i class="fa-solid fa-id-card"></i> รหัสบัตรประชาชน</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-3">
+                            <p class="textOR"><span>หรือ</span></p>
+                        </div>
+                        <div class="col-sm-12 col-lg-3 col-xl-2 mx-2  divInputSearch">
+                            <div class="input-group">
+                                <div class="inputGroup w-100">
+                                    <input name="compname" id="compname" type="text" value="{{ request('compname') }}" autocomplete="off" oninput="clearInputID()">
+                                    <label for="compname"><i class="fa-solid fa-buildings"></i> ชื่อบริษัท </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-3 col-xl-2 mx-2  divInputSearch">
+                            <div class="input-group">
+                                <div class="inputGroup w-100">
+                                    <input name="d_name" id="d_name" type="text" value="{{ request('d_name') }}" autocomplete="off" oninput="clearInputID()">
+                                    <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อพนักงานขับ </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group btnGroupSearch h-100" role="group" aria-label="Button group with nested dropdown">
+                            <div>
+                                <button type="submit" class="btn btn-primary  h-100 m-0"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+                                <a href="{{ url('/customer') }}" type="submit" class="btn btn-danger  h-100 m-0"><i class="fa-solid fa-trash"></i> ล้าง</a>
+                            </div>
+                        </div>
                     </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+@if(!empty($driver))
+    <div class="container">
+        <div class="main-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <div class="mt-3">
+                                    <h4>{{ $driver->compname }} {{ $driver->d_name }}</h4>
+                                    <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($driver->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
+                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($driver->c_date)) }} <br> เวลา {{ thaidate("H:i" , strtotime($driver->c_date)) }} น.</p>
+                                    <!-- <button class="btn btn-primary">Follow</button>
+                                            <button class="btn btn-outline-primary">Message</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">ลักษณะการกระทำความผิด</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $driver->demerit }}
+                                </div>
+                                <div class="col-sm-3 mt-4">
+                                    <h6 class="mb-0">รายละเอียด</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary mt-4">
+                                    {{ $driver->demeritdetail }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    @if(!empty($driver->d_pic_id_card) || !empty($driver->d_pic_lease) || !empty($driver->d_pic_execution) || !empty($driver->d_pic_cap) || !empty($driver->d_pic_other))
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="d-flex align-items-center mb-3">หลักฐานกระทำความผิด</h5>
+                                    <div class="owl-carousel owl-theme carouselSPhoto">
+                                        @if(!empty($driver->d_pic_id_card))
+                                        <div class="item">
+                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_id_card }}" alt="ภาพบัตรประชาชน">
+                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_id_card }}" alt="ภาพบัตรประชาชน">
+                                                <div class="infoImg">
+                                                    <span class="m-0">ภาพบัตรประชาชน</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        @endif
+                                        @if(!empty($driver->d_pic_lease))
+                                        <div class="item">
+                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_lease }}" alt="ภาพใบบังคับคดี">
+                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_lease }}" alt="ใบบังคับคดี">
+                                                <div class="infoImg">
+                                                    <span class="m-0">ใบบังคับคดี</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        @endif
+                                        @if(!empty($driver->d_pic_execution))
+                                        <div class="item">
+                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_execution }}" alt="ภาพสัญญาเช่า">
+                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_execution }}" alt="สัญญาเช่า">
+                                                <div class="infoImg">
+                                                    <span class="m-0">สัญญาเช่า</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        @endif
+                                        @if(!empty($driver->d_pic_cap))
+                                        <div class="item">
+                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
+                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
+                                                <div class="infoImg">
+                                                    <span class="m-0">หลักฐานการพูด-คุย</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        @endif
+                                        @if(!empty($driver->d_pic_other))
+                                        <div class="item">
+                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
+                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
+                                                <div class="infoImg">
+                                                    <span class="m-0">อื่นๆ</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+@else
+    @php
+        $text_show = '';
+        $class_show = 'd-none';
+
+        $full_url = url()->full();
+        $query_params = request()->query();
+
+        if (!empty($query_params['d_idno'])) {
+            $d_idno = urldecode($query_params['d_idno']);
+            $text_show = $d_idno;
+            $class_show = '';
+        } elseif (!empty($query_params['compname']) || !empty($query_params['d_name'])) {
+            $compname = urldecode($query_params['compname']);
+            $d_name = urldecode($query_params['d_name']);
+            $text_show = $compname . ' ' . $d_name;
+            $class_show = '';
+        }
+    @endphp
+
+
+
+
+    <div class="text-center {{ $class_show }}" style="margin-top: 8vh;">
+        <img src="{{asset('img/icon/no-results.png')}}" alt="User" class="" width="310">
+        <h2 class=" mt-5">ไม่พบข้อมูลที่คุณค้นหา <span class="text-danger">"{{ $text_show }}"</span> </h2>
+        <h5 class="mt-3">กรุณาปรับการค้นหาและตรวจสอบอีกครั้ง</h5>
+    </div>
+@endif
+
+<script>
+    function clearInputID() {
+        document.getElementById("d_idno").value = "";
+    }
+
+    function clearInputName() {
+        document.getElementById("compname").value = "";
+        document.getElementById("d_name").value = "";
+    }
+
+    function clearInput() {
+        document.getElementById("d_idno").value = "";
+        document.getElementById("compname").value = "";
+        document.getElementById("d_name").value = "";
+    }
+
+
+    $(function() {
+        // Owl Carousel
+        var owl = $(".carouselSPhoto");
+        owl.owlCarousel({
+            margin: 10,
+            loop: false,
+            nav: true,
+            // autoWidth: true,
+            // items: 4,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                900: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                },
+                2000: {
+                    items: 4
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+    /* glightbox
+     */
+    var glightbox = GLightbox({
+        loop: true,
+        selector: ".glightbox",
+        openEffect: "zoom",
+        closeEffect: "fade",
+        startAt: 0,
+        closeOnOutsideClick: false,
+        zoomable: true,
+        height: "auto",
+        width: "100vw",
+        height: "100vh"
+    });
+
+    feather.replace();
+</script>
+
+
+<!-- <div class="container">
+    <div class="row">
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">Driver</div>
+                <div class="card-body">
+                    <a href="{{ url('/driver/create') }}" class="btn btn-success btn-sm" title="Add New Driver">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                    </a>
+
+                    <form method="GET" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
+                            <span class="input-group-append">
+                                <button class="btn btn-secondary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User Id</th>
+                                    <th>Compname</th>
+                                    <th>Commercial Registration</th>
+                                    <th>D Name</th>
+                                    <th>D Surname</th>
+                                    <th>D Idno</th>
+                                    <th>Demerit</th>
+                                    <th>Demeritdetail</th>
+                                    <th>D Pic Id Card</th>
+                                    <th>D Pic Lease</th>
+                                    <th>D Pic Cap</th>
+                                    <th>D Pic Other</th>
+                                    <th>D Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 @endsection

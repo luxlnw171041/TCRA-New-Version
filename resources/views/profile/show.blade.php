@@ -131,8 +131,8 @@
                         @endif
                         <div class="d-flex flex-column align-items-center text-center">
                             <div class="profile-pic-container">
-                                @if(!empty(Auth::user()->member_pic))
-                                    <img class="profile-pic" src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="Profile Picture">
+                                @if(!empty($user->member_pic))
+                                    <img class="profile-pic" src="{{ url('storage')}}/{{ $user->member_pic }}" alt="Profile Picture">
                                 @else
                                     <img class="profile-pic" src="{{asset('img/icon/user.jpg')}}" alt="Profile Picture">
                                 @endif
@@ -143,11 +143,11 @@
                             <p class="mb-1 mt-2">
                                 @if( $user->member_role == "customer" )
                                     <span class="badge bg-light-danger text-danger" style="font-size:13px;">
-                                        ดูข้อมูลมิจฉาชีพ
+                                        customer
                                     </span>
                                 @elseif($user->member_role == "driver")
                                     <span class="btn bg-light-warning text-warning" style="font-size:13px;">
-                                        ดูข้อมูลพนักงานขับรถ
+                                        driver
                                     </span>
                                 @else
                                     <span class="btn bg-light-info text-info" style="font-size:12px;">
@@ -200,8 +200,8 @@
                             </div>
                             <p class="ms-auto mb-0 text-purple">{{ intval($user->count_search) }} ครั้ง</p>
                         </div>
-
-                        @if($id == $user->id)
+                        
+                        @if(Auth::user()->id == $user->id)
                         <div class="d-grid mt-3">
                             <br>
                             <div class="row text-center">
