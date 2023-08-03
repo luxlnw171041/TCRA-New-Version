@@ -56,7 +56,7 @@
             <a href="{{ url('/home') }}" class="has-arrow">
                 <div class="sidebar-header">
                     <div>
-                        <img src="{{asset('img/logo/tcra.png')}}" class="logo-icon" alt="logo icon">
+                        <img src="{{asset('img/logo/tcra.png')}}" style="width:50px;" alt="logo icon">
                     </div>
                     <div>
                         <h6 class="logo-text">สมาคม<br>รถเช่าไทย</h6>
