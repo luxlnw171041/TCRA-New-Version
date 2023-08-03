@@ -5,7 +5,7 @@
 <div class="wrapper">
     <div class="authentication-forgot d-flex align-items-center justify-content-center">
 
-        <div class="card forgot-box">
+        <div class="card forgot-box" style="width:500px;">
             <div class="card-body">
                 <div class="p-4 rounded">
                     <div class="text-center">
@@ -48,6 +48,8 @@
                             </a>
                         </div>
                     </form>
+                    <br>
+                    <span class="text-secondary">หรือติดต่อแอดมิน TCRA</span>
 
                 </div>
             </div>

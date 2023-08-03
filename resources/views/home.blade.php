@@ -52,7 +52,7 @@ url('data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICR
             <div class="content" style="font-family: 'Prompt', sans-serif;border-radius: 25px;">
                 <div class="row">
                         <div class="card-body col-md-6" style="hight: 450px">
-                            <img src="{{ url('/img/png/blacklist.png') }}" width="80%" alt="viicheck">
+                            <img src="{{ url('/img/logo/tcra.png') }}" width="80%" alt="viicheck">
                         </div>
                         <div class="card-body col-md-6 d-flex align-items-center ">
                             <div class="col-md-12">
