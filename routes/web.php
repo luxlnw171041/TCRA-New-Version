@@ -48,3 +48,4 @@ Route::middleware(['auth', 'member_role:customer,admin'])->group(function () {
 Route::middleware(['auth', 'member_role:driver,admin'])->group(function () {
 	Route::resource('driver', 'DriverController');
 });
+
