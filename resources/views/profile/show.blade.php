@@ -108,7 +108,20 @@
             box-shadow: inset 0px 0px 0px 60px #fff
         }
     }
-
+    .icon-24{
+        width: 24px;
+        height: 24px;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;display: flex;
+        align-items: center;
+    }.list-item-data-user{
+        display: flex;
+        align-items: center;
+    }
+    .list-item-data-user i{
+       margin-right: 5px;
+    }
 </style>
 
 <div class="container">
@@ -116,6 +129,74 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card sticky">
+                    <!-- <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            @if(!empty($user->member_pic))
+                                <img src="{{ url('storage')}}/{{ $user->member_pic }}" alt="Admin" class="rounded-circle p-1" width="110">
+                            @else
+                             <img src="{{asset('img/icon/user.jpg')}}" alt="Admin" class="rounded-circle p-1" width="110">
+                            @endif
+
+                            <div class="mt-3">
+                                <h4>U-name : <b>{{ $user->username }}</b></h4>
+                                <p class="text-secondary mb-1">สถานะ : <b>{{$user->member_role}}</b></p>
+                                <p class="text-muted font-size-sm">ID : <b>{{$user->id}}</b> </p>
+                                <button class="btn btn-primary">แก้ไขข้อมูล</button>
+                                <button class="btn btn-outline-primary">Message</button>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 list-item-data-user">
+                                    <i class="icon-24 fa-solid fa-user"></i> เป็นสมาชิกเมื่อ
+                                </h6>
+                                <span class="text-secondary"> {{ \Carbon\Carbon::parse($user->created_at)->locale('th')->diffForHumans() }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 list-item-data-user text-primary">
+                                    <i class="icon-24 fa-solid fa-right-to-bracket"></i> ลงชื่อเข้าใช้</h6>
+                                <span class="text-secondary">{{ $user->member_count_login }} ครั้ง</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 list-item-data-user text-danger">
+                                    <i class="icon-24 fa-solid fa-file-export"></i> ลงข้อมูล</h6>
+                                <span class="text-secondary">{{ $count_data_add }} ครั้ง</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 list-item-data-user text-info">
+                                    <i class="icon-24 fa-solid fa-magnifying-glass"></i> ค้นหาข้อมูล</h6>
+                                <span class="text-secondary">{{ intval($user->count_search) }} ครั้ง</span>
+                            </li>
+                        </ul>
+                    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div class="p-5 pb-2">
                         <span class="userID">
                             ID : {{ $user->id }}
@@ -171,7 +252,9 @@
                             <div class="ps-3">
                                 <h6 class="mb-0 font-weight-bold">เป็นสมาชิกเมื่อ</h6>
                             </div>
-                            <p class="ms-auto mb-0 text-purple">{{ $user->created_at }}</p>
+                            <p class="ms-auto mb-0 text-purple">
+                                {{ \Carbon\Carbon::parse($user->created_at)->locale('th')->diffForHumans() }}
+                            </p>
                         </div>
                         <div class="p-2 d-flex align-items-center">
                             <div class="product-img">

@@ -149,7 +149,9 @@
         box-shadow: inset 0px 0px 0px 60px #fff
     }
 }
-
+button:focus.btnAddUser {
+    box-shadow: 0 0 0 0.25rem  rgb(69, 211, 83, 0.6);
+}
 </style>
 
 <div id="alert_copy" class="div_alert" role="alert">
@@ -332,11 +334,104 @@
     </div>
 
 <div class="row">
-    <div class="col-md-3">
-        <div class="card sticky">
-            <div class="card-body p-2">
 
-                <div class="card radius-10 bg-success bg-gradient">
+    <!-- <div class="col-md-3">
+        <div class="card border-top border-0 border-4 border-primary">
+            <div class="card-body" style="padding: 39px;">
+                <div class="card-title d-flex align-items-center">
+                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+                    </div>
+                    <h5 class="mb-0 text-primary">สร้างรหัสสมาชิก</h5>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <label for="inputLastName1" class="form-label">Username (สำหรับลงชื่อเข้าใช้) <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-at"></i></span>
+                            <input type="text" class="form-control border-start-0" id="inputLastName1" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputLastName2" class="form-label">Name (สำหรับแสดงในระบบ) <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-user"></i></span>
+                            <input type="text" class="form-control border-start-0" id="Name" name="Name" placeholder="Name" required oninput="on_inputData();">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="validationServerUsername" class="form-label">Email Address <span class="text-danger">*</span></label>
+                        <div class="input-group has-validation"> <span class="input-group-text bg-transparent" id="inputGroupPrepend3"><i class="bx bxs-message"></i></span>
+                        <input type="text" class="form-control border-start-0" id="email" name="email" placeholder="Email" required oninput="on_inputData();" onchange="check_email();">
+                            <div id="div_text_alert_email" class="invalid-feedback d-none" >มี EMail นี้ในระบบแล้ว.</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="inputPhoneNo" class="form-label">สถานะลงชื่อเข้าใช้ <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-right-to-bracket"></i></span>
+                            <select class="form-select border-start-0" id="member_status" name="member_status" required oninput="on_inputData();">
+                                <option  selected value="">สถานะลงชื่อเข้าใช้</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="inputPhoneNo" class="form-label">หมวดหมู่สมาชิก <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-duotone fa-users"></i></span>
+                            <select class="form-select border-start-0" id="member_role" name="member_role" required oninput="on_inputData();">
+                                <option selected value="">หมวดหมู่สมาชิก</option>
+                                <option value="admin">admin</option>
+                                <option value="customer">กลุ่มมิจฉาชีพ</option>
+                                <option value="driver">พนักงานขับรถ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputChoosePassword" class="form-label">Choose Password</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-lock-open"></i></span>
+                            <input type="text" class="form-control border-start-0" id="member_co" name="member_co" placeholder="Company" oninput="on_inputData();">
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputPhoneNo" class="form-label">Phone No</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-microphone"></i></span>
+                            <input type="text" class="form-control border-start-0" id="member_tel" name="member_tel" placeholder="Phone No" oninput="on_inputData();">
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress3" class="form-label">Address</label>
+                        <textarea class="form-control" id="member_addr" name="member_addr" placeholder="Enter Address" rows="3" oninput="on_inputData();"></textarea>
+
+                    </div>
+                    <div id="div_text_alert_input" class="col-12 d-none">
+                        <span class="text-danger d-">
+                            <span id="text_alert_input">ss</span>
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <button class="card btn radius-10 btnAddUser bg-success bg-gradient w-100" onclick="check_create_member();">
+                            <div class="card-body w-100 p-2">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h6 class="my-1 text-white">สร้างรหัสสมาชิก</h6>
+                                    </div>
+                                    <div class="text-white ms-auto font-25">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>                                             -->
+    <div class="col-md-3">
+        <div class="sticky">
+            <div>
+
+                <!-- <div class="card radius-10 bg-success bg-gradient">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
@@ -347,8 +442,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </div> -->                            
                 <ul class="nav nav-pills nav-pills-success mb-3 d-none" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a id="btn_a_inputdata" class="nav-link active" data-bs-toggle="pill" href="#success-pills-inputdata" role="tab" aria-selected="true">
@@ -369,11 +463,109 @@
                         </a>
                     </li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content">  
                     <div class="tab-pane fade active show" id="success-pills-inputdata" role="tabpanel">
+                    <div class="card border-top border-0 border-4 border-primary">
+            <div class="card-body" style="padding: 39px;">
+                <div class="card-title d-flex align-items-center">
+                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+                    </div>
+                    <h5 class="mb-0 text-primary">สร้างรหัสสมาชิก</h5>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <label for="inputLastName1" class="form-label">Username (สำหรับลงชื่อเข้าใช้) <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-at"></i></span>
+                            <input type="text" class="form-control border-start-0"  id="Username" name="Username" placeholder="Username" required oninput="on_inputData();">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputLastName2" class="form-label">Name (สำหรับแสดงในระบบ) <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-user"></i></span>
+                            <input type="text" class="form-control border-start-0" id="Name" name="Name" placeholder="Name" required oninput="on_inputData();">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputEmailAddress" class="form-label">Email Address <span class="text-danger">*</span></label>
+                        <div class="input-group "> <span class="input-group-text bg-transparent"><i class="bx bxs-message"></i></span>
+                            <input type="text" class="form-control border-start-0" id="email" name="email" placeholder="Email" required oninput="on_inputData();" onchange="check_email();">
+                        </div>
+                        <span id="div_text_alert_email" class="text-danger d-none">มี EMail นี้ในระบบแล้ว</span>
+                        <div id="validationServer03Feedback" class="invalid-feedback">มี EMail นี้ในระบบแล้ว.</div>
 
+                    </div>
+                    <!-- <div class="col-12">
+                        <label for="validationServerUsername" class="form-label">Email Address <span class="text-danger">*</span></label>
+                        <div class="input-group has-validation"> <span class="input-group-text bg-transparent" id="inputGroupPrepend3"><i class="bx bxs-message"></i></span>
+                        <input type="text" class="form-control border-start-0" id="email" name="email" placeholder="Email" required oninput="on_inputData();" onchange="check_email();">
+                            <div id="div_text_alert_email" class="invalid-feedback d-none" >มี EMail นี้ในระบบแล้ว.</div>
+                        </div>
+                    </div> -->
+                    <div class="col-6">
+                        <label for="inputPhoneNo" class="form-label">สถานะลงชื่อเข้าใช้ <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-right-to-bracket"></i></span>
+                            <select class="form-select border-start-0" id="member_status" name="member_status" required oninput="on_inputData();">
+                                <option  selected value="">สถานะลงชื่อเข้าใช้</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="inputPhoneNo" class="form-label">หมวดหมู่สมาชิก <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-duotone fa-users"></i></span>
+                            <select class="form-select border-start-0" id="member_role" name="member_role" required oninput="on_inputData();">
+                                <option selected value="">หมวดหมู่สมาชิก</option>
+                                <option value="admin">admin</option>
+                                <option value="customer">กลุ่มมิจฉาชีพ</option>
+                                <option value="driver">พนักงานขับรถ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputChoosePassword" class="form-label">Company</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-buildings"></i></span>
+                            <input type="text" class="form-control border-start-0" id="member_co" name="member_co" placeholder="Company" oninput="on_inputData();">
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputPhoneNo" class="form-label">Phone No</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-phone"></i></span>
+                            <input type="text" class="form-control border-start-0" id="member_tel" name="member_tel" placeholder="Phone No" oninput="on_inputData();">
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress3" class="form-label">Address</label>
+                        <textarea class="form-control" id="member_addr" name="member_addr" placeholder="Enter Address" rows="3" oninput="on_inputData();"></textarea>
+
+                    </div>
+                    <div id="div_text_alert_input" class="col-12 d-none">
+                        <span class="text-danger d-">
+                            <span id="text_alert_input">ss</span>
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <button class="card btn radius-10 btnAddUser bg-success bg-gradient w-100" onclick="check_create_member();">
+                            <div class="card-body w-100 p-2">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h6 class="my-1 text-white">สร้างรหัสสมาชิก</h6>
+                                    </div>
+                                    <div class="text-white ms-auto font-25">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
                         <!-- กรอกข้อมูลสมาชิก -->
-                        <div class="border border-3 p-4 rounded div_input_data">
+                        <!-- <div class="border border-3 p-4 rounded div_input_data">
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="Username" class="form-label">
@@ -429,10 +621,26 @@
                                 </div>
                                 <div id="div_text_alert_input" class="col-12 d-none">
                                     <span class="text-danger d-">
-                                        <span id="text_alert_input"></span>
+                                        <span id="text_alert_input">ss</span>
                                     </span>
                                 </div>
+                                <style>
+                                    
+                                </style>
                                 <div class="col-12">
+                                    <button class="card btn radius-10 btnAddUser bg-success bg-gradient w-100" onclick="check_create_member();">
+                                        <div class="card-body w-100 p-2">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <h6 class="my-1 text-white">สร้างรหัสสมาชิก</h6>
+                                                </div>
+                                                <div class="text-white ms-auto font-25">
+                                                    <i class="fa-solid fa-user-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                                
                                     <div class="d-grid">
                                         <button type="button" class="btn btn-primary" onclick="check_create_member();">
                                             สร้างรหัส
@@ -440,11 +648,13 @@
                                     </div>
                                 </div>
                             </div> 
-                        </div>
+                        </div> -->
 
                     </div>
-                    <div class="tab-pane fade success_copydata" id="success-pills-copydata" role="tabpanel">
-                        
+                    <div class="tab-pane fade success_copydata card" id="success-pills-copydata" role="tabpanel">
+                        <div class="div_copydata">
+
+                        </div>
                         <!-- Copy DATA -->
                         <div id="div_loading" class="text-center">
                             <div class="spinner-copy-data">
@@ -454,7 +664,7 @@
                             <h5>กำลังโหลด..</h5>
                         </div>
 
-                        <div id="div_load_success" class="d-none">
+                        <div id="div_load_success" class="d-none" style="padding:40px">
                             <svg class="checkmark d-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                                 <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
                                 <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
@@ -562,6 +772,8 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.3.2/moment-duration-format.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/th.js"></script>
+
 <script>
 
     function on_inputData(){
@@ -639,8 +851,9 @@
                 document.querySelector('#div_loading').classList.add('d-none');
                 document.querySelector('#div_load_success').classList.remove('d-none');
                 document.querySelector('.checkmark').classList.remove('d-none');
-
+                document.querySelector('.div_copydata').innerHTML= "" ;
                 setTimeout(function() {
+                    
 
                     let html = `
                         <div class="row g-0">
@@ -662,7 +875,7 @@
                         </div>
                     `;
 
-                    let div_copydata = document.querySelector('.success_copydata');
+                    let div_copydata = document.querySelector('.div_copydata');
                         div_copydata.insertAdjacentHTML('afterbegin', html); // แทรกบนสุด
 
                     let str = "Username : " + data.username + "\n" + "Password : " + data.pass_code
@@ -1048,16 +1261,15 @@
                         if(result[i].last_time_active == ""){
                             result[i].last_time_active = ".." ;
                         }else{
-                            var dateString = "2023-08-03 12:34:56";
+                            var last_time_active = result[i].last_time_active;
+                            
+                            var Date_last_time_active = moment(last_time_active);
 
-  // แปลงเวลาให้กลายเป็นวัตถุของ moment.js
-  var dateTime = moment(dateString);
+                            
+                            moment.locale('th');
 
-  // แสดงผลรูปแบบความเปลี่ยนแปลงตามเวลาในรูปแบบของภาษาไทย
-  var diffForHumans = dateTime.fromNow();
-
-  // แสดงผลลัพธ์ในคอนโซลหรือที่ทำการแสดงผลอื่น ๆ
-  console.log(diffForHumans); 
+                            
+                            var diffForHumans = Date_last_time_active.fromNow();
                         }
 
                         let url_edit_profile = "{{ url('/') }}" + "/user/" + result[i].id + "/edit" ;
@@ -1137,7 +1349,7 @@
                                                                 <b>ใช้งานล่าสุด</b>
                                                             </h6>
                                                             <span class="text-secondary">
-                                                                `+result[i].last_time_active+`
+                                                                `+ diffForHumans +`
                                                             </span>
                                                         </li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -1245,12 +1457,14 @@
         fetch("{{ url('/') }}/api/check_email/"+email)
             .then(response => response.text())
             .then(result => {
-                // console.log(result);
+                console.log(result);
                 if(result == "มีข้อมูลอีเมลนี้แล้ว"){
                     document.querySelector('#div_text_alert_email').classList.remove('d-none');
+                    document.querySelector('#email').classList.add('is-invalid');
                     document.querySelector('#email').value = '' ;
                     document.querySelector('#email').focus() ;
-
+                }if(result == "อีเมลนี้สามารถใช้งานได้"){
+                    document.querySelector('#email').classList.remove('is-invalid');
                 }
             });
     }
