@@ -40,11 +40,11 @@ Route::middleware(['auth', 'member_role:admin'])->group(function () {
 });
 
 // customer
-Route::middleware(['auth', 'member_role:customer'])->group(function () {
+Route::middleware(['auth', 'member_role:customer,admin'])->group(function () {
 	Route::resource('customer', 'CustomerController');
 });
 
 // driver
-Route::middleware(['auth', 'member_role:driver'])->group(function () {
+Route::middleware(['auth', 'member_role:driver,admin'])->group(function () {
 	Route::resource('driver', 'DriverController');
 });
