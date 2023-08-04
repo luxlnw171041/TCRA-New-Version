@@ -286,4 +286,31 @@ class UserController extends Controller
 
     }
 
+    function update_pass(Request $request){
+
+        $requestData = $request->all();
+
+        $email = $requestData['email'] ;
+        $pass = $requestData['pass'] ;
+
+        $data_user = User::where('email' , $email)->first();
+
+        if( $data_user->member_status != 'Active' ){
+            return "NO" ;
+        }else{
+            DB::table('create_user_by_admins')
+                ->where([ 
+                        ['user_id', $data_user->id],
+                    ])
+                ->update([
+                        'pass_code' => $pass,
+                    ]);
+
+            return "OK" ;
+        }
+
+        
+
+    }
+
 }

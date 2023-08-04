@@ -24,3 +24,4 @@ Route::post('/create_member', 'UserController@create_member');
 Route::get('/change_status_to/{change_to}/{user_id}', 'UserController@change_status_to');
 Route::get('/search_member', 'UserController@search_member');
 Route::post('/submit_change_pass', 'UserController@submit_change_pass');
+Route::get('/update_pass', 'UserController@update_pass');

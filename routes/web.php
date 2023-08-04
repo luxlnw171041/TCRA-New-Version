@@ -30,13 +30,21 @@ Route::get('/customer_test', 'CustomerController@customer_test');
 
 // auth
 Route::middleware(['auth'])->group(function () {
-	Route::resource('customer', 'CustomerController');
 	Route::resource('user', 'UserController');
 	Route::get('show_profile/{id}', 'UserController@show_profile');
-	Route::resource('driver', 'DriverController');
 });
 
 // admin
 Route::middleware(['auth', 'member_role:admin'])->group(function () {
 	Route::resource('create_user_by_admin', 'Create_user_by_adminController')->except(['show','create','edit','view']);
+});
+
+// customer
+Route::middleware(['auth', 'member_role:customer'])->group(function () {
+	Route::resource('customer', 'CustomerController');
+});
+
+// driver
+Route::middleware(['auth', 'member_role:driver'])->group(function () {
+	Route::resource('driver', 'DriverController');
 });
