@@ -59,7 +59,9 @@ url('data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICR
                                 <h1 style="font-family: 'Prompt', sans-serif;text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);margin-top:25px;"> <b>ยินดีต้อนรับ </b> </h1>
                                 <h1 style="font-family: 'Prompt', sans-serif;text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);margin-top:25px;"> <b>{{ Auth::user()->name }}</b> </h1>
                                 <h1 style="font-family: 'Prompt', sans-serif;text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);margin-top:25px;"> <b>เข้าสู่</b> </h1>
-                                <h1 style="font-family: 'Prompt', sans-serif;text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);margin-top:25px;"> <b>ระบบ Blacklist <span style="color: #0f72ac;">TCRA</span></b> </h1>
+                                <h1 style="font-family: 'Prompt', sans-serif;text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);margin-top:25px;"> 
+                                    <b>ระบบ <br>Blacklist <span style="color: #0f72ac;">TCRA</span></b> 
+                                </h1>
                                 
                             </div>
                         </div>
