@@ -72,7 +72,16 @@ class LoginController extends Controller
 
             
         }else{
-            return redirect($backurl . "&error=Yes");
+            $full_url = $backurl;
+
+            $full_url_ex = explode("error=",$full_url);
+
+            if(!empty($full_url_ex[1])){
+                $backurl_new = $backurl ;
+            }else{
+                $backurl_new = $backurl . "&error=Yes" ;
+            }
+            return redirect($backurl_new);
         }
           
     }
