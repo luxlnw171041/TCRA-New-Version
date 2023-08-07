@@ -264,6 +264,13 @@ class UserController extends Controller
             $data_user[$i]['count_Cus'] = $count_Cus ;
             $data_user[$i]['count_Dri'] = $count_Dri ;
 
+            if(empty($data_user[$i]['count_Cus'])){
+                $data_user[$i]['count_Cus'] = '0' ;
+            }
+            if(empty($data_user[$i]['count_Dri'])){
+                $data_user[$i]['count_Dri'] = '0' ;
+            }
+
             if(empty($data_user[$i]['count_search_cus'])){
                 $data_user[$i]['count_search_cus'] = '0' ;
             }
