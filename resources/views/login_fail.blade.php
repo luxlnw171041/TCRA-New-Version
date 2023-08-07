@@ -15,8 +15,12 @@
                             <h2 class="font-weight-bold">
                                 ขออภัย บัญชีของคุณถูกระงับการใช้งานชั่วคราว
                             </h2>
-                            <p>
-                                กรุณาติดต่อแอดมิน สมาคมรถเช่าไทย
+                            <p class="mt-4">
+                                กรุณาติดต่อเจ้าหน้าที่ TCRA
+                                <br>
+                                <a href="mailto:thaitcra@gmail.com" class="text-info">
+                                    ▪ thaitcra@gmail.com
+                                </a>
                             </p>
                         </div>
                     </div>

@@ -230,6 +230,10 @@
                                     <span class="btn bg-light-warning text-warning" style="font-size:13px;">
                                         driver
                                     </span>
+                                @elseif($user->member_role == "member")
+                                    <span class="btn bg-light-success text-success" style="font-size:13px;">
+                                        member
+                                    </span>
                                 @else
                                     <span class="btn bg-light-info text-info" style="font-size:12px;">
                                         แอดมิน
@@ -272,7 +276,9 @@
                             <div class="ps-3">
                                 <h6 class="mb-0 font-weight-bold">ลงข้อมูล</h6>
                             </div>
-                            <p class="ms-auto mb-0 text-purple">{{ $count_data_add }} ครั้ง</p>
+                            <p class="ms-auto mb-0 text-purple">
+                                {{ $count_data_add }} ครั้ง
+                            </p>
                         </div>
                         <div class="p-2 d-flex align-items-center">
                             <div class="product-img">
@@ -313,13 +319,13 @@
                                             </span>
                                             <input type="password" class="form-control border-start-0" id="old_key" oninput="check_input_pass();">
                                         </div>
-                                        <div class="input-group mb-2" style="background-color: lightblue;">
+                                        <div class="input-group mb-2" style="background-color: lightgreen;">
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-key"></i> &nbsp;รหัสผ่านใหม่&nbsp;
                                             </span>
                                             <input type="password" class="form-control border-start-0" id="new_key" oninput="check_input_pass();">
                                         </div>
-                                        <div class="input-group mb-2" style="background-color: lightblue;">
+                                        <div class="input-group mb-2" style="background-color: lightgreen;">
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-duotone fa-key"></i> &nbsp;กรอกอีกครั้ง
                                             </span>
@@ -373,7 +379,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div>
-                                        <p class="mb-0 text-secondary">ชื่อเต็ม</p>
+                                        <p class="mb-0 text-secondary">ชื่อ-นามสกุล</p>
                                         <h4 class="mb-0">{{ $user->member_name }}</h4>
                                     </div>
                                     <div class="widgets-icons bg-light-primary text-primary ms-auto">
@@ -386,7 +392,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div>
-                                        <p class="mb-0 text-secondary">ชื่อ</p>
+                                        <p class="mb-0 text-secondary">ชื่อโปรไฟล์</p>
                                         <h4 class="mb-0">{{ $user->name }}</h4>
                                     </div>
                                     <div class="widgets-icons bg-light-success text-success ms-auto">

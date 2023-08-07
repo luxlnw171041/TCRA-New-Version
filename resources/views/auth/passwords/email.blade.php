@@ -49,7 +49,11 @@
                         </div>
                     </form>
                     <br>
-                    <span class="text-secondary">หรือติดต่อแอดมิน TCRA</span>
+                    <span class="text-secondary">หรือติดต่อเจ้าหน้าที่ TCRA</span>
+                    <br>
+                    <a href="mailto:thaitcra@gmail.com" class="text-info">
+                        ▪ thaitcra@gmail.com
+                    </a>
 
                 </div>
             </div>

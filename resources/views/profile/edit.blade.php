@@ -105,11 +105,15 @@
                                 <p class="mb-1 mt-2">
                                     @if( $user->member_role == "customer" )
                                         <span class="badge bg-light-danger text-danger" style="font-size:13px;">
-                                            ดูข้อมูลมิจฉาชีพ
+                                            customer
                                         </span>
                                     @elseif($user->member_role == "driver")
                                         <span class="btn bg-light-warning text-warning" style="font-size:13px;">
-                                            ดูข้อมูลพนักงานขับรถ
+                                            driver
+                                        </span>
+                                    @elseif($user->member_role == "member")
+                                        <span class="btn bg-light-success text-success" style="font-size:13px;">
+                                            member
                                         </span>
                                     @else
                                         <span class="btn bg-light-info text-info" style="font-size:12px;">
@@ -157,7 +161,7 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <div>
-                                            <p class="mb-0 text-secondary">ชื่อเต็ม</p>
+                                            <p class="mb-0 text-secondary">ชื่อ-นามสกุล</p>
                                         </div>
                                         <div class="widgets-icons bg-light-primary text-primary ms-auto">
                                             <i class="fa-solid fa-signature"></i>
@@ -170,7 +174,7 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <div>
-                                            <p class="mb-0 text-secondary">ชื่อ</p>
+                                            <p class="mb-0 text-secondary">ชื่อโปรไฟล์</p>
                                         </div>
                                         <div class="widgets-icons bg-light-success text-success ms-auto">
                                             <i class="fa-sharp fa-solid fa-input-text"></i>

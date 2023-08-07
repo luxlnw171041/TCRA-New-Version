@@ -152,6 +152,76 @@
 button:focus.btnAddUser {
     box-shadow: 0 0 0 0.25rem  rgb(69, 211, 83, 0.6);
 }
+
+.td_member_co{
+    width: 250px;
+    height: 1em; /* กำหนดความสูงของ td เพื่อให้ทำงานกับ ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.checkbox-apple {
+  position: relative;
+  width: 50px;
+  height: 25px;
+  margin: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-apple label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 25px;
+  border-radius: 50px;
+  background: linear-gradient(to bottom, #b3b3b3, #e6e6e6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkbox-apple label:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.checkbox-apple input[type="checkbox"]:checked + label {
+  background: linear-gradient(to bottom, #4cd964, #5de24e);
+}
+
+.checkbox-apple input[type="checkbox"]:checked + label:after {
+  transform: translateX(25px);
+}
+
+.checkbox-apple label:hover {
+  background: linear-gradient(to bottom, #b3b3b3, #e6e6e6);
+}
+
+.checkbox-apple label:hover:after {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.yep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 25px;
+}
+
+
 </style>
 
 <div id="alert_copy" class="div_alert" role="alert">
@@ -164,7 +234,7 @@ button:focus.btnAddUser {
     @foreach($data_member as $item_modal)
     <!-- Modal -->
     <div class="modal fade" id="view_data_mamber_{{ $item_modal->id }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Label_view_data_mamber_{{ $item_modal->id }}" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="Label_view_data_mamber_{{ $item_modal->id }}">ข้อมูลสมาชิก</h5>
@@ -176,140 +246,57 @@ button:focus.btnAddUser {
 
                     <div class="card">
                         <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                @if( empty($item_modal->member_pic))
-                                    <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="110">
-                                @else
-                                    <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="profile-pic" width="110">
-                                @endif
-                                <div class="mt-3">
-                                    <h4>{{ $item_modal->name }}</h4>
-                                    <p class="text-secondary mb-1">
-                                        {{ $item_modal->member_tel }}
-                                    </p>
-                                    <p class="text-muted font-size-sm">
-                                        {{ $item_modal->member_addr }}
-                                    </p>
-                                </div>
-                                <div class="mt-3">
-                                    <!-- สถานะลงชื่อเข้าใช้ -->
-                                    @if($item_modal->member_status == "Active")
-                                        <span  class="btn bg-light-success text-success" style="font-size:12px;">
-                                            Active
-                                        </span>
-                                    @else
-                                        <span class="btn bg-light-danger text-danger" style="font-size:12px;">
-                                            Inactive
-                                        </span>
-                                    @endif
-                                    <!-- บทบาทของสมาชิก -->
-                                    @if($item_modal->member_role == "admin")
-                                        <span class="btn bg-light-info text-info" style="font-size:12px;">
-                                            แอดมิน
-                                        </span>
-                                    @elseif($item_modal->member_role == "customer")
-                                        <span class="btn bg-light-danger text-danger" style="font-size:12px;">
-                                            customer
-                                        </span>
-                                    @else
-                                        <span class="btn bg-light-warning text-warning" style="font-size:12px;">
-                                            driver
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <hr class="my-4">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0">
-                                        <b>Username</b>
-                                    </h6>
-                                    <span class="text-secondary">{{ $item_modal->username }}</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0">
-                                        <b>E-Mail</b>
-                                    </h6>
-                                    <span class="text-secondary">{{ $item_modal->email }}</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0">
-                                        <b>บริษัท</b>
-                                    </h6>
-                                    <span class="text-secondary">
-                                        {{ $item_modal->member_co }}
-                                    </span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0">
-                                        <b>ลงชื่อเข้าใช้</b>
-                                    </h6>
-                                    <span class="text-secondary">
-                                        {{ intval($item_modal->member_count_login) }} ครั้ง
-                                    </span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0">
-                                        <b>ใช้งานล่าสุด</b>
-                                    </h6>
-                                    <span class="text-secondary">
-                                        @if( !empty($item_modal->last_time_active) )
-                                            {{ \Carbon\Carbon::parse($item_modal->last_time_active)->locale('th')->diffForHumans() }}
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        @if( empty($item_modal->member_pic))
+                                            <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="150">
                                         @else
-                                            ..
+                                            <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="profile-pic" width="150">
                                         @endif
-                                    </span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0">
-                                        <b>ลงข้อมูล</b>
-                                    </h6>
-                                    <span class="text-secondary">
-                                        @php
-                                            $count_add_data = 0 ;
-
-                                            if( $item_modal->member_role == "customer" ){
-                                                $data_add = App\Models\Customer::where('user_id',$item_modal->id)->get();
-                                                $count_add_data = count($data_add);
-                                            }else if( $item_modal->member_role == "driver" ){
-                                                $data_add = App\Models\Driver::where('user_id',$item_modal->id)->get();
-                                                $count_add_data = count($data_add);
-                                            }else{
-                                                $data_add_Cus = App\Models\Customer::where('user_id',$item_modal->id)->get();
-                                                $count_Cus = count($data_add_Cus);
-
-                                                $data_add_Dri = App\Models\Driver::where('user_id',$item_modal->id)->get();
-                                                $count_Dri = count($data_add_Dri);
-                                                
-                                                $count_add_data = intval($count_Cus + $count_Dri);
-                                            }
-
-                                        @endphp
-
-                                        {{ $count_add_data }} ครั้ง
-                                    </span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                    <h6 class="mb-0">
-                                        <b>ค้นหาข้อมูล</b>
-                                    </h6>
-                                    <span class="text-secondary">
-                                       {{ intval($item_modal->count_search) }} ครั้ง
-                                    </span>
-                                </li>
-                                
-                                <div class="row text-center mt-3">
-                                    <div class="col-6">
-                                        <a href="{{ url('/user/' . $item_modal->id .'/edit') }}" class="btn btn-warning" style="width:90%;">
-                                            แก้ไขข้อมูล
-                                        </a>
+                                        <div class="mt-3">
+                                            <h4>{{ $item_modal->name }}</h4>
+                                            <p class="text-secondary mb-1">
+                                                {{ $item_modal->member_tel }}
+                                            </p>
+                                            <p class="text-muted font-size-sm">
+                                                {{ $item_modal->member_addr }}
+                                            </p>
+                                        </div>
+                                        <div class="mt-3">
+                                            <!-- สถานะลงชื่อเข้าใช้ -->
+                                            @if($item_modal->member_status == "Active")
+                                                <span  class="btn bg-light-success text-success" style="font-size:12px;">
+                                                    Active
+                                                </span>
+                                            @else
+                                                <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                                    Inactive
+                                                </span>
+                                            @endif
+                                            <!-- บทบาทของสมาชิก -->
+                                            @if($item_modal->member_role == "admin")
+                                                <span class="btn bg-light-info text-info" style="font-size:12px;">
+                                                    แอดมิน
+                                                </span>
+                                            @elseif($item_modal->member_role == "member")
+                                                <span class="btn bg-light-success text-success" style="font-size:12px;">
+                                                    member
+                                                </span>
+                                            @elseif($item_modal->member_role == "customer")
+                                                <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                                    customer
+                                                </span>
+                                            @else
+                                                <span class="btn bg-light-warning text-warning" style="font-size:12px;">
+                                                    driver
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_{{ $item_modal->id }}');">
-                                            Copy Username
-                                        </span>
-                                    </div>
-                                    <div class="col-12 mt-2">
+                                    <hr class="my-4">
+                                    <div class="mt-2">
                                         <div class="text-center pt-2 pb-2">
                                             @php
                                                 $text_username = "";
@@ -322,8 +309,105 @@ button:focus.btnAddUser {
                                             <textarea class="form-control" name="copy_username_{{ $item_modal->id }}" id="copy_username_{{ $item_modal->id }}" readonly>{{ $text_username }}</textarea>
                                         </div>
                                     </div>
+                                    <div class="row text-center mt-3">
+                                        <div class="col-6">
+                                            <a href="{{ url('/user/' . $item_modal->id .'/edit') }}" class="btn btn-warning" style="width:90%;">
+                                                แก้ไขข้อมูล
+                                            </a>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_{{ $item_modal->id }}');">
+                                                Copy Username
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </ul>
+                                <div class="col-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>Username</b>
+                                            </h6>
+                                            <span class="text-secondary">{{ $item_modal->username }}</span>
+                                        </li>
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>E-Mail</b>
+                                            </h6>
+                                            <span class="text-secondary">{{ $item_modal->email }}</span>
+                                        </li>
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>บริษัท</b>
+                                            </h6>
+                                            <span class="text-secondary">
+                                                {{ $item_modal->member_co }}
+                                            </span>
+                                        </li>
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>ลงชื่อเข้าใช้</b>
+                                            </h6>
+                                            <span class="text-secondary">
+                                                {{ intval($item_modal->member_count_login) }} ครั้ง
+                                            </span>
+                                        </li>
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>ใช้งานล่าสุด</b>
+                                            </h6>
+                                            <span class="text-secondary">
+                                                @if( !empty($item_modal->last_time_active) )
+                                                    {{ \Carbon\Carbon::parse($item_modal->last_time_active)->locale('th')->diffForHumans() }}
+                                                @else
+                                                    ..
+                                                @endif
+                                            </span>
+                                        </li>
+                                        @php
+                                            $data_add_Cus = App\Models\Customer::where('user_id',$item_modal->id)->get();
+                                            $count_Cus = count($data_add_Cus);
+
+                                            $data_add_Dri = App\Models\Driver::where('user_id',$item_modal->id)->get();
+                                            $count_Dri = count($data_add_Dri);
+                                        @endphp
+
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>ลงข้อมูล มิจฉาชีพ (เช่ารถ)</b>
+                                            </h6>
+                                            <span class="text-secondary">
+                                                {{ $count_Cus }} ครั้ง
+                                            </span>
+                                        </li>
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>ลงข้อมูล Blacklist ข้อมูลพนักงานขับรถ</b>
+                                            </h6>
+                                            <span class="text-secondary">
+                                                {{ $count_Dri }} ครั้ง
+                                            </span>
+                                        </li>
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>ค้นหาข้อมูล มิจฉาชีพ (เช่ารถ)</b>
+                                            </h6>
+                                            <span class="text-secondary">
+                                               {{ intval($item_modal->count_search_cus) }} ครั้ง
+                                            </span>
+                                        </li>
+                                        <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <h6 class="mb-0">
+                                                <b>ค้นหา Blacklist ข้อมูลพนักงานขับรถ</b>
+                                            </h6>
+                                            <span class="text-secondary">
+                                               {{ intval($item_modal->count_search_dri) }} ครั้ง
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -475,6 +559,12 @@ button:focus.btnAddUser {
                 <hr>
                 <div class="row g-3">
                     <div class="col-md-12">
+                        <label for="inputLastName0" class="form-label">เลขที่สมาชิก <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-input-numeric"></i></span>
+                            <input type="text" class="form-control border-start-0"  id="no_member" name="no_member" placeholder="เลขที่สมาชิก" required oninput="on_inputData();">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <label for="inputLastName1" class="form-label">Username (สำหรับลงชื่อเข้าใช้) <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-at"></i></span>
                             <input type="text" class="form-control border-start-0"  id="Username" name="Username" placeholder="Username" required oninput="on_inputData();">
@@ -502,7 +592,7 @@ button:focus.btnAddUser {
                             <div id="div_text_alert_email" class="invalid-feedback d-none" >มี EMail นี้ในระบบแล้ว.</div>
                         </div>
                     </div> -->
-                    <div class="col-6">
+                    <div class="col-12">
                         <label for="inputPhoneNo" class="form-label">สถานะลงชื่อเข้าใช้ <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-right-to-bracket"></i></span>
                             <select class="form-select border-start-0" id="member_status" name="member_status" required oninput="on_inputData();">
@@ -512,36 +602,49 @@ button:focus.btnAddUser {
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12">
                         <label for="inputPhoneNo" class="form-label">หมวดหมู่สมาชิก <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-duotone fa-users"></i></span>
                             <select class="form-select border-start-0" id="member_role" name="member_role" required oninput="on_inputData();">
                                 <option selected value="">หมวดหมู่สมาชิก</option>
                                 <option value="admin">admin</option>
-                                <option value="customer">กลุ่มมิจฉาชีพ</option>
-                                <option value="driver">พนักงานขับรถ</option>
+                                <option value="member">member</option>
+                                <option value="customer">มิจฉาชีพ (เช่ารถ)</option>
+                                <option value="driver">Blacklist ข้อมูลพนักงานขับรถ</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <label for="inputChoosePassword" class="form-label">Company</label>
-                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-buildings"></i></span>
-                            <input type="text" class="form-control border-start-0" id="member_co" name="member_co" placeholder="Company" oninput="on_inputData();">
 
+                    <div class="accordion mt-4" id="accordionExample">
+                        <div class="accordion-item">
+                            <button id="headingOne" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                บริษัท / เบอร์ติดต่อ / ที่อยู่
+                            </button>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <label for="inputPhoneNo" class="form-label">Phone No</label>
-                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-phone"></i></span>
-                            <input type="text" class="form-control border-start-0" id="member_tel" name="member_tel" placeholder="Phone No" oninput="on_inputData();">
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="border:none;">
+                        <div class="accordion-body">
+                            <div class="col-12 mb-3">
+                                <label for="inputChoosePassword" class="form-label">บริษัท</label>
+                                <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-buildings"></i></span>
+                                    <input type="text" class="form-control border-start-0" id="member_co" name="member_co" placeholder="บริษัท" oninput="on_inputData();">
 
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="inputPhoneNo" class="form-label">เบอร์ติดต่อ</label>
+                                <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-phone"></i></span>
+                                    <input type="text" class="form-control border-start-0" id="member_tel" name="member_tel" placeholder="เบอร์ติดต่อ" oninput="on_inputData();">
+
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="inputAddress3" class="form-label">ที่อยู่</label>
+                                <textarea class="form-control" id="member_addr" name="member_addr" placeholder="ที่อยู่" rows="3" oninput="on_inputData();"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <label for="inputAddress3" class="form-label">Address</label>
-                        <textarea class="form-control" id="member_addr" name="member_addr" placeholder="Enter Address" rows="3" oninput="on_inputData();"></textarea>
-
-                    </div>
+                    
                     <div id="div_text_alert_input" class="col-12 d-none">
                         <span class="text-danger d-">
                             <span id="text_alert_input">ss</span>
@@ -696,60 +799,141 @@ button:focus.btnAddUser {
                     </div>
                 </div>
                 <hr>
+                <style>
+                .bordered-table {
+                    border-collapse: collapse;
+                }
+
+                .bordered-table th,
+                .bordered-table tr {
+                    padding: 8px;
+                }
+
+                .bordered-table tr,
+                .bordered-table th,
+                .bordered-table td {
+                    border: 1px solid black; /* เส้นขอบที่แถวล่างของแต่ละแถว */
+                    border-left: 1px solid black;
+                    border-right: 1px solid black;
+                }
+
+            </style>
                 <div class="row g-3">
                     <div class="col-12">
                         <div class="table-responsive mt-3">
-                            <table class="table align-middle mb-0 text-center">
-                                <thead class="table-light">
+                            <table class="table align-middle mb-0 text-center bordered-table">
+                                <!-- <thead class="table-light">
                                     <tr>
-                                        <th>ชื่อ</th>
-                                        <th>หมวดหมู่</th>
                                         <th>บริษัท</th>
+                                        <th>หมวดหมู่</th>
+                                        <th>ลงข้อมูลมิจฉาชีพ (เช่ารถ)</th>
+                                        <th>ลงข้อมูล Blacklist ข้อมูลพนักงานขับรถ</th>
+                                        <th>ค้นหาข้อมูลมิจฉาชีพ (เช่ารถ)</th>
+                                        <th>ค้นหา Blacklist ข้อมูลพนักงานขับรถ</th>
                                         <th>สถานะ</th>
                                         <th></th>
                                     </tr>
+                                </thead> -->
+                                <thead class="table-light text-center">
+                                    <tr>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">เลขที่สมาชิก</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">บริษัท</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">สิทธิ์การใช้งาน</th>
+                                        <th colspan="2" style="color:green;">บันทึก (ครั้ง)</th>
+                                        <th colspan="2" style="color:blue;">ค้นหา (ครั้ง)</th>
+                                        <th rowspan="2">สถานะ</th>
+                                        <th rowspan="2">เพิ่มเติม</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="color:green;">มิจฉาชีพ</th>
+                                        <th style="color:green;">พขร</th>
+                                        <th style="color:blue;">มิจฉาชีพ</th>
+                                        <th style="color:blue;">พขร</th>
+                                    </tr>
                                 </thead>
+
                                 <tbody id="list_member" class="notranslate">
                                 @foreach($data_member as $item)
                                     <tr>
                                         <td>
+                                            {{ $item->no_member }}
+                                        </td>
+                                        <td style="width: 250px;">
                                             <div class="d-flex align-items-center">
                                                 <div class="ms-2">
-                                                    <h6 class="mb-1 font-22">{{ $item->name }}</h6>
+                                                    <h6 class="mb-1 font-22 td_member_co">{{ $item->member_co }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="text-center">
                                             @if($item->member_role == "admin")
-                                                <span class="badge bg-light-info text-info" style="font-size:13px;">
+                                                <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
                                                     แอดมิน
                                                 </span>
+                                            @elseif($item->member_role == "member")
+                                                <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    member
+                                                </span>
                                             @elseif($item->member_role == "customer")
-                                                <span class="badge bg-light-danger text-danger" style="font-size:13px;">
+                                                <span class="badge bg-light-danger text-danger" style="font-size:13px;width: 100px;margin: 20px;">
                                                     customer
                                                 </span>
                                             @else
-                                                <span class="badge bg-light-warning text-warning" style="font-size:13px;">
+                                                <span class="badge bg-light-warning text-warning" style="font-size:13;pxwidth: 100px;margin: 20px;">
                                                     driver
                                                 </span>
                                             @endif
+                                            <br>
+                                            ใช้งานระบบ {{ $item->member_count_login }} ครั้ง
+                                            <br>
+                                            ล่าสุด : {{ $item->last_time_active }}
                                             
                                         </td>
-                                        <td class="text-center">
-                                            {{ $item->member_co }}
+                                        @php
+                                            $data_add_Cus = App\Models\Customer::where('user_id',$item->id)->get();
+                                            $count_Cus = count($data_add_Cus);
+
+                                            $data_add_Dri = App\Models\Driver::where('user_id',$item->id)->get();
+                                            $count_Dri = count($data_add_Dri);
+                                        @endphp
+                                        <td class="text-center" style="color:green;">
+                                            {{ $count_Cus }}
                                         </td>
-                                        <td class="text-center" id="td_status_member_{{ $item->id }}">
+                                        <td class="text-center" style="color:green;">
+                                            {{ $count_Dri }}
+                                        </td>
+                                        <td class="text-center" style="color:blue;">
+                                            {{ intval($item->count_search_cus) }}
+                                        </td>
+                                        <td class="text-center" style="color:blue;">
+                                            {{ intval($item->count_search_dri) }}
+                                        </td>
+                                        <td class="text-center">
+                                            @php
+                                                $checked_checkbox = '';
+
+                                                if($item->member_status == "Active"){
+                                                    $checked_checkbox = 'checked' ;
+                                                }
+                                            @endphp
+                                            <div class="checkbox-apple">
+                                                <input class="yep" id="check_active_{{ $item->id }}" {{ $checked_checkbox}} type="checkbox" onclick="click_check_active('{{ $item->id }}');">
+                                                <label for="check_active_{{ $item->id }}"></label>
+                                            </div>
+
+                                            <div id="td_status_member_{{ $item->id }}" class="d-none">
                                             @if($item->member_status == "Active")
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-success" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
-                                                    <button type="button" class="btn btn-outline-danger" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
+                                                    <button type="button" class="btn btn-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
+                                                    <button type="button" class="btn btn-outline-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
                                                 </div>
                                             @else
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-outline-success" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
-                                                    <button type="button" class="btn btn-danger" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
+                                                    <button type="button" class="btn btn-outline-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
+                                                    <button type="button" class="btn btn-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
                                                 </div>
                                             @endif
+                                            </div>
                                         </td>
                                         <td class="text-center">
                                             <div class="d-flex order-actions">
@@ -761,15 +945,79 @@ button:focus.btnAddUser {
                                     </tr>
                                 @endforeach
                                 </tbody>
-                            </table>
-
-                            
+                            </table>     
+                        </div>
                     </div>
                 </div>
+
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+                <br class="mt-4 mb-4 d-none">
+
+                @foreach($data_member as $item_2)
+                <div class="row g-0 d-none">
+                    <div class="col-2">
+                        <center>
+                            <img src="{{ url('storage')}}/{{ $item_2->member_pic }}" class="card-img" style="width:80%;">
+                        </center>
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ $item_2->member_co }}
+                            </h5>
+                            <p class="card-text" style="line-height: 1.8;">
+                                ลงข้อมูลมิจฉาชีพ (เช่ารถ) : 0 ครั้ง <br>
+                                ค้นหาข้อมูลมิจฉาชีพ (เช่ารถ) : 0 ครั้ง <br>
+                                ลงข้อมูล Blacklist ข้อมูลพนักงานขับรถ : 0 ครั้ง <br>
+                                ค้นหา Blacklist ข้อมูลพนักงานขับรถ : 0 ครั้ง <br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="row text-center" style="margin-top: 20px;">
+                            <div class="col-6">
+                                @if($item_2->member_role == "admin")
+                                    <span class="badge bg-light-info text-info" style="font-size:14px;width: 100px;">
+                                        แอดมิน
+                                    </span>
+                                @elseif($item_2->member_role == "member")
+                                    <span class="badge bg-light-success text-success" style="font-size:14px;width: 100px;">
+                                        member
+                                    </span>
+                                @elseif($item_2->member_role == "customer")
+                                    <span class="badge bg-light-danger text-danger" style="font-size:14px;width: 100px;">
+                                        customer
+                                    </span>
+                                @else
+                                    <span class="badge bg-light-warning text-warning" style="font-size:14;pxwidth: 100px;">
+                                        driver
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-6">
+                                <!--  -->
+                            </div>
+
+                            <button style="position: relative;margin-right:10px;bottom: -30px;" type="button" class="btn btn-primary mt-2 float-end" data-toggle="modal" data-target="#view_data_mamber_{{ $item_2->id }}">
+                                <i class="fa-solid fa-eye"></i> เพิ่มเติม
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
             </div>
         </div>
     </div>
-</div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.3.2/moment-duration-format.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/th.js"></script>
@@ -788,11 +1036,12 @@ button:focus.btnAddUser {
         let email = document.querySelector('#email').value ;
         let member_status = document.querySelector('#member_status').value ;
         let member_role = document.querySelector('#member_role').value ;
+        let no_member = document.querySelector('#no_member').value ;
 
-        if (!Username || !Name || !email|| !member_status || !member_role) {
+        if (!no_member || !Username || !Name || !email|| !member_status || !member_role) {
 
             document.querySelector('#div_text_alert_input').classList.remove('d-none');
-            checkConditions(Username , Name , email , member_status , member_role);
+            checkConditions(Username , Name , email , member_status , member_role , no_member);
 
         }else{
 
@@ -804,6 +1053,7 @@ button:focus.btnAddUser {
 
     function create_member(){
 
+        let no_member = document.querySelector('#no_member').value ;
         let Username = document.querySelector('#Username').value ;
         let Name = document.querySelector('#Name').value ;
         let email = document.querySelector('#email').value ;
@@ -817,6 +1067,7 @@ button:focus.btnAddUser {
         let data_arr = [];
 
         data_arr = {
+            "no_member" : no_member,
             "username" : Username,
             "name" : Name,
             "email" : email,
@@ -936,8 +1187,8 @@ button:focus.btnAddUser {
                     if(data.member_status == "Active"){
                         html_member_status = `
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-success" onclick="change_status_to('Active','`+data.user_id+`');">Active</button>
-                                <button type="button" class="btn btn-outline-danger" onclick="change_status_to('Inactive','`+data.user_id+`');">Inactive</button>
+                                <button type="button" class="btn btn-success btn_status_Active_`+data.user_id+`" onclick="change_status_to('Active','`+data.user_id+`');">Active</button>
+                                <button type="button" class="btn btn-outline-danger btn_status_Inactive_`+data.user_id+`" onclick="change_status_to('Inactive','`+data.user_id+`');">Inactive</button>
                             </div>
                         `;
 
@@ -949,8 +1200,8 @@ button:focus.btnAddUser {
                     }else{
                         html_member_status = `
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-success" onclick="change_status_to('Active','`+data.user_id+`');">Active</button>
-                                <button type="button" class="btn btn-danger" onclick="change_status_to('Inactive','`+data.user_id+`');">Inactive</button>
+                                <button type="button" class="btn btn-outline-success btn_status_Active_`+data.user_id+`" onclick="change_status_to('Active','`+data.user_id+`');">Active</button>
+                                <button type="button" class="btn btn-danger btn_status_Inactive_`+data.user_id+`" onclick="change_status_to('Inactive','`+data.user_id+`');">Inactive</button>
                             </div>
                         `;
 
@@ -1142,7 +1393,7 @@ button:focus.btnAddUser {
                                 result[i][key] = '';
                             }
 
-                            if (key == 'count_search' && (value == '' || value == null) ) {
+                            if (key == 'count_search_cus' && (value == '' || value == null) ) {
                                 result[i][key] = 0;
                             }
                         }
@@ -1362,10 +1613,10 @@ button:focus.btnAddUser {
                                                         </li>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                             <h6 class="mb-0">
-                                                                <b>ค้นหาข้อมูล</b>
+                                                                <b>ค้นหาข้อมูลมิจฉาชีพ (เช่ารถ)</b>
                                                             </h6>
                                                             <span class="text-secondary">
-                                                               `+result[i].count_search+` ครั้ง
+                                                               `+result[i].count_search_cus+` ครั้ง
                                                             </span>
                                                         </li>
 
@@ -1469,9 +1720,12 @@ button:focus.btnAddUser {
             });
     }
 
-    function checkConditions(Username , Name , email , member_status , member_role) {
+    function checkConditions(Username , Name , email , member_status , member_role , no_member) {
 
-        if (!Username) {
+        if (!no_member) {
+            document.querySelector('#text_alert_input').innerHTML = 'กรุณากรอกข้อมูล : เลขที่สมาชิก';
+            return false;
+        }else if (!Username) {
             document.querySelector('#text_alert_input').innerHTML = 'กรุณากรอกข้อมูล : Username';
             return false;
         } else if (!Name) {
@@ -1506,8 +1760,8 @@ button:focus.btnAddUser {
 
                         html_btn_status = `
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-success" onclick="change_status_to('Active','`+user_id+`');">Active</button>
-                                <button type="button" class="btn btn-outline-danger" onclick="change_status_to('Inactive','`+user_id+`');">Inactive</button>
+                                <button type="button" class="btn btn-success btn_status_Active_`+user_id+`" onclick="change_status_to('Active','`+user_id+`');">Active</button>
+                                <button type="button" class="btn btn-outline-danger btn_status_Inactive_`+user_id+`" onclick="change_status_to('Inactive','`+user_id+`');">Inactive</button>
                             </div>
                         `;
 
@@ -1515,8 +1769,8 @@ button:focus.btnAddUser {
 
                         html_btn_status = `
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-success" onclick="change_status_to('Active','`+user_id+`');">Active</button>
-                                <button type="button" class="btn btn-danger" onclick="change_status_to('Inactive','`+user_id+`');">Inactive</button>
+                                <button type="button" class="btn btn-outline-success btn_status_Active_`+user_id+`" onclick="change_status_to('Active','`+user_id+`');">Active</button>
+                                <button type="button" class="btn btn-danger btn_status_Inactive_`+user_id+`" onclick="change_status_to('Inactive','`+user_id+`');">Inactive</button>
                             </div>
                         `;
 
@@ -1526,6 +1780,17 @@ button:focus.btnAddUser {
                 }
             });
 
+    }
+
+    function click_check_active(id){
+        let check_active = document.querySelector('#check_active_'+id).checked;
+            // console.log(check_active);
+
+            if(check_active){
+                document.querySelector('.btn_status_Active_'+id).click();
+            }else{
+                document.querySelector('.btn_status_Inactive_'+id).click();
+            }
     }
 
 </script>

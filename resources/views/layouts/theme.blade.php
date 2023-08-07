@@ -81,32 +81,40 @@
                         </ul>
                     </li>
                 @endif
-                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" )
+                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" || Auth::user()->member_role == "member" )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-user-ninja"></i>
                         </div>
-                        <div class="menu-title">ข้อมูลมิจฉาชีพ</div>
+                        <div class="menu-title">
+                            ข้อมูลมิจฉาชีพ
+                            <br>
+                            (เช่ารถ)
+                        </div>
                     </a>
                     <ul>
                         <li> <a href="{{ url('/customer/create') }}"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
                         </li>
-                        <li> <a href="{{ url('/customer/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูลมิจฉาชีพ</a>
+                        <li> <a href="{{ url('/customer/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูล</a>
                         </li>
                     </ul>
                 </li>
                 @endif
-                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "driver" )
+                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "driver" || Auth::user()->member_role == "member" )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="menu-title">ข้อมูลพนักงานขับรถ </div>
+                        <div class="menu-title">
+                            Blacklist
+                            <br>
+                            ข้อมูลพนักงานขับรถ
+                        </div>
                     </a>
                     <ul>
                         <li> <a href="{{ url('/driver/create') }}"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
                         </li>
-                        <li> <a href="{{ url('/driver/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูลพนักงานขับรถ</a>
+                        <li> <a href="{{ url('/driver/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูล</a>
                         </li>
                     </ul>
                 </li>
@@ -653,6 +661,23 @@
 
         document.addEventListener('DOMContentLoaded', (event) => {
 
+            let user_id = "{{ Auth::user()->id }}";
+
+            fetch( "{{ url('/') }}/api/update_last_time_active/" + user_id )
+                .then(response => response.text())
+                .then(result => {
+                    // console.log(result);
+                    if(result =="OK"){
+                        // console.log("update time active >> " + Date.now());
+                    }
+            });
+
+            func_update_last_time_active();
+
+        });
+
+        function func_update_last_time_active(){
+
             update_last_time_active = setInterval(function() {
                 let user_id = "{{ Auth::user()->id }}";
 
@@ -666,7 +691,7 @@
                 });
             }, 180000);
 
-        });
+        }
 
         function myStop_update_last_time_active() {
             clearInterval(update_last_time_active);
