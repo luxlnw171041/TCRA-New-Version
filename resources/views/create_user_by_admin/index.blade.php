@@ -248,7 +248,7 @@ button:focus.btnAddUser {
                         <div class="card-body">
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         @if( empty($item_modal->member_pic))
                                             <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="150">
@@ -322,7 +322,7 @@ button:focus.btnAddUser {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <ul class="list-group list-group-flush">
                                         <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                             <h6 class="mb-0">
@@ -836,13 +836,14 @@ button:focus.btnAddUser {
                                 </thead> -->
                                 <thead class="table-light text-center">
                                     <tr>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ</th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;">เลขที่สมาชิก</th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;">บริษัท</th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;">สิทธิ์การใช้งาน</th>
                                         <th colspan="2" style="color:green;">บันทึก (ครั้ง)</th>
                                         <th colspan="2" style="color:blue;">ค้นหา (ครั้ง)</th>
-                                        <th rowspan="2">สถานะ</th>
-                                        <th rowspan="2">เพิ่มเติม</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">สถานะ</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">เพิ่มเติม</th>
                                     </tr>
                                     <tr>
                                         <th style="color:green;">มิจฉาชีพ</th>
@@ -855,6 +856,9 @@ button:focus.btnAddUser {
                                 <tbody id="list_member" class="notranslate">
                                 @foreach($data_member as $item)
                                     <tr>
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
                                         <td>
                                             {{ $item->no_member }}
                                         </td>
@@ -1090,6 +1094,7 @@ button:focus.btnAddUser {
 
             // console.log(data);
             // console.log(data.check_data);
+            let loop_i = 0 ;
 
             if(data.check_data == "OK"){
 
@@ -1098,6 +1103,8 @@ button:focus.btnAddUser {
                         data[key] = '';
                     }
                 }
+
+                loop_i = loop_i + 1 ;
 
                 document.querySelector('#div_loading').classList.add('d-none');
                 document.querySelector('#div_load_success').classList.remove('d-none');
@@ -1143,8 +1150,21 @@ button:focus.btnAddUser {
                     let html_member_role_modal ;
                     if (data.member_role == "admin") {
                         html_member_role = `
-                            <span class="badge bg-light-info text-info" style="font-size:13px;">
+                            <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
                                 แอดมิน
+                            </span>
+                        `;
+
+                        html_member_role_modal = `
+                            <span class="btn bg-light-info text-info" style="font-size:12px;">
+                                แอดมิน
+                            </span>
+                        `;
+
+                    }else if (data.member_role == "member") {
+                        html_member_role = `
+                            <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
+                                member
                             </span>
                         `;
 
@@ -1156,7 +1176,7 @@ button:focus.btnAddUser {
 
                     }else if(data.member_role == "customer"){
                         html_member_role = `
-                            <span class="badge bg-light-danger text-danger" style="font-size:13px;">
+                            <span class="badge bg-light-danger text-danger" style="font-size:13px;width: 100px;margin: 20px;">
                                 customer
                             </span>
                         `;
@@ -1169,7 +1189,7 @@ button:focus.btnAddUser {
 
                     }else{
                         html_member_role = `
-                            <span class="badge bg-light-warning text-warning" style="font-size:13px;">
+                            <span class="badge bg-light-warning text-warning" style="font-size:13px;width: 100px;margin: 20px;">
                                 driver
                             </span>
                         `;
@@ -1212,23 +1232,62 @@ button:focus.btnAddUser {
                         `;
                     }
 
-                    let html_list_member = `
+                    let html_checkbox_member_status ;
+                    if(data.member_status == "Active"){
+                        html_checkbox_member_status = `
+                            <div class="checkbox-apple">
+                                <input class="yep" id="check_active_`+data.user_id+`" checked type="checkbox" onclick="click_check_active('`+data.user_id+`');">
+                                <label for="check_active_`+data.user_id+`"></label>
+                            </div>
+                        `;
+                    }else{
+                        html_checkbox_member_status = `
+                            <div class="checkbox-apple">
+                                <input class="yep" id="check_active_`+data.user_id+`" type="checkbox" onclick="click_check_active('`+data.user_id+`');">
+                                <label for="check_active_`+data.user_id+`"></label>
+                            </div>
+                        `;
+                    }
+
+                    let  html_list_member = `
                         <tr>
                             <td>
+                                `+loop_i+`
+                            </td>
+                            <td>
+                                `+data.no_member+`
+                            </td>
+                            <td style="width: 250px;">
                                 <div class="d-flex align-items-center">
                                     <div class="ms-2">
-                                        <h6 class="mb-1 font-22">`+data.name+`</h6>
+                                        <h6 class="mb-1 font-22 td_member_co">`+data.member_co+`</h6>
                                     </div>
                                 </div>
                             </td>
                             <td class="text-center">
                                 `+html_member_role+`
+                                <br>
+                                ใช้งานระบบ `+data.member_count_login+` ครั้ง
+                                <br>
+                                ล่าสุด : `+data.last_time_active+`                                
+                            </td>
+                            <td class="text-center" style="color:green;">
+                                `+data.count_Cus+`
+                            </td>
+                            <td class="text-center" style="color:green;">
+                                `+data.count_Dri+`
+                            </td>
+                            <td class="text-center" style="color:blue;">
+                                `+data.count_search_cus+`
+                            </td>
+                            <td class="text-center" style="color:blue;">
+                                `+data.count_search_dri+`
                             </td>
                             <td class="text-center">
-                                `+data.member_co+`
-                            </td>
-                            <td class="text-center" id="td_status_member_`+data.user_id+`">
-                                `+html_member_status+`
+                                `+html_checkbox_member_status+`
+                                <div id="td_status_member_`+data.user_id+`" class="d-none">
+                                    `+html_member_status+`
+                                </div>
                             </td>
                             <td class="text-center">
                                 <div class="d-flex order-actions">

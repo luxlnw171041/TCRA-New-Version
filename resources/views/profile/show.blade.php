@@ -318,18 +318,27 @@
                                                 <i class="fa-solid fa-unlock"></i> &nbsp;รหัสผ่านเดิม&nbsp;
                                             </span>
                                             <input type="password" class="form-control border-start-0" id="old_key" oninput="check_input_pass();">
+                                            <span id="view_pass_old_key" class="input-group-text" style="cursor: pointer;" onclick="view_pass('old_key');">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </span>
                                         </div>
                                         <div class="input-group mb-2" style="background-color: lightgreen;">
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-key"></i> &nbsp;รหัสผ่านใหม่&nbsp;
                                             </span>
                                             <input type="password" class="form-control border-start-0" id="new_key" oninput="check_input_pass();">
+                                            <span id="view_pass_new_key" class="input-group-text" style="cursor: pointer;" onclick="view_pass('new_key');">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </span>
                                         </div>
                                         <div class="input-group mb-2" style="background-color: lightgreen;">
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-duotone fa-key"></i> &nbsp;กรอกอีกครั้ง
                                             </span>
                                             <input type="password" class="form-control border-start-0" id="new_key_again" oninput="check_input_pass();">
+                                            <span id="view_pass_new_key_again" class="input-group-text" style="cursor: pointer;" onclick="view_pass('new_key_again');">
+                                                <i class="fa-solid fa-eye-slash"></i>
+                                            </span>
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-12">
@@ -558,6 +567,42 @@
             });
 
         }
+    }
+
+    function view_pass(type){
+
+        let eye = `<i class="fa-sharp fa-solid fa-eye"></i>`;
+        let eye_slash = `<i class="fa-solid fa-eye-slash"></i>`;
+
+        if( type == 'old_key' ){
+            let get_old_key = document.querySelector('#'+type).getAttribute('type');
+            if(get_old_key == 'password'){
+                document.querySelector('#'+type).setAttribute('type' , 'text');
+                document.querySelector('#view_pass_'+type).innerHTML = eye;
+            }else{
+                document.querySelector('#'+type).setAttribute('type' , 'password');
+                document.querySelector('#view_pass_'+type).innerHTML = eye_slash;
+            }
+        }else if( type == 'new_key' ){
+            let get_new_key = document.querySelector('#'+type).getAttribute('type');
+            if(get_new_key == 'password'){
+                document.querySelector('#'+type).setAttribute('type' , 'text');
+                document.querySelector('#view_pass_'+type).innerHTML = eye;
+            }else{
+                document.querySelector('#'+type).setAttribute('type' , 'password');
+                document.querySelector('#view_pass_'+type).innerHTML = eye_slash;
+            }
+        }else{
+            let get_new_key_again = document.querySelector('#'+type).getAttribute('type');
+            if(get_new_key_again == 'password'){
+                document.querySelector('#'+type).setAttribute('type' , 'text');
+                document.querySelector('#view_pass_'+type).innerHTML = eye;
+            }else{
+                document.querySelector('#'+type).setAttribute('type' , 'password');
+                document.querySelector('#view_pass_'+type).innerHTML = eye_slash;
+            }
+        }
+
     }
 
 </script>

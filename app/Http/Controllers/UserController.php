@@ -152,10 +152,35 @@ class UserController extends Controller
 
         $last_user = User::latest()->first();
 
+        $data_add_Cus = Customer::where('user_id',$last_user->id)->get();
+        $count_Cus = count($data_add_Cus);
+
+        $data_add_Dri = Driver::where('user_id',$last_user->id)->get();
+        $count_Dri = count($data_add_Dri);
+
+        if(empty($last_user->count_search_cus)){
+            $last_user->count_search_cus = '0' ;
+        }
+        if(empty($last_user->count_search_cus)){
+            $last_user->count_search_dri = '0' ;
+        }
+        if(empty($last_user->member_count_login)){
+            $last_user->member_count_login = '..' ;
+        }
+        if(empty($last_user->last_time_active)){
+            $last_user->last_time_active = '..' ;
+        }
+
         $data_create = $requestData;
+        $data_create['count_Cus'] = $count_Cus ;
+        $data_create['count_Dri'] = $count_Dri ;
         $data_create['check_data'] = "OK" ;
         $data_create['user_id'] = $last_user->id;
         $data_create['member_pic'] = $last_user->member_pic;
+        $data_create['member_count_login'] = $last_user->member_count_login;
+        $data_create['last_time_active'] = $last_user->last_time_active;
+        $data_create['count_search_cus'] = $last_user->count_search_cus;
+        $data_create['count_search_dri'] = $last_user->count_search_dri;
         $data_create['username'] = $requestData['username'];
         $data_create['pass_code'] = $password;
 
@@ -200,6 +225,7 @@ class UserController extends Controller
             $data_user = User::orderBy('id','DESC')->get();
         }else{
             $data_user = User::where('name', 'LIKE', "%$keyword%")
+                ->orWhere('no_member', 'LIKE', "%$keyword%")
                 ->orWhere('username', 'LIKE', "%$keyword%")
                 ->orWhere('email', 'LIKE', "%$keyword%")
                 ->orWhere('member_co', 'LIKE', "%$keyword%")
