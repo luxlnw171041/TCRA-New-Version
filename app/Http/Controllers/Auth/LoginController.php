@@ -72,7 +72,7 @@ class LoginController extends Controller
 
             
         }else{
-            return redirect($backurl)->with('error','Email-Address And Password Are Wrong.');
+            return redirect($backurl . "&error=Yes");
         }
           
     }

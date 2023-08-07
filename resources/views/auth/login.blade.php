@@ -300,6 +300,27 @@
 <div class="wrapper loginPC">
 	<div class="section-authentication-signin d-flex align-items-center justify-content-center">
 		<div class="">
+			@php
+				$full_url = url()->full();
+				$full_url_ex = explode("error=",$full_url);
+				if(!empty($full_url_ex[1])){
+					$error_login = "YES" ;
+				}else{
+					$error_login = "NO" ;
+				}
+			@endphp
+			@if($error_login == "YES")
+			<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+				<div class="d-flex align-items-center">
+					<div class="font-35 text-white"><i class="bx bxs-message-square-x"></i>
+					</div>
+					<div class="ms-3">
+						<h6 class="mb-0 text-white">เกิดข้อผิดพลาด</h6>
+						<div class="text-white">กรุณาตรวจสอบ Username Password และลองใหม่อีกครั้ง</div>
+					</div>
+				</div>
+			</div>
+			@endif
 			<div class="containerLogin" id="containerLogin">
 				<div class="form-container sign-up-container">
 					<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
