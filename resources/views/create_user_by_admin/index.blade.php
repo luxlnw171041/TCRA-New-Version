@@ -271,7 +271,7 @@ button:focus.btnAddUser {
                                         @if( empty($item_modal->member_pic))
                                             <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="150">
                                         @else
-                                            <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="profile-pic" width="150">
+                                            <img src="{{ url('storage')}}/{{ $item_modal->member_pic }}" class="profile-pic" style="width:150px;height: 150px;object-fit: contain;">
                                         @endif
                                         <div class="mt-3">
                                             <h4>{{ $item_modal->name }}</h4>
@@ -1327,7 +1327,7 @@ button:focus.btnAddUser {
                     let html_member_pic ;
                     if (data.member_pic) {
                         html_member_pic = `
-                            <img src="{{ url('storage')}}/`+data.member_pic+`" class="profile-pic" width="150">
+                            <img src="{{ url('storage')}}/`+data.member_pic+`" class="profile-pic" style="width:150px;height: 150px;object-fit: contain;">
                         `;
                     }else{
                         html_member_pic = `
@@ -1705,7 +1705,7 @@ button:focus.btnAddUser {
                         let html_member_pic ;
                         if (result[i].member_pic) {
                             html_member_pic = `
-                                <img src="{{ url('storage')}}/`+result[i].member_pic+`" class="profile-pic" width="150">
+                                <img src="{{ url('storage')}}/`+result[i].member_pic+`" class="profile-pic" style="width:150px;height: 150px;object-fit: contain;">
                             `;
                         }else{
                             html_member_pic = `
