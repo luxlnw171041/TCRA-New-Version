@@ -222,7 +222,7 @@ class UserController extends Controller
         $keyword = $requestData['search'];
 
         if ($keyword == 'all') {
-            $data_user = User::orderBy('id','DESC')->get();
+            $data_user = User::orderBy('id','ASC')->get();
         }else{
             $data_user = User::where('name', 'LIKE', "%$keyword%")
                 ->orWhere('no_member', 'LIKE', "%$keyword%")
@@ -233,7 +233,7 @@ class UserController extends Controller
                 ->orWhere('member_tel', 'LIKE', "%$keyword%")
                 ->orWhere('member_status', 'LIKE', "%$keyword%")
                 ->orWhere('member_role', 'LIKE', "%$keyword%")
-                ->orderBy('id','DESC')
+                ->orderBy('id','ASC')
                 ->get();
         }
 
@@ -245,14 +245,13 @@ class UserController extends Controller
             $data_user[$i]['pass_code'] = $data_create->pass_code ;
 
             // ลงข้อมูล
-            $count_add_data = 0 ;
 
             if( $data_user[$i]['member_role'] == "customer" ){
-                $data_add = Customer::where('user_id',$data_user[$i]['id'])->get();
-                $count_add_data = count($data_add);
+                $data_add_Cus = Customer::where('user_id',$data_user[$i]['id'])->get();
+                $count_Cus = count($data_add_Cus);
             }else if( $data_user[$i]['member_role'] == "driver" ){
                 $data_add_Dri = Driver::where('user_id',$data_user[$i]['id'])->get();
-                $count_add_data = count($data_add_Dri);
+                $count_Dri = count($data_add_Dri);
             }else{
                 $data_add_Cus = Customer::where('user_id',$data_user[$i]['id'])->get();
                 $count_Cus = count($data_add_Cus);
@@ -260,10 +259,23 @@ class UserController extends Controller
                 $data_add_Dri = Driver::where('user_id',$data_user[$i]['id'])->get();
                 $count_Dri = count($data_add_Dri);
                 
-                $count_add_data = intval($count_Cus + $count_Dri);
             }
 
-            $data_user[$i]['count_add_data'] = $count_add_data ;
+            $data_user[$i]['count_Cus'] = $count_Cus ;
+            $data_user[$i]['count_Dri'] = $count_Dri ;
+
+            if(empty($data_user[$i]['count_search_cus'])){
+                $data_user[$i]['count_search_cus'] = '0' ;
+            }
+            if(empty($data_user[$i]['count_search_dri'])){
+                $data_user[$i]['count_search_dri'] = '0' ;
+            }
+            if(empty($data_user[$i]['member_count_login'])){
+                $data_user[$i]['member_count_login'] = '..' ;
+            }
+            if(empty($data_user[$i]['last_time_active'])){
+                $data_user[$i]['last_time_active'] = '..' ;
+            }
 
         }
 

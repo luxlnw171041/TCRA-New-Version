@@ -221,6 +221,24 @@ button:focus.btnAddUser {
   height: 25px;
 }
 
+.flashing_border {
+    animation: flashing 5s alternate;
+}
+
+@keyframes flashing {
+  0% {
+    background-color: lightgreen;
+  }
+  50% {
+    background-color: lightblue;
+  }
+  75% {
+    background-color: lightgreen;
+  }
+  100% {
+    background-color: none;
+  }
+}
 
 </style>
 
@@ -1169,8 +1187,8 @@ button:focus.btnAddUser {
                         `;
 
                         html_member_role_modal = `
-                            <span class="btn bg-light-info text-info" style="font-size:12px;">
-                                แอดมิน
+                            <span class="btn bg-light-success text-success" style="font-size:12px;">
+                                member
                             </span>
                         `;
 
@@ -1250,7 +1268,7 @@ button:focus.btnAddUser {
                     }
 
                     let  html_list_member = `
-                        <tr>
+                        <tr class="flashing_border">
                             <td>
                                 `+loop_i+`
                             </td>
@@ -1319,7 +1337,7 @@ button:focus.btnAddUser {
 
                     let html_list_member_modal = `
                         <div class="modal fade" id="view_data_mamber_`+data.user_id+`" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Label_view_data_mamber_`+data.user_id+`" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-xl modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="Label_view_data_mamber_`+data.user_id+`">ข้อมูลสมาชิก</h5>
@@ -1328,65 +1346,108 @@ button:focus.btnAddUser {
                                         </button>
                                     </div>
                                     <div class="modal-body">
+
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="d-flex flex-column align-items-center text-center">
-                                                    `+html_member_pic+`
-                                                    <div class="mt-3">
-                                                        <h4>`+data.name+`</h4>
-                                                        <p class="text-secondary mb-1">
-                                                            `+data.member_tel+`
-                                                        </p>
-                                                        <p class="text-muted font-size-sm">
-                                                            `+data.member_addr+`
-                                                        </p>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <!-- สถานะลงชื่อเข้าใช้ -->
-                                                        `+html_member_status_modal+`
-                                                        <!-- บทบาทของสมาชิก -->
-                                                        `+html_member_role_modal+`
-                                                    </div>
-                                                </div>
-                                                <hr class="my-4">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                        <h6 class="mb-0">
-                                                            <b>Username</b>
-                                                        </h6>
-                                                        <span class="text-secondary">`+data.username+`</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                        <h6 class="mb-0">
-                                                            <b>E-Mail</b>
-                                                        </h6>
-                                                        <span class="text-secondary">`+data.email+`</span>
-                                                    </li>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                        <h6 class="mb-0">
-                                                            <b>บริษัท</b>
-                                                        </h6>
-                                                        <span class="text-secondary">`+data.member_co+`</span>
-                                                    </li>
 
-                                                    <div class="row text-center mt-3">
-                                                        <div class="col-6">
-                                                            <a href="`+url_edit_profile+`" class="btn btn-warning" style="width:90%;">
-                                                                แก้ไขข้อมูล
-                                                            </a>
+                                                <div class="row">
+                                                    <div class="col-12 col-md-6 col-lg-6">
+                                                        <div class="d-flex flex-column align-items-center text-center">
+                                                            `+html_member_pic+`
+                                                            <div class="mt-3">
+                                                                <h4>`+data.name+`</h4>
+                                                                <p class="text-secondary mb-1">
+                                                                    `+data.member_tel+`
+                                                                </p>
+                                                                <p class="text-muted font-size-sm">
+                                                                    `+data.member_addr+`
+                                                                </p>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <!-- สถานะลงชื่อเข้าใช้ -->
+                                                                `+html_member_status_modal+`
+                                                                <!-- บทบาทของสมาชิก -->
+                                                                `+html_member_role_modal+`
+                                                            </div>
                                                         </div>
-                                                        <div class="col-6">
-                                                            <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_`+data.user_id+`');">
-                                                                Copy Username
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-12 mt-2">
+                                                        <hr class="my-4">
+                                                        <div class="mt-2">
                                                             <div class="text-center pt-2 pb-2">
                                                                 <textarea class="form-control" name="copy_username_`+data.user_id+`" id="copy_username_`+data.user_id+`" readonly>`+str+`</textarea>
                                                             </div>
                                                         </div>
+                                                        <div class="row text-center mt-3">
+                                                            <div class="col-6">
+                                                                <a href="`+url_edit_profile+`" class="btn btn-warning" style="width:90%;">
+                                                                    แก้ไขข้อมูล
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_`+data.user_id+`');">
+                                                                    Copy Username
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </ul>
+                                                    <div class="col-12 col-md-6 col-lg-6">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>Username</b>
+                                                                </h6>
+                                                                <span class="text-secondary">`+data.username+`</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>E-Mail</b>
+                                                                </h6>
+                                                                <span class="text-secondary">`+data.email+`</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>บริษัท</b>
+                                                                </h6>
+                                                                <span class="text-secondary">`+data.member_co+`</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>ลงชื่อเข้าใช้</b>
+                                                                </h6>
+                                                                <span class="text-secondary">0 ครั้ง</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>ใช้งานล่าสุด</b>
+                                                                </h6>
+                                                                <span class="text-secondary">..</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>ลงข้อมูล มิจฉาชีพ (เช่ารถ)</b>
+                                                                </h6>
+                                                                <span class="text-secondary">0 ครั้ง</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>ลงข้อมูล Blacklist ข้อมูลพนักงานขับรถ</b>
+                                                                </h6>
+                                                                <span class="text-secondary">0 ครั้ง</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>ค้นหาข้อมูล มิจฉาชีพ (เช่ารถ)</b>
+                                                                </h6>
+                                                                <span class="text-secondary">0 ครั้ง</span>
+                                                            </li>
+                                                            <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                <h6 class="mb-0">
+                                                                    <b>ค้นหา Blacklist ข้อมูลพนักงานขับรถ</b>
+                                                                </h6>
+                                                                <span class="text-secondary">0 ครั้ง</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1445,6 +1506,9 @@ button:focus.btnAddUser {
                         <h5 class="text-secondary mt-3 float-start">ไม่พบข้อมูลที่ค้นหา</h5>
                     `;
                 }else{
+
+                    let loop_i = 0;
+
                     for (let i = 0; i < result.length; i++) {
 
                         for (const [key, value ] of Object.entries(result[i])) {
@@ -1457,11 +1521,13 @@ button:focus.btnAddUser {
                             }
                         }
 
+                        loop_i = loop_i + 1 ;
+
                         let html_member_role ;
                         let html_member_role_modal ;
                         if (result[i].member_role == "admin") {
                             html_member_role = `
-                                <span class="badge bg-light-info text-info" style="font-size:13px;">
+                                <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
                                     แอดมิน
                                 </span>
                             `;
@@ -1472,9 +1538,22 @@ button:focus.btnAddUser {
                                 </span>
                             `;
 
+                        }else if (result[i].member_role == "member") {
+                            html_member_role = `
+                                <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
+                                    member
+                                </span>
+                            `;
+
+                            html_member_role_modal = `
+                                <span class="btn bg-light-success text-success" style="font-size:12px;">
+                                    member
+                                </span>
+                            `;
+
                         }else if(result[i].member_role == "customer"){
                             html_member_role = `
-                                <span class="badge bg-light-danger text-danger" style="font-size:13px;">
+                                <span class="badge bg-light-danger text-danger" style="font-size:13px;width: 100px;margin: 20px;">
                                     customer
                                 </span>
                             `;
@@ -1487,7 +1566,7 @@ button:focus.btnAddUser {
 
                         }else{
                             html_member_role = `
-                                <span class="badge bg-light-warning text-warning" style="font-size:13px;">
+                                <span class="badge bg-light-warning text-warning" style="font-size:13px;width: 100px;margin: 20px;">
                                     driver
                                 </span>
                             `;
@@ -1505,8 +1584,8 @@ button:focus.btnAddUser {
                         if(result[i].member_status == "Active"){
                             html_member_status = `
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-success" onclick="change_status_to('Active','`+result[i].id+`');">Active</button>
-                                    <button type="button" class="btn btn-outline-danger" onclick="change_status_to('Inactive','`+result[i].id+`');">Inactive</button>
+                                    <button type="button" class="btn btn-success btn_status_Active_`+result[i].id+`" onclick="change_status_to('Active','`+result[i].id+`');">Active</button>
+                                    <button type="button" class="btn btn-outline-danger btn_status_Inactive_`+result[i].id+`" onclick="change_status_to('Inactive','`+result[i].id+`');">Inactive</button>
                                 </div>
                             `;
 
@@ -1518,8 +1597,8 @@ button:focus.btnAddUser {
                         }else{
                             html_member_status = `
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-success" onclick="change_status_to('Active','`+result[i].id+`');">Active</button>
-                                    <button type="button" class="btn btn-danger" onclick="change_status_to('Inactive','`+result[i].id+`');">Inactive</button>
+                                    <button type="button" class="btn btn-outline-success btn_status_Active_`+result[i].id+`" onclick="change_status_to('Active','`+result[i].id+`');">Active</button>
+                                    <button type="button" class="btn btn-danger btn_status_Inactive_`+result[i].id+`" onclick="change_status_to('Inactive','`+result[i].id+`');">Inactive</button>
                                 </div>
                             `;
 
@@ -1530,33 +1609,72 @@ button:focus.btnAddUser {
                             `;
                         }
 
-                        list_html = `
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="ms-2">
-                                                <h6 class="mb-1 font-22">`+result[i].name+`</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        `+html_member_role+`
-                                    </td>
-                                    <td class="text-center">
-                                        `+result[i].member_co+`
-                                    </td>
-                                    <td class="text-center" id="td_status_member_`+result[i].id+`">
-                                        `+html_member_status+`
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="d-flex order-actions">
-                                            <a href="javascript:;" class="ms-2 text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_`+result[i].id+`">
-                                                <i class="fa-solid fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                        let html_checkbox_member_status ;
+                        if(result[i].member_status == "Active"){
+                            html_checkbox_member_status = `
+                                <div class="checkbox-apple">
+                                    <input class="yep" id="check_active_`+result[i].id+`" checked type="checkbox" onclick="click_check_active('`+result[i].id+`');">
+                                    <label for="check_active_`+result[i].id+`"></label>
+                                </div>
                             `;
+                        }else{
+                            html_checkbox_member_status = `
+                                <div class="checkbox-apple">
+                                    <input class="yep" id="check_active_`+result[i].id+`" type="checkbox" onclick="click_check_active('`+result[i].id+`');">
+                                    <label for="check_active_`+result[i].id+`"></label>
+                                </div>
+                            `;
+                        }
+
+                        list_html = `
+                            <tr>
+                                <td>
+                                    `+loop_i+`
+                                </td>
+                                <td>
+                                    `+result[i].no_member+`
+                                </td>
+                                <td style="width: 250px;">
+                                    <div class="d-flex align-items-center">
+                                        <div class="ms-2">
+                                            <h6 class="mb-1 font-22 td_member_co">`+result[i].member_co+`</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    `+html_member_role+`
+                                    <br>
+                                    ใช้งานระบบ `+result[i].member_count_login+` ครั้ง
+                                    <br>
+                                    ล่าสุด : `+result[i].last_time_active+`                                
+                                </td>
+                                <td class="text-center" style="color:green;">
+                                    `+result[i].count_Cus+`
+                                </td>
+                                <td class="text-center" style="color:green;">
+                                    `+result[i].count_Dri+`
+                                </td>
+                                <td class="text-center" style="color:blue;">
+                                    `+result[i].count_search_cus+`
+                                </td>
+                                <td class="text-center" style="color:blue;">
+                                    `+result[i].count_search_dri+`
+                                </td>
+                                <td class="text-center">
+                                    `+html_checkbox_member_status+`
+                                    <div id="td_status_member_`+result[i].id+`" class="d-none">
+                                        `+html_member_status+`
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex order-actions">
+                                        <a href="javascript:;" class="ms-2 text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_`+result[i].id+`">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
 
                         html = html + list_html ;
 
@@ -1597,7 +1715,7 @@ button:focus.btnAddUser {
 
                         let html_list_member_modal = `
                             <div class="modal fade" id="view_data_mamber_`+result[i].id+`" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="Label_view_data_mamber_`+result[i].id+`" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-xl modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="Label_view_data_mamber_`+result[i].id+`">ข้อมูลสมาชิก</h5>
@@ -1606,97 +1724,108 @@ button:focus.btnAddUser {
                                             </button>
                                         </div>
                                         <div class="modal-body">
+
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div class="d-flex flex-column align-items-center text-center">
-                                                        `+html_member_pic+`
-                                                        <div class="mt-3">
-                                                            <h4>`+result[i].name+`</h4>
-                                                            <p class="text-secondary mb-1">
-                                                                `+result[i].member_tel+`
-                                                            </p>
-                                                            <p class="text-muted font-size-sm">
-                                                                `+result[i].member_addr+`
-                                                            </p>
-                                                        </div>
-                                                        <div class="mt-3">
-                                                            <!-- สถานะลงชื่อเข้าใช้ -->
-                                                            `+html_member_status_modal+`
-                                                            <!-- บทบาทของสมาชิก -->
-                                                            `+html_member_role_modal+`
-                                                        </div>
-                                                    </div>
-                                                    <hr class="my-4">
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>Username</b>
-                                                            </h6>
-                                                            <span class="text-secondary">`+result[i].username+`</span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>E-Mail</b>
-                                                            </h6>
-                                                            <span class="text-secondary">`+result[i].email+`</span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>บริษัท</b>
-                                                            </h6>
-                                                            <span class="text-secondary">`+result[i].member_co+`</span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ลงชื่อเข้าใช้</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                                `+result[i].member_count_login+` ครั้ง
-                                                            </span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ใช้งานล่าสุด</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                                `+ diffForHumans +`
-                                                            </span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ลงข้อมูล</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                                `+result[i].count_add_data+` ครั้ง
-                                                            </span>
-                                                        </li>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                            <h6 class="mb-0">
-                                                                <b>ค้นหาข้อมูลมิจฉาชีพ (เช่ารถ)</b>
-                                                            </h6>
-                                                            <span class="text-secondary">
-                                                               `+result[i].count_search_cus+` ครั้ง
-                                                            </span>
-                                                        </li>
 
-                                                        <div class="row text-center mt-3">
-                                                            <div class="col-6">
-                                                                <a href="`+url_edit_profile+`" class="btn btn-warning" style="width:90%;">
-                                                                    แก้ไขข้อมูล
-                                                                </a>
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-6 col-lg-6">
+                                                            <div class="d-flex flex-column align-items-center text-center">
+                                                                `+html_member_pic+`
+                                                                <div class="mt-3">
+                                                                    <h4>`+result[i].name+`</h4>
+                                                                    <p class="text-secondary mb-1">
+                                                                        `+result[i].member_tel+`
+                                                                    </p>
+                                                                    <p class="text-muted font-size-sm">
+                                                                        `+result[i].member_addr+`
+                                                                    </p>
+                                                                </div>
+                                                                <div class="mt-3">
+                                                                    <!-- สถานะลงชื่อเข้าใช้ -->
+                                                                    `+html_member_status_modal+`
+                                                                    <!-- บทบาทของสมาชิก -->
+                                                                    `+html_member_role_modal+`
+                                                                </div>
                                                             </div>
-                                                            <div class="col-6">
-                                                                <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_`+result[i].id+`');">
-                                                                    Copy Username
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-12 mt-2">
+                                                            <hr class="my-4">
+                                                            <div class="mt-2">
                                                                 <div class="text-center pt-2 pb-2">
                                                                     <textarea class="form-control" name="copy_username_`+result[i].id+`" id="copy_username_`+result[i].id+`" readonly>`+str+`</textarea>
                                                                 </div>
                                                             </div>
+                                                            <div class="row text-center mt-3">
+                                                                <div class="col-6">
+                                                                    <a href="`+url_edit_profile+`" class="btn btn-warning" style="width:90%;">
+                                                                        แก้ไขข้อมูล
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <span class="btn btn-info" style="width:90%;" onclick="CopyToClipboard('copy_username_`+result[i].id+`');">
+                                                                        Copy Username
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </ul>
+                                                        <div class="col-12 col-md-6 col-lg-6">
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>Username</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].username+`</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>E-Mail</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].email+`</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>บริษัท</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].member_co+`</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>ลงชื่อเข้าใช้</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].member_count_login+` ครั้ง</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>ใช้งานล่าสุด</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+ diffForHumans +`</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>ลงข้อมูล มิจฉาชีพ (เช่ารถ)</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].count_Cus+` ครั้ง</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>ลงข้อมูล Blacklist ข้อมูลพนักงานขับรถ</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].count_Dri+` ครั้ง</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>ค้นหาข้อมูล มิจฉาชีพ (เช่ารถ)</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].count_search_cus+` ครั้ง</span>
+                                                                </li>
+                                                                <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                                    <h6 class="mb-0">
+                                                                        <b>ค้นหา Blacklist ข้อมูลพนักงานขับรถ</b>
+                                                                    </h6>
+                                                                    <span class="text-secondary">`+result[i].count_search_dri+` ครั้ง</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
