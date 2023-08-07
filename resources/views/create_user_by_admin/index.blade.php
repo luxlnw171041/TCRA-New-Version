@@ -1327,11 +1327,11 @@ button:focus.btnAddUser {
                     let html_member_pic ;
                     if (data.member_pic) {
                         html_member_pic = `
-                            <img src="{{ url('storage')}}/`+data.member_pic+`" class="rounded-circle p-1 bg-primary" width="110">
+                            <img src="{{ url('storage')}}/`+data.member_pic+`" class="profile-pic" width="150">
                         `;
                     }else{
                         html_member_pic = `
-                            <img src="{{ url('/img/icon/businessman.png') }}" class="rounded-circle p-1 bg-primary" width="110">
+                            <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="150">
                         `;
                     }
 
@@ -1705,11 +1705,11 @@ button:focus.btnAddUser {
                         let html_member_pic ;
                         if (result[i].member_pic) {
                             html_member_pic = `
-                                <img src="{{ url('storage')}}/`+result[i].member_pic+`" class="rounded-circle p-1 bg-primary" width="110">
+                                <img src="{{ url('storage')}}/`+result[i].member_pic+`" class="profile-pic" width="150">
                             `;
                         }else{
                             html_member_pic = `
-                                <img src="{{ url('/img/icon/businessman.png') }}" class="rounded-circle p-1 bg-primary" width="110">
+                                <img src="{{ url('/img/icon/businessman.png') }}" class="profile-pic" width="150">
                             `;
                         }
 
