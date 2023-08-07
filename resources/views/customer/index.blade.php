@@ -654,7 +654,7 @@
 
                     </div>
                 </div>
-                @if(!empty($customers->c_pic_id_card) || !empty($customers->c_pic_lease) || !empty($customers->c_pic_execution) || !empty($customers->c_pic_cap) || !empty($customers->c_pic_other))
+                @if(!empty($customers->c_pic_id_card) || !empty($customers->c_pic_indictment) || !empty($customers->c_pic_indictment) || !empty($customers->c_pic_cap) || !empty($customers->c_pic_other))
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
@@ -671,20 +671,20 @@
                                         </a>
                                     </div>
                                     @endif
-                                    @if(!empty($customers->c_pic_lease))
+                                    @if(!empty($customers->c_pic_indictment))
                                     <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_lease }}" alt="ภาพใบบังคับคดี">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_lease }}" alt="ใบบังคับคดี">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ภาพใบบังคับคดี">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ใบบังคับคดี">
                                             <div class="infoImg">
                                                 <span class="m-0">ใบบังคับคดี</span>
                                             </div>
                                         </a>
                                     </div>
                                     @endif
-                                    @if(!empty($customers->c_pic_execution))
+                                    @if(!empty($customers->c_pic_indictment))
                                     <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_execution }}" alt="ภาพสัญญาเช่า">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_execution }}" alt="สัญญาเช่า">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ภาพสัญญาเช่า">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="สัญญาเช่า">
                                             <div class="infoImg">
                                                 <span class="m-0">สัญญาเช่า</span>
                                             </div>

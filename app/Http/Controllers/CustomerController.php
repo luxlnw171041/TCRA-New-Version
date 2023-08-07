@@ -71,11 +71,11 @@ class CustomerController extends Controller
         if ($request->hasFile('c_pic_id_card')) {
             $requestData['c_pic_id_card'] = $request->file('c_pic_id_card')->store('uploads', 'public');
         }
-        if ($request->hasFile('c_pic_lease')) {
-            $requestData['c_pic_lease'] = $request->file('c_pic_lease')->store('uploads', 'public');
+        if ($request->hasFile('c_pic_company_certificate')) {
+            $requestData['c_pic_company_certificate'] = $request->file('c_pic_company_certificate')->store('uploads', 'public');
         }
-        if ($request->hasFile('c_pic_execution')) {
-            $requestData['c_pic_execution'] = $request->file('c_pic_execution')->store('uploads', 'public');
+        if ($request->hasFile('c_pic_indictment')) {
+            $requestData['c_pic_indictment'] = $request->file('c_pic_indictment')->store('uploads', 'public');
         }
         if ($request->hasFile('c_pic_cap')) {
             $requestData['c_pic_cap'] = $request->file('c_pic_cap')->store('uploads', 'public');

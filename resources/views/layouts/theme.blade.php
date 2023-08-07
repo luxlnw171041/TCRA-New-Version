@@ -479,6 +479,9 @@
                                 <p class="user-name mb-0" style="color: #ffffff!important;">{{Auth::user()->name}}</p>
                                 <p class="designattion mb-0" style="color: #ffffff!important;">{{Auth::user()->member_co}}</p>
                             </div>
+                            <div style="margin-left:10px ;">
+                            <i class="fa-solid fa-bars text-white"></i>
+                            </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item btn" href="{{ url('/show_profile/' . Auth::user()->id ) }}"><i class="bx bx-user"></i><span>Profile</span></a>

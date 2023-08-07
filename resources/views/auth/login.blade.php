@@ -294,6 +294,24 @@
 		}
 
 	}
+
+	.alert{
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		z-index: 1100;
+		animation: alertExrance .5s ease 0s 1 normal forwards;
+	}
+
+	@keyframes alertExrance {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
 </style>
 
 <!--wrapper-->
@@ -319,8 +337,10 @@
 						<div class="text-white">กรุณาตรวจสอบ Username Password และลองใหม่อีกครั้ง</div>
 					</div>
 				</div>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 			@endif
+
 			<div class="containerLogin" id="containerLogin">
 				<div class="form-container sign-up-container">
 					<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
@@ -365,8 +385,8 @@
 					</form>
 				</div>
 				<div class="form-container sign-in-container">
-					<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
-						@csrf
+					<form class="formLogin row g-3" action="#" method="POST" action="{{ route('login') }}">
+						
 						<h1 class="headerLogin text-tcra">เข้าสู่ระบบ</h1>
 						<!-- <input class="inputLogin" type="text" placeholder="Name" />
 							<input class="inputLogin" type="email" placeholder="Email" />
@@ -450,7 +470,7 @@
 										<hr>
 									</div> -->
 									<div class="form-body">
-										<form class="row formLogin" action="#" method="POST" action="{{ route('login') }}">
+										<form class="row formLogin g-3" action="#" method="POST" action="{{ route('login') }}">
 											@csrf
 											<div class="col-12">
 												<label for="username" class="form-label">Username</label>
@@ -545,4 +565,5 @@
 			console.log("เกิดข้อผิดพลาด: ค่าใน loginParam ไม่ถูกต้อง");
 		}
 	</script>
+	
 	@endsection
