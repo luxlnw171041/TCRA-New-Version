@@ -84,7 +84,9 @@
                 @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" || Auth::user()->member_role == "member" )
                 <li>
                     <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="fa-solid fa-user-ninja"></i>
+                        <div class="parent-icon">
+                        <img src="{{ url('/img/icon/iconCustomerSlash.png') }}" alt="" width="25">
+                        <!-- <i class="fa-solid fa-user-ninja"></i> -->
                         </div>
                         <div class="menu-title">
                             ข้อมูลมิจฉาชีพ
@@ -103,7 +105,10 @@
                 @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "driver" || Auth::user()->member_role == "member" )
                 <li>
                     <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="fa-solid fa-user-tie"></i>
+                        <div class="parent-icon">
+                            <!-- <i class="fa-solid fa-user-tie"></i> -->
+                            <img src="{{ url('/img/icon/iconDriversSlash.png') }}" alt="" width="25">
+
                         </div>
                         <div class="menu-title">
                             Blacklist

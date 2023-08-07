@@ -51,10 +51,10 @@ url('data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICR
             <div class="box" style="font-family: 'Prompt', sans-serif;border-radius: 25px;">
             <div class="content" style="font-family: 'Prompt', sans-serif;border-radius: 25px;">
                 <div class="row">
-                        <div class="card-body col-md-6" style="hight: 450px">
+                        <div class="card-body col-md-6 col-12" style="hight: 450px">
                             <img src="{{ url('/img/logo/tcra.png') }}" width="80%" alt="viicheck">
                         </div>
-                        <div class="card-body col-md-6 d-flex align-items-center ">
+                        <div class="card-body col-md-6 col-12 d-flex align-items-center justify-content-center">
                             <div class="col-md-12">
                                 <h1 style="font-family: 'Prompt', sans-serif;text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);margin-top:25px;"> <b>ยินดีต้อนรับ </b> </h1>
                                 <h1 style="font-family: 'Prompt', sans-serif;text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);margin-top:25px;"> <b>{{ Auth::user()->name }}</b> </h1>

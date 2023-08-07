@@ -77,7 +77,7 @@
     input[type="datetime-local"]:focus.selectDate {
         outline: none;
         border-color: #e62e2e;
-        box-shadow: 0 0 0 0.25rem  rgb(230, 46, 46, 0.6);
+        box-shadow: 0 0 0 0.25rem rgb(230, 46, 46, 0.6);
     }
 
     .selectDate::-webkit-datetime-edit-month-field:hover,
@@ -125,13 +125,19 @@
         background-color: #e62e2e;
         border-radius: 15px;
         color: #fff;
-    }.headerCustomer{
+    }
+
+    .headerCustomer {
         font-weight: bolder !important;
         font-size: 18px !important;
-    }.subHeaderCustomer{
+    }
+
+    .subHeaderCustomer {
         font-weight: bolder !important;
         font-size: 16px !important;
-    } .text-overflow{
+    }
+
+    .text-overflow {
         max-width: 92%;
         white-space: nowrap;
         overflow: hidden;
@@ -153,9 +159,9 @@
                 </span>
                 <div class="d-flex flex-column align-items-center text-center">
                     @if(!empty(Auth::user()->member_pic))
-                        <img src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="User" class="rounded-circle profileImg p-1" width="110">
+                    <img src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="User" class="rounded-circle profileImg p-1" width="110">
                     @else
-                        <img src="{{asset('img/icon/user.jpg')}}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
+                    <img src="{{asset('img/icon/user.jpg')}}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
                     @endif
                     <div class="mt-3">
                         <h4>{{Auth::user()->name}}</h4>
@@ -175,11 +181,11 @@
                 <div class="card-title d-flex align-items-center">
                     <div><i class="bx bxs-user me-1 font-22 text-danger"></i>
                     </div>
-                    <h5 class="mb-0 text-danger headerCustomer">เพิ่มข้อมูลมิจฉาชีพ</h5>
+                    <h5 class="mb-0 text-danger headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบุคคล</h5>
                 </div>
-                <hr>
-                <div class="row g-3">
-                    <div class="col-12">
+                <!-- <hr> -->
+                <div class="row g-3 mt-4">
+                    <!-- <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer ">ติดต่อในนาม <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-md-4 m-0">
@@ -209,18 +215,18 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-4 mt-md-0" id="input_c_name">
+                    <div class="col-md-4 mt-md-0 mb-4" id="input_c_name">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group">
                             <div class="inputGroup w-100">
-                                <input name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}" required=""  autocomplete="off">
+                                <input name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}" required="" autocomplete="off">
                                 <label for="c_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mt-md-0" id="input_c_surname">
+                    <div class="col-md-4 mt-md-0 mb-4" id="input_c_surname">
                         <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
@@ -229,8 +235,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mt-md-0 d-none" id="input_c_company_name">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
+                    <!-- <div class="col-md-4 mt-md-0 d-none" id="input_c_company_name">
                         <div class="input-group">
                             <div class="inputGroup w-100">
                                 <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off">
@@ -239,70 +244,99 @@
                         </div>
                     </div>
                     <div class="col-md-4 mt-md-0 d-none" id="input_commercial_registration">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
                                 <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off">
                                 <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขทะเบียนพาณิชย์/เลขนิติบุคคล <span class="text-danger">*</span></label>
                             </div>
                         </div>
-                    </div>
-                    <script>
+                    </div> -->
 
-
-                          const radioInputs = document.querySelectorAll('.radio-input');
-                          const input_c_name = document.querySelector('#input_c_name');
-                          const input_c_surname = document.querySelector('#input_c_surname');
-                          const input_c_company_name = document.querySelector('#input_c_company_name');
-                          const input_commercial_registration = document.querySelector('#input_commercial_registration');
-
-                            radioInputs.forEach((input) => {
-                            input.addEventListener('change', function() {
-                            if (this.checked) {
-                                if (this.value === 'บุคคล') {
-                                    
-                                    input_c_name.classList.remove('d-none');
-                                    input_c_surname.classList.remove('d-none');
-                                    input_c_company_name.classList.add('d-none');
-                                    input_commercial_registration.classList.add('d-none');
-
-                                    document.querySelector('#c_company_name').required = false;
-                                    document.querySelector('#commercial_registration').required = false;
-                                    document.querySelector('#c_company_name').value = "";
-                                    document.querySelector('#commercial_registration').value = "";
-                                    document.querySelector('#c_surname').required = true;
-                                    document.querySelector('#c_name').required = true;
-
-                                } else if (this.value === 'บริษัท') {
-                                    input_c_name.classList.add('d-none');
-                                    input_c_surname.classList.add('d-none');
-                                    input_c_company_name.classList.remove('d-none');
-                                    input_commercial_registration.classList.remove('d-none');
-
-                                    document.querySelector('#c_surname').required = false;
-                                    document.querySelector('#c_name').required = false;
-                                    document.querySelector('#c_surname').value = "";
-                                    document.querySelector('#c_name').value = "";
-                                    document.querySelector('#c_company_name').required = true;
-                                    document.querySelector('#commercial_registration').required = true;
-                                    
-                                    
-                                }
-                            }
-                            });
-                        });
-                    </script>
-                    <div class="col-md-6 mt-md-4">
+                    <div class="col-md-4 mt-md-0 mb-4" id="div_id_no">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
                                 <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}">
-                                <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตร <span class="text-danger">*</span></label>
+                                <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-6">
+                    <div class="card-title d-flex align-items-center">
+                        <div><i class="bx bxs-user me-1 font-22 text-danger"></i>
+                        </div>
+                        <h5 class="mb-0 text-danger headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบริษัท</h5>
+                    </div>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4 mt-md-0 d-nonee" id="input_c_company_name">
+                            <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
+                            <div class="input-group">
+                                <div class="inputGroup w-100">
+                                    <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off">
+                                    <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-md-0 d-nonee" id="input_commercial_registration">
+                            <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
+                            <div class="input-group ">
+                                <div class="inputGroup w-100">
+                                    <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off">
+                                    <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขทะเบียนพาณิชย์/เลขนิติบุคคล <span class="text-danger">*</span></label>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                  
+
+                    <script>
+
+
+                        // const radioInputs = document.querySelectorAll('.radio-input');
+                        // const input_c_name = document.querySelector('#input_c_name');
+                        // const input_c_surname = document.querySelector('#input_c_surname');
+                        // const input_c_company_name = document.querySelector('#input_c_company_name');
+                        // const input_commercial_registration = document.querySelector('#input_commercial_registration');
+
+                        // radioInputs.forEach((input) => {
+                        //     input.addEventListener('change', function() {
+                        //         if (this.checked) {
+                        //             if (this.value === 'บุคคล') {
+
+                        //                 input_c_name.classList.remove('d-none');
+                        //                 input_c_surname.classList.remove('d-none');
+                        //                 input_c_company_name.classList.add('d-none');
+                        //                 input_commercial_registration.classList.add('d-none');
+
+                        //                 document.querySelector('#c_company_name').required = false;
+                        //                 document.querySelector('#commercial_registration').required = false;
+                        //                 document.querySelector('#c_company_name').value = "";
+                        //                 document.querySelector('#commercial_registration').value = "";
+                        //                 document.querySelector('#c_surname').required = true;
+                        //                 document.querySelector('#c_name').required = true;
+                        //                 document.querySelector('#div_id_no').classList.remove('d-none');
+
+                        //             } else if (this.value === 'บริษัท') {
+                        //                 input_c_name.classList.add('d-none');
+                        //                 input_c_surname.classList.add('d-none');
+                        //                 input_c_company_name.classList.remove('d-none');
+                        //                 input_commercial_registration.classList.remove('d-none');
+
+
+                        //                 document.querySelector('#c_surname').required = false;
+                        //                 document.querySelector('#c_name').required = false;
+                        //                 document.querySelector('#c_surname').value = "";
+                        //                 document.querySelector('#c_name').value = "";
+                        //                 document.querySelector('#c_company_name').required = true;
+                        //                 document.querySelector('#commercial_registration').required = true;
+                        //                 document.querySelector('#div_id_no').classList.add('d-none');
+                        //                 document.querySelector('#c_idno').value = "";
+                        //             }
+                        //         }
+                        //     });
+                        // });
+                    </script>
+
 
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">แนบหลักฐานกระทำความผิด <span class="text-danger">*</span></label>
@@ -493,41 +527,53 @@
                                 <!-- <input type="file" id="avatar" name="avatar"accept="image/png, image/jpeg"> -->
                                 <!-- <label class="inputSelectFile" for="c_pic_execution">d</label>
                                 <input class="form-control d-none" name="c_pic_execution" type="file" id="c_pic_execution" value="{{ isset($customer->c_pic_execution) ? $customer->c_pic_execution : '' }}"> -->
-                                    <style>
-                                        .imgUpLoad{
-                                            width: 75px !important;
-                                            height: 75px !important;
-                                        }.upload-id-card:hover{
-                                            background-color: rgb(114, 85, 206 , 0.2) !important;
-                                        }.upload-id-card:hover .upload-text{
-                                            color: #7255ce !important;
-                                        }
+                                <style>
+                                    .imgUpLoad {
+                                        width: 75px !important;
+                                        height: 75px !important;
+                                    }
 
-                                        .upload-lease:hover{
-                                            background-color: rgb(39, 166, 255 , 0.2) !important;
-                                        }.upload-lease:hover .upload-text{
-                                            color: #1f496e !important;
-                                        }
+                                    .upload-id-card:hover {
+                                        background-color: rgb(114, 85, 206, 0.2) !important;
+                                    }
 
-                                        .upload-execution:hover{
-                                            background-color: rgb(221, 125, 0 , 0.2) !important;
-                                        }.upload-execution:hover .upload-text{
-                                            color: #dd7d00 !important;
-                                        }
+                                    .upload-id-card:hover .upload-text {
+                                        color: #7255ce !important;
+                                    }
 
-                                        .upload-capture:hover{
-                                            background-color: rgb(0, 51, 112, 0.2) !important;
+                                    .upload-lease:hover {
+                                        background-color: rgb(39, 166, 255, 0.2) !important;
+                                    }
 
-                                        }.upload-capture:hover .upload-text{
-                                            color: #003370 !important;
-                                        }
+                                    .upload-lease:hover .upload-text {
+                                        color: #1f496e !important;
+                                    }
 
-                                        .upload-other:hover{
-                                            background-color: rgb(255, 68, 68 , 0.2) !important;
-                                        }.upload-other:hover .upload-text{
-                                            color: #ff4444 !important;
-                                        }
-                                    </style>
+                                    .upload-execution:hover {
+                                        background-color: rgb(221, 125, 0, 0.2) !important;
+                                    }
+
+                                    .upload-execution:hover .upload-text {
+                                        color: #dd7d00 !important;
+                                    }
+
+                                    .upload-capture:hover {
+                                        background-color: rgb(0, 51, 112, 0.2) !important;
+
+                                    }
+
+                                    .upload-capture:hover .upload-text {
+                                        color: #003370 !important;
+                                    }
+
+                                    .upload-other:hover {
+                                        background-color: rgb(255, 68, 68, 0.2) !important;
+                                    }
+
+                                    .upload-other:hover .upload-text {
+                                        color: #ff4444 !important;
+                                    }
+                                </style>
                                 <div class="file-upload-box upload-id-card">
                                     <div id="clear-button" style="display: none;">
                                         <span class="clear-button">
@@ -547,12 +593,12 @@
                                             <span class="imgFile"></span>
                                         </p>
                                     </div>
-                                 
+
                                     <div class="upload-text text-center">
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/id-card.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>สำเนาบัตรประชาชน</span> 
+                                        <span>สำเนาบัตรประชาชน</span>
                                     </div>
                                 </div>
                             </div>
@@ -581,7 +627,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/document.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>ใบบังคับคดี</span> 
+                                        <span>ใบบังคับคดี</span>
                                     </div>
                                 </div>
                             </div>
@@ -612,7 +658,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/signature.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>สัญญาเช่า</span> 
+                                        <span>สัญญาเช่า</span>
                                     </div>
                                 </div>
 
@@ -642,7 +688,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/chat.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>หลักฐานการพูด-คุย</span> 
+                                        <span>หลักฐานการพูด-คุย</span>
                                     </div>
                                 </div>
                             </div>
@@ -671,7 +717,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/other.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>อื่นๆ</span> 
+                                        <span>อื่นๆ</span>
                                     </div>
                                 </div>
                             </div>
@@ -844,10 +890,11 @@
                             </li>
                         </ul>
                         <style>
-                            .font-tab{
+                            .font-tab {
                                 font-size: 18px !important;
                                 transition: all .15s ease-in-out;
                             }
+
                             .groupOffense {
                                 display: flex;
                                 flex-wrap: wrap;
@@ -1163,19 +1210,19 @@
             const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
 
 
-            otherCheckboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                if (this.checked) {
-                    // ตั้งค่า checked เป็น true สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
-                    otherCheckboxes.forEach(function (otherCheckbox) {
-                    otherCheckbox.checked = true;
-                    });
-                } else {
-                    // ตั้งค่า checked เป็น false สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
-                    otherCheckboxes.forEach(function (otherCheckbox) {
-                    otherCheckbox.checked = false;
-                    });
-                }
+            otherCheckboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // ตั้งค่า checked เป็น true สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                        otherCheckboxes.forEach(function(otherCheckbox) {
+                            otherCheckbox.checked = true;
+                        });
+                    } else {
+                        // ตั้งค่า checked เป็น false สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                        otherCheckboxes.forEach(function(otherCheckbox) {
+                            otherCheckbox.checked = false;
+                        });
+                    }
                 });
             });
 

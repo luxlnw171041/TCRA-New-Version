@@ -29,7 +29,7 @@
         margin-left: 0.5em;
         pointer-events: none;
         transition: all 0.3s ease;
-        color: rgb(10, 88, 202);
+        color: rgb(230, 46, 46);
     }
 
     .inputGroup label i {
@@ -45,7 +45,7 @@
     }
 
     .inputGroup :is(input:focus, input:valid) {
-        border-color: rgb(10, 88, 202);
+        border-color: rgb(230, 46, 46);
     }
 
     .group {
@@ -344,7 +344,7 @@
         top: 40%;
         width: 30px;
         height: 30px;
-        background-color: rgb(17, 112, 204) !important;
+        background-color: rgb(230, 46, 46) !important;
         color: #fff !important;
         border-radius: 50% !important;
     }
@@ -355,7 +355,7 @@
         top: 40%;
         width: 30px;
         height: 30px;
-        background-color: rgb(17, 112, 204) !important;
+        background-color: rgb(230, 46, 46) !important;
         color: #fff !important;
         border-radius: 50% !important;
     }
@@ -370,7 +370,7 @@
         justify-content: start;
         padding: 5px;
         position: absolute;
-        color: #2260ff;
+        color: #e62e2e;
         transition: all .15s ease-in-out;
         transform: translateY(200px);
         background-color: #fff;
@@ -379,7 +379,7 @@
     }
 
     .show-img-box:hover .infoImg {
-        color: #2260ff;
+        color: #e62e2e;
         transform: translateY(75px);
     }
 

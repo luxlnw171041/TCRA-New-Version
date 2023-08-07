@@ -8,12 +8,78 @@
 	}
 
 	@media (max-width: 767px) {
+
 		/* เพิ่มหรือปรับแต่ง CSS สำหรับมือถือที่มีความกว้างไม่เกิน 767px */
+		.loginPC {
+			display: none;
+		}
+
+		.radio-input-mobile-login input {
+			display: none;
+		}
+
+		.radio-input-mobile-login {
+			position: relative;
+			display: flex;
+			align-items: center;
+			border-radius: 100px;
+			background-color: #fff;
+			color: #2c5597;
+			width: 100%;
+			overflow: hidden;
+			border: 1px solid rgba(53, 52, 52, 0.226);
+		}
+
+		.radio-input-mobile-login label {
+			width: 100%;
+			padding: 10px;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 1;
+			font-weight: 600;
+			letter-spacing: -1px;
+			font-size: 14px;
+		}
+
+		.selection-type-login {
+			display: none;
+			position: absolute;
+			height: 100%;
+			width: 50%;
+			z-index: 0;
+			left: 0;
+			top: 0;
+			transition: .15s ease;
+		}
+
+		.radio-input-mobile-login label:has(input:checked) {
+			color: #fff;
+		}
+
+		.radio-input-mobile-login label:has(input:checked)~.selection-type-login {
+			background-color: rgb(11 117 223);
+			display: inline-block;
+		}
+
+		.radio-input-mobile-login label:nth-child(1):has(input:checked)~.selection-type-login {
+			transform: translateX(calc(0%));
+		}
+
+		.radio-input-mobile-login label:nth-child(2):has(input:checked)~.selection-type-login {
+			transform: translateX(calc(100%));
+		}
 	}
 
 	@media (min-width: 768px) {
 
 		/* เพิ่มหรือปรับแต่ง CSS สำหรับแท็บเล็ตและคอมพิวเตอร์ที่มีความกว้างไม่ต่ำกว่า 768px */
+		.loginMobile {
+			display: none;
+
+		}
+
 		.headerLogin {
 			font-weight: bold;
 			margin: 0;
@@ -21,11 +87,12 @@
 		}
 
 		.detailLogin {
-			font-size: 14px;
-			font-weight: 100;
+			font-size: 24px;
+			font-weight: bold;
 			line-height: 20px;
 			letter-spacing: 0.5px;
-			margin: 20px 0 30px;
+			margin: 25px 0 30px;
+			color: #ffb00f;
 		}
 
 
@@ -229,113 +296,204 @@
 	}
 </style>
 
-	<!--wrapper-->
-	<div class="wrapper">
-		<div class="section-authentication-signin d-flex align-items-center justify-content-center">
-			<div class="">
-				<div class="containerLogin" id="containerLogin">
-					<div class="form-container sign-up-container">
-						<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
-							@csrf
-							<h1 class="headerLogin text-tcra">เข้าสู่ระบบ</h1>
-							<!-- <input class="inputLogin" type="text" placeholder="Name" />
+<!--wrapper-->
+<div class="wrapper loginPC">
+	<div class="section-authentication-signin d-flex align-items-center justify-content-center">
+		<div class="">
+			<div class="containerLogin" id="containerLogin">
+				<div class="form-container sign-up-container">
+					<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
+						@csrf
+						<h1 class="headerLogin text-tcra">เข้าสู่ระบบ</h1>
+						<!-- <input class="inputLogin" type="text" placeholder="Name" />
 							<input class="inputLogin" type="email" placeholder="Email" />
 							<input class="inputLogin" type="password" placeholder="Password" /> -->
 
-							<input type="username" class="form-control inputLogin  @error('username') is-invalid @enderror" id="username" placeholder="Username" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-							@error('username')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-							@enderror
+						<input type="username" class="form-control inputLogin  @error('username') is-invalid @enderror" id="username" placeholder="Username" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+						@error('username')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
 
-							<div class="input-group" id="show_hide_password">
-								<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
+						<!-- <div class="input-group" id="show_hide_password">
+								<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror mb-0" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
 								<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword"><i class='bx bx-hide'></i></a>
-							</div>
+							</div> -->
 
-							@error('password')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-							@enderror
+						<div class="input-group" id="show_hide_password">
+							<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror password-input" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
+							<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword toggle-password"><i class='bx bx-hide'></i></a>
+						</div>
 
-							<button class="btnSwip" type="submit">Login</button>
-							@if (Route::has('password.request'))
-                                <a class="btn btn-link text-muted float-right" href="{{ route('password.request') }}?back={{ url()->full() }}">
-                                    {{ __('ลืมรหัสผ่าน ?') }}
-                                </a>
-                            @endif
-						</form>
-					</div>
-					<div class="form-container sign-in-container">
-						<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
-							@csrf
-							<h1 class="headerLogin text-tcra">เข้าสู่ระบบ</h1>
-							<!-- <input class="inputLogin" type="text" placeholder="Name" />
+						@error('password')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+
+						@if (Route::has('password.request'))
+						<div class="d-flex justify-content-end w-100">
+							<a class="btn btn-link text-muted float-right p-0 mt-1" href="{{ route('password.request') }}?back={{ url()->full() }}">
+								{{ __('ลืมรหัสผ่าน ?') }}
+							</a>
+						</div>
+						@endif
+						<button class="btnSwip mt-2" type="submit">Login</button>
+
+					</form>
+				</div>
+				<div class="form-container sign-in-container">
+					<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
+						@csrf
+						<h1 class="headerLogin text-tcra">เข้าสู่ระบบ</h1>
+						<!-- <input class="inputLogin" type="text" placeholder="Name" />
 							<input class="inputLogin" type="email" placeholder="Email" />
 							<input class="inputLogin" type="password" placeholder="Password" /> -->
 
-							<input type="text" class="form-control inputLogin  @error('username') is-invalid @enderror" id="password" placeholder="Username" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-							@error('username')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-							@enderror
+						<input type="text" class="form-control inputLogin  @error('username') is-invalid @enderror" id="username" placeholder="Username" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+						@error('username')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
 
-							<div class="input-group" id="show_hide_password">
-								<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
-								<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword"><i class='bx bx-hide'></i></a>
-							</div>
+						<div class="input-group" id="show_hide_password">
+							<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror password-input" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
+							<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword toggle-password"><i class='bx bx-hide'></i></a>
+						</div>
+						@error('password')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
 
-							@error('password')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-							@enderror
+						@if (Route::has('password.request'))
+						<div class="d-flex justify-content-end w-100">
+							<a class="btn btn-link text-muted float-right p-0 mt-1" href="{{ route('password.request') }}?back={{ url()->full() }}">
+								{{ __('ลืมรหัสผ่าน ?') }}
+							</a>
+						</div>
+						@endif
+						<button class="btnSwip" type="submit">Login</button>
+					</form>
+				</div>
+				<div class="overlay-container">
+					<div class="overlay">
+						<div class="overlay-panel overlay-left">
+							<img src="{{asset('img/icon/iconCustomer.png')}}" class="mb-2" width="90" alt="">
+							<h1 class="headerLogin">กลุ่มมิจฉาชีพ <br> (เช่ารถ)</h1>
+							<p class="detailLogin">(เฉพาะสมาชิกสามัญ)</p>
+						</div>
+						<div class="overlay-panel overlay-right">
+							<img src="{{asset('img/icon/iconDrivers.png')}}" class="mb-2" width="90" alt="">
 
-							<button class="btnSwip" type="submit">Login</button>
-							@if (Route::has('password.request'))
-                                <a class="btn btn-link text-muted float-right" href="{{ route('password.request') }}?back={{ url()->full() }}">
-                                    {{ __('ลืมรหัสผ่าน ?') }}
-                                </a>
-                            @endif
-						</form>
-					</div>
-					<div class="overlay-container">
-						<div class="overlay">
-							<div class="overlay-panel overlay-left">
-								<img src="{{asset('img/icon/iconCustomer.png')}}" class="mb-2" width="90" alt="">
-								<h1 class="headerLogin">กลุ่มมิจฉาชีพ</h1>
-								<p class="detailLogin">จัดการข้อมูล Black List รายชื่อกลุ่มมิจฉาชีพ <br>(เฉพาะสมาชิกสามัญสมาคม)</p>
-							</div>
-							<div class="overlay-panel overlay-right">
-								<img src="{{asset('img/icon/iconDrivers.png')}}" class="mb-2" width="90" alt="">
-
-								<h1 class="headerLogin">พนักงานขับรถ</h1>
-								<p class="detailLogin">จัดการข้อมูลพนักงานขับรถที่มีประวัติ <br>(เฉพาะสมาชิกสามัญสมาคม)</p>
-							</div>
+							<h1 class="headerLogin">BlackList <br> พนักงานขับรถ</h1>
+							<p class="detailLogin">(เฉพาะสมาชิกสามัญ)</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--end wrapper-->
+</div>
+<!--end wrapper PC LOGIN-->
+
+<!-- LOGIN MOBILE -->
+<div class="wrapper loginMobile">
+	<div class="authentication-header"></div>
+	<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+		<div class="container-fluid">
+			<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+				<div class="col mx-auto">
+					<div class="mb-4 text-center">
+						<img src="assets/images/logo-img.png" width="180" alt="">
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<div class="p-4 rounded">
+								<div class="text-center">
+									<h3 class="font-weight-bolder">เข้าสู่ระบบ</h3>
+									<div class="radio-input-mobile-login mb-4">
+										<label>
+											<input type="radio" id="typeLoginMoblie" name="typeLoginMoblie" value="customer">
+											<span>กลุ่มมิจฉาชีพ(เช่ารถ)</span>
+										</label>
+										<label>
+											<input type="radio" id="typeLoginMoblie" name="typeLoginMoblie" value="driver">
+											<span>BlackList พนักงานขับรถ</span>
+										</label>
+										<span class="selection-type-login"></span>
+									</div>
+									<!-- <div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
+										<hr>
+									</div> -->
+									<div class="form-body">
+										<form class="row formLogin" action="#" method="POST" action="{{ route('login') }}">
+											@csrf
+											<div class="col-12">
+												<label for="username" class="form-label">Username</label>
+												<input type="username" class="form-control inputLogin  @error('username') is-invalid @enderror" id="username" placeholder="Username" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+												@error('username')
+												<span class="invalid-feedback" role="alert">
+													<strong>{{ $message }}</strong>
+												</span>
+												@enderror
+											</div>
+											<div class="col-12">
+												<label for="password" class="form-label">Password</label>
+												<div class="input-group" id="show_hide_password">
+													<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror password-input" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
+													<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword toggle-password"><i class='bx bx-hide'></i></a>
+												</div>
+
+												@error('password')
+												<span class="invalid-feedback" role="alert">
+													<strong>{{ $message }}</strong>
+												</span>
+												@enderror
+											</div>
+											<div class="col-md-6 text-end"> <a href="{{ route('password.request') }}?back={{ url()->full() }}">{{ __('ลืมรหัสผ่าน ?') }}</a>
+											</div>
+											<div class="col-12">
+												<div class="d-grid">
+													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Login</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+	</div>
+	<!-- LOGIN MOBILE -->
 
 	<script>
-		$(document).ready(function() {
-			$("#show_hide_password a").on('click', function(event) {
-				event.preventDefault();
-				if ($('#show_hide_password input').attr("type") == "text") {
-					$('#show_hide_password input').attr('type', 'password');
-					$('#show_hide_password i').addClass("bx-hide");
-					$('#show_hide_password i').removeClass("bx-show");
-				} else if ($('#show_hide_password input').attr("type") == "password") {
-					$('#show_hide_password input').attr('type', 'text');
-					$('#show_hide_password i').removeClass("bx-hide");
-					$('#show_hide_password i').addClass("bx-show");
-				}
+		document.addEventListener("DOMContentLoaded", function() {
+			const togglePasswordIcons = document.querySelectorAll(".toggle-password");
+
+
+			togglePasswordIcons.forEach(icon => {
+				icon.addEventListener("click", function(event) {
+					event.preventDefault();
+					const passwordInput = this.parentElement.querySelector(".password-input");
+					const iconClassList = this.querySelector("i").classList;
+
+					if (passwordInput.type === "text") {
+						passwordInput.type = "password";
+						iconClassList.remove("bx-show");
+						iconClassList.add("bx-hide");
+					} else {
+						passwordInput.type = "text";
+						iconClassList.remove("bx-hide");
+						iconClassList.add("bx-show");
+					}
+				});
 			});
 		});
 	</script>
@@ -343,11 +501,27 @@
 		const urlParams = new URLSearchParams(window.location.search);
 		const loginParam = urlParams.get('login');
 		const containerLogin = document.getElementById('containerLogin');
+		const radioInputs = document.getElementsByName("typeLoginMoblie");
 
 		if (loginParam === "customer") {
 			containerLogin.classList.add("right-panel-active");
+			for (var i = 0; i < radioInputs.length; i++) {
+				if (radioInputs[i].value === "customer") {
+					radioInputs[i].checked = true;
+					break;
+				}
+			}
 		} else if (loginParam === "drivers") {
 			containerLogin.classList.remove("right-panel-active");
+			for (var i = 0; i < radioInputs.length; i++) {
+				if (radioInputs[i].value === "driver") {
+					radioInputs[i].checked = true;
+					break;
+				}
+			}
+		} else {
+			// ถ้าไม่ตรงกับ "customer" และ "drivers" ให้แสดงข้อความผิดพลาด
+			console.log("เกิดข้อผิดพลาด: ค่าใน loginParam ไม่ถูกต้อง");
 		}
 	</script>
-@endsection
+	@endsection
