@@ -901,7 +901,7 @@ button:focus.btnAddUser {
                                                     customer
                                                 </span>
                                             @else
-                                                <span class="badge bg-light-warning text-warning" style="font-size:13;pxwidth: 100px;margin: 20px;">
+                                                <span class="badge bg-light-warning text-warning" style="font-size:13px;width: 100px;margin: 20px;">
                                                     driver
                                                 </span>
                                             @endif
