@@ -245,31 +245,16 @@ class UserController extends Controller
             $data_user[$i]['pass_code'] = $data_create->pass_code ;
 
             // ลงข้อมูล
+            $data_add_Cus = Customer::where('user_id',$data_user[$i]['id'])->get();
+            $count_Cus = count($data_add_Cus);
 
-            if( $data_user[$i]['member_role'] == "customer" ){
-                $data_add_Cus = Customer::where('user_id',$data_user[$i]['id'])->get();
-                $count_Cus = count($data_add_Cus);
-            }else if( $data_user[$i]['member_role'] == "driver" ){
-                $data_add_Dri = Driver::where('user_id',$data_user[$i]['id'])->get();
-                $count_Dri = count($data_add_Dri);
-            }else{
-                $data_add_Cus = Customer::where('user_id',$data_user[$i]['id'])->get();
-                $count_Cus = count($data_add_Cus);
-
-                $data_add_Dri = Driver::where('user_id',$data_user[$i]['id'])->get();
-                $count_Dri = count($data_add_Dri);
+            $data_add_Dri = Driver::where('user_id',$data_user[$i]['id'])->get();
+            $count_Dri = count($data_add_Dri);
                 
-            }
 
             $data_user[$i]['count_Cus'] = $count_Cus ;
             $data_user[$i]['count_Dri'] = $count_Dri ;
 
-            if(empty($data_user[$i]['count_Cus'])){
-                $data_user[$i]['count_Cus'] = '0' ;
-            }
-            if(empty($data_user[$i]['count_Dri'])){
-                $data_user[$i]['count_Dri'] = '0' ;
-            }
 
             if(empty($data_user[$i]['count_search_cus'])){
                 $data_user[$i]['count_search_cus'] = '0' ;
