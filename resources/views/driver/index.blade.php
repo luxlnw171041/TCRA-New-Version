@@ -30,6 +30,11 @@
         pointer-events: none;
         transition: all 0.3s ease;
         color: rgb(10, 88, 202);
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     }
 
     .inputGroup label i {
@@ -42,6 +47,10 @@
         margin-left: 1.3em;
         padding: 0.1em;
         background-color: #fff;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .inputGroup :is(input:focus, input:valid) {
@@ -392,6 +401,8 @@
                         <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
                             <div class="w-100 d-flex justify-content-center">
                                 <div>
+                                    Blacklist
+                                    <br>
                                     ข้อมูลพนักงานขับรถ
                                 </div>
                             </div>
@@ -400,7 +411,7 @@
                             <div class="input-group">
                                 <div class="inputGroup w-100">
                                     <input name="d_idno" id="d_idno" type="number" value="{{ request('d_idno') }}" autocomplete="off" oninput="clearInputName()">
-                                    <label for="d_idno"><i class="fa-solid fa-id-card"></i> รหัสบัตรประชาชน</label>
+                                    <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน</label>
                                 </div>
                             </div>
                         </div>
@@ -410,23 +421,23 @@
                         <div class="col-sm-12 col-lg-3 col-xl-2 mx-2  divInputSearch">
                             <div class="input-group">
                                 <div class="inputGroup w-100">
-                                    <input name="compname" id="compname" type="text" value="{{ request('compname') }}" autocomplete="off" oninput="clearInputID()">
-                                    <label for="compname"><i class="fa-solid fa-buildings"></i> ชื่อบริษัท </label>
+                                    <input name="d_name" id="d_name" type="text" value="{{ request('d_name') }}" autocomplete="off" oninput="clearInputID()">
+                                    <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อ </label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-lg-3 col-xl-2 mx-2  divInputSearch">
                             <div class="input-group">
                                 <div class="inputGroup w-100">
-                                    <input name="d_name" id="d_name" type="text" value="{{ request('d_name') }}" autocomplete="off" oninput="clearInputID()">
-                                    <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อพนักงานขับ </label>
+                                    <input name="d_surname" id="d_surname" type="text" value="{{ request('d_surname') }}" autocomplete="off" oninput="clearInputID()">
+                                    <label for="d_surname"><i class="fa-solid fa-buildings"></i> นามสกุล </label>
                                 </div>
                             </div>
                         </div>
                         <div class="btn-group btnGroupSearch h-100" role="group" aria-label="Button group with nested dropdown">
                             <div>
                                 <button type="submit" class="btn btn-primary  h-100 m-0"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
-                                <a href="{{ url('/customer') }}" type="submit" class="btn btn-danger  h-100 m-0"><i class="fa-solid fa-trash"></i> ล้าง</a>
+                                <a href="{{ url('/driver') }}" type="submit" class="btn btn-danger  h-100 m-0"><i class="fa-solid fa-trash"></i> ล้าง</a>
                             </div>
                         </div>
                     </div>
@@ -444,9 +455,9 @@
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <div class="mt-3">
-                                    <h4>{{ $driver->compname }} {{ $driver->d_name }}</h4>
-                                    <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($driver->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
-                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($driver->c_date)) }} <br> เวลา {{ thaidate("H:i" , strtotime($driver->c_date)) }} น.</p>
+                                    <h4>{{ $driver->d_name }} {{ $driver->d_surname }} </h4>
+                                    <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($driver->d_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
+                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($driver->c_date)) }}</p>
                                     <!-- <button class="btn btn-primary">Follow</button>
                                             <button class="btn btn-outline-primary">Message</button> -->
                                 </div>
@@ -474,7 +485,7 @@
 
                         </div>
                     </div>
-                    @if(!empty($driver->d_pic_id_card) || !empty($driver->d_pic_lease) || !empty($driver->d_pic_execution) || !empty($driver->d_pic_cap) || !empty($driver->d_pic_other))
+                    @if(!empty($driver->d_pic_id_card) || !empty($driver->d_pic_indictment)  || !empty($driver->d_pic_cap) || !empty($driver->d_pic_other))
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
@@ -491,22 +502,13 @@
                                             </a>
                                         </div>
                                         @endif
-                                        @if(!empty($driver->d_pic_lease))
+                                        
+                                        @if(!empty($driver->d_pic_indictment))
                                         <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_lease }}" alt="ภาพใบบังคับคดี">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_lease }}" alt="ใบบังคับคดี">
+                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_indictment }}" alt="ภาพใบบังคับคดี">
+                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_indictment }}" alt="ใบบังคับคดี">
                                                 <div class="infoImg">
-                                                    <span class="m-0">ใบบังคับคดี</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        @endif
-                                        @if(!empty($driver->d_pic_execution))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_execution }}" alt="ภาพสัญญาเช่า">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_execution }}" alt="สัญญาเช่า">
-                                                <div class="infoImg">
-                                                    <span class="m-0">สัญญาเช่า</span>
+                                                    <span class="m-0">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -553,10 +555,10 @@
             $d_idno = urldecode($query_params['d_idno']);
             $text_show = $d_idno;
             $class_show = '';
-        } elseif (!empty($query_params['compname']) || !empty($query_params['d_name'])) {
-            $compname = urldecode($query_params['compname']);
+        } elseif (!empty($query_params['d_name']) || !empty($query_params['d_surname'])) {
             $d_name = urldecode($query_params['d_name']);
-            $text_show = $compname . ' ' . $d_name;
+            $d_surname = urldecode($query_params['d_surname']);
+            $text_show = $d_name . ' ' . $d_surname;
             $class_show = '';
         }
     @endphp
@@ -577,13 +579,13 @@
     }
 
     function clearInputName() {
-        document.getElementById("compname").value = "";
+        document.getElementById("d_surname").value = "";
         document.getElementById("d_name").value = "";
     }
 
     function clearInput() {
         document.getElementById("d_idno").value = "";
-        document.getElementById("compname").value = "";
+        document.getElementById("d_surname").value = "";
         document.getElementById("d_name").value = "";
     }
 

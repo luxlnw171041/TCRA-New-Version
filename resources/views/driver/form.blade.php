@@ -25,6 +25,11 @@
         pointer-events: none;
         transition: all 0.3s ease;
         color: #0a58ca;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     }
 
     .inputGroup label i {
@@ -37,6 +42,10 @@
         margin-left: 1.3em;
         padding: 0.4em;
         background-color: #fff;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .inputGroup :is(input:focus, input:valid) {
@@ -77,7 +86,7 @@
     input[type="date"]:focus.selectDate {
         outline: none;
         border-color: #0a58ca;
-        box-shadow: 0 0 0 0.25rem  rgb(10, 88, 202, 0.4);
+        box-shadow: 0 0 0 0.25rem rgb(10, 88, 202, 0.4);
     }
 
     .selectDate::-webkit-datetime-edit-month-field:hover,
@@ -125,10 +134,14 @@
         background-color: #0a58ca;
         border-radius: 15px;
         color: #fff;
-    }.headerCustomer{
+    }
+
+    .headerCustomer {
         font-weight: bolder !important;
         font-size: 18px !important;
-    }.subHeaderCustomer{
+    }
+
+    .subHeaderCustomer {
         font-weight: bolder !important;
         font-size: 16px !important;
     }
@@ -148,9 +161,9 @@
                 </span>
                 <div class="d-flex flex-column align-items-center text-center">
                     @if(!empty(Auth::user()->member_pic))
-                        <img src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="User" class="rounded-circle p-1" width="110">
+                    <img src="{{ url('storage')}}/{{ Auth::user()->member_pic }}" alt="User" class="rounded-circle p-1" width="110">
                     @else
-                        <img src="{{asset('img/icon/user.jpg')}}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
+                    <img src="{{asset('img/icon/user.jpg')}}" alt="User" class="rounded-circle p-1 bg-primary" width="110">
                     @endif
                     <div class="mt-3">
                         <h4>{{Auth::user()->name}}</h4>
@@ -174,7 +187,7 @@
                 </div>
                 <hr>
                 <div class="row g-3">
-                    <div class="col-md-4 mt-md-4 " >
+                    <div class="col-md-4 mt-md-4 ">
                         <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
@@ -182,7 +195,8 @@
                                 <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
                             </div>
                         </div>
-                    </div><div class="col-md-4 mt-md-4 " >
+                    </div>
+                    <div class="col-md-4 mt-md-4 ">
                         <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
@@ -196,19 +210,19 @@
                         <div class="input-group ">
                             <div class="inputGroup w-100">
                                 <input type="text" required="" autocomplete="off" name="d_idno" id="d_idno" value="{{ isset($customer->d_idno) ? $customer->d_idno : '' }}">
-                                <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตร <span class="text-danger">*</span></label>
+                                <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <label for="inputLastName1" class="form-label subHeaderCustomer">ลักษณะกระทำความผิด <span class="text-danger">*</span></label>
+                        <label for="inputLastName1" class="form-label subHeaderCustomer">ลักษณะการกระทำความผิด  <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-12 mb-md-0">
                         <ul class="nav nav-pills mb-3" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navDanger active" data-bs-toggle="pill" href="#corrupt" role="tab" aria-selected="true">
                                     <div class="d-flex align-items-center font-tab">
-                                        <div class="tab-icon"><i class="fa-solid fa-user-police  me-1"></i>
+                                        <div class="tab-icon"><i class="fa-solid fa-user-ninja me-1"></i>
                                         </div>
                                         <div class="tab-title">หมวดทุจริต</div>
                                     </div>
@@ -217,7 +231,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navWarning" data-bs-toggle="pill" href="#discipline" role="tab" aria-selected="false">
                                     <div class="d-flex align-items-center font-tab">
-                                        <div class="tab-icon"><i class="fa-solid fa-user-xmark  me-1"></i>
+                                        <div class="tab-icon"><i class="fa-solid fa-user-slash me-1"></i>
                                         </div>
                                         <div class="tab-title">หมวดวินัย</div>
                                     </div>
@@ -226,7 +240,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navSuccess" data-bs-toggle="pill" href="#blacklist" role="tab" aria-selected="false">
                                     <div class="d-flex align-items-center font-tab">
-                                        <div class="tab-icon"><i class="fa-solid fa-user-xmark  me-1"></i>
+                                        <div class="tab-icon"><i class="fa-regular fa-file-circle-exclamation me-1"></i>
                                         </div>
                                         <div class="tab-title">หมวดบัญชีดำ</div>
                                     </div>
@@ -234,10 +248,11 @@
                             </li>
                         </ul>
                         <style>
-                            .font-tab{
+                            .font-tab {
                                 font-size: 18px !important;
                                 transition: all .15s ease-in-out;
                             }
+
                             .groupOffense {
                                 display: flex;
                                 flex-wrap: wrap;
@@ -654,7 +669,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="inputLastName1" class="form-label subHeaderCustomer">วันที่กระทำความผิด <span class="text-danger">*</span></label>
+                        <label for="inputLastName1" class="form-label subHeaderCustomer">วัน/เดือน/ปี ที่กระทำความผิด <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-md-6 mt-md-1 mb-md-2">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
@@ -665,7 +680,7 @@
                         </div>
                     </div>
                     <div class="col-12 mt-2">
-                        <label for="inputLastName1" class="form-label subHeaderCustomer">แนบหลักฐานกระทำความผิด</label>
+                        <label for="inputLastName1" class="form-label subHeaderCustomer">แนบหลักฐานการกระทำความผิด</label>
                     </div>
                     <style>
                         .file-upload-box {
@@ -801,6 +816,7 @@
                             color: #fff !important;
                             border-radius: 50% !important;
                         }
+
                         .owl-next {
                             position: absolute;
                             right: 0;
@@ -832,41 +848,53 @@
                                 <!-- <input type="file" id="avatar" name="avatar"accept="image/png, image/jpeg"> -->
                                 <!-- <label class="inputSelectFile" for="c_pic_execution">d</label>
                                 <input class="form-control d-none" name="c_pic_execution" type="file" id="c_pic_execution" value="{{ isset($customer->c_pic_execution) ? $customer->c_pic_execution : '' }}"> -->
-                                    <style>
-                                        .imgUpLoad{
-                                            width: 75px !important;
-                                            height: 75px !important;
-                                        }.upload-id-card:hover{
-                                            background-color: rgb(114, 85, 206 , 0.2) !important;
-                                        }.upload-id-card:hover .upload-text{
-                                            color: #7255ce !important;
-                                        }
+                                <style>
+                                    .imgUpLoad {
+                                        width: 75px !important;
+                                        height: 75px !important;
+                                    }
 
-                                        .upload-lease:hover{
-                                            background-color: rgb(39, 166, 255 , 0.2) !important;
-                                        }.upload-lease:hover .upload-text{
-                                            color: #1f496e !important;
-                                        }
+                                    .upload-id-card:hover {
+                                        background-color: rgb(114, 85, 206, 0.2) !important;
+                                    }
 
-                                        .upload-execution:hover{
-                                            background-color: rgb(221, 125, 0 , 0.2) !important;
-                                        }.upload-execution:hover .upload-text{
-                                            color: #dd7d00 !important;
-                                        }
+                                    .upload-id-card:hover .upload-text {
+                                        color: #7255ce !important;
+                                    }
 
-                                        .upload-capture:hover{
-                                            background-color: rgb(0, 51, 112, 0.2) !important;
+                                    .upload-lease:hover {
+                                        background-color: rgb(39, 166, 255, 0.2) !important;
+                                    }
 
-                                        }.upload-capture:hover .upload-text{
-                                            color: #003370 !important;
-                                        }
+                                    .upload-lease:hover .upload-text {
+                                        color: #1f496e !important;
+                                    }
 
-                                        .upload-other:hover{
-                                            background-color: rgb(255, 68, 68 , 0.2) !important;
-                                        }.upload-other:hover .upload-text{
-                                            color: #ff4444 !important;
-                                        }
-                                    </style>
+                                    .upload-execution:hover {
+                                        background-color: rgb(221, 125, 0, 0.2) !important;
+                                    }
+
+                                    .upload-execution:hover .upload-text {
+                                        color: #dd7d00 !important;
+                                    }
+
+                                    .upload-capture:hover {
+                                        background-color: rgb(0, 51, 112, 0.2) !important;
+
+                                    }
+
+                                    .upload-capture:hover .upload-text {
+                                        color: #003370 !important;
+                                    }
+
+                                    .upload-other:hover {
+                                        background-color: rgb(255, 68, 68, 0.2) !important;
+                                    }
+
+                                    .upload-other:hover .upload-text {
+                                        color: #ff4444 !important;
+                                    }
+                                </style>
                                 <div class="file-upload-box upload-id-card">
                                     <div id="clear-button" style="display: none;">
                                         <span class="clear-button">
@@ -886,12 +914,12 @@
                                             <span class="imgFile"></span>
                                         </p>
                                     </div>
-                                 
+
                                     <div class="upload-text text-center">
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/id-card.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>สำเนาบัตรประชาชน <br> Passport</span> 
+                                        <span>สำเนาบัตรประชาชน <br> Passport</span>
                                     </div>
                                 </div>
                             </div>
@@ -903,7 +931,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_indictment" name="c_pic_indictment" value="{{ isset($driver->c_pic_indictment) ? $driver->c_pic_indictment : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_indictment" name="d_pic_indictment" value="{{ isset($driver->d_pic_indictment) ? $driver->d_pic_indictment : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -951,7 +979,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/chat.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>หลักฐานการพูด-คุย</span> 
+                                        <span>หลักฐานการพูด-คุย</span>
                                     </div>
                                 </div>
                             </div>
@@ -980,7 +1008,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/other.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                       <span>อื่นๆ</span> 
+                                        <span>อื่นๆ</span>
                                     </div>
                                 </div>
                             </div>
@@ -1130,11 +1158,121 @@
                     </script>
                     <div class="col-12">
                         <a id="btnSubmitFormCreateDriver" type="submit" class="btn btn-primary px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}" onclick="checkvaluedemerit()">ยืนยัน</a>
+                    
                     </div>
                 </div>
             </div>
         </div>
+        <style>
+            .loading-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
+            .loading-spinner {
+                border: 4px solid rgba(0, 0, 0, 0.1);
+                border-left-color: #000;
+                animation: spin 1s linear infinite;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                margin-right: 20px;
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes drawCheck {
+                0% {
+                    transform: scale(0);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            .checkmark {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: block;
+                stroke-width: 2;
+                stroke: #29cc39;
+                stroke-miterlimit: 10;
+                margin: 10% auto;
+                box-shadow: inset 0px 0px 0px #ffffff;
+                animation: fill 0.9s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+            }
+
+            .checkmark__check {
+                transform-origin: 50% 50%;
+                stroke-dasharray: 48;
+                stroke-dashoffset: 48;
+                animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+            }
+
+            @keyframes stroke {
+                100% {
+                    stroke-dashoffset: 0
+                }
+            }
+
+            @keyframes scale {
+
+                0%,
+                100% {
+                    transform: none
+                }
+
+                50% {
+                    transform: scale3d(1.1, 1.1, 1)
+                }
+            }
+
+            @keyframes fill {
+                100% {
+                    box-shadow: inset 0px 0px 0px 60px #fff
+                }
+            }
+
+            .radius-20 {
+                border-radius: 20px;
+            }
+        </style>
+        <!-- Modal -->
+        <div class="modal fade" id="saveDataSuccess" tabindex="-1" role="dialog" aria-labelledby="saveDataSuccessTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content radius-20">
+                    <div class="modal-body p-5">
+                        <div class="loading-container">
+                            <div class="loading-spinner"></div>
+
+                            <div class="contrainerCheckmark d-none">
+                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                </svg>
+                                <center>
+                                    <h5 class="mt-5">เสร็จสิ้น</h5>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]');
             const formCreateDriver = document.getElementById('formCreateDriver');
@@ -1142,19 +1280,19 @@
             var checkdemerit = false;
 
 
-            otherCheckboxes.forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                if (this.checked) {
-                    // ตั้งค่า checked เป็น true สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
-                    otherCheckboxes.forEach(function (otherCheckbox) {
-                    otherCheckbox.checked = true;
-                    });
-                } else {
-                    // ตั้งค่า checked เป็น false สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
-                    otherCheckboxes.forEach(function (otherCheckbox) {
-                    otherCheckbox.checked = false;
-                    });
-                }
+            otherCheckboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // ตั้งค่า checked เป็น true สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                        otherCheckboxes.forEach(function(otherCheckbox) {
+                            otherCheckbox.checked = true;
+                        });
+                    } else {
+                        // ตั้งค่า checked เป็น false สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                        otherCheckboxes.forEach(function(otherCheckbox) {
+                            otherCheckbox.checked = false;
+                        });
+                    }
                 });
             });
 
@@ -1175,24 +1313,37 @@
                 const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
 
                 if (demeritCheckboxes.length === 0) {
-                    console.log('โปรดเลือก');
-                    event.preventDefault(); // ป้องกันการส่งฟอร์ม   
-                    dangerAlert("กรุณาเลือกลักษณะกระทำความผิดอย่างน้อย 1 อย่าง");
+                    // console.log('โปรดเลือก');
                     checkdemerit = false;
+                    event.preventDefault(); // ป้องกันการส่งฟอร์ม   
+                    dangerAlert("กรุณาเลือกลักษณะการกระทำความผิด อย่างน้อย 1 อย่าง");
 
                 } else {
-                    console.log('ยืนยัน')
                     checkdemerit = true;
-
                 }
             }
 
-            $("#btnSubmitFormCreateDriver").click(function() {
-                if ($("#formCreateDriver")[0].checkValidity())
-                    console.log('sucess');
-                else
-                    //Validate Form
-                    $("#formCreateDriver")[0].reportValidity()
+            $("#btnSubmitFormCreateDriver").click(function(event) {
+                if ($("#formCreateDriver")[0].checkValidity()) {
+                    if (checkdemerit) {
+                        // console.log('success');
+
+                        $('#saveDataSuccess').modal('show');
+
+                        setTimeout(function() {
+                            document.querySelector(".loading-spinner").style.display = "none";
+                            document.querySelector(".contrainerCheckmark").classList.remove('d-none');
+                        }, 3000);
+
+                        setTimeout(function() {
+                            $("#formCreateDriver")[0].submit();
+                        }, 4000);
+                    }
+                } else {
+                    // Validate Form
+                    $("#formCreateDriver")[0].reportValidity();
+                    event.preventDefault();
+                }
             });
         </script>
         <div class="col-sm-12">

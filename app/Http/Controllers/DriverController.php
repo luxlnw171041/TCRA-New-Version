@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Driver;
 use Illuminate\Http\Request;
@@ -20,7 +23,25 @@ class DriverController extends Controller
         $keyword = $request->get('search');
         $perPage = 25;
 
+        $user_id = Auth::user()->id;
+        $data_user = User::where('id', $user_id)->first();
+        
+        $count_search_driver = (int)$data_user->count_search_dri; 
+        
         $requestData = $request->all();
+        
+        // ddd($requestData);
+        if(!empty($requestData)){
+            $count_search_driver += 1; 
+        
+            DB::table('users')
+            ->where([
+                ['id', $user_id],
+            ])
+            ->update([
+                'count_search_dri' => $count_search_driver,
+            ]);
+        }
         if (!empty($requestData['d_idno'])) {
             $d_id_no = $requestData['d_idno'];
             $driver = Driver::where('d_idno', $d_id_no)->first();
@@ -28,13 +49,13 @@ class DriverController extends Controller
             return view('driver.index', compact('driver'));
             
 
-        } elseif (!empty($requestData['compname']) and !empty($requestData['d_name'])) {
+        } elseif (!empty($requestData['d_name']) and !empty($requestData['d_surname'])) {
 
-            $compname = $requestData['compname'];
-            $driver_name = $requestData['d_name'];
+            $d_name = $requestData['d_name'];
+            $d_surname = $requestData['d_surname'];
 
-            $driver = Driver::where('compname', $compname)
-                ->Where('d_name',  $driver_name)
+            $driver = Driver::where('d_name', $d_name)
+                ->Where('d_surname',  $d_surname)
                 ->first();
 
                 return view('driver.index', compact('driver'));

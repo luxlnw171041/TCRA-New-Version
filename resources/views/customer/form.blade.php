@@ -25,6 +25,11 @@
         pointer-events: none;
         transition: all 0.3s ease;
         color: #e62e2e;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     }
 
     .inputGroup label i {
@@ -1415,7 +1420,7 @@
     }
 </style>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="saveDataSuccess" tabindex="-1" role="dialog" aria-labelledby="saveDataSuccessTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content radius-20" >
             <div class="modal-body p-5">
@@ -1442,7 +1447,7 @@
         if ($("#formCreateCustomer")[0].checkValidity())
             if (checkdemerit && checkisGroupPersonAndCompany) {
                 console.log('sucess');
-                $('#exampleModalCenter').modal('show');
+                $('#saveDataSuccess').modal('show');
 
                 setTimeout(function() {
                     document.querySelector(".loading-spinner").style.display = "none";

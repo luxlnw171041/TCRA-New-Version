@@ -46,6 +46,11 @@
         margin-left: 1.3em;
         padding: 0.1em;
         background-color: #fff;
+        max-width: 90%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     }
 
     .inputGroup :is(input:focus, input:valid) {
