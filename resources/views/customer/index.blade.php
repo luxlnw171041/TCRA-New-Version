@@ -30,6 +30,10 @@
         pointer-events: none;
         transition: all 0.3s ease;
         color: rgb(230, 46, 46);
+        white-space: nowrap;
+        max-width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .inputGroup label i {
@@ -425,33 +429,33 @@
     .checkbox-wrapper-35 .switch+label::before {
         background-color: #05012c;
         border-radius: 500px;
-        height: 15px;
+        height: 18px;
         margin-right: 8px;
         -webkit-transition: background-color 0.125s ease-out;
         transition: background-color 0.125s ease-out;
-        width: 25px;
+        width: 50px;
     }
 
     .checkbox-wrapper-35 .switch+label::after {
         background-color: #fff;
         border-radius: 13px;
         box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
-        height: 13px;
-        left: 1px;
+        height: 18px;
+        left: 0px;
         position: absolute;
-        top: 1px;
+        top: 0px;
         -webkit-transition: -webkit-transform 0.125s ease-out;
         transition: -webkit-transform 0.125s ease-out;
         transition: transform 0.125s ease-out;
         transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
-        width: 13px;
+        width: 18px;
     }
 
 
     .checkbox-wrapper-35 .switch+label .switch-x-toggletext {
         display: block;
         font-weight: bold;
-        height: 15px;
+        height: 18px;
         overflow: hidden;
         position: relative;
         width: 100%;
@@ -486,12 +490,12 @@
     }
 
     .checkbox-wrapper-35 .switch:checked+label::before {
-        background-color: #ffb500;
+        background-color: #e62e2e;
     }
 
     .checkbox-wrapper-35 .switch:checked+label::after {
-        -webkit-transform: translate3d(10px, 0, 0);
-        transform: translate3d(10px, 0, 0);
+        -webkit-transform: translate3d(18px, 0, 0);
+        transform: translate3d(18px, 0, 0);
     }
 
     .checkbox-wrapper-35 .switch:checked+label .switch-x-unchecked {
@@ -506,6 +510,7 @@
         transform: none;
     }
 </style>
+
 <div class="container">
     <div class="col-12 d-">
         <div class="card">
@@ -517,11 +522,11 @@
                                 <div>
                                      ค้นหาข้อมูลมิฉาชีพ <br>
                                 <div class="checkbox-wrapper-35">
-                                    <input value="private" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch" value="asdas">
+                                    <input value="company" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch"value="{{ request('switchforSearch') }}" onclick="toggleDivsswitchforSearch()">
                                     <label for="switchforSearch">
                                         <span class="switch-x-toggletext">
-                                            <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel"></span>บุคคล</span>
-                                            <span class="switch-x-checked"><span class="switch-x-hiddenlabel"></span>บริษัท</span>
+                                            <span class="switch-x-unchecked font-18"><span class="switch-x-hiddenlabel"></span>บุคคล</span>
+                                            <span class="switch-x-checked font-18"><span class="switch-x-hiddenlabel"></span>บริษัท</span>
                                         </span>
                                     </label>
                                 </div>
@@ -532,11 +537,11 @@
                             <div class="input-group">
                                 <div class="inputGroup w-100">
                                     <input name="c_idno" id="c_idno" type="number" value="{{ request('c_idno') }}" autocomplete="off" oninput="clearInputName()">
-                                    <label for="c_id_no"><i class="fa-solid fa-id-card"></i> รหัสบัตรประชาชน</label>
+                                    <label for="c_id_no"><i class="fa-solid fa-id-card"></i>หมายเลขบัตรประชาชน</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-3">
+                        <div class="m-3 divInputSearch">
                             <p class="textOR"><span>หรือ</span></p>
                         </div>
                         <div class="col-sm-12 col-lg-3 col-xl-2 mx-2  divInputSearch">
@@ -552,6 +557,29 @@
                                 <div class="inputGroup w-100">
                                     <input name="c_surname" id="c_surname" type="text" value="{{ request('c_surname') }}" autocomplete="off" oninput="clearInputID()">
                                     <label for="c_surname"><i class="fa-solid fa-user"></i> นามสกุล </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-sm-12 col-lg-3 col-xl-3 mx-2 divInputSearch d-none">
+                            <div class="input-group">
+                                <div class="inputGroup w-100">
+                                    <input name="commercial_registration" id="commercial_registration" type="nunmber" value="{{ request('commercial_registration') }}" autocomplete="off" oninput="clearInputCompanyName()">
+                                    <label for="commercial_registration"><i class="fa-solid fa-id-card"></i> เลขประจำตัวผู้เสียภาษี</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-3 d-none divInputSearch">
+                            <p class="textOR"><span>หรือ</span></p>
+                        </div>
+                        <div class="col-sm-12 col-lg-3 col-xl-3 mx-2  divInputSearch d-none">
+                            <div class="input-group">
+                                <div class="inputGroup w-100">
+                                    <input name="c_company_name" id="c_company_name" type="text" value="{{ request('c_company_name') }}" autocomplete="off" oninput="clearInputCommercialRegistration()">
+                                    <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท </label>
                                 </div>
                             </div>
                         </div>
@@ -587,9 +615,21 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <div class="mt-3">
-                                <h4>{{ $customers->c_name }} {{ $customers->c_surname }}</h4>
+                                <h4>
+                                @if(!empty($customers->c_name) && !empty($customers->c_surname))
+                                    {{ $customers->c_name }} {{ $customers->c_surname }}
+                                @elseif(!empty($customers->c_company_name) )
+                                    {{$customers->c_company_name}}
+                                @endif
+                                </h4>
+
+                                @if(!empty($customers->commercial_registration))
+                                    <h4>
+                                        {{$customers->commercial_registration}}
+                                    </h4>
+                                @endif
                                 <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($customers->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
-                                <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($customers->c_date)) }} <br> เวลา {{ thaidate("H:i" , strtotime($customers->c_date)) }} น.</p>
+                                <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($customers->c_date)) }} </p>
                                 <!-- <button class="btn btn-primary">Follow</button>
                                         <button class="btn btn-outline-primary">Message</button> -->
                             </div>
@@ -654,7 +694,7 @@
 
                     </div>
                 </div>
-                @if(!empty($customers->c_pic_id_card) || !empty($customers->c_pic_indictment) || !empty($customers->c_pic_indictment) || !empty($customers->c_pic_cap) || !empty($customers->c_pic_other))
+                @if(!empty($customers->c_pic_id_card) || !empty($customers->c_pic_company_certificate) || !empty($customers->c_pic_indictment) || !empty($customers->c_pic_cap) || !empty($customers->c_pic_other))
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
@@ -671,12 +711,12 @@
                                         </a>
                                     </div>
                                     @endif
-                                    @if(!empty($customers->c_pic_indictment))
+                                    @if(!empty($customers->c_pic_company_certificate))
                                     <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ภาพใบบังคับคดี">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ใบบังคับคดี">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="ภาพใบบังคับคดี">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="ใบบังคับคดี">
                                             <div class="infoImg">
-                                                <span class="m-0">ใบบังคับคดี</span>
+                                                <span class="m-0">สำเนาหนังสือรับรองบริษัท</span>
                                             </div>
                                         </a>
                                     </div>
@@ -686,7 +726,7 @@
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ภาพสัญญาเช่า">
                                             <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="สัญญาเช่า">
                                             <div class="infoImg">
-                                                <span class="m-0">สัญญาเช่า</span>
+                                                <span class="m-0">คำฟ้องหรือใบร้องทุกขดำเนินคดี</span>
                                             </div>
                                         </a>
                                     </div>
@@ -733,10 +773,18 @@
             $c_idno = urldecode($query_params['c_idno']);
             $text_show = $c_idno;
             $class_show = '';
-        } elseif (!empty($query_params['c_name']) || !empty($query_params['c_surname'])) {
+        }if (!empty($query_params['c_name']) || !empty($query_params['c_surname'])) {
             $c_name = urldecode($query_params['c_name']);
             $c_surname = urldecode($query_params['c_surname']);
             $text_show = $c_name . ' ' . $c_surname;
+            $class_show = '';
+        }if (!empty($query_params['commercial_registration'])) {
+            $commercial_registration = urldecode($query_params['commercial_registration']);
+            $text_show = $commercial_registration;
+            $class_show = '';
+        }if (!empty($query_params['c_company_name'])) {
+            $c_company_name = urldecode($query_params['c_company_name']);
+            $text_show = $c_company_name;
             $class_show = '';
         }
     @endphp
@@ -747,20 +795,65 @@
         </div>
 @endif
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+		const switchforSearch = urlParams.get('switchforSearch');
+
+        if (switchforSearch) {
+            console.log('บริษัท');
+            document.getElementById('switchforSearch').checked = true;
+            toggleDivsswitchforSearch()
+            console.log('บริษัท');
+
+        }
+    });
+
+    function toggleDivsswitchforSearch() {
+        var Search = document.querySelectorAll(".divInputSearch");
+
+        Search.forEach(function(div) {
+                div.classList.toggle('d-none');
+        });
+    }
+
+
     function clearInputID() {
         document.getElementById("c_idno").value = "";
+        document.getElementById('c_company_name').value = ''
+        document.getElementById('commercial_registration').value = ''
     }
 
     function clearInputName() {
         document.getElementById("c_name").value = "";
         document.getElementById("c_surname").value = "";
+        document.getElementById('c_company_name').value = ''
+        document.getElementById('commercial_registration').value = ''
     }
 
-    function clearInput() {
-        console.log("asd");
+    function clearInputCompanyName() {
         document.getElementById("c_idno").value = "";
         document.getElementById("c_name").value = "";
         document.getElementById("c_surname").value = "";
+        document.getElementById('c_company_name').value = ''
+    }
+
+    function clearInputCommercialRegistration() {
+        document.getElementById("c_idno").value = "";
+        document.getElementById("c_name").value = "";
+        document.getElementById("c_surname").value = "";
+        document.getElementById('commercial_registration').value = ''
+
+    }
+
+
+
+    function clearInput() {
+        // console.log("asd");
+        document.getElementById("c_idno").value = "";
+        document.getElementById("c_name").value = "";
+        document.getElementById("c_surname").value = "";
+        document.getElementById('c_company_name').value = ''
+        document.getElementById('commercial_registration').value = ''
     }
 
 

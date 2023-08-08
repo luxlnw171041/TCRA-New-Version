@@ -30,7 +30,9 @@ class CustomerController extends Controller
                 return view('customer.index', compact('customers'));
             
 
-        } elseif (!empty($requestData['c_name']) and !empty($requestData['c_surname'])) {
+        }
+        
+        if (!empty($requestData['c_name']) and !empty($requestData['c_surname'])) {
 
             $name = $requestData['c_name'];
             $surname = $requestData['c_surname'];
@@ -40,7 +42,23 @@ class CustomerController extends Controller
                 ->first();
 
                 return view('customer.index', compact('customers'));
-        }else{
+        }
+        if (!empty($requestData['commercial_registration'])) {
+            $commercial_registration = $requestData['commercial_registration'];
+
+            $customers = Customer::where('commercial_registration', $commercial_registration)
+            ->first();
+
+            return view('customer.index', compact('customers'));
+        } if (!empty($requestData['c_company_name'])) {
+            $c_company_name = $requestData['c_company_name'];
+
+            $customers = Customer::where('c_company_name', $c_company_name)
+            ->first();
+
+            return view('customer.index', compact('customers'));
+        }
+        else{
 
             return view('customer.index');
         }
@@ -68,6 +86,7 @@ class CustomerController extends Controller
     {
 
         $requestData = $request->all();
+        // ddd($requestData);
         if ($request->hasFile('c_pic_id_card')) {
             $requestData['c_pic_id_card'] = $request->file('c_pic_id_card')->store('uploads', 'public');
         }
@@ -90,7 +109,9 @@ class CustomerController extends Controller
         // ddd($requestData);
         Customer::create($requestData);
 
-        return redirect('customer')->with('flash_message', 'Customer added!');
+        // return redirect('customer.create')->with('flash_message', 'Customer added!');
+        return redirect()->back();
+        
     }
 
     /**

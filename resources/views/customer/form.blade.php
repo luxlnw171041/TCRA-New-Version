@@ -439,7 +439,7 @@
                             <div class="input-group ">
                                 <div class="inputGroup w-100">
                                     <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off">
-                                    <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขระจำตัวผู้เสียภาษี <span class="text-danger">*</span></label>
+                                    <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขประจำตัวผู้เสียภาษี <span class="text-danger">*</span></label>
                                 </div>
                             </div>
                         </div>
@@ -820,7 +820,6 @@
                         <div class="input-group ">
                             <div class="inputGroup ">
                                 <input name="c_date" id="c_date" class="selectDate" type="date" min="2005-01-01" max="201101-01" required>
-                                <input type="date" id="buddhistDate" name="buddhistDate" min="2541-01-01" >
                             </div>
                         </div>
                     </div>
@@ -1177,7 +1176,7 @@
                         });
                     </script>
                     <div class="col-12">
-                        <button id="test" onclick="checkValueInput()" type="submit" class="btn btn-danger px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</button>
+                        <a id="btnSubmitFormCreateCustomer" onclick="checkValueInput();checkvaluedemerit(); " type="submit" class="btn btn-danger px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</a>
                     </div>
                 </div>
             </div>
@@ -1187,7 +1186,8 @@
             const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]');
             const formCreateCustomer = document.getElementById('formCreateCustomer');
             const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
-
+            var checkdemerit = false;
+            var checkisGroupPersonAndCompany = false;
 
             otherCheckboxes.forEach(function(checkbox) {
                 checkbox.addEventListener('change', function() {
@@ -1218,17 +1218,21 @@
             // });
 
 
-            formCreateCustomer.addEventListener('submit', function(event) {
-                const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
 
+            function checkvaluedemerit() {
+                const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
                 if (demeritCheckboxes.length === 0) {
-                    console.log('โปรดเลือก');
+                    // console.log('โปรดเลือก');
+                    checkdemerit = false;
+
                     event.preventDefault(); // ป้องกันการส่งฟอร์ม   
                     dangerAlert("กรุณาเลือกลักษณะการกระทำความผิดอย่างน้อย 1 อย่าง");
                 } else {
-                    console.log('ยืนยัน')
+                    checkdemerit = true;
+
+                    // console.log('ยืนยัน')
                 }
-            });
+            }
 
 
             const c_name = document.getElementById('c_name');
@@ -1259,13 +1263,16 @@
                 }
 
                 if (isGroupPersonValid && isGroupCompanyValid) {
+                    checkisGroupPersonAndCompany = false;
                     event.preventDefault();
                     dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัท');
                 } else if (!isGroupPersonValid && !isGroupCompanyValid) {
+                    checkisGroupPersonAndCompany = false;
                     event.preventDefault();
                     dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัทให้ครบถ้วน');
 
                 } else {
+                    checkisGroupPersonAndCompany = true;
                     if (isGroupPersonValid) {
                         for (const input of inputsGroupCompany) {
                             input.removeAttribute('required');
@@ -1280,11 +1287,13 @@
                 // เพิ่มเงื่อนไขเช็คว่าถ้ามีการกรอกชุดใดชุดนึงครบแล้ว แต่ก็ยังกรอกอีกช่องนึงให้แจ้งเตือน
                 if (isGroupPersonValid && !isGroupCompanyValid) {
                     if (inputsGroupCompany.some(input => input.value)) {
+                        checkisGroupPersonAndCompany = false;
                         event.preventDefault();
                         dangerAlert('คุณกรอกข้อมูลในชุด บุคคล ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
                     }
                 } else if (!isGroupPersonValid && isGroupCompanyValid) {
                     if (inputsGroupPerson.some(input => input.value)) {
+                        checkisGroupPersonAndCompany = false;
                         event.preventDefault();
                         dangerAlert('คุณกรอกข้อมูลในชุด บริษัท ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
                     }
@@ -1319,6 +1328,197 @@
     </div>
 </div>
 
+
+<style>
+    .loading-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        animation: spin 1s linear infinite;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes drawCheck {
+        0% {
+            transform: scale(0);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .checkmark {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: block;
+        stroke-width: 2;
+        stroke: #29cc39;
+        stroke-miterlimit: 10;
+        margin: 10% auto;
+        box-shadow: inset 0px 0px 0px #ffffff;
+        animation: fill 0.9s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+    }
+
+    .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+    }
+
+    @keyframes stroke {
+        100% {
+            stroke-dashoffset: 0
+        }
+    }
+
+    @keyframes scale {
+
+        0%,
+        100% {
+            transform: none
+        }
+
+        50% {
+            transform: scale3d(1.1, 1.1, 1)
+        }
+    }
+
+    @keyframes fill {
+        100% {
+            box-shadow: inset 0px 0px 0px 60px #fff
+        }
+    }.radius-20{
+        border-radius: 20px;
+    }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content radius-20" >
+            <div class="modal-body p-5">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+
+                    <div class="contrainerCheckmark d-none">
+                         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                        <center>
+                            <h5 class="mt-5">เสร็จสิ้น</h5>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#btnSubmitFormCreateCustomer").click(function() {
+        if ($("#formCreateCustomer")[0].checkValidity())
+            if (checkdemerit && checkisGroupPersonAndCompany) {
+                console.log('sucess');
+                $('#exampleModalCenter').modal('show');
+
+                setTimeout(function() {
+                    document.querySelector(".loading-spinner").style.display = "none";
+                    document.querySelector(".contrainerCheckmark").classList.remove('d-none');
+                }, 3000);
+
+                setTimeout(function() {
+                    formCreateCustomer.submit();
+                }, 4000);
+
+                // formCreateCustomer.submit();
+            } else {
+                console.log('un_sucess');
+            }
+        else
+            //Validate Form
+            $("#formCreateCustomer")[0].reportValidity()
+    });
+</script>
+
+<style>
+    .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 2;
+        stroke-miterlimit: 10;
+        stroke: #7ac142;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+    }
+
+    .checkmark {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: block;
+        stroke-width: 2;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        margin: 10% auto;
+        box-shadow: inset 0px 0px 0px #7ac142;
+        animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+    }
+
+    .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+    }
+
+    @keyframes stroke {
+        100% {
+            stroke-dashoffset: 0
+        }
+    }
+
+    @keyframes scale {
+
+        0%,
+        100% {
+            transform: none
+        }
+
+        50% {
+            transform: scale3d(1.1, 1.1, 1)
+        }
+    }
+
+    @keyframes fill {
+        100% {
+            box-shadow: inset 0px 0px 0px 30px #7ac142
+        }
+    }
+</style>
 <!-- 
 {{-- <div class="form-group {{ $errors->has('rentname') ? 'has-error' : ''}}">
 <label for="rentname" class="control-label">{{ 'Rentname' }}</label>
