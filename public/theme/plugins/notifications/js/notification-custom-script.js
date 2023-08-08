@@ -89,12 +89,13 @@ function dangerAlert(detail) {
 	Lobibox.notify('error', {
 		pauseDelayOnHover: true,
 		size: 'mini',
-		rounded: true,
+		rounded: false,
 		delayIndicator: false,
 		icon: 'bx bx-x-circle',
 		continueDelayOnInactiveTab: false,
 		position: 'top right',
-		msg: detail
+		msg: detail,
+		delay: false
 	});
 }
 function round_error_noti() {
