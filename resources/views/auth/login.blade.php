@@ -386,7 +386,7 @@
 				</div>
 				<div class="form-container sign-in-container">
 					<form class="formLogin row g-3" action="#" method="POST" action="{{ route('login') }}">
-						
+						@csrf
 						<h1 class="headerLogin text-tcra">เข้าสู่ระบบ</h1>
 						<!-- <input class="inputLogin" type="text" placeholder="Name" />
 							<input class="inputLogin" type="email" placeholder="Email" />
