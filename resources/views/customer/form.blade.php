@@ -968,7 +968,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/legal.png')}}" alt="คำฟ้องหรือใบร้องทุกข์ดำเนินดคี" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>คำฟ้องหรือใบร้องทุกข์ดำเนินดคี</span>
+                                        <span>คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
                                     </div>
                                 </div>
 
