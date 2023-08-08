@@ -127,7 +127,8 @@ class DriverController extends Controller
         
         Driver::create($requestData);
 
-        return redirect('driver')->with('flash_message', 'Driver added!');
+        // return redirect('driver')->with('flash_message', 'Driver added!');
+        return redirect()->back();
     }
 
     /**
