@@ -713,8 +713,8 @@
                                     @endif
                                     @if(!empty($customers->c_pic_company_certificate))
                                     <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="ภาพใบบังคับคดี">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="ใบบังคับคดี">
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="สำเนาหนังสือรับรองบริษัท">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="สำเนาหนังสือรับรองบริษัท">
                                             <div class="infoImg">
                                                 <span class="m-0">สำเนาหนังสือรับรองบริษัท</span>
                                             </div>
@@ -724,9 +724,9 @@
                                     @if(!empty($customers->c_pic_indictment))
                                     <div class="item">
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ภาพสัญญาเช่า">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="สัญญาเช่า">
+                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
                                             <div class="infoImg">
-                                                <span class="m-0">คำฟ้องหรือใบร้องทุกขดำเนินคดี</span>
+                                                <span class="m-0">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
                                             </div>
                                         </a>
                                     </div>
