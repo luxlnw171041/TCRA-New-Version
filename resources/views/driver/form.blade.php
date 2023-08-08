@@ -1129,7 +1129,7 @@
                         });
                     </script>
                     <div class="col-12">
-                        <a id="btnSubmitFormCreateDriver" type="submit" class="btn btn-primary px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</a>
+                        <a id="btnSubmitFormCreateDriver" type="submit" class="btn btn-primary px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}" onclick="checkvaluedemerit()">ยืนยัน</a>
                     </div>
                 </div>
             </div>
@@ -1139,6 +1139,7 @@
             const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]');
             const formCreateDriver = document.getElementById('formCreateDriver');
             const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
+            var checkdemerit = false;
 
 
             otherCheckboxes.forEach(function (checkbox) {
@@ -1170,17 +1171,21 @@
             // });
 
 
-            formCreateDriver.addEventListener('submit', function(event) {
+            function checkvaluedemerit() {
                 const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
 
                 if (demeritCheckboxes.length === 0) {
                     console.log('โปรดเลือก');
                     event.preventDefault(); // ป้องกันการส่งฟอร์ม   
                     dangerAlert("กรุณาเลือกลักษณะกระทำความผิดอย่างน้อย 1 อย่าง");
+                    checkdemerit = false;
+
                 } else {
                     console.log('ยืนยัน')
+                    checkdemerit = true;
+
                 }
-            });
+            }
 
             $("#btnSubmitFormCreateDriver").click(function() {
                 if ($("#formCreateDriver")[0].checkValidity())

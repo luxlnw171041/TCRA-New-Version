@@ -28,19 +28,20 @@ class CustomerController extends Controller
         
         $count_search_cus = (int)$data_user->count_search_cus; 
         
-        $count_search_cus += 1; 
+        $requestData = $request->all();
         
-        // ddd($count_search_cus);
-        DB::table('users')
+        if(!empty($requestData)){
+            $count_search_cus += 1; 
+        
+            DB::table('users')
             ->where([
                 ['id', $user_id],
             ])
             ->update([
                 'count_search_cus' => $count_search_cus,
             ]);
-        
-            
-        $requestData = $request->all();
+        }
+
         if (!empty($requestData['c_idno'])) {
             $c_id_no = $requestData['c_idno'];
             $customers = Customer::where('c_idno', $c_id_no)->first();
