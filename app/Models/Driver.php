@@ -25,7 +25,7 @@ class Driver extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'compname', 'commercial_registration', 'd_name', 'd_surname', 'd_idno', 'demerit', 'demeritdetail', 'd_pic_id_card', 'd_pic_lease', 'd_pic_cap', 'd_pic_other', 'd_date'];
+    protected $fillable = ['user_id', 'd_name', 'd_surname', 'd_idno', 'demerit', 'demeritdetail', 'd_pic_id_card', 'd_pic_indictment', 'd_pic_cap', 'd_pic_other', 'd_date'];
 
     public function user()
     {

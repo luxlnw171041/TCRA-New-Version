@@ -90,8 +90,8 @@ class DriverController extends Controller
         if ($request->hasFile('d_pic_id_card')) {
             $requestData['d_pic_id_card'] = $request->file('d_pic_id_card')->store('uploads', 'public');
         }
-        if ($request->hasFile('d_pic_lease')) {
-            $requestData['d_pic_lease'] = $request->file('d_pic_lease')->store('uploads', 'public');
+        if ($request->hasFile('d_pic_indictment')) {
+            $requestData['d_pic_indictment'] = $request->file('d_pic_indictment')->store('uploads', 'public');
         }
         if ($request->hasFile('d_pic_cap')) {
             $requestData['d_pic_cap'] = $request->file('d_pic_cap')->store('uploads', 'public');

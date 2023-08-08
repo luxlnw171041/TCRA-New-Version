@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -21,6 +23,23 @@ class CustomerController extends Controller
         $keyword = $request->get('search');
         $perPage = 25;
 
+        $user_id = Auth::user()->id;
+        $data_user = User::where('id', $user_id)->first();
+        
+        $count_search_cus = (int)$data_user->count_search_cus; 
+        
+        $count_search_cus += 1; 
+        
+        // ddd($count_search_cus);
+        DB::table('users')
+            ->where([
+                ['id', $user_id],
+            ])
+            ->update([
+                'count_search_cus' => $count_search_cus,
+            ]);
+        
+            
         $requestData = $request->all();
         if (!empty($requestData['c_idno'])) {
             $c_id_no = $requestData['c_idno'];

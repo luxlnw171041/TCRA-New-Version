@@ -550,7 +550,7 @@
                 <input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">
                 <label class="form-check-label" for="minimaltheme">Minimal Theme</label>
             </div>
-            <hr />
+            <!-- <hr />
             <h6 class="mb-0">Header Colors</h6>
             <hr />
             <div class="header-colors-indigators">
@@ -611,7 +611,7 @@
                         <div class="indigator sidebarcolor8" id="sidebarcolor8"></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!--end switcher-->

@@ -59,7 +59,7 @@
         top: 60px;
     }
 
-    input[type="datetime-local"].selectDate {
+    input[type="date"].selectDate {
         transition: all .15s ease-in-out;
         display: block;
         position: relative;
@@ -74,7 +74,7 @@
         cursor: pointer;
     }
 
-    input[type="datetime-local"]:focus.selectDate {
+    input[type="date"]:focus.selectDate {
         outline: none;
         border-color: #0a58ca;
         box-shadow: 0 0 0 0.25rem  rgb(10, 88, 202, 0.4);
@@ -98,14 +98,14 @@
     /* open select date picker */
     ::-webkit-calendar-picker-indicator {
         position: absolute;
-        width: 30%;
+        width: 13%;
         height: 100%;
-        top: 0;
-        right: 0;
+        top: 6px;
+        right: 10px;
         bottom: 0;
         opacity: 0;
         cursor: pointer;
-        color: rgb(10, 88, 202);
+        color: rgb(230, 46, 46);
         border: 2px solid rgb(200, 200, 200);
     }
 
@@ -170,38 +170,28 @@
                 <div class="card-title d-flex align-items-center">
                     <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
                     </div>
-                    <h5 class="mb-0 text-primary headerCustomer">เพิ่มข้อมูลพนักงานขับรถ</h5>
+                    <h5 class="mb-0 text-primary headerCustomer">เพิ่มข้อมูล Blacklistพนักงานขับรถ</h5>
                 </div>
                 <hr>
                 <div class="row g-3">
-                    <div class="col-md-4 mt-md-4 ">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
-                        <div class="input-group">
-                            <div class="inputGroup w-100">
-                                <input name="compname" type="text" id="compname" value="{{ isset($customer->compname) ? $customer->compname : '' }}" required="" autocomplete="off">
-                                <label for="compname"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-md-4 " >
-                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off">
-                                <label for="commercial_registration"><i class="fa-solid fa-user"></i> เลขทะเบียนพาณิชย์/เลขนิติบุคคล <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-4 mt-md-4 " >
                         <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
                                 <input name="d_name" type="text" id="d_name" value="{{ isset($customer->d_name) ? $customer->d_name : '' }}" required="" autocomplete="off">
-                                <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อพนักงานขับรถ <span class="text-danger">*</span></label>
+                                <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                    </div><div class="col-md-4 mt-md-4 " >
+                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
+                        <div class="input-group ">
+                            <div class="inputGroup w-100">
+                                <input name="d_surname" type="text" id="d_surname" value="{{ isset($customer->d_surname) ? $customer->d_surname : '' }}" required="" autocomplete="off">
+                                <label for="d_surname"><i class="fa-solid fa-user"></i> นามสกุล <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mt-md-4">
+                    <div class="col-md-4 mt-md-4">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
@@ -210,476 +200,10 @@
                             </div>
                         </div>
                     </div>
-
-                  
-
-                    <div class="col-12">
-                        <label for="inputLastName1" class="form-label subHeaderCustomer">แนบหลักฐานกระทำความผิด <span class="text-danger">*</span></label>
-                    </div>
-                    <style>
-                        .file-upload-box {
-                            position: relative;
-                            width: 100%;
-                            height: 200px;
-                            border: 2px dashed #ccc;
-                            border-radius: 10px;
-                            /* text-align: center; */
-                            cursor: pointer;
-                            overflow: hidden;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center !important;
-                            transition: all .15s ease-in-out;
-                        }
-
-                        .file-upload-box h1 {
-                            text-align: center;
-                        }
-
-                        .file-upload-box:hover {
-                            background-color: #f5f5f5;
-                        }
-
-                        .loader {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            display: none;
-                        }
-
-                        .loader .spinner {
-                            margin-bottom: 10px;
-                            width: 40px;
-                            height: 40px;
-                            border: 4px solid #f3f3f3;
-                            border-top: 4px solid #0a58ca;
-                            border-radius: 50%;
-                            animation: spin 2s linear infinite;
-                            /* เพิ่มคำสั่งต่อไปนี้เพื่อจัดให้สปินเป็นตรงกลาง */
-                            position: relative;
-                            top: 50%;
-                            left: 25%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        @keyframes spin {
-                            0% {
-                                transform: rotate(0deg);
-                            }
-
-                            100% {
-                                transform: rotate(360deg);
-                            }
-                        }
-
-                        .file-preview {
-                            max-width: 100%;
-                            max-height: 100%;
-                            display: none;
-                            cursor: pointer;
-                            object-fit: contain;
-                        }
-
-                        .file-upload-box .upload-text {
-                            margin-top: 10px;
-                            font-size: 16px;
-                            color: #777;
-                        }
-
-                        .file-upload-box .upload-text h1 i {
-                            margin-top: 10px;
-                            font-size: 50px;
-                            color: #777;
-                        }
-
-                        input {
-                            caret-color: #0a58ca;
-                            caret-shape: 50px;
-                        }
-
-                        .infoImg {
-                            display: block;
-                            justify-content: start;
-                            padding: 5px;
-                            position: absolute;
-                            color: #0a58ca;
-                            transition: all .15s ease-in-out;
-                            transform: translateY(200px);
-                            background-color: #fff;
-                            width: 95%;
-                            border-radius: 10px;
-                        }
-
-                        .file-upload-box:hover .infoImg {
-                            color: #0a58ca;
-                            transform: translateY(60px);
-                        }
-
-                        .clear-button {
-                            position: absolute;
-                            top: 10px;
-                            right: 10px;
-                            background-color: #ff3f4d;
-                            border-radius: 50%;
-                            width: 30px;
-                            height: 30px;
-                            color: #fff;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            transition: all .15s ease-in-out;
-                            font-size: 16px;
-                        }
-
-                        .clear-button:hover {
-                            background-color: #cc323d;
-                        }
-
-                        .clear-button:hover i {
-                            transform: scale(1.2);
-                        }
-
-                        .owl-prev {
-                            position: absolute;
-                            left: 0;
-                            top: 40%;
-                            width: 30px;
-                            height: 30px;
-                            background-color: rgb(10, 88, 202) !important;
-                            color: #fff !important;
-                            border-radius: 50% !important;
-                        }
-                        .owl-next {
-                            position: absolute;
-                            right: 0;
-                            top: 40%;
-                            width: 30px;
-                            height: 30px;
-                            background-color: rgb(10, 88, 202) !important;
-                            color: #fff !important;
-                            border-radius: 50% !important;
-                        }
-
-                        .owl-prev *,
-                        .owl-next * {
-                            font-size: 20px;
-                        }
-
-                        .infoImg .imgName {
-                            white-space: nowrap;
-                            width: 100%;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-                    </style>
-                    <div class="selectPhoto">
-
-                        <div class="owl-carousel owl-theme carouselSelectPhoto">
-
-                            <div class="item">
-                                <!-- <input type="file" id="avatar" name="avatar"accept="image/png, image/jpeg"> -->
-                                <!-- <label class="inputSelectFile" for="c_pic_execution">d</label>
-                                <input class="form-control d-none" name="c_pic_execution" type="file" id="c_pic_execution" value="{{ isset($customer->c_pic_execution) ? $customer->c_pic_execution : '' }}"> -->
-                                    <style>
-                                        .imgUpLoad{
-                                            width: 75px !important;
-                                            height: 75px !important;
-                                        }.upload-id-card:hover{
-                                            background-color: rgb(114, 85, 206 , 0.2) !important;
-                                        }.upload-id-card:hover .upload-text{
-                                            color: #7255ce !important;
-                                        }
-
-                                        .upload-lease:hover{
-                                            background-color: rgb(39, 166, 255 , 0.2) !important;
-                                        }.upload-lease:hover .upload-text{
-                                            color: #1f496e !important;
-                                        }
-
-                                        .upload-execution:hover{
-                                            background-color: rgb(221, 125, 0 , 0.2) !important;
-                                        }.upload-execution:hover .upload-text{
-                                            color: #dd7d00 !important;
-                                        }
-
-                                        .upload-capture:hover{
-                                            background-color: rgb(0, 51, 112, 0.2) !important;
-
-                                        }.upload-capture:hover .upload-text{
-                                            color: #003370 !important;
-                                        }
-
-                                        .upload-other:hover{
-                                            background-color: rgb(255, 68, 68 , 0.2) !important;
-                                        }.upload-other:hover .upload-text{
-                                            color: #ff4444 !important;
-                                        }
-                                    </style>
-                                <div class="file-upload-box upload-id-card">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="d_pic_id_card" name="d_pic_id_card" value="{{ isset($pet->d_pic_id_card) ? $pet->d_pic_id_card : ''}}" accept="image/*" style="display: none;">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-                                 
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/id-card.png')}}" alt="User" class="imgUpLoad" width="50">
-                                        </div>
-                                       <span>สำเนาบัตรประชาชน</span> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- <h6>ภาพใบบังคับคดี</h6> -->
-                                <div class="file-upload-box upload-lease">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="d_pic_lease" name="d_pic_lease" value="{{ isset($pet->d_pic_lease) ? $pet->d_pic_lease : ''}}" accept="image/*" style="display: none;">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/document.png')}}" alt="User" class="imgUpLoad" width="50">
-                                        </div>
-                                       <span>ใบบังคับคดี</span> 
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <!-- <h6>ภาพแคป</h6> -->
-                                <div class="file-upload-box upload-capture">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="d_pic_cap" name="d_pic_cap" value="{{ isset($pet->d_pic_cap) ? $pet->d_pic_cap : ''}}" accept="image/*" style="display: none;">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/chat.png')}}" alt="User" class="imgUpLoad" width="50">
-                                        </div>
-                                       <span>หลักฐานการพูด-คุย</span> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- <h6>ภาพอื่นๆ</h6> -->
-                                <div class="file-upload-box upload-other">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="d_pic_other" name="d_pic_other" value="{{ isset($pet->d_pic_other) ? $pet->d_pic_other : ''}}" accept="image/*" style="display: none;">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/other.png')}}" alt="User" class="imgUpLoad" width="50">
-                                        </div>
-                                       <span>อื่นๆ</span> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <script>
-                        function handleFileUpload(fileUploadBox) {
-                            const fileInput = fileUploadBox.querySelector('input[type="file"]');
-                            const loader = fileUploadBox.querySelector('.loader');
-                            const filePreview = fileUploadBox.querySelector('.file-preview');
-                            const uploadText = fileUploadBox.querySelector('.upload-text');
-                            const infoImg = fileUploadBox.querySelector('.infoImg');
-                            const clearButton = fileUploadBox.querySelector('#clear-button');
-                            let isClearButtonClicked = false;
-
-                            clearButton.addEventListener('click', function() {
-                                fileInput.value = null; // เคลียร์ค่า input file
-                                filePreview.src = ''; // เคลียร์ค่าภาพตัวอย่าง
-                                filePreview.style.display = 'none';
-                                uploadText.style.display = 'block';
-                                clearButton.style.display = 'none';
-                                infoImg.style.display = 'none';
-                                isClearButtonClicked = true;
-                            });
-
-                            fileUploadBox.addEventListener('click', function() {
-                                fileInput.value = null; // เคลียร์ค่า input file
-                                if (!isClearButtonClicked) {
-                                    fileInput.click();
-                                }
-
-                                isClearButtonClicked = false;
-                            });
-
-                            fileInput.addEventListener('change', function(event) {
-                                const file = event.target.files[0];
-                                const fileName = file.name;
-                                const fileSize = formatFileSize(file.size);
-                                const fileExtension = getFileExtension(fileName);
-                                const imgName = fileUploadBox.querySelector('.imgName');
-                                const imgSize = fileUploadBox.querySelector('.imgSize');
-                                const imgFile = fileUploadBox.querySelector('.imgFile');
-
-                                // ลบนามสกุลไฟล์
-                                const lastDotIndex = fileName.lastIndexOf('.');
-                                const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
-
-                                if (file) {
-                                    // ตรวจสอบอัพโหลดรูปเท่านั้น
-                                    if (file.type.includes('image')) {
-                                        // console.log("รูป");
-                                        const reader = new FileReader();
-                                        loader.style.display = 'block';
-                                        filePreview.style.display = 'none';
-                                        infoImg.style.display = 'none';
-                                        uploadText.style.display = 'none';
-                                        clearButton.style.display = 'none';
-
-
-                                        reader.onload = function(e) {
-                                            setTimeout(function() {
-                                                loader.style.display = 'none';
-                                                filePreview.src = e.target.result;
-                                                filePreview.style.display = 'block';
-                                                infoImg.style.display = 'block';
-                                                clearButton.style.display = 'block';
-
-                                                imgName.textContent = fileNameWithoutExtension;
-                                                imgSize.textContent = fileSize + ' | ';
-                                                imgFile.textContent = fileExtension;
-                                            }, 2000);
-                                        };
-
-                                        reader.readAsDataURL(file);
-
-                                    } else {
-                                        // console.log("ไม่รูป");
-                                        upload_file_error();
-                                    }
-                                } else {
-                                    // กรณีไม่มีการเลือกไฟล์ใหม่
-                                    loader.style.display = 'none';
-                                    filePreview.style.display = 'none';
-                                    uploadText.style.display = 'block';
-                                    clearButton.style.display = 'none';
-                                }
-
-
-
-
-                            });
-
-
-                        }
-
-                        // เรียกใช้ฟังก์ชันสำหรับแต่ละกล่องอัพโหลด
-                        const fileUploadBoxes = document.querySelectorAll('.file-upload-box');
-                        fileUploadBoxes.forEach(function(fileUploadBox) {
-                            handleFileUpload(fileUploadBox);
-                        });
-
-                        function formatFileSize(fileSize) {
-                            if (fileSize === 0) return '0 Bytes';
-
-                            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-                            const k = 1024;
-                            const i = Math.floor(Math.log(fileSize) / Math.log(k));
-
-                            return parseFloat((fileSize / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-                        }
-
-                        function getFileExtension(fileName) {
-                            return fileName.slice((fileName.lastIndexOf('.') - 1 >>> 0) + 2);
-                        }
-                    </script>
-                    <script>
-                        $(function() {
-                            // Owl Carousel
-                            var owl = $(".carouselSelectPhoto");
-                            owl.owlCarousel({
-                                margin: 10,
-                                loop: false,
-                                nav: true,
-                                // autoWidth: true,
-                                // items: 4,
-                                dots: false,
-                                responsive: {
-                                    0: {
-                                        items: 1
-                                    },
-                                    600: {
-                                        items: 2
-                                    },
-                                    900: {
-                                        items: 2
-                                    },
-                                    1000: {
-                                        items: 3
-                                    },
-                                    2000: {
-                                        items: 4
-                                    }
-                                }
-                            });
-                        });
-                    </script>
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">ลักษณะกระทำความผิด <span class="text-danger">*</span></label>
                     </div>
-                    <div class="col-12 mb-md-3">
+                    <div class="col-12 mb-md-0">
                         <ul class="nav nav-pills mb-3" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navDanger active" data-bs-toggle="pill" href="#corrupt" role="tab" aria-selected="true">
@@ -776,7 +300,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">อื่นๆ</span>
+                                            <span class="radio-label">6.อื่นๆ</span>
                                         </span>
                                     </label>
                                 </div>
@@ -788,7 +312,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">6.ทิ้งงาน</span>
+                                            <span class="radio-label">7.ทิ้งงาน</span>
                                         </span>
                                     </label>
                                     <label>
@@ -796,7 +320,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">7.ทะเลาะวิวาท</span>
+                                            <span class="radio-label">8.ทะเลาะวิวาท</span>
                                         </span>
                                     </label>
                                     <label>
@@ -804,7 +328,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">8.ยืมเงินลูกค้า</span>
+                                            <span class="radio-label">9.ยืมเงินลูกค้า</span>
                                         </span>
                                     </label>
                                     <label>
@@ -812,7 +336,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">9.ไม่เก็บรักษาความลับ</span>
+                                            <span class="radio-label">10.ไม่เก็บรักษาความลับ</span>
                                         </span>
                                     </label>
                                     <label>
@@ -820,7 +344,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">10.ปิดมือถือติดต่อไม่ได้</span>
+                                            <span class="radio-label">11.ปิดมือถือติดต่อไม่ได้</span>
                                         </span>
                                     </label>
                                     <label>
@@ -828,7 +352,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">11.โกหกบ่อยครั้ง</span>
+                                            <span class="radio-label">12.โกหกบ่อยครั้ง</span>
                                         </span>
                                     </label>
                                     <label>
@@ -836,7 +360,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">12.ฟ้องร้องนายจ้างหรือร้องตรวจแรงงานที่เป็นเท็จ</span>
+                                            <span class="radio-label">13.ฟ้องร้องนายจ้างหรือร้องตรวจแรงงานที่เป็นเท็จ</span>
                                         </span>
                                     </label>
                                     <label>
@@ -844,7 +368,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">อื่นๆ</span>
+                                            <span class="radio-label">14.อื่นๆ</span>
                                         </span>
                                     </label>
                                 </div>
@@ -856,7 +380,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">14.ขับรถอันตราย</span>
+                                            <span class="radio-label">15.ขับรถอันตราย</span>
                                         </span>
                                     </label>
                                     <label>
@@ -864,7 +388,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">15.มาสาย</span>
+                                            <span class="radio-label">16.มาสาย</span>
                                         </span>
                                     </label>
                                     <label>
@@ -872,7 +396,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">16.สตาร์ทรถรอลูกค้า</span>
+                                            <span class="radio-label">17.สตาร์ทรถรอลูกค้า</span>
                                         </span>
                                     </label>
                                     <label>
@@ -880,7 +404,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">17.ทัศนคติ/การบริการไม่ดี</span>
+                                            <span class="radio-label">18.ทัศนคติ/การบริการไม่ดี</span>
                                         </span>
                                     </label>
                                     <label>
@@ -888,7 +412,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">18.ไม่รู้เส้นทาง</span>
+                                            <span class="radio-label">19.ไม่รู้เส้นทาง</span>
                                         </span>
                                     </label>
                                     <label>
@@ -896,7 +420,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">19.ขัดคำสั่งลูกค้า/นายจ้าง</span>
+                                            <span class="radio-label">20.ขัดคำสั่งลูกค้า/นายจ้าง</span>
                                         </span>
                                     </label>
                                     <label>
@@ -904,7 +428,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">20.แต่งกาย/พูดจา ไม่สุภาพ</span>
+                                            <span class="radio-label">21.แต่งกาย/พูดจา ไม่สุภาพ</span>
                                         </span>
                                     </label>
                                     <label>
@@ -912,7 +436,7 @@
                                         <span class="radio-tile">
                                             <span class="radio-icon">
                                             </span>
-                                            <span class="radio-label">อื่นๆ</span>
+                                            <span class="radio-label">22.อื่นๆ</span>
                                         </span>
                                     </label>
                                 </div>
@@ -1132,16 +656,480 @@
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">วันที่กระทำความผิด <span class="text-danger">*</span></label>
                     </div>
-                    <div class="col-md-6 mt-md-1">
+                    <div class="col-md-6 mt-md-1 mb-md-2">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup ">
-                                <input name="d_date" id="d_date" class="selectDate" type="datetime-local" min="2005-01-01" max="201101-01" required>
+                                <input name="d_date" id="d_date" class="selectDate" type="date" required>
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 mt-2">
+                        <label for="inputLastName1" class="form-label subHeaderCustomer">แนบหลักฐานกระทำความผิด</label>
+                    </div>
+                    <style>
+                        .file-upload-box {
+                            position: relative;
+                            width: 100%;
+                            height: 200px;
+                            border: 2px dashed #ccc;
+                            border-radius: 10px;
+                            /* text-align: center; */
+                            cursor: pointer;
+                            overflow: hidden;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center !important;
+                            transition: all .15s ease-in-out;
+                        }
+
+                        .file-upload-box h1 {
+                            text-align: center;
+                        }
+
+                        .file-upload-box:hover {
+                            background-color: #f5f5f5;
+                        }
+
+                        .loader {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            display: none;
+                        }
+
+                        .loader .spinner {
+                            margin-bottom: 10px;
+                            width: 40px;
+                            height: 40px;
+                            border: 4px solid #f3f3f3;
+                            border-top: 4px solid #0a58ca;
+                            border-radius: 50%;
+                            animation: spin 2s linear infinite;
+                            /* เพิ่มคำสั่งต่อไปนี้เพื่อจัดให้สปินเป็นตรงกลาง */
+                            position: relative;
+                            top: 50%;
+                            left: 25%;
+                            transform: translate(-50%, -50%);
+                        }
+
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+
+                        .file-preview {
+                            max-width: 100%;
+                            max-height: 100%;
+                            display: none;
+                            cursor: pointer;
+                            object-fit: contain;
+                        }
+
+                        .file-upload-box .upload-text {
+                            margin-top: 10px;
+                            font-size: 16px;
+                            color: #777;
+                        }
+
+                        .file-upload-box .upload-text h1 i {
+                            margin-top: 10px;
+                            font-size: 50px;
+                            color: #777;
+                        }
+
+                        input {
+                            caret-color: #0a58ca;
+                            caret-shape: 50px;
+                        }
+
+                        .infoImg {
+                            display: block;
+                            justify-content: start;
+                            padding: 5px;
+                            position: absolute;
+                            color: #0a58ca;
+                            transition: all .15s ease-in-out;
+                            transform: translateY(200px);
+                            background-color: #fff;
+                            width: 95%;
+                            border-radius: 10px;
+                        }
+
+                        .file-upload-box:hover .infoImg {
+                            color: #0a58ca;
+                            transform: translateY(60px);
+                        }
+
+                        .clear-button {
+                            position: absolute;
+                            top: 10px;
+                            right: 10px;
+                            background-color: #ff3f4d;
+                            border-radius: 50%;
+                            width: 30px;
+                            height: 30px;
+                            color: #fff;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: all .15s ease-in-out;
+                            font-size: 16px;
+                        }
+
+                        .clear-button:hover {
+                            background-color: #cc323d;
+                        }
+
+                        .clear-button:hover i {
+                            transform: scale(1.2);
+                        }
+
+                        .owl-prev {
+                            position: absolute;
+                            left: 0;
+                            top: 40%;
+                            width: 30px;
+                            height: 30px;
+                            background-color: rgb(10, 88, 202) !important;
+                            color: #fff !important;
+                            border-radius: 50% !important;
+                        }
+                        .owl-next {
+                            position: absolute;
+                            right: 0;
+                            top: 40%;
+                            width: 30px;
+                            height: 30px;
+                            background-color: rgb(10, 88, 202) !important;
+                            color: #fff !important;
+                            border-radius: 50% !important;
+                        }
+
+                        .owl-prev *,
+                        .owl-next * {
+                            font-size: 20px;
+                        }
+
+                        .infoImg .imgName {
+                            white-space: nowrap;
+                            width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    </style>
+                    <div class="selectPhoto">
+
+                        <div class="owl-carousel owl-theme carouselSelectPhoto">
+
+                            <div class="item">
+                                <!-- <input type="file" id="avatar" name="avatar"accept="image/png, image/jpeg"> -->
+                                <!-- <label class="inputSelectFile" for="c_pic_execution">d</label>
+                                <input class="form-control d-none" name="c_pic_execution" type="file" id="c_pic_execution" value="{{ isset($customer->c_pic_execution) ? $customer->c_pic_execution : '' }}"> -->
+                                    <style>
+                                        .imgUpLoad{
+                                            width: 75px !important;
+                                            height: 75px !important;
+                                        }.upload-id-card:hover{
+                                            background-color: rgb(114, 85, 206 , 0.2) !important;
+                                        }.upload-id-card:hover .upload-text{
+                                            color: #7255ce !important;
+                                        }
+
+                                        .upload-lease:hover{
+                                            background-color: rgb(39, 166, 255 , 0.2) !important;
+                                        }.upload-lease:hover .upload-text{
+                                            color: #1f496e !important;
+                                        }
+
+                                        .upload-execution:hover{
+                                            background-color: rgb(221, 125, 0 , 0.2) !important;
+                                        }.upload-execution:hover .upload-text{
+                                            color: #dd7d00 !important;
+                                        }
+
+                                        .upload-capture:hover{
+                                            background-color: rgb(0, 51, 112, 0.2) !important;
+
+                                        }.upload-capture:hover .upload-text{
+                                            color: #003370 !important;
+                                        }
+
+                                        .upload-other:hover{
+                                            background-color: rgb(255, 68, 68 , 0.2) !important;
+                                        }.upload-other:hover .upload-text{
+                                            color: #ff4444 !important;
+                                        }
+                                    </style>
+                                <div class="file-upload-box upload-id-card">
+                                    <div id="clear-button" style="display: none;">
+                                        <span class="clear-button">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </span>
+                                    </div>
+                                    <input type="file" id="d_pic_id_card" name="d_pic_id_card" value="{{ isset($driver->d_pic_id_card) ? $driver->d_pic_id_card : ''}}" accept="image/*" style="display: none;">
+                                    <div class="loader">
+                                        <div class="spinner"></div>
+                                        <p>กำลังอัปโหลด...</p>
+                                    </div>
+                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
+                                    <div class="infoImg" style="display: none;">
+                                        <span class="m-0 imgName"></span>
+                                        <p class="m-0">
+                                            <span class="imgSize"></span>
+                                            <span class="imgFile"></span>
+                                        </p>
+                                    </div>
+                                 
+                                    <div class="upload-text text-center">
+                                        <div class="w-100 d-flex justify-content-center mb-3">
+                                            <img src="{{asset('img/icon/id-card.png')}}" alt="User" class="imgUpLoad" width="50">
+                                        </div>
+                                       <span>สำเนาบัตรประชาชน <br> Passport</span> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <!-- <h6>สัญญาเช่า</h6> -->
+                                <div class="file-upload-box upload-execution">
+                                    <div id="clear-button" style="display: none;">
+                                        <span class="clear-button">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </span>
+                                    </div>
+                                    <input type="file" id="c_pic_indictment" name="c_pic_indictment" value="{{ isset($driver->c_pic_indictment) ? $driver->c_pic_indictment : ''}}" accept="image/*" style="display: none;">
+                                    <div class="loader">
+                                        <div class="spinner"></div>
+                                        <p>กำลังอัปโหลด...</p>
+                                    </div>
+                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
+                                    <div class="infoImg" style="display: none;">
+                                        <span class="m-0 imgName"></span>
+                                        <p class="m-0">
+                                            <span class="imgSize"></span>
+                                            <span class="imgFile"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="upload-text text-center">
+                                        <div class="w-100 d-flex justify-content-center mb-3">
+                                            <img src="{{asset('img/icon/legal.png')}}" alt="คำฟ้องหรือใบร้องทุกข์ดำเนินดคี" class="imgUpLoad" width="50">
+                                        </div>
+                                        <span>คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <!-- <h6>ภาพแคป</h6> -->
+                                <div class="file-upload-box upload-capture">
+                                    <div id="clear-button" style="display: none;">
+                                        <span class="clear-button">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </span>
+                                    </div>
+                                    <input type="file" id="d_pic_cap" name="d_pic_cap" value="{{ isset($driver->d_pic_cap) ? $driver->d_pic_cap : ''}}" accept="image/*" style="display: none;">
+                                    <div class="loader">
+                                        <div class="spinner"></div>
+                                        <p>กำลังอัปโหลด...</p>
+                                    </div>
+                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
+                                    <div class="infoImg" style="display: none;">
+                                        <span class="m-0 imgName"></span>
+                                        <p class="m-0">
+                                            <span class="imgSize"></span>
+                                            <span class="imgFile"></span>
+                                        </p>
+                                    </div>
+                                    <div class="upload-text text-center">
+                                        <div class="w-100 d-flex justify-content-center mb-3">
+                                            <img src="{{asset('img/icon/chat.png')}}" alt="User" class="imgUpLoad" width="50">
+                                        </div>
+                                       <span>หลักฐานการพูด-คุย</span> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <!-- <h6>ภาพอื่นๆ</h6> -->
+                                <div class="file-upload-box upload-other">
+                                    <div id="clear-button" style="display: none;">
+                                        <span class="clear-button">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </span>
+                                    </div>
+                                    <input type="file" id="d_pic_other" name="d_pic_other" value="{{ isset($driver->d_pic_other) ? $driver->d_pic_other : ''}}" accept="image/*" style="display: none;">
+                                    <div class="loader">
+                                        <div class="spinner"></div>
+                                        <p>กำลังอัปโหลด...</p>
+                                    </div>
+                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
+                                    <div class="infoImg" style="display: none;">
+                                        <span class="m-0 imgName"></span>
+                                        <p class="m-0">
+                                            <span class="imgSize"></span>
+                                            <span class="imgFile"></span>
+                                        </p>
+                                    </div>
+                                    <div class="upload-text text-center">
+                                        <div class="w-100 d-flex justify-content-center mb-3">
+                                            <img src="{{asset('img/icon/other.png')}}" alt="User" class="imgUpLoad" width="50">
+                                        </div>
+                                       <span>อื่นๆ</span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function handleFileUpload(fileUploadBox) {
+                            const fileInput = fileUploadBox.querySelector('input[type="file"]');
+                            const loader = fileUploadBox.querySelector('.loader');
+                            const filePreview = fileUploadBox.querySelector('.file-preview');
+                            const uploadText = fileUploadBox.querySelector('.upload-text');
+                            const infoImg = fileUploadBox.querySelector('.infoImg');
+                            const clearButton = fileUploadBox.querySelector('#clear-button');
+                            let isClearButtonClicked = false;
+
+                            clearButton.addEventListener('click', function() {
+                                fileInput.value = null; // เคลียร์ค่า input file
+                                filePreview.src = ''; // เคลียร์ค่าภาพตัวอย่าง
+                                filePreview.style.display = 'none';
+                                uploadText.style.display = 'block';
+                                clearButton.style.display = 'none';
+                                infoImg.style.display = 'none';
+                                isClearButtonClicked = true;
+                            });
+
+                            fileUploadBox.addEventListener('click', function() {
+                                fileInput.value = null; // เคลียร์ค่า input file
+                                if (!isClearButtonClicked) {
+                                    fileInput.click();
+                                }
+
+                                isClearButtonClicked = false;
+                            });
+
+                            fileInput.addEventListener('change', function(event) {
+                                const file = event.target.files[0];
+                                const fileName = file.name;
+                                const fileSize = formatFileSize(file.size);
+                                const fileExtension = getFileExtension(fileName);
+                                const imgName = fileUploadBox.querySelector('.imgName');
+                                const imgSize = fileUploadBox.querySelector('.imgSize');
+                                const imgFile = fileUploadBox.querySelector('.imgFile');
+
+                                // ลบนามสกุลไฟล์
+                                const lastDotIndex = fileName.lastIndexOf('.');
+                                const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
+
+                                if (file) {
+                                    // ตรวจสอบอัพโหลดรูปเท่านั้น
+                                    if (file.type.includes('image')) {
+                                        // console.log("รูป");
+                                        const reader = new FileReader();
+                                        loader.style.display = 'block';
+                                        filePreview.style.display = 'none';
+                                        infoImg.style.display = 'none';
+                                        uploadText.style.display = 'none';
+                                        clearButton.style.display = 'none';
+
+
+                                        reader.onload = function(e) {
+                                            setTimeout(function() {
+                                                loader.style.display = 'none';
+                                                filePreview.src = e.target.result;
+                                                filePreview.style.display = 'block';
+                                                infoImg.style.display = 'block';
+                                                clearButton.style.display = 'block';
+
+                                                imgName.textContent = fileNameWithoutExtension;
+                                                imgSize.textContent = fileSize + ' | ';
+                                                imgFile.textContent = fileExtension;
+                                            }, 2000);
+                                        };
+
+                                        reader.readAsDataURL(file);
+
+                                    } else {
+                                        // console.log("ไม่รูป");
+                                        upload_file_error();
+                                    }
+                                } else {
+                                    // กรณีไม่มีการเลือกไฟล์ใหม่
+                                    loader.style.display = 'none';
+                                    filePreview.style.display = 'none';
+                                    uploadText.style.display = 'block';
+                                    clearButton.style.display = 'none';
+                                }
+
+
+
+
+                            });
+
+
+                        }
+
+                        // เรียกใช้ฟังก์ชันสำหรับแต่ละกล่องอัพโหลด
+                        const fileUploadBoxes = document.querySelectorAll('.file-upload-box');
+                        fileUploadBoxes.forEach(function(fileUploadBox) {
+                            handleFileUpload(fileUploadBox);
+                        });
+
+                        function formatFileSize(fileSize) {
+                            if (fileSize === 0) return '0 Bytes';
+
+                            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                            const k = 1024;
+                            const i = Math.floor(Math.log(fileSize) / Math.log(k));
+
+                            return parseFloat((fileSize / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+                        }
+
+                        function getFileExtension(fileName) {
+                            return fileName.slice((fileName.lastIndexOf('.') - 1 >>> 0) + 2);
+                        }
+                    </script>
+                    <script>
+                        $(function() {
+                            // Owl Carousel
+                            var owl = $(".carouselSelectPhoto");
+                            owl.owlCarousel({
+                                margin: 10,
+                                loop: false,
+                                nav: true,
+                                // autoWidth: true,
+                                // items: 4,
+                                dots: false,
+                                responsive: {
+                                    0: {
+                                        items: 1
+                                    },
+                                    600: {
+                                        items: 2
+                                    },
+                                    900: {
+                                        items: 2
+                                    },
+                                    1000: {
+                                        items: 3
+                                    },
+                                    2000: {
+                                        items: 4
+                                    }
+                                }
+                            });
+                        });
+                    </script>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</button>
+                        <a id="btnSubmitFormCreateDriver" type="submit" class="btn btn-primary px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</a>
                     </div>
                 </div>
             </div>
@@ -1192,6 +1180,14 @@
                 } else {
                     console.log('ยืนยัน')
                 }
+            });
+
+            $("#btnSubmitFormCreateDriver").click(function() {
+                if ($("#formCreateDriver")[0].checkValidity())
+                    console.log('sucess');
+                else
+                    //Validate Form
+                    $("#formCreateDriver")[0].reportValidity()
             });
         </script>
         <div class="col-sm-12">

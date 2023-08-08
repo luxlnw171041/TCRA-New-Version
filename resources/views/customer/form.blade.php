@@ -819,7 +819,7 @@
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup ">
-                                <input name="c_date" id="c_date" class="selectDate" type="date" min="2005-01-01" max="201101-01" required>
+                                <input name="c_date" id="c_date" class="selectDate" type="date" required>
                             </div>
                         </div>
                     </div>
@@ -890,7 +890,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_id_card" name="c_pic_id_card" value="{{ isset($pet->c_pic_id_card) ? $pet->c_pic_id_card : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_id_card" name="c_pic_id_card" value="{{ isset($customer->c_pic_id_card) ? $customer->c_pic_id_card : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -920,7 +920,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_company_certificate" name="c_pic_company_certificate" value="{{ isset($pet->c_pic_company_certificate) ? $pet->c_pic_company_certificate : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_company_certificate" name="c_pic_company_certificate" value="{{ isset($customer->c_pic_company_certificate) ? $customer->c_pic_company_certificate : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -950,7 +950,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_indictment" name="c_pic_indictment" value="{{ isset($pet->c_pic_indictment) ? $pet->c_pic_indictment : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_indictment" name="c_pic_indictment" value="{{ isset($customer->c_pic_indictment) ? $customer->c_pic_indictment : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -971,7 +971,6 @@
                                         <span>คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="item">
                                 <!-- <h6>ภาพแคป</h6> -->
@@ -981,7 +980,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_cap" name="c_pic_cap" value="{{ isset($pet->c_pic_cap) ? $pet->c_pic_cap : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_cap" name="c_pic_cap" value="{{ isset($customer->c_pic_cap) ? $customer->c_pic_cap : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -1010,7 +1009,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_other" name="c_pic_other" value="{{ isset($pet->c_pic_other) ? $pet->c_pic_other : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_other" name="c_pic_other" value="{{ isset($customer->c_pic_other) ? $customer->c_pic_other : ''}}" accept="image/*" style="display: none;">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>

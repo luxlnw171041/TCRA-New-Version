@@ -520,7 +520,7 @@
                         <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
                             <div class="w-100 d-flex justify-content-center">
                                 <div>
-                                     ค้นหาข้อมูลมิฉาชีพ <br>
+                                    <span style="font-size: 18px;" class="m-0 p-0">ข้อมูลมิจฉาชีพ(เช่ารถ)</span>  <br>
                                 <div class="checkbox-wrapper-35">
                                     <input value="company" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch"value="{{ request('switchforSearch') }}" onclick="toggleDivsswitchforSearch()">
                                     <label for="switchforSearch">
