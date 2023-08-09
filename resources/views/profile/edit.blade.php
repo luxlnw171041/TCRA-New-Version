@@ -160,79 +160,79 @@
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div>
+                                        <div style="width:90%;">
                                             <p class="mb-0 text-secondary">ชื่อ-นามสกุล</p>
+                                            <input type="text" style="width:100%;" class="form-control" name="member_name" value="{{ $user->member_name }}">
                                         </div>
                                         <div class="widgets-icons bg-light-primary text-primary ms-auto">
                                             <i class="fa-solid fa-signature"></i>
                                         </div>
                                     </div>
-                                    <input type="text" style="width:90%;" class="form-control" name="member_name" value="{{ $user->member_name }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div>
+                                        <div style="width:90%;" >
                                             <p class="mb-0 text-secondary">ชื่อโปรไฟล์</p>
+                                            <input type="text" style="width:100%;" class="form-control" name="name" value="{{ $user->name }}">
                                         </div>
                                         <div class="widgets-icons bg-light-success text-success ms-auto">
                                             <i class="fa-sharp fa-solid fa-input-text"></i>
                                         </div>
                                     </div>
-                                    <input type="text" style="width:90%;" class="form-control" name="name" value="{{ $user->name }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div>
+                                        <div style="width:90%;" >
                                             <p class="mb-0 text-secondary">เบอร์ติดต่อ</p>
+                                            <input type="text" style="width:100%;" class="form-control" name="member_tel" value="{{ $user->member_tel }}">
                                         </div>
                                         <div class="widgets-icons bg-light-danger text-danger ms-auto">
                                             <i class="fa-solid fa-phone"></i>
                                         </div>
                                     </div>
-                                    <input type="text" style="width:90%;" class="form-control" name="member_tel" value="{{ $user->member_tel }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div>
+                                        <div style="width:90%;" >
                                             <p class="mb-0 text-secondary">อีเมล</p>
+                                            <input type="text" style="width:100%;" class="form-control" name="email" value="{{ $user->email }}">
                                         </div>
                                         <div class="widgets-icons bg-light-warning text-warning ms-auto">
                                             <i class="fa-solid fa-at"></i>
                                         </div>
                                     </div>
-                                    <input type="text" style="width:90%;" class="form-control" name="email" value="{{ $user->email }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div>
+                                        <div style="width:90%;" >
                                             <p class="mb-0 text-secondary">บริษัท</p>
+                                            <input type="text" style="width:100%;" class="form-control" name="member_co" value="{{ $user->member_co }}">
                                         </div>
                                         <div class="widgets-icons bg-light-info text-info ms-auto">
                                             <i class="fa-regular fa-building"></i>
                                         </div>
                                     </div>
-                                    <input type="text" style="width:90%;" class="form-control" name="member_co" value="{{ $user->member_co }}">
                                 </div>
                             </div>
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <div>
+                                        <div style="width:90%;" >
                                             <p class="mb-0 text-secondary">ที่อยู่</p>
+                                            <textarea style="width:100%;" rows="4" class="form-control" name="member_addr">{{ $user->member_addr }}</textarea>
                                         </div>
                                         <div class="widgets-icons bg-light-secondary text-secondary ms-auto">
                                             <i class="fa-sharp fa-solid fa-map-location-dot"></i>
                                         </div>
                                     </div>
-                                    <textarea style="width:90%;" rows="4" class="form-control" name="member_addr">{{ $user->member_addr }}</textarea>
                                 </div>
                             </div>
                             <div class="row">

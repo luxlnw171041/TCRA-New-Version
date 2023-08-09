@@ -430,7 +430,7 @@
                         <h5 class="mb-0 text-danger headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบริษัท</h5>
                     </div>
                     <div class="row g-3 mt-3">
-                        <div class="col-md-4 mt-md-0 d-nonee" id="input_c_company_name">
+                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 d-none" id="input_c_company_name">
                             <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                             <div class="input-group">
                                 <div class="inputGroup w-100">
@@ -439,7 +439,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mt-md-0 d-nonee" id="input_commercial_registration">
+                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 d-none" id="input_commercial_registration">
                             <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                             <div class="input-group ">
                                 <div class="inputGroup w-100">
