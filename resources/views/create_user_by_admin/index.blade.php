@@ -737,7 +737,7 @@ button:focus.btnAddUser {
                     <div class="col-12">
 
                         <div class="table-responsive">
-                            <table id="table_show_member" class="table table-striped table-bordered align-middle mb-0 text-center">
+                            <table id="table_show_member" class="table table-striped table-bordered align-middle text-center">
                                 <thead>
                                     <tr>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ</th>
@@ -756,20 +756,6 @@ button:focus.btnAddUser {
                                         <th style="color:blue;">พขร</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th rowspan="2" style="vertical-align: middle;">ลำดับ</th>
-                                        <th rowspan="2" style="vertical-align: middle;">เลขที่สมาชิก</th>
-                                        <th rowspan="2" style="vertical-align: middle;">บริษัท</th>
-                                        <th rowspan="2" style="vertical-align: middle;">สิทธิ์การใช้งาน</th>
-                                        <th style="color:#02ad13;">มิจฉาชีพ</th>
-                                        <th style="color:#02ad13;">พขร</th>
-                                        <th style="color:blue;">มิจฉาชีพ</th>
-                                        <th style="color:blue;">พขร</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
                                 <tbody id="data_command_user_tbody">
                                     @foreach($data_member as $item)
                                         <tr>
@@ -868,75 +854,26 @@ button:focus.btnAddUser {
                                         </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th rowspan="2" style="vertical-align: middle;">ลำดับ</th>
+                                        <th rowspan="2" style="vertical-align: middle;">เลขที่สมาชิก</th>
+                                        <th rowspan="2" style="vertical-align: middle;">บริษัท</th>
+                                        <th rowspan="2" style="vertical-align: middle;">สิทธิ์การใช้งาน</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
 
                             </table>
                         </div>
 
                     </div>
                 </div>
-
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-                <br class="mt-4 mb-4 d-none">
-
-                @foreach($data_member as $item_2)
-                <div class="row g-0 d-none">
-                    <div class="col-2">
-                        <center>
-                            <img src="{{ url('storage')}}/{{ $item_2->member_pic }}" class="card-img" style="width:80%;">
-                        </center>
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                {{ $item_2->member_co }}
-                            </h5>
-                            <p class="card-text" style="line-height: 1.8;">
-                                ลงข้อมูลมิจฉาชีพ (เช่ารถ) : 0 ครั้ง <br>
-                                ค้นหาข้อมูลมิจฉาชีพ (เช่ารถ) : 0 ครั้ง <br>
-                                ลงข้อมูล Blacklist ข้อมูลพนักงานขับรถ : 0 ครั้ง <br>
-                                ค้นหา Blacklist ข้อมูลพนักงานขับรถ : 0 ครั้ง <br>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="row text-center" style="margin-top: 20px;">
-                            <div class="col-6">
-                                @if($item_2->member_role == "admin")
-                                    <span class="badge bg-light-info text-info" style="font-size:14px;width: 100px;">
-                                        แอดมิน
-                                    </span>
-                                @elseif($item_2->member_role == "member")
-                                    <span class="badge bg-light-success text-success" style="font-size:14px;width: 100px;">
-                                        member
-                                    </span>
-                                @elseif($item_2->member_role == "customer")
-                                    <span class="badge bg-light-danger text-danger" style="font-size:14px;width: 100px;">
-                                        customer
-                                    </span>
-                                @else
-                                    <span class="badge bg-light-warning text-warning" style="font-size:14;pxwidth: 100px;">
-                                        driver
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="col-6">
-                                <!--  -->
-                            </div>
-
-                            <button style="position: relative;margin-right:10px;bottom: -30px;" type="button" class="btn btn-primary mt-2 float-end" data-toggle="modal" data-target="#view_data_mamber_{{ $item_2->id }}">
-                                <i class="fa-solid fa-eye"></i> เพิ่มเติม
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
 
             </div>
         </div>
@@ -963,7 +900,7 @@ $(document).ready(function () {
     var table = $("#table_show_member").DataTable({
         dom: '<"dt-buttons"Bf><"clear">lirtp',
         paging: true,
-        Width: true,
+        autoWidth: true,
         lengthChange: false,
         initComplete: function (settings, json) {
             var footer = $("#table_show_member tfoot tr");

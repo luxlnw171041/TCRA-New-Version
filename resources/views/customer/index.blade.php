@@ -301,9 +301,14 @@
         }
     }
 
-    @media (min-width: 1441px) {
+    @media (min-width: 1441px) and (max-width: 1593px){
         /* สำหรับหน้าจอเดสก์ท็อปที่มีความกว้างมากกว่าหรือเท่ากับ 1025px */
-
+        .btn-group {
+            margin-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
     }
 
     .social-logo {
