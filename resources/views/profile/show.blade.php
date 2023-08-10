@@ -322,7 +322,7 @@
                                                 <i class="fa-solid fa-eye-slash"></i>
                                             </span>
                                         </div>
-                                        <div class="input-group mb-2" style="background-color: lightgreen;">
+                                        <div class="input-group mb-2 bg-success bg-gradient">
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-key"></i> &nbsp;รหัสผ่านใหม่&nbsp;
                                             </span>
@@ -331,7 +331,7 @@
                                                 <i class="fa-solid fa-eye-slash"></i>
                                             </span>
                                         </div>
-                                        <div class="input-group mb-2" style="background-color: lightgreen;">
+                                        <div class="input-group mb-2 bg-success bg-gradient">
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-duotone fa-key"></i> &nbsp;กรอกอีกครั้ง
                                             </span>

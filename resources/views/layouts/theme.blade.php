@@ -111,9 +111,9 @@
 
                         </div>
                         <div class="menu-title">
-                            Blacklist
+                            ข้อมูล Blacklist
                             <br>
-                            ข้อมูลพนักงานขับรถ
+                            พนักงานขับรถ
                         </div>
                     </a>
                     <ul>

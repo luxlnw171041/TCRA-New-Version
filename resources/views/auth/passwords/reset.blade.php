@@ -12,7 +12,7 @@
                     <div class="text-center">
                         <img src="{{ url('/img/icon/reset-password.png') }}" width="120" alt="">
                     </div>
-                    <h4 class="mt-5 font-weight-bold">รีเซตรหัสผ่าน</h4>
+                    <h4 class="mt-5 font-weight-bold">รีเซ็ตรหัสผ่าน</h4>
                     <p class="text-muted">ป้อนรหัสผ่านใหม่ของคุณ</p>
                     <div class="my-4">
                         <form method="POST" action="{{ route('password.update') }}">
