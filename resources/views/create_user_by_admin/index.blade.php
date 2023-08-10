@@ -392,7 +392,7 @@ button:focus.btnAddUser {
 
                                         <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                             <h6 class="mb-0" style="color:#02ad13;">
-                                                <b>ลงข้อมูล มิจฉาชีพ (เช่ารถ)</b>
+                                                <b>บันทึกข้อมูล มิจฉาชีพ (เช่ารถ)</b>
                                             </h6>
                                             <span style="color:#02ad13;">
                                                 {{ $count_Cus }} ครั้ง
@@ -400,7 +400,7 @@ button:focus.btnAddUser {
                                         </li>
                                         <li class="mt-2 mb-2 list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                             <h6 class="mb-0" style="color:#02ad13;">
-                                                <b>ลงข้อมูล Blacklist พนักงานขับรถ</b>
+                                                <b>บันทึกข้อมูล Blacklist พนักงานขับรถ</b>
                                             </h6>
                                             <span style="color:#02ad13;">
                                                 {{ $count_Dri }} ครั้ง
@@ -529,7 +529,7 @@ button:focus.btnAddUser {
             </div>
         </div>
     </div>                                             -->
-    <div class="col-md-3">
+    <div class="col-md-12">
         <div class="sticky">
             <div>
 
@@ -576,28 +576,28 @@ button:focus.btnAddUser {
                 </div>
                 <hr>
                 <div class="row g-3">
-                    <div class="col-md-12">
+                    <div class="col-4">
                         <label for="inputLastName0" class="form-label">เลขที่สมาชิก <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-input-numeric"></i></span>
                             <input type="text" class="form-control border-start-0"  id="no_member" name="no_member" placeholder="เลขที่สมาชิก" required oninput="on_inputData();">
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_no_member">ss</span>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-4">
                         <label for="inputLastName1" class="form-label">Username (สำหรับลงชื่อเข้าใช้) <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-at"></i></span>
                             <input type="text" class="form-control border-start-0"  id="Username" name="Username" placeholder="Username" required oninput="on_inputData();">
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_Username">ss</span>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-4">
                         <label for="inputLastName2" class="form-label">Name (สำหรับแสดงในระบบ) <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-user"></i></span>
                             <input type="text" class="form-control border-start-0" id="Name" name="Name" placeholder="Name" required oninput="on_inputData();">
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_Name">ss</span>
                     </div>
-                    <div class="col-12">
+                    <div class="col-4">
                         <label for="inputEmailAddress" class="form-label">Email Address <span class="text-danger">*</span></label>
                         <div class="input-group "> <span class="input-group-text bg-transparent"><i class="bx bxs-message"></i></span>
                             <input type="text" class="form-control border-start-0" id="email" name="email" placeholder="Email" required oninput="on_inputData();" onchange="check_email();">
@@ -614,7 +614,7 @@ button:focus.btnAddUser {
                             <div id="div_text_alert_email" class="invalid-feedback d-none" >มี EMail นี้ในระบบแล้ว.</div>
                         </div>
                     </div> -->
-                    <div class="col-12">
+                    <div class="col-4">
                         <label for="inputPhoneNo" class="form-label">สถานะลงชื่อเข้าใช้ <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-right-to-bracket"></i></span>
                             <select class="form-select border-start-0" id="member_status" name="member_status" required oninput="on_inputData();">
@@ -625,7 +625,7 @@ button:focus.btnAddUser {
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_member_status">ss</span>
                     </div>
-                    <div class="col-12">
+                    <div class="col-4">
                         <label for="inputPhoneNo" class="form-label">หมวดหมู่สมาชิก <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-duotone fa-users"></i></span>
                             <select class="form-select border-start-0" id="member_role" name="member_role" required oninput="on_inputData();">
@@ -639,7 +639,7 @@ button:focus.btnAddUser {
                         <span class="text-danger d-none" id="text_alert_input_member_role">ss</span>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-4">
                         <label for="inputChoosePassword" class="form-label">บริษัท</label> <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-buildings"></i></span>
                             <input type="text" class="form-control border-start-0" id="member_co" name="member_co" placeholder="บริษัท" oninput="on_inputData();">
@@ -647,7 +647,7 @@ button:focus.btnAddUser {
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_member_co">ss</span>
                     </div>
-                    <div class="col-12">
+                    <div class="col-4">
                         <label for="inputPhoneNo" class="form-label">เบอร์ติดต่อ</label> <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-phone"></i></span>
                             <input type="text" class="form-control border-start-0" id="member_tel" name="member_tel" placeholder="เบอร์ติดต่อ" oninput="on_inputData();">
@@ -655,14 +655,14 @@ button:focus.btnAddUser {
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_member_tel">ss</span>
                     </div>
-                    <div class="col-12">
+                    <div class="col-4">
                         <label for="inputAddress3" class="form-label">ที่อยู่</label> <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="member_addr" name="member_addr" placeholder="เพิ่มข้อมูลที่อยู่" rows="3" oninput="on_inputData();"></textarea>
                         <span class="text-danger d-none" id="text_alert_input_member_addr">ss</span>
                     </div>
                     
                     <div class="col-12">
-                        <button class="card btn radius-10 btnAddUser bg-success bg-gradient w-100" onclick="check_create_member();">
+                        <button class="card btn radius-10 btnAddUser bg-success bg-gradient" onclick="check_create_member();" style="width:20%;">
                             <div class="card-body w-100 p-2">
                                 <div class="d-flex align-items-center">
                                     <div>
@@ -712,7 +712,7 @@ button:focus.btnAddUser {
 
 
     <!-- Card ตารางฝั่งขวา -->
-    <div class="col-md-9">
+    <div class="col-md-12">
         <div class="card border-top border-0 border-4 border-danger">
             <div class="card-body p-5">
                 <div class="card-title d-flex align-items-center">
@@ -724,30 +724,166 @@ button:focus.btnAddUser {
                 </div>
                 <hr>
                 <style>
-                    .bordered-table tr,
-                    .bordered-table th,
-                    .bordered-table td {
+                    table {
                         border: 0.5px solid lightgray; /* เส้นขอบที่แถวล่างของแต่ละแถว */
                         border-left: 0.5px solid lightgray;
                         border-right: 0.5px solid lightgray;
                     }
 
                 </style>
-                <div class="row g-3">
-                    <div class="col-12">
+                <div class="col-12">
 
-                        <div class="table-responsive">
-                            <table id="table_show_member" class="table table-striped table-bordered align-middle text-center">
+                    <!-- <div class="table-responsive">
+                        <table id="table_show_member" class="table table-striped table-bordered align-middle text-center">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ</th>
+                                    <th rowspan="2" style="font-size:18px;vertical-align: middle;">เลขที่สมาชิก</th>
+                                    <th rowspan="2" style="font-size:18px;vertical-align: middle;">บริษัท</th>
+                                    <th rowspan="2" style="font-size:18px;vertical-align: middle;">สิทธิ์การใช้งาน</th>
+                                    <th colspan="2" style="color:#02ad13;">บันทึก (ครั้ง)</th>
+                                    <th colspan="2" style="color:blue;">ค้นหา (ครั้ง)</th>
+                                    <th rowspan="2" style="font-size:18px;vertical-align: middle;">สถานะ</th>
+                                    <th rowspan="2" style="font-size:18px;vertical-align: middle;">เพิ่มเติม</th>
+                                </tr>
+                                <tr>
+                                    <th style="color:#02ad13;">มิจฉาชีพ</th>
+                                    <th style="color:#02ad13;">พขร</th>
+                                    <th style="color:blue;">มิจฉาชีพ</th>
+                                    <th style="color:blue;">พขร</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data_command_user_tbody">
+                                @foreach($data_member as $item)
+                                    <tr>
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                            {{ $item->no_member }}
+                                        </td>
+                                        <td style="width: 250px;">
+                                            <div class="d-flex align-items-center">
+                                                <div class="ms-2">
+                                                    <h6 class="mb-1 font-22 td_member_co">{{ $item->member_co }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            @if($item->member_role == "admin")
+                                                <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    แอดมิน
+                                                </span>
+                                            @elseif($item->member_role == "member")
+                                                <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    member
+                                                </span>
+                                            @elseif($item->member_role == "customer")
+                                                <span class="badge bg-light-danger text-danger" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    customer
+                                                </span>
+                                            @else
+                                                <span class="badge bg-light-warning text-warning" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    driver
+                                                </span>
+                                            @endif
+                                            <br>
+                                            ใช้งานระบบ {{ $item->member_count_login }} ครั้ง
+                                            <br>
+                                            ล่าสุด : {{ $item->last_time_active }}
+                                            
+                                        </td>
+                                        @php
+                                            $data_add_Cus = App\Models\Customer::where('user_id',$item->id)->get();
+                                            $count_Cus = count($data_add_Cus);
+
+                                            $data_add_Dri = App\Models\Driver::where('user_id',$item->id)->get();
+                                            $count_Dri = count($data_add_Dri);
+                                        @endphp
+                                        <td class="text-center" style="color:#02ad13;">
+                                            {{ $count_Cus }}
+                                        </td>
+                                        <td class="text-center" style="color:#02ad13;">
+                                            {{ $count_Dri }}
+                                        </td>
+                                        <td class="text-center" style="color:blue;">
+                                            {{ intval($item->count_search_cus) }}
+                                        </td>
+                                        <td class="text-center" style="color:blue;">
+                                            {{ intval($item->count_search_dri) }}
+                                        </td>
+                                        <td class="text-center">
+                                            @php
+                                                $checked_checkbox = '';
+
+                                                if($item->member_status == "Active"){
+                                                    $checked_checkbox = 'checked' ;
+                                                }
+                                            @endphp
+                                            <center>
+                                            <div class="checkbox-apple">
+                                                <input class="yep" id="check_active_{{ $item->id }}" {{ $checked_checkbox}} type="checkbox" onclick="click_check_active('{{ $item->id }}');">
+                                                <label for="check_active_{{ $item->id }}"></label>
+                                            </div>
+                                            </center>
+
+                                            <div id="td_status_member_{{ $item->id }}" class="d-none">
+                                            @if($item->member_status == "Active")
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
+                                                    <button type="button" class="btn btn-outline-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
+                                                </div>
+                                            @else
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-outline-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
+                                                    <button type="button" class="btn btn-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
+                                                </div>
+                                            @endif
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="d-flex align-items-center order-actions">
+                                                <a href="javascript:;" class="ms-2 text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_{{ $item->id }}">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle;">ลำดับ</th>
+                                    <th rowspan="2" style="vertical-align: middle;">เลขที่สมาชิก</th>
+                                    <th rowspan="2" style="vertical-align: middle;">บริษัท</th>
+                                    <th rowspan="2" style="vertical-align: middle;">สิทธิ์การใช้งาน</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </div> -->
+
+                    <div class="table-responsive w-100">
+
+                        <div id="table_show_member_wrapper" class="">
+                        
+                            <table id="table_show_member" class="table table-striped table-bordered align-middle text-center" >
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">เลขที่สมาชิก</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">บริษัท</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">สิทธิ์การใช้งาน</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">ลำดับ</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">เลขที่สมาชิก</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">บริษัท</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">สิทธิ์การใช้งาน</th>
                                         <th colspan="2" style="color:#02ad13;">บันทึก (ครั้ง)</th>
                                         <th colspan="2" style="color:blue;">ค้นหา (ครั้ง)</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">สถานะ</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">เพิ่มเติม</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">สถานะ</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">เพิ่มเติม</th>
                                     </tr>
                                     <tr>
                                         <th style="color:#02ad13;">มิจฉาชีพ</th>
@@ -756,127 +892,131 @@ button:focus.btnAddUser {
                                         <th style="color:blue;">พขร</th>
                                     </tr>
                                 </thead>
-                                <tbody id="data_command_user_tbody">
+                                <tbody id="list_member">
                                     @foreach($data_member as $item)
-                                        <tr>
-                                            <td>
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td>
-                                                {{ $item->no_member }}
-                                            </td>
-                                            <td style="width: 250px;">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="ms-2">
-                                                        <h6 class="mb-1 font-22 td_member_co">{{ $item->member_co }}</h6>
-                                                    </div>
+                                    <tr>
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                            {{ $item->no_member }}
+                                        </td>
+                                        <td style="width: 250px;">
+                                            <div class="d-flex align-items-center">
+                                                <div class="ms-2">
+                                                    <h6 class="mb-1 font-22 td_member_co">{{ $item->member_co }}</h6>
                                                 </div>
-                                            </td>
-                                            <td class="text-center">
-                                                @if($item->member_role == "admin")
-                                                    <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
-                                                        แอดมิน
-                                                    </span>
-                                                @elseif($item->member_role == "member")
-                                                    <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
-                                                        member
-                                                    </span>
-                                                @elseif($item->member_role == "customer")
-                                                    <span class="badge bg-light-danger text-danger" style="font-size:13px;width: 100px;margin: 20px;">
-                                                        customer
-                                                    </span>
-                                                @else
-                                                    <span class="badge bg-light-warning text-warning" style="font-size:13px;width: 100px;margin: 20px;">
-                                                        driver
-                                                    </span>
-                                                @endif
-                                                <br>
-                                                ใช้งานระบบ {{ $item->member_count_login }} ครั้ง
-                                                <br>
-                                                ล่าสุด : {{ $item->last_time_active }}
-                                                
-                                            </td>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            @if($item->member_role == "admin")
+                                                <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    แอดมิน
+                                                </span>
+                                            @elseif($item->member_role == "member")
+                                                <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    member
+                                                </span>
+                                            @elseif($item->member_role == "customer")
+                                                <span class="badge bg-light-danger text-danger" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    customer
+                                                </span>
+                                            @else
+                                                <span class="badge bg-light-warning text-warning" style="font-size:13px;width: 100px;margin: 20px;">
+                                                    driver
+                                                </span>
+                                            @endif
+                                            <br>
+                                            ใช้งานระบบ {{ $item->member_count_login }} ครั้ง
+                                            <br>
+                                            ล่าสุด : {{ $item->last_time_active }}
+                                            
+                                        </td>
+                                        @php
+                                            $data_add_Cus = App\Models\Customer::where('user_id',$item->id)->get();
+                                            $count_Cus = count($data_add_Cus);
+
+                                            $data_add_Dri = App\Models\Driver::where('user_id',$item->id)->get();
+                                            $count_Dri = count($data_add_Dri);
+                                        @endphp
+                                        <td class="text-center" style="color:#02ad13;">
+                                            {{ $count_Cus }}
+                                        </td>
+                                        <td class="text-center" style="color:#02ad13;">
+                                            {{ $count_Dri }}
+                                        </td>
+                                        <td class="text-center" style="color:blue;">
+                                            {{ intval($item->count_search_cus) }}
+                                        </td>
+                                        <td class="text-center" style="color:blue;">
+                                            {{ intval($item->count_search_dri) }}
+                                        </td>
+                                        <td class="text-center">
                                             @php
-                                                $data_add_Cus = App\Models\Customer::where('user_id',$item->id)->get();
-                                                $count_Cus = count($data_add_Cus);
+                                                $checked_checkbox = '';
 
-                                                $data_add_Dri = App\Models\Driver::where('user_id',$item->id)->get();
-                                                $count_Dri = count($data_add_Dri);
+                                                if($item->member_status == "Active"){
+                                                    $checked_checkbox = 'checked' ;
+                                                }
                                             @endphp
-                                            <td class="text-center" style="color:#02ad13;">
-                                                {{ $count_Cus }}
-                                            </td>
-                                            <td class="text-center" style="color:#02ad13;">
-                                                {{ $count_Dri }}
-                                            </td>
-                                            <td class="text-center" style="color:blue;">
-                                                {{ intval($item->count_search_cus) }}
-                                            </td>
-                                            <td class="text-center" style="color:blue;">
-                                                {{ intval($item->count_search_dri) }}
-                                            </td>
-                                            <td class="text-center">
-                                                @php
-                                                    $checked_checkbox = '';
+                                            <center>
+                                            <div class="checkbox-apple" style="margin: 0!important;">
+                                                <input class="yep" id="check_active_{{ $item->id }}" {{ $checked_checkbox}} type="checkbox" onclick="click_check_active('{{ $item->id }}');">
+                                                <label for="check_active_{{ $item->id }}"></label>
+                                            </div>
+                                            </center>
 
-                                                    if($item->member_status == "Active"){
-                                                        $checked_checkbox = 'checked' ;
-                                                    }
-                                                @endphp
-                                                <center>
-                                                <div class="checkbox-apple">
-                                                    <input class="yep" id="check_active_{{ $item->id }}" {{ $checked_checkbox}} type="checkbox" onclick="click_check_active('{{ $item->id }}');">
-                                                    <label for="check_active_{{ $item->id }}"></label>
+                                            <div id="td_status_member_{{ $item->id }}" class="d-none">
+                                            @if($item->member_status == "Active")
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
+                                                    <button type="button" class="btn btn-outline-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
                                                 </div>
-                                                </center>
-
-                                                <div id="td_status_member_{{ $item->id }}" class="d-none">
-                                                @if($item->member_status == "Active")
-                                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button type="button" class="btn btn-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
-                                                        <button type="button" class="btn btn-outline-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
-                                                    </div>
-                                                @else
-                                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button type="button" class="btn btn-outline-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
-                                                        <button type="button" class="btn btn-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
-                                                    </div>
-                                                @endif
+                                            @else
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-outline-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
+                                                    <button type="button" class="btn btn-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
                                                 </div>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="d-flex align-items-center order-actions">
-                                                    <a href="javascript:;" class="ms-2 text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_{{ $item->id }}">
-                                                        <i class="fa-solid fa-eye"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            @endif
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="d-flex align-items-center order-actions">
+                                                <a href="javascript:;" class="ms-2 text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_{{ $item->id }}">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="2" style="vertical-align: middle;">ลำดับ</th>
-                                        <th rowspan="2" style="vertical-align: middle;">เลขที่สมาชิก</th>
-                                        <th rowspan="2" style="vertical-align: middle;">บริษัท</th>
-                                        <th rowspan="2" style="vertical-align: middle;">สิทธิ์การใช้งาน</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th rowspan="1"></th>
+                                        <th rowspan="1">เลขที่สมาชิก</th>
+                                        <th rowspan="1">บริษัท</th>
+                                        <th rowspan="1">สิทธิ์การใช้งาน</th>
+                                        <th rowspan="1"></th>
+                                        <th rowspan="1"></th>
+                                        <th rowspan="1"></th>
+                                        <th rowspan="1"></th>
+                                        <th rowspan="1"></th>
+                                        <th rowspan="1"></th>
                                     </tr>
                                 </tfoot>
-
                             </table>
+                            
                         </div>
-
                     </div>
+
                 </div>
 
             </div>
         </div>
+    </div>
+
+    <div>
+        
     </div>
 
 
@@ -884,38 +1024,54 @@ button:focus.btnAddUser {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.3.2/moment-duration-format.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/th.js"></script>
 
+<!--app JS-->
+<script src="{{ asset('/theme/js/app.js') }}"></script>
+
+<!--plugins-->
+<script src="{{ asset('/theme/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('/theme/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+
+
 <script>
-$(document).ready(function () {
-    //Only needed for the filename of export files.
-    //Normally set in the title tag of your page.
-    // document.title = "ข้อมูลข้อมูลสมาชิก";
-    // Create search inputs in footer
-    $("#table_show_member tfoot th").each(function () {
-        if($(this).text()){
-            var title = $(this).text();
-            $(this).html('<input type="text" style="width:100%;" placeholder="🔎 ' + title + '" />');
-        }
-    });
-    // DataTable initialisation
-    var table = $("#table_show_member").DataTable({
-        dom: '<"dt-buttons"Bf><"clear">lirtp',
-        paging: true,
-        autoWidth: true,
-        lengthChange: false,
-        initComplete: function (settings, json) {
-            var footer = $("#table_show_member tfoot tr");
-            $("#table_show_member thead").append(footer);
-        }
-    });
+    $(document).ready(function() {
 
-    // Apply the search
-    $("#table_show_member thead").on("keyup", "input", function () {
-            table.column($(this).parent().index())
-            .search(this.value)
-            .draw();
+        $("#table_show_member tfoot th").each(function () {
+            if($(this).text()){
+                var title = $(this).text();
+                if(title){
+                    $(this).html('<input type="text" style="width:100%;" placeholder="🔎 ' + title + '" />');
+                }
+            }
         });
-});
+        // DataTable initialisation
+        var table = $("#table_show_member").DataTable({
+            dom: '<"dt-buttons"Bf><"clear">lirtp',
+            paging: true,
+            autoWidth: true,
+            lengthChange: false,
+            columnDefs: [{
+                targets: [0, 4,5,6,7,8,9],  // Disable sorting for columns 2 and 3
+                orderable: false
+            }],
+            buttons: [
+                {
+                    extend: "excelHtml5",
+                    text: "Export Excel"  // เปลี่ยนข้อความในปุ่มที่นี่
+                },
+            ],
+            initComplete: function (settings, json) {
+                var footer = $("#table_show_member tfoot tr");
+                $("#table_show_member thead").append(footer);
+            }
+        });
 
+        // Apply the search
+        $("#table_show_member thead").on("keyup", "input", function () {
+                table.column($(this).parent().index())
+                .search(this.value)
+                .draw();
+            });
+    } );
 </script>
 
 <script>

@@ -22,6 +22,10 @@ Route::get('/login_fail', function () {
     return view('login_fail');
 });
 
+Route::get('/data_table_member', function () {
+    return view('create_user_by_admin.data_table_member');
+});
+
 
 Auth::routes();
 
