@@ -406,9 +406,9 @@
                         <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
                             <div class="w-100 d-flex justify-content-center">
                                 <div>
-                                    Blacklist
+                                    ข้อมูล Blacklist
                                     <br>
-                                    ข้อมูลพนักงานขับรถ
+                                    พนักงานขับรถ
                                 </div>
                             </div>
                         </div>
@@ -470,6 +470,20 @@
                         </div>
                     </div>
                 </div>
+                <style>
+                .group-danger{
+                    color: #e62e2e;
+                    padding: 5px;
+                    border: .5px solid #e62e2e;
+                }.group-warning{
+                    color: #ffc107;
+                    padding: 5px;
+                }.group-success{
+                    color: #29cc39;
+                    padding: 5px;
+                }
+               
+            </style>
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
@@ -477,8 +491,49 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">ลักษณะการกระทำความผิด</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $driver->demerit }}
+                                <div class="col-sm-9 text-secondary" style="border-radius: 50px">
+                                @php
+                                    $demerit = $driver->demerit;
+                                    $demeritArray = explode(',', $demerit);
+
+                                    $groups = [
+                                    'หมวดทุจริต' => ['ปลอมแปลงเอกสารใบลงเวลา/บิลน้ำมัน', 'ลักทรัพย์นายจ้าง' ,'ยักยอกรถยนต์หรือทรัพย์สิน' ,'ทำร้ายร่างกาย' ,'ความผิดคดีอาญาหรือทุจริตอื่นๆ'],
+                                    'หมวดวินัย' => ['ทิ้งงาน', 'ทะเลาะวิวาท', 'ยืมเงินลูกค้า', 'ไม่เก็บรักษาความลับ', 'ปิดมือถือติดต่อไม่ได้', 'โกหกบ่อยครั้ง', 'ฟ้องร้องนายจ้างหรือร้องตรวจแรงงานที่เป็นเท็จ'],
+                                    'หมวดบัญชีดำ' => ['ขับรถอันตราย', 'มาสาย', 'สตาร์ทรถรอลูกค้า', 'ทัศนคติ/การบริการไม่ดี', 'ไม่รู้เส้นทาง', 'ขัดคำสั่งลูกค้า/นายจ้าง', 'แต่งกาย/พูดจา ไม่สุภาพ'] ,
+                                    ];
+                                @endphp
+
+                                @foreach ($groups as $groupName => $groupMembers)
+                                    @php
+                                        $filteredMembers = array_filter($groupMembers, function ($member) use ($demeritArray) {
+                                        return in_array($member, $demeritArray);
+                                        });
+                                    @endphp
+
+                                    @if (count($filteredMembers) > 0)
+                                        @php
+                                            $groupColorClass = '';
+                                            switch ($groupName) {
+                                                case 'หมวดทุจริต':
+                                                    $groupColorClass = 'group-danger alert border-0 border-start border-5 border-danger py-2';
+                                                break;
+                                                case 'หมวดบัญชีดำ':
+                                                    $groupColorClass = 'group-warning alert border-0 border-start border-5 border-warning py-2';
+                                                break;
+                                                case 'หมวดวินัย':
+                                                    $groupColorClass = 'group-success alert border-0 border-start border-5 border-success py-2';
+                                                break;
+                                            }
+                                        @endphp
+
+                                        <div class="d-block p-2 my-2 {{ $groupColorClass }}">
+                                            <b>{{ $groupName }} </b>
+                                            @foreach ($filteredMembers as $index => $member)
+                                            <span >{{ ($index + 1) }}.{{ $member }}{{ $loop->last ? '' : ' ,' }}</span>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                @endforeach
                                 </div>
                                 <div class="col-sm-3 mt-4">
                                     <h6 class="mb-0">รายละเอียด</h6>
@@ -495,7 +550,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="d-flex align-items-center mb-3">หลักฐานกระทำความผิด</h5>
+                                    <h5 class="d-flex align-items-center mb-3">หลักฐานการกระทำความผิด</h5>
                                     <div class="owl-carousel owl-theme carouselSPhoto">
                                         @if(!empty($driver->d_pic_id_card))
                                         <div class="item">

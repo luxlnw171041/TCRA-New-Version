@@ -92,7 +92,7 @@
 			line-height: 20px;
 			letter-spacing: 0.5px;
 			margin: 25px 0 30px;
-			color: #ffb00f;
+			color: #fff733;
 		}
 
 
@@ -327,19 +327,7 @@
 					$error_login = "NO" ;
 				}
 			@endphp
-			@if($error_login == "YES")
-			<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
-				<div class="d-flex align-items-center">
-					<div class="font-35 text-white"><i class="bx bxs-message-square-x"></i>
-					</div>
-					<div class="ms-3">
-						<h6 class="mb-0 text-white">เกิดข้อผิดพลาด</h6>
-						<div class="text-white">กรุณาตรวจสอบ Username Password และลองใหม่อีกครั้ง</div>
-					</div>
-				</div>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-			</div>
-			@endif
+			
 
 			<div class="containerLogin" id="containerLogin">
 				<div class="form-container sign-up-container">
@@ -381,8 +369,21 @@
 						</div>
 						@endif
 						<button class="btnSwip mt-2" type="submit">Login</button>
-
+						
 					</form>
+					@if($error_login == "YES")
+						<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-1" style="left:5%;width:90%;position: absolute; top:82%;">
+							<div class="d-flex align-items-center">
+								<div class="font-35 text-white me-2"><i class="bx bxs-message-square-x"></i>
+								</div>
+								<div class="w-100">
+									<h6 class="mb-0 text-white">Username หรือ Password ไม่ถูกต้อง</h6>
+									<div class="text-white">กรุณาตรวจสอบและลองใหม่อีกครั้ง</div>
+								</div>
+							</div>
+							<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+						</div>
+					@endif
 				</div>
 				<div class="form-container sign-in-container">
 					<form class="formLogin row g-3" action="#" method="POST" action="{{ route('login') }}">
@@ -399,7 +400,7 @@
 						</span>
 						@enderror
 
-						<div class="input-group" id="show_hide_password">
+						<div class="input-group p-0" id="show_hide_password">
 							<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror password-input" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
 							<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword toggle-password"><i class='bx bx-hide'></i></a>
 						</div>
@@ -417,17 +418,31 @@
 						</div>
 						@endif
 						<button class="btnSwip" type="submit">Login</button>
-					</form>
+					
+					</form>	
+					@if($error_login == "YES")
+						<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-1" style="left:5%;width:90%;position: absolute; top:82%;">
+							<div class="d-flex align-items-center">
+								<div class="font-35 text-white me-2"><i class="bx bxs-message-square-x"></i>
+								</div>
+								<div class="w-100 float-left float-end">
+									<h6 class="mb-0 text-white float-left float-end">Username หรือ Password ไม่ถูกต้อง</h6>
+									<div class="text-white float-left float-end">กรุณาตรวจสอบและลองใหม่อีกครั้ง</div>
+								</div>
+							</div>
+							<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+						</div>
+					@endif
 				</div>
 				<div class="overlay-container">
 					<div class="overlay">
 						<div class="overlay-panel overlay-left">
-							<img src="{{asset('img/icon/iconCustomer.png')}}" class="mb-2" width="90" alt="">
+							<img src="{{asset('img/icon/iconCustomerSlash.png')}}" class="mb-2" width="90" alt="">
 							<h1 class="headerLogin">กลุ่มมิจฉาชีพ <br> (เช่ารถ)</h1>
 							<p class="detailLogin">(เฉพาะสมาชิกสามัญ)</p>
 						</div>
 						<div class="overlay-panel overlay-right">
-							<img src="{{asset('img/icon/iconDrivers.png')}}" class="mb-2" width="90" alt="">
+							<img src="{{asset('img/icon/iconDriversSlash.png')}}" class="mb-2" width="90" alt="">
 
 							<h1 class="headerLogin">BlackList <br> พนักงานขับรถ</h1>
 							<p class="detailLogin">(เฉพาะสมาชิกสามัญ)</p>
@@ -483,7 +498,7 @@
 											</div>
 											<div class="col-12">
 												<label for="password" class="form-label">Password</label>
-												<div class="input-group" id="show_hide_password">
+												<div class="input-group p-0" id="show_hide_password">
 													<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror password-input" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
 													<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword toggle-password"><i class='bx bx-hide'></i></a>
 												</div>
@@ -501,6 +516,19 @@
 													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Login</button>
 												</div>
 											</div>
+												@if($error_login == "YES")
+													<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-1" style="left:5%;width:90%;position: absolute; top:92%;">
+														<div class="d-flex align-items-center">
+															<div class="font-35 text-white me-2"><i class="bx bxs-message-square-x"></i>
+															</div>
+															<div class="w-100">
+																<h6 class="mb-0 text-white">Username หรือ Password ไม่ถูกต้อง</h6>
+																<div class="text-white">กรุณาตรวจสอบและลองใหม่อีกครั้ง</div>
+															</div>
+														</div>
+														<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+													</div>
+												@endif
 										</form>
 									</div>
 								</div>

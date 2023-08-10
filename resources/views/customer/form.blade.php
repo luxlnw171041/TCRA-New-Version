@@ -135,11 +135,13 @@
     .headerCustomer {
         font-weight: bolder !important;
         font-size: 18px !important;
+        color: #525f7f !important;
     }
 
     .subHeaderCustomer {
         font-weight: bolder !important;
         font-size: 16px !important;
+        
     }
 
     .text-overflow {
@@ -340,10 +342,12 @@
     <div class="col-md-9">
         <div class="card border-top border-0 border-4 border-danger">
             <div class="card-body p-5">
-                <div class="card-title d-flex align-items-center">
-                    <div><i class="bx bxs-user me-1 font-22 text-danger"></i>
+                <div class="card-title d-flex align-items-center addDataperson">
+                    <div>
+                        <img src="{{asset('img/icon/iconHeaderCustomerSlash.png')}}" alt="User" class="me-1" width="22.5">
+                        <!-- <i class="bx bxs-user me-1 font-22 text-danger"></i> -->
                     </div>
-                    <h5 class="mb-0 text-danger headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบุคคล</h5>
+                    <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบุคคล</h5>
                 </div>
                 <!-- <hr> -->
                 <div class="row g-3 mt-4">
@@ -379,20 +383,20 @@
                         </div>
                     </div> -->
 
-                    <div class="col-md-4 mt-md-0 mb-4" id="input_c_name">
+                    <div class="col-md-4 mt-md-0 mb-4 addDataperson" id="input_c_name">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group">
                             <div class="inputGroup w-100">
-                                <input name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}" required="" autocomplete="off">
+                                <input name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
                                 <label for="c_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mt-md-0 mb-4" id="input_c_surname">
+                    <div class="col-md-4 mt-md-0 mb-4 addDataperson" id="input_c_surname">
                         <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
-                                <input name="c_surname" type="text" id="c_surname" value="{{ isset($customer->c_surname) ? $customer->c_surname : '' }}" required="" autocomplete="off">
+                                <input name="c_surname" type="text" id="c_surname" value="{{ isset($customer->c_surname) ? $customer->c_surname : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
                                 <label for="c_surname"><i class="fa-solid fa-user"></i> นามสกุล <span class="text-danger">*</span></label>
                             </div>
                         </div>
@@ -414,36 +418,37 @@
                         </div>
                     </div> -->
 
-                    <div class="col-md-4 mt-md-0 mb-4" id="div_id_no">
+                    <div class="col-md-4 mt-md-0 mb-4 addDataperson" id="div_id_no">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup w-100">
-                                <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}">
+                                <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}" oninput="handleInputs(this)">
                                 <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
-                    <hr class="mt-6">
-                    <div class="card-title d-flex align-items-center">
-                        <div><i class="fa-solid fa-buildings me-1 font-22 text-danger"></i>
+                    <hr class="mt-6 addDataperson">
+                    <div class="card-title d-flex align-items-center addDatacompany">
+                        <div>                        
+                            <img src="{{asset('img/icon/iconHeaderCustomerSlash.png')}}" alt="User" class="me-1" width="22.5">
                         </div>
-                        <h5 class="mb-0 text-danger headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบริษัท</h5>
+                        <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบริษัท</h5>
                     </div>
-                    <div class="row g-3 mt-3">
-                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 d-none" id="input_c_company_name">
+                    <div class="row g-3 mt-3 addDatacompany">
+                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0" id="input_c_company_name">
                             <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                             <div class="input-group">
                                 <div class="inputGroup w-100">
-                                    <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off">
+                                    <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
                                     <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 d-none" id="input_commercial_registration">
+                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 addDatacompany" id="input_commercial_registration">
                             <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
                             <div class="input-group ">
                                 <div class="inputGroup w-100">
-                                    <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off">
+                                    <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
                                     <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขประจำตัวผู้เสียภาษี <span class="text-danger">*</span></label>
                                 </div>
                             </div>
@@ -504,7 +509,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navDanger active" data-bs-toggle="pill" href="#corrupt" role="tab" aria-selected="true">
                                     <div class="d-flex align-items-center font-tab">
-                                        <div class="tab-icon"><i class="fa-solid fa-user-ninja"></i>
+                                        <div class="tab-icon"><i class="fa-solid fa-user-shield"></i>
                                         </div>
                                         <div class="tab-title">&nbsp;หมวดทุจริต</div>
                                     </div>
@@ -513,7 +518,7 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link navWarning" data-bs-toggle="pill" href="#discipline" role="tab" aria-selected="false">
                                     <div class="d-flex align-items-center font-tab">
-                                        <div class="tab-icon"><i class="fa-regular fa-file-circle-exclamation"></i>
+                                        <div class="tab-icon"><i class="fa-regular fa-file-shield"></i>
                                         </div>
                                         <div class="tab-title">&nbsp;หมวดบัญชีดำ</div>
                                     </div>
@@ -545,7 +550,7 @@
                                 <div class="groupOffense">
                                     <label>
                                         <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ฉ้อโกงหรือยักยอกรถยนต์">
-                                        <span class="radio-tile">
+                                        <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
                                             <span class="radio-label">1.ฉ้อโกงหรือยักยอกรถยนต์</span>
@@ -553,7 +558,7 @@
                                     </label>
                                     <label>
                                         <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์">
-                                        <span class="radio-tile">
+                                        <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
                                             <span class="radio-label">2.ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์</span>
@@ -561,7 +566,7 @@
                                     </label>
                                     <label>
                                         <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ความผิดในคดีอาญาอื่นๆ">
-                                        <span class="radio-tile">
+                                        <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
                                             <span class="radio-label">3.ความผิดในคดีอาญาอื่นๆ</span>
@@ -581,7 +586,7 @@
                                 <div class="groupOffense">
                                     <label>
                                         <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่บำรุงรักษารถยนต์">
-                                        <span class="radio-tile">
+                                        <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
                                             <span class="radio-label">4.ไม่บำรุงรักษารถยนต์</span>
@@ -589,7 +594,7 @@
                                     </label>
                                     <label>
                                         <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่ชำระค่าเช่า">
-                                        <span class="radio-tile">
+                                        <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
                                             <span class="radio-label">5.ไม่ชำระค่าเช่า</span>
@@ -597,7 +602,7 @@
                                     </label>
                                     <label>
                                         <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
-                                        <span class="radio-tile">
+                                        <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
                                             <span class="radio-label">6.อื่นๆ</span>
@@ -913,7 +918,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/id-card.png')}}" alt="สำเนาบัตรประชาชน" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>สำเนาบัตรประชาชน <br> PassPort</span>
+                                        <span>สำเนาบัตรประชาชน / <br> PassPort</span>
                                     </div>
                                 </div>
                             </div>
@@ -973,7 +978,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/legal.png')}}" alt="คำฟ้องหรือใบร้องทุกข์ดำเนินดคี" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                        <span>คำฟ้องหรือใบร้องทุกข์ <br> แจ้งความดำเนินคดี</span>
                                     </div>
                                 </div>
                             </div>
@@ -1180,7 +1185,7 @@
                         });
                     </script>
                     <div class="col-12">
-                        <a id="btnSubmitFormCreateCustomer" onclick="checkValueInput();checkvaluedemerit(); " type="submit" class="btn btn-danger px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</a>
+                        <a id="btnSubmitFormCreateCustomer" onclick="checkvaluedemerit(); " type="submit" class="btn btn-danger px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</a>
                     </div>
                 </div>
             </div>
@@ -1244,77 +1249,133 @@
             const c_idno = document.getElementById('c_idno');
             const c_company_name = document.getElementById('c_company_name');
             const commercial_registration = document.getElementById('commercial_registration');
+            const addDataperson = document.querySelectorAll('.addDataperson');
+            const addDatacompany = document.querySelectorAll('.addDatacompany');
 
 
-            function checkValueInput() {
-                const inputsGroupPerson = [document.getElementById('c_name'), document.getElementById('c_surname'), document.getElementById('c_idno')];
-                const inputsGroupCompany = [document.getElementById('c_company_name'), document.getElementById('commercial_registration')];
-                let isGroupPersonValid = true;
-                let isGroupCompanyValid = true;
+          
+            function handleInputs(inputElement) {
 
-                for (const input of inputsGroupPerson) {
-                    if (!input.value) {
-                        isGroupPersonValid = false;
-                        break;
-                    }
-                }
-
-                for (const input of inputsGroupCompany) {
-                    if (!input.value) {
-                        isGroupCompanyValid = false;
-                        break;
-                    }
-                }
-
-                if (isGroupPersonValid && isGroupCompanyValid) {
-                    checkisGroupPersonAndCompany = false;
-                    event.preventDefault();
-                    dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัท');
-                } else if (!isGroupPersonValid && !isGroupCompanyValid) {
-                    checkisGroupPersonAndCompany = false;
-                    event.preventDefault();
-                    dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัทให้ครบถ้วน');
-
+            if (inputElement === c_name || inputElement === c_surname || inputElement === c_idno) {
+                if (c_name.value !== "" || c_surname.value !== "" || c_idno.value !== "") {
+                    addDatacompany.forEach(element => {
+                        element.classList.add('d-none');
+                    });
+                    c_company_name.value = "";
+                    c_company_name.required = false;
+                    
+                    commercial_registration.value = "";
+                    commercial_registration.required = false;
                 } else {
-                    checkisGroupPersonAndCompany = true;
-                    if (isGroupPersonValid) {
-                        for (const input of inputsGroupCompany) {
-                            input.removeAttribute('required');
-                        }
-                    } else {
-                        for (const input of inputsGroupPerson) {
-                            input.removeAttribute('required');
-                        }
-                    }
-                }
+                    addDatacompany.forEach(element => {
+                        element.classList.remove('d-none');
+                        c_company_name.required = true;
+                    commercial_registration.required = true;
 
-                // เพิ่มเงื่อนไขเช็คว่าถ้ามีการกรอกชุดใดชุดนึงครบแล้ว แต่ก็ยังกรอกอีกช่องนึงให้แจ้งเตือน
-                if (isGroupPersonValid && !isGroupCompanyValid) {
-                    if (inputsGroupCompany.some(input => input.value)) {
-                        checkisGroupPersonAndCompany = false;
-                        event.preventDefault();
-                        dangerAlert('คุณกรอกข้อมูลในชุด บุคคล ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
-                    }
-                } else if (!isGroupPersonValid && isGroupCompanyValid) {
-                    if (inputsGroupPerson.some(input => input.value)) {
-                        checkisGroupPersonAndCompany = false;
-                        event.preventDefault();
-                        dangerAlert('คุณกรอกข้อมูลในชุด บริษัท ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
-                    }
+                    });
                 }
+            } else if (inputElement === c_company_name || inputElement === commercial_registration) {
+                if (c_company_name.value !== "" || commercial_registration.value !== "") {
+                    addDataperson.forEach(element => {
+                        element.classList.add('d-none');
+                    });
+                    // c_name.classList.add('d-none');
+                    // c_surname.classList.add('d-none');
+                    // c_idno.classList.add('d-none');
+                    c_name.value = "";                 
+                    c_name.required = false;
 
-                // ตรวจสอบหากมีการกรอกข้อมูลแล้วลบออก แล้วกดบันทึก
-                formCreateCustomer.addEventListener('submit', function(event) {
-                    if (isGroupPersonValid && isGroupCompanyValid) {
-                        for (const input of inputsGroupPerson) {
-                            input.removeAttribute('required');
-                        }
-                        for (const input of inputsGroupCompany) {
-                            input.removeAttribute('required');
-                        }
-                    }
-                });
+                    c_surname.value = "";                    
+                    c_surname.required = false;
+
+                    c_idno.value = "";                 
+                    c_idno.required = false;
+                } else {
+                    addDataperson.forEach(element => {
+                        element.classList.remove('d-none');
+                    });
+                    c_name.required = true;
+                    c_surname.required = true;
+                    c_idno.required = true;
+
+                    // c_name.classList.remove('d-none');
+                    // c_surname.classList.remove('d-none');
+                    // c_idno.classList.remove('d-none');
+                }
             }
+        }
+            
+
+            // function checkValueInput() {
+            //     const inputsGroupPerson = [document.getElementById('c_name'), document.getElementById('c_surname'), document.getElementById('c_idno')];
+            //     const inputsGroupCompany = [document.getElementById('c_company_name'), document.getElementById('commercial_registration')];
+            //     let isGroupPersonValid = true;
+            //     let isGroupCompanyValid = true;
+
+            //     for (const input of inputsGroupPerson) {
+            //         if (!input.value) {
+            //             isGroupPersonValid = false;
+            //             break;
+            //         }
+            //     }
+
+            //     for (const input of inputsGroupCompany) {
+            //         if (!input.value) {
+            //             isGroupCompanyValid = false;
+            //             break;
+            //         }
+            //     }
+
+            //     if (isGroupPersonValid && isGroupCompanyValid) {
+            //         checkisGroupPersonAndCompany = false;
+            //         event.preventDefault();
+            //         dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัท');
+            //     } else if (!isGroupPersonValid && !isGroupCompanyValid) {
+            //         checkisGroupPersonAndCompany = false;
+            //         event.preventDefault();
+            //         dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัทให้ครบถ้วน');
+
+            //     } else {
+            //         checkisGroupPersonAndCompany = true;
+            //         if (isGroupPersonValid) {
+            //             for (const input of inputsGroupCompany) {
+            //                 input.removeAttribute('required');
+            //             }
+            //         } else {
+            //             for (const input of inputsGroupPerson) {
+            //                 input.removeAttribute('required');
+            //             }
+            //         }
+            //     }
+
+            //     // เพิ่มเงื่อนไขเช็คว่าถ้ามีการกรอกชุดใดชุดนึงครบแล้ว แต่ก็ยังกรอกอีกช่องนึงให้แจ้งเตือน
+            //     if (isGroupPersonValid && !isGroupCompanyValid) {
+            //         if (inputsGroupCompany.some(input => input.value)) {
+            //             checkisGroupPersonAndCompany = false;
+            //             event.preventDefault();
+            //             dangerAlert('คุณกรอกข้อมูลในชุด บุคคล ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
+                        
+            //         }
+            //     } else if (!isGroupPersonValid && isGroupCompanyValid) {
+            //         if (inputsGroupPerson.some(input => input.value)) {
+            //             checkisGroupPersonAndCompany = false;
+            //             event.preventDefault();
+            //             dangerAlert('คุณกรอกข้อมูลในชุด บริษัท ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
+            //         }
+            //     }
+
+            //     // ตรวจสอบหากมีการกรอกข้อมูลแล้วลบออก แล้วกดบันทึก
+            //     formCreateCustomer.addEventListener('submit', function(event) {
+            //         if (isGroupPersonValid && isGroupCompanyValid) {
+            //             for (const input of inputsGroupPerson) {
+            //                 input.removeAttribute('required');
+            //             }
+            //             for (const input of inputsGroupCompany) {
+            //                 input.removeAttribute('required');
+            //             }
+            //         }
+            //     });
+            // }
         </script>
         <div class="col-sm-12">
             <div class="card">
@@ -1445,7 +1506,7 @@
 <script>
     $("#btnSubmitFormCreateCustomer").click(function() {
         if ($("#formCreateCustomer")[0].checkValidity())
-            if (checkdemerit && checkisGroupPersonAndCompany) {
+            if (checkdemerit) {
                 console.log('sucess');
                 $('#saveDataSuccess').modal('show');
 

@@ -301,7 +301,8 @@
         }
     }
 
-    @media (min-width: 1441px) and (max-width: 1593px){
+    @media (min-width: 1441px) and (max-width: 1593px) {
+
         /* สำหรับหน้าจอเดสก์ท็อปที่มีความกว้างมากกว่าหรือเท่ากับ 1025px */
         .btn-group {
             margin-top: 15px;
@@ -427,7 +428,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        
+
     }
 
     .checkbox-wrapper-35 .switch+label::before,
@@ -530,16 +531,23 @@
                         <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
                             <div class="w-100 d-flex justify-content-center">
                                 <div>
-                                    <span style="font-size: 18px;" class="m-0 p-0">ข้อมูลมิจฉาชีพ(เช่ารถ)</span>  <br>
-                                <div class="checkbox-wrapper-35">
-                                    <input value="company" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch"value="{{ request('switchforSearch') }}" onclick="toggleDivsswitchforSearch()">
-                                    <label for="switchforSearch">
-                                        <span class="switch-x-toggletext">
-                                            <span class="switch-x-unchecked font-18"><span class="switch-x-hiddenlabel"></span>บุคคล</span>
-                                            <span class="switch-x-checked font-18"><span class="switch-x-hiddenlabel"></span>บริษัท</span>
-                                        </span>
-                                    </label>
-                                </div>
+                                    <span style="font-size: 18px;" class="m-0 p-0">ข้อมูลมิจฉาชีพ(เช่ารถ)</span> <br>
+                                    <!-- <div class="checkbox-wrapper-35">
+                                            <input value="company" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch"value="{{ request('switchforSearch') }}" onclick="toggleDivsswitchforSearch()">
+                                            <label for="switchforSearch">
+                                                <span class="switch-x-toggletext">
+                                                    <span class="switch-x-unchecked font-18"><span class="switch-x-hiddenlabel"></span>บุคคล</span>
+                                                    <span class="switch-x-checked font-18"><span class="switch-x-hiddenlabel"></span>บริษัท</span>
+                                                </span>
+                                            </label>
+                                        </div> -->
+                                    <div class="">
+                                        <input class="form-check-input" type="radio" name="switchforSearch" value="person" id="switchforSearch1" checked="" onclick="toggleDivsswitchforSearch()">
+                                        <label class="form-check-label" for="switchforSearch1">บุคคล</label>
+
+                                        <input class="form-check-input" type="radio" name="switchforSearch" value="company" id="switchforSearch2" onclick="toggleDivsswitchforSearch()">
+                                        <label class="form-check-label" for="switchforSearch2">บริษัท</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -626,17 +634,17 @@
                         <div class="d-flex flex-column align-items-center text-center">
                             <div class="mt-3">
                                 <h4>
-                                @if(!empty($customers->c_name) && !empty($customers->c_surname))
+                                    @if(!empty($customers->c_name) && !empty($customers->c_surname))
                                     {{ $customers->c_name }} {{ $customers->c_surname }}
-                                @elseif(!empty($customers->c_company_name) )
+                                    @elseif(!empty($customers->c_company_name) )
                                     {{$customers->c_company_name}}
-                                @endif
+                                    @endif
                                 </h4>
 
                                 @if(!empty($customers->commercial_registration))
-                                    <h4>
-                                        {{$customers->commercial_registration}}
-                                    </h4>
+                                <h4>
+                                    {{$customers->commercial_registration}}
+                                </h4>
                                 @endif
                                 <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($customers->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
                                 <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($customers->c_date)) }} </p>
@@ -684,6 +692,19 @@
                     </div>
                 </div>
             </div>
+            <style>
+                 .group-danger{
+                    color: #e62e2e;
+                    padding: 5px;
+                    border: .5px solid #e62e2e;
+                }.group-warning{
+                    color: #ffc107;
+                    padding: 5px;
+                }.group-success{
+                    color: #29cc39;
+                    padding: 5px;
+                }
+            </style>
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
@@ -692,14 +713,54 @@
                                 <h6 class="mb-0">ลักษณะการกระทำความผิด</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                {{ $customers->demerit }}
+                                @php
+                                    $demerit = $customers->demerit;
+                                    $demeritArray = explode(',', $demerit);
+
+                                    $groups = [
+                                    'หมวดทุจริต' => ['ฉ้อโกงหรือยักยอกรถยนต์', 'ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์' ,'ความผิดในคดีอาญาอื่นๆ'],
+                                    'หมวดบัญชีดำ' => ['ไม่บำรุงรักษารถยนต์', 'ไม่ชำระค่าเช่า'],
+                                    ];
+                                @endphp
+
+                                @foreach ($groups as $groupName => $groupMembers)
+                                    @php
+                                        $filteredMembers = array_filter($groupMembers, function ($member) use ($demeritArray) {
+                                        return in_array($member, $demeritArray);
+                                        });
+                                    @endphp
+
+                                    @if (count($filteredMembers) > 0)
+                                        @php
+                                            $groupColorClass = '';
+                                            switch ($groupName) {
+                                                case 'หมวดทุจริต':
+                                                    $groupColorClass = 'group-danger alert border-0 border-start border-5 border-danger py-2';
+                                                break;
+                                                case 'หมวดบัญชีดำ':
+                                                    $groupColorClass = 'group-warning alert border-0 border-start border-5 border-warning py-2';
+                                                break;
+                                            }
+                                        @endphp
+
+                                        <div class="d-block p-2 my-2 {{ $groupColorClass }}">
+                                            <b>{{ $groupName }} </b>
+                                            @foreach ($filteredMembers as $index => $member)
+                                            <span >{{ ($index + 1) }}.{{ $member }}{{ $loop->last ? '' : ' ,' }}</span>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
+
+                            @if(!empty$customers->demeritdetail))
                             <div class="col-sm-3 mt-4">
                                 <h6 class="mb-0">รายละเอียด</h6>
                             </div>
                             <div class="col-sm-9 text-secondary mt-4">
                                 {{ $customers->demeritdetail }}
                             </div>
+                            @endif
                         </div>
 
                     </div>
@@ -709,7 +770,7 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="d-flex align-items-center mb-3">หลักฐานกระทำความผิด</h5>
+                                <h5 class="d-flex align-items-center mb-3">หลักฐานการกระทำความผิด</h5>
                                 <div class="owl-carousel owl-theme carouselSPhoto">
                                     @if(!empty($customers->c_pic_id_card))
                                     <div class="item">
@@ -772,49 +833,48 @@
     </div>
 </div>
 @else
-    @php
-        $text_show = '';
-        $class_show = 'd-none';
+@php
+$text_show = '';
+$class_show = 'd-none';
 
-        $full_url = url()->full();
-        $query_params = request()->query();
+$full_url = url()->full();
+$query_params = request()->query();
 
-        if (!empty($query_params['c_idno'])) {
-            $c_idno = urldecode($query_params['c_idno']);
-            $text_show = $c_idno;
-            $class_show = '';
-        }if (!empty($query_params['c_name']) || !empty($query_params['c_surname'])) {
-            $c_name = urldecode($query_params['c_name']);
-            $c_surname = urldecode($query_params['c_surname']);
-            $text_show = $c_name . ' ' . $c_surname;
-            $class_show = '';
-        }if (!empty($query_params['commercial_registration'])) {
-            $commercial_registration = urldecode($query_params['commercial_registration']);
-            $text_show = $commercial_registration;
-            $class_show = '';
-        }if (!empty($query_params['c_company_name'])) {
-            $c_company_name = urldecode($query_params['c_company_name']);
-            $text_show = $c_company_name;
-            $class_show = '';
-        }
-    @endphp
-        <div class="text-center {{ $class_show }}" style="margin-top: 8vh;">
-            <img src="{{asset('img/icon/no-results.png')}}" alt="User" class="" width="310">
-            <h2 class=" mt-5">ไม่พบข้อมูลที่คุณค้นหา <span class="text-danger">"{{ $text_show }}"</span> </h2>
-            <h5 class="mt-3">กรุณาปรับการค้นหาและตรวจสอบอีกครั้ง</h5>
-        </div>
+if (!empty($query_params['c_idno'])) {
+$c_idno = urldecode($query_params['c_idno']);
+$text_show = $c_idno;
+$class_show = '';
+}if (!empty($query_params['c_name']) || !empty($query_params['c_surname'])) {
+$c_name = urldecode($query_params['c_name']);
+$c_surname = urldecode($query_params['c_surname']);
+$text_show = $c_name . ' ' . $c_surname;
+$class_show = '';
+}if (!empty($query_params['commercial_registration'])) {
+$commercial_registration = urldecode($query_params['commercial_registration']);
+$text_show = $commercial_registration;
+$class_show = '';
+}if (!empty($query_params['c_company_name'])) {
+$c_company_name = urldecode($query_params['c_company_name']);
+$text_show = $c_company_name;
+$class_show = '';
+}
+@endphp
+<div class="text-center {{ $class_show }}" style="margin-top: 8vh;">
+    <img src="{{asset('img/icon/no-results.png')}}" alt="User" class="" width="310">
+    <h2 class=" mt-5">ไม่พบข้อมูลที่คุณค้นหา <span class="text-danger">"{{ $text_show }}"</span> </h2>
+    <h5 class="mt-3">กรุณาปรับการค้นหาและตรวจสอบอีกครั้ง</h5>
+</div>
 @endif
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
-		const switchforSearch = urlParams.get('switchforSearch');
-
-        if (switchforSearch) {
+        const switchforSearch = urlParams.get('switchforSearch');
+        console.log(switchforSearch);
+        if (switchforSearch === "company") {
             console.log('บริษัท');
-            document.getElementById('switchforSearch').checked = true;
+            document.getElementById('switchforSearch2').checked = true;
             toggleDivsswitchforSearch()
             console.log('บริษัท');
-
         }
     });
 
@@ -822,7 +882,7 @@
         var Search = document.querySelectorAll(".divInputSearch");
 
         Search.forEach(function(div) {
-                div.classList.toggle('d-none');
+            div.classList.toggle('d-none');
         });
     }
 

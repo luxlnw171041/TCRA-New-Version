@@ -17,33 +17,84 @@
         margin: 6px;
     }
 
-    .radio-input:checked+.radio-tile {
-        border-color: #0a58ca;
+    .radio-input:checked+.radio-danger {
+        border-color: #e62e2e;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        color: #0a58ca;
+        color: #e62e2e;
     }
 
-    .radio-input:checked+.radio-tile:before {
+    .radio-input:checked+.radio-danger:before {
         transform: scale(1);
         opacity: 1;
-        background-color: #0a58ca;
-        border-color: #0a58ca;
+        background-color: #e62e2e;
+        border-color: #e62e2e;
     }
 
-    .radio-input:checked+.radio-tile .radio-icon svg {
-        fill: #0a58ca;
+    .radio-input:checked+.radio-danger .radio-icon svg {
+        fill: #e62e2e;
     }
 
-    .radio-input:checked+.radio-tile .radio-label {
-        color: #0a58ca;
+    .radio-input:checked+.radio-danger .radio-label {
+        color: #e62e2e;
     }
 
-    .radio-input:focus+.radio-tile {
-        border-color: #0a58ca;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgb(10, 88, 202, 0.3);
-        ;
+    .radio-input:focus+.radio-danger {
+        border-color: #e62e2e;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgb(230, 46, 46, 0.3);
     }
 
+    .radio-input:checked+.radio-warning {
+        border-color: #fabb00;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        color: #fabb00;
+    }
+
+    .radio-input:checked+.radio-warning:before {
+        transform: scale(1);
+        opacity: 1;
+        background-color: #fabb00;
+        border-color: #fabb00;
+    }
+
+    .radio-input:checked+.radio-warning .radio-icon svg {
+        fill: #fabb00;
+    }
+
+    .radio-input:checked+.radio-warning .radio-label {
+        color: #000;
+    }
+
+    .radio-input:focus+.radio-warning {
+        border-color: #fabb00;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgb(250, 187, 0, 0.3);
+    }
+
+
+    .radio-input:checked+.radio-success {
+        border-color: #29cc39;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        color: #29cc39;
+    }
+
+    .radio-input:checked+.radio-success:before {
+        transform: scale(1);
+        opacity: 1;
+        background-color: #29cc39;
+        border-color: #29cc39;
+    }
+
+    .radio-input:checked+.radio-success .radio-icon svg {
+        fill: #29cc39;
+    }
+
+    .radio-input:checked+.radio-success .radio-label {
+        color: #29cc39;
+    }
+
+    .radio-input:focus+.radio-success {
+        border-color: #29cc39;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px rgb(41, 204, 57, 0.3);
+    }
     .radio-input:focus+.radio-tile:before {
         transform: scale(1);
         opacity: 1;
@@ -81,10 +132,16 @@
         transition: 0.25s ease;
     }
 
-    .radio-tile:hover {
-        border-color: #0a58ca;
+    .radio-danger:hover {
+        border-color: #e62e2e;
     }
 
+    .radio-warning:hover {
+        border-color: #fabb00;
+    }
+    .radio-succss:hover {
+        border-color: #29cc39;
+    }
     .radio-tile:hover:before {
         transform: scale(1);
         opacity: 1;
@@ -115,12 +172,12 @@
     }
 </style>
 
- <form id="formCreateDriver" method="POST" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+<form id="formCreateDriver" method="POST" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+    {{ csrf_field() }}
 
-                        @include ('driver.form', ['formMode' => 'create'])
+    @include ('driver.form', ['formMode' => 'create'])
 
-                    </form>
+</form>
 <!-- <div class="container">
     <div class="row">
         <div class="col-md-9">

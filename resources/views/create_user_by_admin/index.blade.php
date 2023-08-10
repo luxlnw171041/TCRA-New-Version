@@ -529,7 +529,7 @@ button:focus.btnAddUser {
             </div>
         </div>
     </div>                                             -->
-    <div class="col-md-12">
+    <div class="col-md-3">
         <div class="sticky">
             <div>
 
@@ -576,28 +576,28 @@ button:focus.btnAddUser {
                 </div>
                 <hr>
                 <div class="row g-3">
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputLastName0" class="form-label">เลขที่สมาชิก <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-input-numeric"></i></span>
                             <input type="text" class="form-control border-start-0"  id="no_member" name="no_member" placeholder="เลขที่สมาชิก" required oninput="on_inputData();">
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_no_member">ss</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputLastName1" class="form-label">Username (สำหรับลงชื่อเข้าใช้) <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-at"></i></span>
                             <input type="text" class="form-control border-start-0"  id="Username" name="Username" placeholder="Username" required oninput="on_inputData();">
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_Username">ss</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputLastName2" class="form-label">Name (สำหรับแสดงในระบบ) <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="bx bxs-user"></i></span>
                             <input type="text" class="form-control border-start-0" id="Name" name="Name" placeholder="Name" required oninput="on_inputData();">
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_Name">ss</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputEmailAddress" class="form-label">Email Address <span class="text-danger">*</span></label>
                         <div class="input-group "> <span class="input-group-text bg-transparent"><i class="bx bxs-message"></i></span>
                             <input type="text" class="form-control border-start-0" id="email" name="email" placeholder="Email" required oninput="on_inputData();" onchange="check_email();">
@@ -614,7 +614,7 @@ button:focus.btnAddUser {
                             <div id="div_text_alert_email" class="invalid-feedback d-none" >มี EMail นี้ในระบบแล้ว.</div>
                         </div>
                     </div> -->
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputPhoneNo" class="form-label">สถานะลงชื่อเข้าใช้ <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-right-to-bracket"></i></span>
                             <select class="form-select border-start-0" id="member_status" name="member_status" required oninput="on_inputData();">
@@ -625,7 +625,7 @@ button:focus.btnAddUser {
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_member_status">ss</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputPhoneNo" class="form-label">หมวดหมู่สมาชิก <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-duotone fa-users"></i></span>
                             <select class="form-select border-start-0" id="member_role" name="member_role" required oninput="on_inputData();">
@@ -639,7 +639,7 @@ button:focus.btnAddUser {
                         <span class="text-danger d-none" id="text_alert_input_member_role">ss</span>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputChoosePassword" class="form-label">บริษัท</label> <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-buildings"></i></span>
                             <input type="text" class="form-control border-start-0" id="member_co" name="member_co" placeholder="บริษัท" oninput="on_inputData();">
@@ -647,7 +647,7 @@ button:focus.btnAddUser {
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_member_co">ss</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputPhoneNo" class="form-label">เบอร์ติดต่อ</label> <span class="text-danger">*</span></label>
                         <div class="input-group"> <span class="input-group-text bg-transparent"><i class="fa-solid fa-phone"></i></span>
                             <input type="text" class="form-control border-start-0" id="member_tel" name="member_tel" placeholder="เบอร์ติดต่อ" oninput="on_inputData();">
@@ -655,14 +655,14 @@ button:focus.btnAddUser {
                         </div>
                         <span class="text-danger d-none" id="text_alert_input_member_tel">ss</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputAddress3" class="form-label">ที่อยู่</label> <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="member_addr" name="member_addr" placeholder="เพิ่มข้อมูลที่อยู่" rows="3" oninput="on_inputData();"></textarea>
                         <span class="text-danger d-none" id="text_alert_input_member_addr">ss</span>
                     </div>
                     
                     <div class="col-12">
-                        <button class="card btn radius-10 btnAddUser bg-success bg-gradient" onclick="check_create_member();" style="width:20%;">
+                        <button class="card btn radius-10 btnAddUser bg-success bg-gradient w-100" onclick="check_create_member();" >
                             <div class="card-body w-100 p-2">
                                 <div class="d-flex align-items-center">
                                     <div>
@@ -712,7 +712,7 @@ button:focus.btnAddUser {
 
 
     <!-- Card ตารางฝั่งขวา -->
-    <div class="col-md-12">
+    <div class="col-md-9">
         <div class="card border-top border-0 border-4 border-danger">
             <div class="card-body p-5">
                 <div class="card-title d-flex align-items-center">
@@ -868,22 +868,26 @@ button:focus.btnAddUser {
 
                         </table>
                     </div> -->
-
+                                                <style>
+                                                    #table_show_member_filter label{
+                                                        display: none;
+                                                    }
+                                                </style>
                     <div class="table-responsive w-100">
 
-                        <div id="table_show_member_wrapper" class="">
+                        <div id="table_show_member_wrapper" class="" style="max-width: 99.3%;">
                         
                             <table id="table_show_member" class="table table-striped table-bordered align-middle text-center" >
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">ลำดับ</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">เลขที่สมาชิก</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">บริษัท</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">สิทธิ์การใช้งาน</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">เลขที่สมาชิก</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">บริษัท</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">สิทธิ์การใช้งาน</th>
                                         <th colspan="2" style="color:#02ad13;">บันทึก (ครั้ง)</th>
                                         <th colspan="2" style="color:blue;">ค้นหา (ครั้ง)</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">สถานะ</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding: 0;">เพิ่มเติม</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">สถานะ</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">เพิ่มเติม</th>
                                     </tr>
                                     <tr>
                                         <th style="color:#02ad13;">มิจฉาชีพ</th>
@@ -896,7 +900,7 @@ button:focus.btnAddUser {
                                     @foreach($data_member as $item)
                                     <tr>
                                         <td>
-                                            {{ $loop->iteration }}
+                                            {{ $item->id }}
                                         </td>
                                         <td>
                                             {{ $item->no_member }}
@@ -981,8 +985,8 @@ button:focus.btnAddUser {
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <div class="d-flex align-items-center order-actions">
-                                                <a href="javascript:;" class="ms-2 text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_{{ $item->id }}">
+                                            <div class="d-flex align-items-center justify-content-center order-actions">
+                                                <a href="javascript:;" class="text-primary bg-light-primary border-0" data-toggle="modal" data-target="#view_data_mamber_{{ $item->id }}">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </a>
                                             </div>
@@ -1050,7 +1054,7 @@ button:focus.btnAddUser {
             autoWidth: true,
             lengthChange: false,
             columnDefs: [{
-                targets: [0, 4,5,6,7,8,9],  // Disable sorting for columns 2 and 3
+                targets: [8,9],  // Disable sorting for columns 2 and 3
                 orderable: false
             }],
             buttons: [
