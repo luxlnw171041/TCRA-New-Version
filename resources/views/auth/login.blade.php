@@ -40,9 +40,9 @@
 			z-index: 1;
 			font-weight: 600;
 			letter-spacing: -1px;
-			font-size: 14px;
+			font-size: 3vw;
 		}
-
+		
 		.selection-type-login {
 			display: none;
 			position: absolute;
@@ -70,6 +70,24 @@
 		.radio-input-mobile-login label:nth-child(2):has(input:checked)~.selection-type-login {
 			transform: translateX(calc(100%));
 		}
+		
+	}
+
+	@media(max-width: 450px){
+		.font-alert-mobile{
+			font-size: 3vw;
+			
+		}
+		.font-header-alert-mobile{
+			font-size: 3.9vw !important;
+			font-weight: bold;
+			
+		}
+		.alert-mobile{
+			padding-right: 4px !important;
+			padding-left: 4px !important;
+		}
+
 	}
 
 	@media (min-width: 768px) {
@@ -517,13 +535,13 @@
 												</div>
 											</div>
 												@if($error_login == "YES")
-													<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-1" style="left:5%;width:90%;position: absolute; top:92%;">
+													<div class="alert alert-danger border-0 bg-danger alert-dismissible alert-mobile fade show py-1" style="left:5%;width:90%;position: absolute; top:92%;">
 														<div class="d-flex align-items-center">
 															<div class="font-35 text-white me-2"><i class="bx bxs-message-square-x"></i>
 															</div>
 															<div class="w-100">
-																<h6 class="mb-0 text-white">Username หรือ Password ไม่ถูกต้อง</h6>
-																<div class="text-white">กรุณาตรวจสอบและลองใหม่อีกครั้ง</div>
+																<h6 class="mb-0 text-white font-header-alert-mobile">Username หรือ Password ไม่ถูกต้อง</h6>
+																<div class="text-white font-alert-mobile">กรุณาตรวจสอบและลองใหม่อีกครั้ง</div>
 															</div>
 														</div>
 														<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
