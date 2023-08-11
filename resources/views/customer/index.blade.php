@@ -646,7 +646,10 @@
                                     {{$customers->commercial_registration}}
                                 </h4>
                                 @endif
-                                <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($customers->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
+                                @if(!empty($customers->c_idno))
+                                    <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($customers->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
+                                @endif
+                                
                                 <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($customers->c_date)) }} </p>
                                 <!-- <button class="btn btn-primary">Follow</button>
                                         <button class="btn btn-outline-primary">Message</button> -->

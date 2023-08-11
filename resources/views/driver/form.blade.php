@@ -1028,43 +1028,29 @@
                             const infoImg = fileUploadBox.querySelector('.infoImg');
                             const clearButton = fileUploadBox.querySelector('#clear-button');
                             let isClearButtonClicked = false;
+                            let isFileSelected = false;
 
                             clearButton.addEventListener('click', function() {
-                                fileInput.value = null; // เคลียร์ค่า input file
-                                filePreview.src = ''; // เคลียร์ค่าภาพตัวอย่าง
-                                filePreview.style.display = 'none';
-                                uploadText.style.display = 'block';
-                                clearButton.style.display = 'none';
-                                infoImg.style.display = 'none';
+                                fileInput.value = null;
+                                resetPreview();
                                 isClearButtonClicked = true;
+                                isFileSelected = false;
                             });
 
                             fileUploadBox.addEventListener('click', function() {
-                                fileInput.value = null; // เคลียร์ค่า input file
                                 if (!isClearButtonClicked) {
                                     fileInput.click();
                                 }
-
-                                isClearButtonClicked = false;
+                                resetPreview();
                             });
 
                             fileInput.addEventListener('change', function(event) {
                                 const file = event.target.files[0];
-                                const fileName = file.name;
-                                const fileSize = formatFileSize(file.size);
-                                const fileExtension = getFileExtension(fileName);
-                                const imgName = fileUploadBox.querySelector('.imgName');
-                                const imgSize = fileUploadBox.querySelector('.imgSize');
-                                const imgFile = fileUploadBox.querySelector('.imgFile');
-
-                                // ลบนามสกุลไฟล์
-                                const lastDotIndex = fileName.lastIndexOf('.');
-                                const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
+                                // Inside the fileInput.addEventListener('change', function (event) { ... }) block
 
                                 if (file) {
-                                    // ตรวจสอบอัพโหลดรูปเท่านั้น
                                     if (file.type.includes('image')) {
-                                        // console.log("รูป");
+                                        isFileSelected = true;
                                         const reader = new FileReader();
                                         loader.style.display = 'block';
                                         filePreview.style.display = 'none';
@@ -1072,44 +1058,54 @@
                                         uploadText.style.display = 'none';
                                         clearButton.style.display = 'none';
 
-
                                         reader.onload = function(e) {
                                             setTimeout(function() {
-                                                loader.style.display = 'none';
-                                                filePreview.src = e.target.result;
-                                                filePreview.style.display = 'block';
-                                                infoImg.style.display = 'block';
-                                                clearButton.style.display = 'block';
+                                                if (isFileSelected) {
+                                                    loader.style.display = 'none';
+                                                    filePreview.src = e.target.result;
+                                                    filePreview.style.display = 'block';
+                                                    infoImg.style.display = 'block';
+                                                    clearButton.style.display = 'block';
 
-                                                imgName.textContent = fileNameWithoutExtension;
-                                                imgSize.textContent = fileSize + ' | ';
-                                                imgFile.textContent = fileExtension;
+                                                    const fileName = file.name;
+                                                    const fileSize = formatFileSize(file.size);
+                                                    const fileExtension = getFileExtension(fileName);
+                                                    const imgName = fileUploadBox.querySelector('.imgName');
+                                                    const imgSize = fileUploadBox.querySelector('.imgSize');
+                                                    const imgFile = fileUploadBox.querySelector('.imgFile'); // Add this line
+
+                                                    const lastDotIndex = fileName.lastIndexOf('.');
+                                                    const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
+
+                                                    imgName.textContent = fileNameWithoutExtension;
+                                                    imgSize.textContent = fileSize + ' | ';
+                                                    imgFile.textContent = fileExtension; // Update this line
+                                                }
                                             }, 2000);
                                         };
 
                                         reader.readAsDataURL(file);
-
                                     } else {
-                                        // console.log("ไม่รูป");
                                         upload_file_error();
                                     }
                                 } else {
-                                    // กรณีไม่มีการเลือกไฟล์ใหม่
-                                    loader.style.display = 'none';
-                                    filePreview.style.display = 'none';
-                                    uploadText.style.display = 'block';
-                                    clearButton.style.display = 'none';
+                                    resetPreview();
                                 }
-
-
-
 
                             });
 
-
+                            function resetPreview() {
+                                fileInput.value = null;
+                                loader.style.display = 'none';
+                                filePreview.style.display = 'none';
+                                uploadText.style.display = 'block';
+                                clearButton.style.display = 'none';
+                                infoImg.style.display = 'none';
+                                isClearButtonClicked = false;
+                                isFileSelected = false;
+                            }
                         }
 
-                        // เรียกใช้ฟังก์ชันสำหรับแต่ละกล่องอัพโหลด
                         const fileUploadBoxes = document.querySelectorAll('.file-upload-box');
                         fileUploadBoxes.forEach(function(fileUploadBox) {
                             handleFileUpload(fileUploadBox);

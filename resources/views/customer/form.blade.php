@@ -141,7 +141,7 @@
     .subHeaderCustomer {
         font-weight: bolder !important;
         font-size: 16px !important;
-        
+
     }
 
     .text-overflow {
@@ -429,7 +429,7 @@
                     </div>
                     <hr class="mt-6 addDataperson">
                     <div class="card-title d-flex align-items-center addDatacompany">
-                        <div>                        
+                        <div>
                             <img src="{{asset('img/icon/iconHeaderCustomerSlash.png')}}" alt="User" class="me-1" width="22.5">
                         </div>
                         <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบริษัท</h5>
@@ -1052,48 +1052,29 @@
                             const infoImg = fileUploadBox.querySelector('.infoImg');
                             const clearButton = fileUploadBox.querySelector('#clear-button');
                             let isClearButtonClicked = false;
+                            let isFileSelected = false;
 
                             clearButton.addEventListener('click', function() {
-                                fileInput.value = null; // เคลียร์ค่า input file
-                                filePreview.src = ''; // เคลียร์ค่าภาพตัวอย่าง
-                                filePreview.style.display = 'none';
-                                uploadText.style.display = 'block';
-                                clearButton.style.display = 'none';
-                                infoImg.style.display = 'none';
+                                fileInput.value = null;
+                                resetPreview();
                                 isClearButtonClicked = true;
+                                isFileSelected = false;
                             });
 
                             fileUploadBox.addEventListener('click', function() {
-                                fileInput.value = null; // เคลียร์ค่า input file
                                 if (!isClearButtonClicked) {
-                                    filePreview.src = ''; // เคลียร์ค่าภาพตัวอย่าง
-                                    filePreview.style.display = 'none';
-                                    uploadText.style.display = 'block';
-                                    clearButton.style.display = 'none';
-                                    infoImg.style.display = 'none';
-                                    isClearButtonClicked = true;
                                     fileInput.click();
                                 }
-                                isClearButtonClicked = false;
+                                resetPreview();
                             });
 
                             fileInput.addEventListener('change', function(event) {
                                 const file = event.target.files[0];
-                                const fileName = file.name;
-                                const fileSize = formatFileSize(file.size);
-                                const fileExtension = getFileExtension(fileName);
-                                const imgName = fileUploadBox.querySelector('.imgName');
-                                const imgSize = fileUploadBox.querySelector('.imgSize');
-                                const imgFile = fileUploadBox.querySelector('.imgFile');
-
-                                // ลบนามสกุลไฟล์
-                                const lastDotIndex = fileName.lastIndexOf('.');
-                                const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
+                                // Inside the fileInput.addEventListener('change', function (event) { ... }) block
 
                                 if (file) {
-                                    // ตรวจสอบอัพโหลดรูปเท่านั้น
                                     if (file.type.includes('image')) {
-                                        // console.log("รูป");
+                                        isFileSelected = true;
                                         const reader = new FileReader();
                                         loader.style.display = 'block';
                                         filePreview.style.display = 'none';
@@ -1101,48 +1082,56 @@
                                         uploadText.style.display = 'none';
                                         clearButton.style.display = 'none';
 
-
                                         reader.onload = function(e) {
                                             setTimeout(function() {
-                                                loader.style.display = 'none';
-                                                filePreview.src = e.target.result;
-                                                filePreview.style.display = 'block';
-                                                infoImg.style.display = 'block';
-                                                clearButton.style.display = 'block';
+                                                if (isFileSelected) {
+                                                    loader.style.display = 'none';
+                                                    filePreview.src = e.target.result;
+                                                    filePreview.style.display = 'block';
+                                                    infoImg.style.display = 'block';
+                                                    clearButton.style.display = 'block';
 
-                                                imgName.textContent = fileNameWithoutExtension;
-                                                imgSize.textContent = fileSize + ' | ';
-                                                imgFile.textContent = fileExtension;
+                                                    const fileName = file.name;
+                                                    const fileSize = formatFileSize(file.size);
+                                                    const fileExtension = getFileExtension(fileName);
+                                                    const imgName = fileUploadBox.querySelector('.imgName');
+                                                    const imgSize = fileUploadBox.querySelector('.imgSize');
+                                                    const imgFile = fileUploadBox.querySelector('.imgFile'); // Add this line
+
+                                                    const lastDotIndex = fileName.lastIndexOf('.');
+                                                    const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
+
+                                                    imgName.textContent = fileNameWithoutExtension;
+                                                    imgSize.textContent = fileSize + ' | ';
+                                                    imgFile.textContent = fileExtension; // Update this line
+                                                }
                                             }, 2000);
                                         };
 
                                         reader.readAsDataURL(file);
-
                                     } else {
-                                        // console.log("ไม่รูป");
                                         upload_file_error();
                                     }
                                 } else {
-                                    // console.log("ไม่รูป");
-                                    // กรณีไม่มีการเลือกไฟล์ใหม่
-                                    loader.style.display = 'none';
-                                    filePreview.style.display = 'none';
-                                    uploadText.style.display = 'block';
-                                    clearButton.style.display = 'none';
+                                    resetPreview();
                                 }
-
-
-
 
                             });
 
-
+                            function resetPreview() {
+                                fileInput.value = null;
+                                loader.style.display = 'none';
+                                filePreview.style.display = 'none';
+                                uploadText.style.display = 'block';
+                                clearButton.style.display = 'none';
+                                infoImg.style.display = 'none';
+                                isClearButtonClicked = false;
+                                isFileSelected = false;
+                            }
                         }
 
-                        // เรียกใช้ฟังก์ชันสำหรับแต่ละกล่องอัพโหลด
                         const fileUploadBoxes = document.querySelectorAll('.file-upload-box');
                         fileUploadBoxes.forEach(function(fileUploadBox) {
-                            
                             handleFileUpload(fileUploadBox);
                         });
 
@@ -1260,58 +1249,58 @@
             const addDatacompany = document.querySelectorAll('.addDatacompany');
 
 
-          
+
             function handleInputs(inputElement) {
 
-            if (inputElement === c_name || inputElement === c_surname || inputElement === c_idno) {
-                if (c_name.value !== "" || c_surname.value !== "" || c_idno.value !== "") {
-                    addDatacompany.forEach(element => {
-                        element.classList.add('d-none');
-                    });
-                    c_company_name.value = "";
-                    c_company_name.required = false;
-                    
-                    commercial_registration.value = "";
-                    commercial_registration.required = false;
-                } else {
-                    addDatacompany.forEach(element => {
-                        element.classList.remove('d-none');
-                        c_company_name.required = true;
-                    commercial_registration.required = true;
+                if (inputElement === c_name || inputElement === c_surname || inputElement === c_idno) {
+                    if (c_name.value !== "" || c_surname.value !== "" || c_idno.value !== "") {
+                        addDatacompany.forEach(element => {
+                            element.classList.add('d-none');
+                        });
+                        c_company_name.value = "";
+                        c_company_name.required = false;
 
-                    });
-                }
-            } else if (inputElement === c_company_name || inputElement === commercial_registration) {
-                if (c_company_name.value !== "" || commercial_registration.value !== "") {
-                    addDataperson.forEach(element => {
-                        element.classList.add('d-none');
-                    });
-                    // c_name.classList.add('d-none');
-                    // c_surname.classList.add('d-none');
-                    // c_idno.classList.add('d-none');
-                    c_name.value = "";                 
-                    c_name.required = false;
+                        commercial_registration.value = "";
+                        commercial_registration.required = false;
+                    } else {
+                        addDatacompany.forEach(element => {
+                            element.classList.remove('d-none');
+                            c_company_name.required = true;
+                            commercial_registration.required = true;
 
-                    c_surname.value = "";                    
-                    c_surname.required = false;
+                        });
+                    }
+                } else if (inputElement === c_company_name || inputElement === commercial_registration) {
+                    if (c_company_name.value !== "" || commercial_registration.value !== "") {
+                        addDataperson.forEach(element => {
+                            element.classList.add('d-none');
+                        });
+                        // c_name.classList.add('d-none');
+                        // c_surname.classList.add('d-none');
+                        // c_idno.classList.add('d-none');
+                        c_name.value = "";
+                        c_name.required = false;
 
-                    c_idno.value = "";                 
-                    c_idno.required = false;
-                } else {
-                    addDataperson.forEach(element => {
-                        element.classList.remove('d-none');
-                    });
-                    c_name.required = true;
-                    c_surname.required = true;
-                    c_idno.required = true;
+                        c_surname.value = "";
+                        c_surname.required = false;
 
-                    // c_name.classList.remove('d-none');
-                    // c_surname.classList.remove('d-none');
-                    // c_idno.classList.remove('d-none');
+                        c_idno.value = "";
+                        c_idno.required = false;
+                    } else {
+                        addDataperson.forEach(element => {
+                            element.classList.remove('d-none');
+                        });
+                        c_name.required = true;
+                        c_surname.required = true;
+                        c_idno.required = true;
+
+                        // c_name.classList.remove('d-none');
+                        // c_surname.classList.remove('d-none');
+                        // c_idno.classList.remove('d-none');
+                    }
                 }
             }
-        }
-            
+
 
             // function checkValueInput() {
             //     const inputsGroupPerson = [document.getElementById('c_name'), document.getElementById('c_surname'), document.getElementById('c_idno')];
@@ -1361,7 +1350,7 @@
             //             checkisGroupPersonAndCompany = false;
             //             event.preventDefault();
             //             dangerAlert('คุณกรอกข้อมูลในชุด บุคคล ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
-                        
+
             //         }
             //     } else if (!isGroupPersonValid && isGroupCompanyValid) {
             //         if (inputsGroupPerson.some(input => input.value)) {
@@ -1483,20 +1472,22 @@
         100% {
             box-shadow: inset 0px 0px 0px 60px #fff
         }
-    }.radius-20{
+    }
+
+    .radius-20 {
         border-radius: 20px;
     }
 </style>
 <!-- Modal -->
 <div class="modal fade" id="saveDataSuccess" tabindex="-1" role="dialog" aria-labelledby="saveDataSuccessTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content radius-20" >
+        <div class="modal-content radius-20">
             <div class="modal-body p-5">
                 <div class="loading-container">
                     <div class="loading-spinner"></div>
 
                     <div class="contrainerCheckmark d-none">
-                         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                             <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
                             <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
                         </svg>
