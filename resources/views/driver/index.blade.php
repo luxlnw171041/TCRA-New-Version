@@ -471,16 +471,8 @@
                     </div>
                 </div>
                 <style>
-                .group-danger{
-                    color: #e62e2e;
-                    padding: 5px;
-                    border: .5px solid #e62e2e;
-                }.group-warning{
-                    color: #ffc107;
-                    padding: 5px;
-                }.group-success{
-                    color: #29cc39;
-                    padding: 5px;
+                .text-warning-header{
+                    color: #a17a06;
                 }
                
             </style>
@@ -515,32 +507,33 @@
                                             $groupColorClass = '';
                                             switch ($groupName) {
                                                 case 'หมวดทุจริต':
-                                                    $groupColorClass = 'group-danger alert border-0 border-start border-5 border-danger py-2';
+                                                    $groupColorClass = 'text-danger mb-1';
                                                 break;
                                                 case 'หมวดบัญชีดำ':
-                                                    $groupColorClass = 'group-warning alert border-0 border-start border-5 border-warning py-2';
+                                                    $groupColorClass = 'text-warning-header mb-1';
                                                 break;
                                                 case 'หมวดวินัย':
-                                                    $groupColorClass = 'group-success alert border-0 border-start border-5 border-success py-2';
+                                                    $groupColorClass = 'text-success mb-1';
                                                 break;
                                             }
                                         @endphp
-
-                                        <div class="d-block p-2 my-2 {{ $groupColorClass }}">
+                                        <div class="d-block p-2 pt-0 {{ $groupColorClass }}">
                                             <b>{{ $groupName }} </b>
                                             @foreach ($filteredMembers as $index => $member)
-                                            <span >{{ ($index + 1) }}.{{ $member }}{{ $loop->last ? '' : ' ,' }}</span>
+                                            <span>{{ ($index + 1) }}.{{ $member }}{{ $loop->last ? '' : ' ,' }}</span>
                                             @endforeach
                                         </div>
                                     @endif
                                 @endforeach
                                 </div>
-                                <div class="col-sm-3 mt-4">
-                                    <h6 class="mb-0">รายละเอียด</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary mt-4">
-                                    {{ $driver->demeritdetail }}
-                                </div>
+                                @if(!empty($driver->demeritdetail))
+                                    <div class="col-sm-3 mt-4">
+                                        <h6 class="mb-0">รายละเอียด</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary mt-4">
+                                        {{ $driver->demeritdetail }}
+                                    </div>
+                                @endif
                             </div>
 
                         </div>
