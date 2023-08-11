@@ -1066,9 +1066,14 @@
                             fileUploadBox.addEventListener('click', function() {
                                 fileInput.value = null; // เคลียร์ค่า input file
                                 if (!isClearButtonClicked) {
+                                    filePreview.src = ''; // เคลียร์ค่าภาพตัวอย่าง
+                                    filePreview.style.display = 'none';
+                                    uploadText.style.display = 'block';
+                                    clearButton.style.display = 'none';
+                                    infoImg.style.display = 'none';
+                                    isClearButtonClicked = true;
                                     fileInput.click();
                                 }
-
                                 isClearButtonClicked = false;
                             });
 
@@ -1118,6 +1123,7 @@
                                         upload_file_error();
                                     }
                                 } else {
+                                    // console.log("ไม่รูป");
                                     // กรณีไม่มีการเลือกไฟล์ใหม่
                                     loader.style.display = 'none';
                                     filePreview.style.display = 'none';
@@ -1136,6 +1142,7 @@
                         // เรียกใช้ฟังก์ชันสำหรับแต่ละกล่องอัพโหลด
                         const fileUploadBoxes = document.querySelectorAll('.file-upload-box');
                         fileUploadBoxes.forEach(function(fileUploadBox) {
+                            
                             handleFileUpload(fileUploadBox);
                         });
 
