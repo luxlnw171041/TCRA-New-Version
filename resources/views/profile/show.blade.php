@@ -222,6 +222,9 @@
                                 U-name : <b>{{ $user->username }}</b>
                             </h4>
                             <p class="mb-1 mt-2">
+                                {{ $user->no_member }}
+                            </p>
+                            <p class="mb-1 mt-2">
                                 @if( $user->member_role == "customer" )
                                     <span class="badge bg-light-danger text-danger" style="font-size:13px;">
                                         customer

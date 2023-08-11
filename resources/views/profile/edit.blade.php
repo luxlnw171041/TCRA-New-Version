@@ -156,6 +156,21 @@
                         </div>
 
                         <div class="p-3 mb-3">
+                            @if($user->member_role == 'admin')
+                                <div class="card radius-10 border shadow-none">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div style="width:90%;">
+                                                <p class="mb-0 text-secondary">เลขที่สมาชิก</p>
+                                                <input type="text" style="width:100%;" class="form-control" name="no_member" value="{{ $user->no_member }}">
+                                            </div>
+                                            <div class="widgets-icons bg-light-dark text-dark ms-auto">
+                                                <i class="fa-solid fa-input-numeric"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
