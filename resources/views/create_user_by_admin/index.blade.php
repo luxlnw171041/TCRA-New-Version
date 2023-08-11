@@ -179,7 +179,7 @@ button:focus.btnAddUser {
   width: 50px;
   height: 25px;
   border-radius: 50px;
-  background: linear-gradient(to bottom, #b3b3b3, #e6e6e6);
+  background: linear-gradient(to bottom, #f72d2d, #f25a5a);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -206,7 +206,7 @@ button:focus.btnAddUser {
 }
 
 .checkbox-apple label:hover {
-  background: linear-gradient(to bottom, #b3b3b3, #e6e6e6);
+  background: linear-gradient(to bottom, #f72d2d, #f25a5a);
 }
 
 .checkbox-apple label:hover:after {
@@ -296,7 +296,7 @@ button:focus.btnAddUser {
                                             <!-- บทบาทของสมาชิก -->
                                             @if($item_modal->member_role == "admin")
                                                 <span class="btn bg-light-info text-info" style="font-size:12px;">
-                                                    แอดมิน
+                                                    Admin
                                                 </span>
                                             @elseif($item_modal->member_role == "member")
                                                 <span class="btn bg-light-success text-success" style="font-size:12px;">
@@ -772,7 +772,7 @@ button:focus.btnAddUser {
                                         <td class="text-center">
                                             @if($item->member_role == "admin")
                                                 <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
-                                                    แอดมิน
+                                                    Admin
                                                 </span>
                                             @elseif($item->member_role == "member")
                                                 <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
@@ -875,25 +875,25 @@ button:focus.btnAddUser {
                                                 </style>
                     <div class="table-responsive w-100">
 
-                        <div id="table_show_member_wrapper" class="" style="max-width: 99.3%;">
+                        <div id="table_show_member_wrapper" class="" style="max-width: 100%;">
                         
-                            <table id="table_show_member" class="table table-striped table-bordered align-middle text-center" >
+                            <table id="table_show_member" class="table table-striped table-bordered align-middle text-center">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">เลขที่สมาชิก</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">บริษัท</th>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">สิทธิ์การใช้งาน</th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">เลขที่สมาชิก <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">บริษัท <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">สิทธิ์การใช้งาน <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
                                         <th colspan="2" style="color:#02ad13;">บันทึก (ครั้ง)</th>
                                         <th colspan="2" style="color:blue;">ค้นหา (ครั้ง)</th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">สถานะ</th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">เพิ่มเติม</th>
                                     </tr>
                                     <tr>
-                                        <th style="color:#02ad13;">มิจฉาชีพ</th>
-                                        <th style="color:#02ad13;">พขร</th>
-                                        <th style="color:blue;">มิจฉาชีพ</th>
-                                        <th style="color:blue;">พขร</th>
+                                        <th style="color:#02ad13;">มิจฉาชีพ <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <th style="color:#02ad13;">พขร <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <th style="color:blue;">มิจฉาชีพ <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <th style="color:blue;">พขร <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody id="list_member">
@@ -915,7 +915,7 @@ button:focus.btnAddUser {
                                         <td class="text-center">
                                             @if($item->member_role == "admin")
                                                 <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
-                                                    แอดมิน
+                                                    Admin
                                                 </span>
                                             @elseif($item->member_role == "member")
                                                 <span class="badge bg-light-success text-success" style="font-size:13px;width: 100px;margin: 20px;">
@@ -969,19 +969,29 @@ button:focus.btnAddUser {
                                                 <label for="check_active_{{ $item->id }}"></label>
                                             </div>
                                             </center>
+                                            <div id="show_text_status_member" class="d-none">{{ $item->member_status }}</div>
 
                                             <div id="td_status_member_{{ $item->id }}" class="d-none">
-                                            @if($item->member_status == "Active")
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
-                                                    <button type="button" class="btn btn-outline-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
-                                                </div>
-                                            @else
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-outline-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">Active</button>
-                                                    <button type="button" class="btn btn-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">Inactive</button>
-                                                </div>
-                                            @endif
+
+                                                @if($item->member_status == "Active")
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <button type="button" class="btn btn-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">
+                                                            <!-- Active -->
+                                                        </button>
+                                                        <button type="button" class="btn btn-outline-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">
+                                                            <!-- Inactive -->
+                                                        </button>
+                                                    </div>
+                                                @else
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <button type="button" class="btn btn-outline-success btn_status_Active_{{ $item->id }}" onclick="change_status_to('Active','{{ $item->id }}');">
+                                                            <!-- Active -->
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn_status_Inactive_{{ $item->id }}" onclick="change_status_to('Inactive','{{ $item->id }}');">
+                                                            <!-- Inactive -->
+                                                        </button>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </td>
                                         <td class="text-center">
@@ -1039,6 +1049,9 @@ button:focus.btnAddUser {
 <script>
     $(document).ready(function() {
 
+        var activeCount = 0;
+        var inactiveCount = 0;
+
         $("#table_show_member tfoot th").each(function () {
             if($(this).text()){
                 var title = $(this).text();
@@ -1053,29 +1066,93 @@ button:focus.btnAddUser {
             paging: true,
             autoWidth: true,
             lengthChange: false,
-            columnDefs: [{
-                targets: [8,9],  // Disable sorting for columns 2 and 3
-                orderable: false
-            }],
+            pageLength: 20,
+            columnDefs: [
+                { type: "num", targets: 0 }, // กำหนดประเภทของข้อมูลในคอลัมน์ที่ 0 เป็นรูปแบบตัวเลข
+                { targets: [8, 9], orderable: false } // ปิดการเรียงลำดับสำหรับคอลัมน์ 9 และ 10
+            ],
+            order: [[0, 'desc']], // เรียงลำดับคอลัมน์ที่ 0 จากมากไปน้อย
             buttons: [
+                {
+                    text: "คืนค่าเริ่มต้น", // ข้อความที่จะแสดงในปุ่ม
+                    action: function () {
+                        table.order([[0, 'desc']]).draw(); // เรียกใช้การเรียงลำดับเริ่มต้นและวาดตารางใหม่
+                        count_active_inactive(); // คำนวณ Active และ Inactive ใหม่
+                    }
+                },
                 {
                     extend: "excelHtml5",
                     text: "Export Excel"  // เปลี่ยนข้อความในปุ่มที่นี่
                 },
             ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/th.json',
+            },
             initComplete: function (settings, json) {
                 var footer = $("#table_show_member tfoot tr");
                 $("#table_show_member thead").append(footer);
+                count_active_inactive();
             }
         });
 
-        // Apply the search
+        // เมื่อมีการเปลี่ยนหน้า
+        table.on('page.dt', function () {
+
+            setTimeout(function() {
+                count_active_inactive(); // เรียกใช้งานฟังก์ชันคำนวณ Active และ Inactive
+            }, 1500);
+        });
+
+        // เมื่อมีการเรียงลำดับ
+        table.on('order.dt', function () {
+            count_active_inactive();
+        });
+
+        // นับจำนวน "Active" และ "Inactive" หลังจากการค้นหา
         $("#table_show_member thead").on("keyup", "input", function () {
-                table.column($(this).parent().index())
+            table.column($(this).parent().index())
                 .search(this.value)
                 .draw();
-            });
+
+            count_active_inactive();
+            
+        });
+
+        document.querySelector('#table_show_member').classList.remove('dataTable');
+        document.querySelector('#table_show_member').setAttribute('style',"width: 100%;");
+        document.querySelector('#table_show_member_info').classList.add('mt-2','mb-2');
     } );
+
+    function count_active_inactive(){
+        activeCount = 0;
+        inactiveCount = 0;
+
+        $("div#show_text_status_member").each(function () {
+            var statusText = $(this).text().trim();
+            if (statusText === "Active") {
+                activeCount++;
+            } else if (statusText === "Inactive") {
+                inactiveCount++;
+            }
+        });
+
+        // console.log("Active count:", activeCount);
+        // console.log("Inactive count:", inactiveCount);
+
+        let count_active_inactive_old = document.querySelector('#count_active_inactive') ;
+        if(count_active_inactive_old){
+            count_active_inactive_old.remove() ;
+        }
+
+        let text_html = `
+            <div id="count_active_inactive" class="float-end">
+                <span class="text-success">Active : `+ activeCount +`</span> / <span class="text-danger">Inactive : `+ inactiveCount+`</span>
+            </div>
+        `;
+
+        document.querySelector('#table_show_member_info').insertAdjacentHTML('afterbegin', text_html); // แทรกบนสุด
+    }
+
 </script>
 
 <script>
@@ -1217,13 +1294,13 @@ button:focus.btnAddUser {
                     if (data.member_role == "admin") {
                         html_member_role = `
                             <span class="badge bg-light-info text-info" style="font-size:13px;width: 100px;margin: 20px;">
-                                แอดมิน
+                                Admin
                             </span>
                         `;
 
                         html_member_role_modal = `
                             <span class="btn bg-light-info text-info" style="font-size:12px;">
-                                แอดมิน
+                                Admin
                             </span>
                         `;
 
@@ -1273,8 +1350,8 @@ button:focus.btnAddUser {
                     if(data.member_status == "Active"){
                         html_member_status = `
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-success btn_status_Active_`+data.user_id+`" onclick="change_status_to('Active','`+data.user_id+`');">Active</button>
-                                <button type="button" class="btn btn-outline-danger btn_status_Inactive_`+data.user_id+`" onclick="change_status_to('Inactive','`+data.user_id+`');">Inactive</button>
+                                <button type="button" class="btn btn-success btn_status_Active_`+data.user_id+`" onclick="change_status_to('Active','`+data.user_id+`');"></button>
+                                <button type="button" class="btn btn-outline-danger btn_status_Inactive_`+data.user_id+`" onclick="change_status_to('Inactive','`+data.user_id+`');"></button>
                             </div>
                         `;
 
@@ -1286,8 +1363,8 @@ button:focus.btnAddUser {
                     }else{
                         html_member_status = `
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-success btn_status_Active_`+data.user_id+`" onclick="change_status_to('Active','`+data.user_id+`');">Active</button>
-                                <button type="button" class="btn btn-danger btn_status_Inactive_`+data.user_id+`" onclick="change_status_to('Inactive','`+data.user_id+`');">Inactive</button>
+                                <button type="button" class="btn btn-outline-success btn_status_Active_`+data.user_id+`" onclick="change_status_to('Active','`+data.user_id+`');"></button>
+                                <button type="button" class="btn btn-danger btn_status_Inactive_`+data.user_id+`" onclick="change_status_to('Inactive','`+data.user_id+`');"></button>
                             </div>
                         `;
 

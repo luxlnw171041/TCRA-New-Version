@@ -26,13 +26,13 @@ class Create_user_by_adminController extends Controller
             $create_user_by_admin = Create_user_by_admin::where('user_id', 'LIKE', "%$keyword%")
                 ->orWhere('username', 'LIKE', "%$keyword%")
                 ->orWhere('pass_code', 'LIKE', "%$keyword%")
-                ->orderBy('id','ASC')
+                ->orderBy('id','DESC')
                 ->get();
         } else {
-            $create_user_by_admin = Create_user_by_admin::orderBy('id','ASC')->get();
+            $create_user_by_admin = Create_user_by_admin::orderBy('id','DESC')->get();
         }
 
-        $data_member = User::orderBy('id','ASC')->get();
+        $data_member = User::orderBy('id','DESC')->get();
 
         return view('create_user_by_admin.index', compact('create_user_by_admin','data_member'));
     }
