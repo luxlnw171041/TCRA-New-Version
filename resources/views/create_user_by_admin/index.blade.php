@@ -1186,7 +1186,7 @@ button:focus.btnAddUser {
         let member_addr = document.querySelector('#member_addr').value ;
 
 
-        if (!no_member || !Username || !Name || !email|| !member_status || !member_role || !member_co || !member_tel || !member_addr) {
+        if (!no_member || !Username || !Name || !member_status || !member_role || !member_co || !member_tel || !member_addr) { // || !email
 
             checkConditions(Username , Name , email , member_status , member_role , no_member , member_co , member_tel , member_addr);
 
@@ -1641,19 +1641,19 @@ button:focus.btnAddUser {
     function check_email(){
         let email = document.querySelector('#email').value ;
 
-        fetch("{{ url('/') }}/api/check_email/"+email)
-            .then(response => response.text())
-            .then(result => {
-                console.log(result);
-                if(result == "มีข้อมูลอีเมลนี้แล้ว"){
-                    document.querySelector('#div_text_alert_email').classList.remove('d-none');
-                    document.querySelector('#email').classList.add('is-invalid');
-                    document.querySelector('#email').value = '' ;
-                    document.querySelector('#email').focus() ;
-                }if(result == "อีเมลนี้สามารถใช้งานได้"){
-                    document.querySelector('#email').classList.remove('is-invalid');
-                }
-            });
+        // fetch("{{ url('/') }}/api/check_email/"+email)
+        //     .then(response => response.text())
+        //     .then(result => {
+        //         console.log(result);
+        //         if(result == "มีข้อมูลอีเมลนี้แล้ว"){
+        //             document.querySelector('#div_text_alert_email').classList.remove('d-none');
+        //             document.querySelector('#email').classList.add('is-invalid');
+        //             document.querySelector('#email').value = '' ;
+        //             document.querySelector('#email').focus() ;
+        //         }if(result == "อีเมลนี้สามารถใช้งานได้"){
+        //             document.querySelector('#email').classList.remove('is-invalid');
+        //         }
+        //     });
     }
 
     function checkConditions(Username , Name , email , member_status , member_role , no_member , member_co , member_tel , member_addr) {
@@ -1673,12 +1673,14 @@ button:focus.btnAddUser {
             document.querySelector('#text_alert_input_Name').classList.remove('d-none');
             document.querySelector('#Name').focus();
             return false;
-        }else if (!email) {
-            document.querySelector('#text_alert_input_email').innerHTML = 'กรุณากรอกข้อมูล : email';
-            document.querySelector('#text_alert_input_email').classList.remove('d-none');
-            document.querySelector('#email').focus();
-            return false;
-        }else if (!member_status) {
+        }
+        // else if (!email) {
+        //     document.querySelector('#text_alert_input_email').innerHTML = 'กรุณากรอกข้อมูล : email';
+        //     document.querySelector('#text_alert_input_email').classList.remove('d-none');
+        //     document.querySelector('#email').focus();
+        //     return false;
+        // }
+        else if (!member_status) {
             document.querySelector('#text_alert_input_member_status').innerHTML = 'กรุณากรอกข้อมูล : สถานะลงชื่อเข้าใช้';
             document.querySelector('#text_alert_input_member_status').classList.remove('d-none');
             document.querySelector('#member_status').focus();
