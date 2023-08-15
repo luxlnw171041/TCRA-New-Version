@@ -1596,6 +1596,7 @@ button:focus.btnAddUser {
 
     function create_success(){
 
+        document.querySelector('#no_member').value = "" ;
         document.querySelector('#Username').value = "" ;
         document.querySelector('#Name').value = "" ;
         document.querySelector('#email').value = "" ;
