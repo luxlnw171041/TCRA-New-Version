@@ -144,7 +144,7 @@ class UserController extends Controller
 
         $requestData = $request->all();
 
-        $password = uniqid();
+        $password = "tcra-" . uniqid();
 
         $requestData['password'] = Hash::make($password);
 
