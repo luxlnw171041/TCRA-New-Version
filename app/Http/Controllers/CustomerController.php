@@ -127,6 +127,13 @@ class CustomerController extends Controller
 
         $requestData['demerit'] = $demerit;
         // ddd($requestData);
+
+        if(!empty($requestData['c_name'])){
+            $requestData['rentname'] = "บุคคล" ;
+        }else{
+            $requestData['rentname'] = "บริษัท" ;
+        }
+        
         Customer::create($requestData);
 
         // return redirect('customer.create')->with('flash_message', 'Customer added!');
