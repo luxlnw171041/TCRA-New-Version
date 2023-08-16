@@ -818,13 +818,37 @@
                                     </div>
                                     @endif
                                     @if(!empty($customers->c_pic_other))
+                                    @php
+                                        // ข้อความที่ต้องการตรวจสอบ
+                                        $text = $customers->c_pic_other;
+
+                                        // คำที่ต้องการตรวจสอบ
+                                        $keyword = "uploads";
+                                        $check_uploads = "";
+
+                                        // ตรวจสอบว่าคำที่ต้องการอยู่ในข้อความหรือไม่
+                                        if (strpos($text, $keyword) !== false) {
+                                            $check_uploads =  "Yes";
+                                        } else {
+                                            $check_uploads =  "No";
+                                        }
+                                    @endphp
                                     <div class="item">
+                                        @if($check_uploads == "Yes")
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
                                             <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
                                             <div class="infoImg">
                                                 <span class="m-0">อื่นๆ</span>
                                             </div>
                                         </a>
+                                        @else
+                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
+                                            <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
+                                            <div class="infoImg">
+                                                <span class="m-0">อื่นๆ</span>
+                                            </div>
+                                        </a>
+                                        @endif
                                     </div>
                                     @endif
                                 </div>
