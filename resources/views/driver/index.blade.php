@@ -461,8 +461,9 @@
                             <div class="d-flex flex-column align-items-center text-center">
                                 <div class="mt-3">
                                     <h4>{{ $driver->d_name }} {{ $driver->d_surname }} </h4>
+                                    
                                     <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($driver->d_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
-                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($driver->c_date)) }}</p>
+                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($driver->d_date)) }}</p>
                                     <!-- <button class="btn btn-primary">Follow</button>
                                             <button class="btn btn-outline-primary">Message</button> -->
                                 </div>
