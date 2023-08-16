@@ -520,7 +520,7 @@
                                         <div class="d-block p-2 pt-0 {{ $groupColorClass }}">
                                             <b>{{ $groupName }} </b>
                                             @foreach ($filteredMembers as $index => $member)
-                                            <span>{{ $loop->last ? '' : ' ,' }}</span>
+                                            <span>{{ $member }}{{ $loop->last ? '' : ' ,' }}</span>
                                             @endforeach
                                         </div>
                                     @endif
