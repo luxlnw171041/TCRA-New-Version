@@ -549,7 +549,7 @@
                             <div class="tab-pane fade active show" id="corrupt" role="tabpanel">
                                 <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ฉ้อโกงหรือยักยอกรถยนต์">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="1.ฉ้อโกงหรือยักยอกรถยนต์">
                                         <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
@@ -557,7 +557,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="2.ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์">
                                         <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
@@ -565,7 +565,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ความผิดในคดีอาญาอื่นๆ">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="3.ความผิดในคดีอาญาอื่นๆ">
                                         <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
@@ -585,7 +585,7 @@
                             <div class="tab-pane fade" id="discipline" role="tabpanel">
                                 <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่บำรุงรักษารถยนต์">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="4.ไม่บำรุงรักษารถยนต์">
                                         <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
@@ -593,7 +593,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่ชำระค่าเช่า">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="5.ไม่ชำระค่าเช่า">
                                         <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
@@ -601,7 +601,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
+                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="6.อื่นๆ">
                                         <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>

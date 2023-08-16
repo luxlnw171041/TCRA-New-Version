@@ -462,7 +462,7 @@
                                 <div class="mt-3">
                                     <h4>{{ $driver->d_name }} {{ $driver->d_surname }} </h4>
                                     <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($driver->d_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
-                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($driver->c_date)) }}</p>
+                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($driver->d_date)) }}</p>
                                     <!-- <button class="btn btn-primary">Follow</button>
                                             <button class="btn btn-outline-primary">Message</button> -->
                                 </div>
@@ -489,9 +489,11 @@
                                     $demeritArray = explode(',', $demerit);
 
                                     $groups = [
-                                    'หมวดทุจริต' => ['ปลอมแปลงเอกสารใบลงเวลา/บิลน้ำมัน', 'ลักทรัพย์นายจ้าง' ,'ยักยอกรถยนต์หรือทรัพย์สิน' ,'ทำร้ายร่างกาย' ,'ความผิดคดีอาญาหรือทุจริตอื่นๆ'],
-                                    'หมวดวินัย' => ['ทิ้งงาน', 'ทะเลาะวิวาท', 'ยืมเงินลูกค้า', 'ไม่เก็บรักษาความลับ', 'ปิดมือถือติดต่อไม่ได้', 'โกหกบ่อยครั้ง', 'ฟ้องร้องนายจ้างหรือร้องตรวจแรงงานที่เป็นเท็จ'],
-                                    'หมวดบัญชีดำ' => ['ขับรถอันตราย', 'มาสาย', 'สตาร์ทรถรอลูกค้า', 'ทัศนคติ/การบริการไม่ดี', 'ไม่รู้เส้นทาง', 'ขัดคำสั่งลูกค้า/นายจ้าง', 'แต่งกาย/พูดจา ไม่สุภาพ'] ,
+                                    'หมวดทุจริต' => ['1.ปลอมแปลงเอกสารใบลงเวลา/บิลน้ำมัน', '2.ลักทรัพย์นายจ้าง' ,'3.ยักยอกรถยนต์หรือทรัพย์สิน' ,'4.ทำร้ายร่างกาย' ,'5.ความผิดคดีอาญาหรือทุจริตอื่นๆ'],
+                                    'หมวดวินัย' => ['7.ทิ้งงาน', '8.ทะเลาะวิวาท', '9.ยืมเงินลูกค้า', '10.ไม่เก็บรักษาความลับ', '11.ปิดมือถือติดต่อไม่ได้', '12.โกหกบ่อยครั้ง', '13.ฟ้องร้องนายจ้างหรือร้องตรวจแรงงานที่เป็นเท็จ'],
+                                    'หมวดบัญชีดำ' => ['15.ขับรถอันตราย', '16.มาสาย', '17.สตาร์ทรถรอลูกค้า', '18.ทัศนคติ/การบริการไม่ดี', '19.ไม่รู้เส้นทาง', '20.ขัดคำสั่งลูกค้า/นายจ้าง', '21.แต่งกาย/พูดจา ไม่สุภาพ'] ,
+                                    ]
+                                    'อื่นๆ' => ['เสพสารเสพติด', 'เมาสุรา' , 'ลักลอบนำรถยนต์ไปใช้ส่วนตัว'] ,
                                     ];
                                 @endphp
 
@@ -514,6 +516,9 @@
                                                 break;
                                                 case 'หมวดวินัย':
                                                     $groupColorClass = 'text-success mb-1';
+                                                break;
+                                                case 'อื่นๆ':
+                                                    $groupColorClass = 'text-dark mb-1';
                                                 break;
                                             }
                                         @endphp
@@ -578,12 +583,37 @@
                                         @endif
                                         @if(!empty($driver->d_pic_other))
                                         <div class="item">
+                                            @php
+                                                // ข้อความที่ต้องการตรวจสอบ
+                                                $text = $driver->d_pic_other;
+
+                                                // คำที่ต้องการตรวจสอบ
+                                                $keyword = "uploads";
+                                                $check_uploads = "";
+
+                                                // ตรวจสอบว่าคำที่ต้องการอยู่ในข้อความหรือไม่
+                                                if (strpos($text, $keyword) !== false) {
+                                                    $check_uploads =  "Yes";
+                                                } else {
+                                                    $check_uploads =  "No";
+                                                }
+                                            @endphp
+
+                                            @if($check_uploads == "Yes")
                                             <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
                                                 <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
                                                 <div class="infoImg">
                                                     <span class="m-0">อื่นๆ</span>
                                                 </div>
                                             </a>
+                                            @else
+                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
+                                                <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
+                                                <div class="infoImg">
+                                                    <span class="m-0">อื่นๆ</span>
+                                                </div>
+                                            </a>
+                                            @endif
                                         </div>
                                         @endif
                                     </div>
