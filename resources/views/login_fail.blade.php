@@ -15,7 +15,7 @@
                     <div class="col-xl-12 text-center">
                         <div class="card-body p-4">
                             <h2 class="text-danger display-4">
-                                ขออภัย เราไม่สามารถเข้าสู่ระบบให้คุณได้
+                                ขออภัย ไม่สามารถเข้าสู่ระบบได้
                             </h2>
                             <h3 class="font-weight-bold">
                                 กรุณาติดต่อเจ้าหน้าที่ TCRA
