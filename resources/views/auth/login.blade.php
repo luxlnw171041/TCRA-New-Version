@@ -216,14 +216,20 @@
 		.containerLogin.right-panel-active .sign-in-container {
 			transform: translateX(100%);
 		}
-
+		.containerLogin.left-panel-active .sign-in-container {
+			transform: translateX(100%);
+		}
 		.sign-up-container {
-			left: 0;
+			left: -50%;
 			width: 50%;
 			opacity: 0;
-			z-index: 1;
+			z-index: 9990000;
+		}
+		.select-customer-login{
+			margin-left: 50% !important;
 		}
 
+		
 		.containerLogin.right-panel-active .sign-up-container {
 			transform: translateX(100%);
 			opacity: 1;
@@ -596,6 +602,8 @@
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
+			checkTypeLogin();
+			
 			const togglePasswordIcons = document.querySelectorAll(".toggle-password");
 
 
@@ -627,6 +635,7 @@
 		if (loginParam === "customer") {
 			document.querySelector(".authentication-header").classList.add("authentication-header-danger");
 			containerLogin.classList.add("right-panel-active");
+			document.querySelector('.overlay-container').classList.add('select-customer-login')
 			for (var i = 0; i < radioInputs.length; i++) {
 				if (radioInputs[i].value === "customer") {
 					radioInputs[i].checked = true;
