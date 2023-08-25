@@ -84,7 +84,7 @@
                 @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" || Auth::user()->member_role == "member" )
                 
                 <li>
-                    <a href="javascript:;" class="has-arrow">
+                    <a id="menu_main_addData_cus" href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
                         <img src="{{ url('/img/icon/iconCustomerSlash.png') }}" alt="" width="25">
                         <!-- <i class="fa-solid fa-user-ninja"></i> -->
@@ -97,10 +97,24 @@
                     </a>
                     
                     <ul>
-                        <li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
+                        <li> <a id="menu_sub_addData_cus" href="javascript:;"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
                         <ul class="mm-collapse">
-								<li> <a href="{{ url('/customer/create') }}?type_create=person""><i class="bx bx-right-arrow-alt"></i>ในนามบุคคล</a></li>
-                                <li> <a href="{{ url('/customer/create') }}?type_create=company""><i class="bx bx-right-arrow-alt"></i>ในนามบริษัท</a></li>
+								<li>
+                                    <a id="menu_add_person_show" href="javascript:;" onclick="document.querySelector('#menu_add_person').click();">
+                                        <i class="bx bx-right-arrow-alt"></i>ในนามบุคคล
+                                    </a>
+                                    <a id="menu_add_person" class="d-none" href="{{ url('/customer/create') }}?type_create=person">
+                                        <!-- <i class="bx bx-right-arrow-alt"></i>ในนามบุคคล -->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="menu_add_company_show" href="javascript:;" onclick="document.querySelector('#menu_add_company').click();">
+                                        <i class="bx bx-right-arrow-alt"></i>ในนามบริษัท
+                                    </a>
+                                    <a id="menu_add_company" class="d-none" href="{{ url('/customer/create') }}?type_create=company">
+                                        <!-- <i class="bx bx-right-arrow-alt"></i>ในนามบริษัท -->
+                                    </a>
+                                </li>
 							</ul>
                         </li>
                         <li> <a href="{{ url('/customer/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูล</a>
@@ -596,6 +610,7 @@
             });
 
             func_update_last_time_active();
+            open_menu_bar();
 
         });
 
@@ -637,6 +652,63 @@
                         }, 1000);
                     }
             });
+        }
+
+        function open_menu_bar(){
+
+            let link_current = "" ;
+            let full_url = '{{ url()->full() }}' ;
+            let text_url_all = full_url.split('?');
+
+            let last_text = text_url_all.length - 1 ;
+            
+            if(text_url_all.length > 1){
+                link_current = text_url_all[last_text];
+            }else{
+                link_current = full_url.split('/')[5] + "/" + full_url.split('/')[6];
+            }
+                
+            console.log(link_current);
+
+            if (link_current == "type_create=person"){
+                console.log("click");
+                setTimeout(function() {
+                    document.querySelector('#menu_main_addData_cus').click();
+                    setTimeout(function() {
+                        document.querySelector('#menu_sub_addData_cus').click();
+                        setTimeout(function() {
+                            document.querySelector('#menu_add_person_show').setAttribute("onclick","");
+                            document.querySelector('#menu_add_person_show').click();
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }
+
+            if(link_current == "type_create=company"){
+                console.log("click");
+                setTimeout(function() {
+                    document.querySelector('#menu_main_addData_cus').click();
+                    setTimeout(function() {
+                        document.querySelector('#menu_sub_addData_cus').click();
+                        setTimeout(function() {
+                            document.querySelector('#menu_add_company_show').setAttribute("onclick","");
+                            document.querySelector('#menu_add_company_show').click();
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }
+
+            if (link_current == "customer/create"){
+                console.log("click");
+                setTimeout(function() {
+                    document.querySelector('#menu_main_addData_cus').click();
+                    setTimeout(function() {
+                        document.querySelector('#menu_sub_addData_cus').click();
+                    }, 500);
+                }, 500);
+            }
+
+
         }
     </script>
 </body>
