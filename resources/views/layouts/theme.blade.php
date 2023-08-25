@@ -662,10 +662,12 @@
 
             let last_text = text_url_all.length - 1 ;
             
+            console.log(full_url.split('/'));
+            
             if(text_url_all.length > 1){
                 link_current = text_url_all[last_text];
             }else{
-                link_current = full_url.split('/')[5] + "/" + full_url.split('/')[6];
+                link_current = full_url.split('/')[4] + "/" + full_url.split('/')[6];
             }
                 
             console.log(link_current);
