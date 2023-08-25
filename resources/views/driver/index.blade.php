@@ -552,7 +552,7 @@
                                             <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_id_card }}" alt="ภาพบัตรประชาชน">
                                                 <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_id_card }}" alt="ภาพบัตรประชาชน">
                                                 <div class="infoImg">
-                                                    <span class="m-0">ภาพบัตรประชาชน</span>
+                                                    <span class="m-0">1.ภาพบัตรประชาชน</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -563,7 +563,7 @@
                                             <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_indictment }}" alt="ภาพใบบังคับคดี">
                                                 <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_indictment }}" alt="ใบบังคับคดี">
                                                 <div class="infoImg">
-                                                    <span class="m-0">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                                    <span class="m-0">2.คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -573,7 +573,7 @@
                                             <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
                                                 <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
                                                 <div class="infoImg">
-                                                    <span class="m-0">หลักฐานการพูด-คุย</span>
+                                                    <span class="m-0">3.หลักฐานการพูด-คุย</span>
                                                 </div>
                                             </a>
                                         </div>
@@ -600,14 +600,14 @@
                                             <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
                                                 <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
                                                 <div class="infoImg">
-                                                    <span class="m-0">อื่นๆ</span>
+                                                    <span class="m-0">4.อื่นๆ</span>
                                                 </div>
                                             </a>
                                             @else
                                                 <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
                                                 <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
                                                 <div class="infoImg">
-                                                    <span class="m-0">อื่นๆ</span>
+                                                    <span class="m-0">4.อื่นๆ</span>
                                                 </div>
                                             </a>
                                             @endif

@@ -939,7 +939,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/id-card.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>สำเนาบัตรประชาชน</span>
+                                        <span>1.สำเนาบัตรประชาชน</span>
                                     </div>
                                 </div>
                             </div>
@@ -969,7 +969,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/legal.png')}}" alt="คำฟ้องหรือใบร้องทุกข์ดำเนินดคี" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>คำฟ้องหรือใบร้องทุกข์ <br> แจ้งความดำเนินคดี</span>
+                                        <span>2.คำฟ้องหรือใบร้องทุกข์ <br> แจ้งความดำเนินคดี</span>
                                     </div>
                                 </div>
                             </div>
@@ -999,7 +999,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/chat.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>หลักฐานการพูด-คุย</span>
+                                        <span>3.หลักฐานการพูด-คุย</span>
                                     </div>
                                 </div>
                             </div>
@@ -1028,7 +1028,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/other.png')}}" alt="User" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>อื่นๆ</span>
+                                        <span>4.อื่นๆ</span>
                                     </div>
                                 </div>
                             </div>

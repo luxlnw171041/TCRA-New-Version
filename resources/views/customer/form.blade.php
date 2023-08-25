@@ -1401,7 +1401,7 @@
     $("#btnSubmitFormCreateCustomer").click(function() {
         if ($("#formCreateCustomer")[0].checkValidity())
             if (checkdemerit) {
-                console.log('sucess');
+                // console.log('sucess');
                 $('#saveDataSuccess').modal('show');
 
                 setTimeout(function() {
@@ -1415,7 +1415,7 @@
 
                 // formCreateCustomer.submit();
             } else {
-                console.log('un_sucess');
+                // console.log('un_sucess');
             }
         else
             //Validate Form

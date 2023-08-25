@@ -782,7 +782,7 @@
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
                                             <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
                                             <div class="infoImg">
-                                                <span class="m-0">ภาพบัตรประชาชน</span>
+                                                <span class="m-0">1.ภาพบัตรประชาชน</span>
                                             </div>
                                         </a>
                                     </div>
@@ -792,7 +792,7 @@
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="สำเนาหนังสือรับรองบริษัท">
                                             <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="สำเนาหนังสือรับรองบริษัท">
                                             <div class="infoImg">
-                                                <span class="m-0">สำเนาหนังสือรับรองบริษัท</span>
+                                                <span class="m-0">2.สำเนาหนังสือรับรองบริษัท</span>
                                             </div>
                                         </a>
                                     </div>
@@ -802,7 +802,11 @@
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ภาพสัญญาเช่า">
                                             <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
                                             <div class="infoImg">
-                                                <span class="m-0">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                                @if($customers->rentname == "บุคคล")
+                                                    <span class="m-0">2.คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                                @else
+                                                    <span class="m-0">3.คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                                @endif
                                             </div>
                                         </a>
                                     </div>
@@ -812,7 +816,11 @@
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
                                             <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
                                             <div class="infoImg">
-                                                <span class="m-0">หลักฐานการพูด-คุย</span>
+                                                @if($customers->rentname == "บุคคล")
+                                                    <span class="m-0">3.หลักฐานการพูด-คุย</span>
+                                                @else
+                                                    <span class="m-0">4.หลักฐานการพูด-คุย</span>
+                                                @endif
                                             </div>
                                         </a>
                                     </div>
@@ -838,14 +846,22 @@
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
                                             <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
                                             <div class="infoImg">
-                                                <span class="m-0">อื่นๆ</span>
+                                                @if($customers->rentname == "บุคคล")
+                                                    <span class="m-0">4.อื่นๆ</span>
+                                                @else
+                                                    <span class="m-0">5.อื่นๆ</span>
+                                                @endif
                                             </div>
                                         </a>
                                         @else
                                         <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
                                             <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
                                             <div class="infoImg">
-                                                <span class="m-0">อื่นๆ</span>
+                                                @if($customers->rentname == "บุคคล")
+                                                    <span class="m-0">4.อื่นๆ</span>
+                                                @else
+                                                    <span class="m-0">5.อื่นๆ</span>
+                                                @endif
                                             </div>
                                         </a>
                                         @endif
@@ -898,12 +914,12 @@ $class_show = '';
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         const switchforSearch = urlParams.get('switchforSearch');
-        console.log(switchforSearch);
+        // console.log(switchforSearch);
         if (switchforSearch === "company") {
-            console.log('บริษัท');
+            // console.log('บริษัท');
             document.getElementById('switchforSearch2').checked = true;
             toggleDivsswitchforSearch()
-            console.log('บริษัท');
+            // console.log('บริษัท');
         }
     });
 
