@@ -662,18 +662,18 @@
 
             let last_text = text_url_all.length - 1 ;
             
-            console.log(full_url.split('/'));
-            
+            // console.log(full_url.split('/'));
+
             if(text_url_all.length > 1){
                 link_current = text_url_all[last_text];
             }else{
-                link_current = full_url.split('/')[4] + "/" + full_url.split('/')[6];
+                link_current = full_url.split('/')[3] + "/" + full_url.split('/')[4];
             }
                 
-            console.log(link_current);
+            // console.log(link_current);
 
             if (link_current == "type_create=person"){
-                console.log("click");
+                // console.log("click");
                 setTimeout(function() {
                     document.querySelector('#menu_main_addData_cus').click();
                     setTimeout(function() {
@@ -687,7 +687,7 @@
             }
 
             if(link_current == "type_create=company"){
-                console.log("click");
+                // console.log("click");
                 setTimeout(function() {
                     document.querySelector('#menu_main_addData_cus').click();
                     setTimeout(function() {
@@ -701,7 +701,7 @@
             }
 
             if (link_current == "customer/create"){
-                console.log("click");
+                // console.log("click");
                 setTimeout(function() {
                     document.querySelector('#menu_main_addData_cus').click();
                     setTimeout(function() {
