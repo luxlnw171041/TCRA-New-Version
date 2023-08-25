@@ -335,172 +335,75 @@
                         <a class="btn btn-outline-danger px-5 " href="{{ url('/user/' . Auth::user()->id . '/edit') }}">แก้ไข</a>
                     </div>
                 </div>
-                <!-- <hr class="my-4"> -->
             </div>
         </div>
     </div>
     <div class="col-md-9">
         <div class="card border-top border-0 border-4 border-danger">
             <div class="card-body p-5">
-                <div class="card-title d-flex align-items-center addDataperson">
-                    <div>
-                        <img src="{{asset('img/icon/iconHeaderCustomerSlash.png')}}" alt="User" class="me-1" width="22.5">
-                        <!-- <i class="bx bxs-user me-1 font-22 text-danger"></i> -->
-                    </div>
-                    <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบุคคล</h5>
-                </div>
-                <!-- <hr> -->
-                <div class="row g-3 mt-4">
-                    <!-- <div class="col-12">
-                        <label for="inputLastName1" class="form-label subHeaderCustomer ">ติดต่อในนาม <span class="text-danger">*</span></label>
-                    </div>
-                    <div class="col-md-4 m-0">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="w-100">
-                                    <label class="w-100">
-                                        <input class="radio-input" type="radio" name="rentname" id="rentname" value="บุคคล" required>
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">บุคคล</span>
-                                        </span>
-                                    </label>
-                                </div>
+                <div class="row g-3">
+                    <div id="create_type_person" class="row addDataperson">
+                        <div class="card-title d-flex align-items-center ">
+                            <div>
+                                <img src="{{asset('img/icon/iconHeaderCustomerSlash.png')}}" alt="User" class="me-1" width="22.5">
                             </div>
-                            <div class="col-6">
-                                <div class="w-100">
-                                    <label class="w-100">
-                                        <input class="radio-input" type="radio" name="rentname" id="rentname" value="บริษัท" required>
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">บริษัท</span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
+                            <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบุคคล</h5>
                         </div>
-                    </div> -->
+                        <div class="row g-3 mt-3">
+                            <div class="col-md-4 mt-md-0 mb-4 ">
+                                <div class="input-group addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}" required="" autocomplete="off" >
+                                        <label for="c_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-md-0 mb-4 ">
+                                <div class="input-group  addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input name="c_surname" type="text" id="c_surname" value="{{ isset($customer->c_surname) ? $customer->c_surname : '' }}" required="" autocomplete="off" >
+                                        <label for="c_surname"><i class="fa-solid fa-user"></i> นามสกุล <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="col-md-4 mt-md-0 mb-4 addDataperson" id="input_c_name">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
-                        <div class="input-group">
-                            <div class="inputGroup w-100">
-                                <input name="c_name" type="text" id="c_name" value="{{ isset($customer->c_name) ? $customer->c_name : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
-                                <label for="c_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-md-0 mb-4 addDataperson" id="input_c_surname">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input name="c_surname" type="text" id="c_surname" value="{{ isset($customer->c_surname) ? $customer->c_surname : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
-                                <label for="c_surname"><i class="fa-solid fa-user"></i> นามสกุล <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-4 mt-md-0 d-none" id="input_c_company_name">
-                        <div class="input-group">
-                            <div class="inputGroup w-100">
-                                <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off">
-                                <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-md-0 d-none" id="input_commercial_registration">
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off">
-                                <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขทะเบียนพาณิชย์/เลขนิติบุคคล <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <div class="col-md-4 mt-md-0 mb-4 addDataperson" id="div_id_no">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}" oninput="handleInputs(this)">
-                                <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mt-6 addDataperson">
-                    <div class="card-title d-flex align-items-center addDatacompany">
-                        <div>
-                            <img src="{{asset('img/icon/iconHeaderCustomerSlash.png')}}" alt="User" class="me-1" width="22.5">
-                        </div>
-                        <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบริษัท</h5>
-                    </div>
-                    <div class="row g-3 mt-3 addDatacompany">
-                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0" id="input_c_company_name">
-                            <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
-                            <div class="input-group">
-                                <div class="inputGroup w-100">
-                                    <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
-                                    <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 addDatacompany" id="input_commercial_registration">
-                            <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
-                            <div class="input-group ">
-                                <div class="inputGroup w-100">
-                                    <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off" oninput="handleInputs(this)">
-                                    <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขประจำตัวผู้เสียภาษี <span class="text-danger">*</span></label>
+                            <div class="col-md-4 mt-md-0 mb-4 ">
+                                <div class="input-group  addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}" >
+                                        <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    <script>
-                        // const radioInputs = document.querySelectorAll('.radio-input');
-                        // const input_c_name = document.querySelector('#input_c_name');
-                        // const input_c_surname = document.querySelector('#input_c_surname');
-                        // const input_c_company_name = document.querySelector('#input_c_company_name');
-                        // const input_commercial_registration = document.querySelector('#input_commercial_registration');
-
-                        // radioInputs.forEach((input) => {
-                        //     input.addEventListener('change', function() {
-                        //         if (this.checked) {
-                        //             if (this.value === 'บุคคล') {
-
-                        //                 input_c_name.classList.remove('d-none');
-                        //                 input_c_surname.classList.remove('d-none');
-                        //                 input_c_company_name.classList.add('d-none');
-                        //                 input_commercial_registration.classList.add('d-none');
-
-                        //                 document.querySelector('#c_company_name').required = false;
-                        //                 document.querySelector('#commercial_registration').required = false;
-                        //                 document.querySelector('#c_company_name').value = "";
-                        //                 document.querySelector('#commercial_registration').value = "";
-                        //                 document.querySelector('#c_surname').required = true;
-                        //                 document.querySelector('#c_name').required = true;
-                        //                 document.querySelector('#div_id_no').classList.remove('d-none');
-
-                        //             } else if (this.value === 'บริษัท') {
-                        //                 input_c_name.classList.add('d-none');
-                        //                 input_c_surname.classList.add('d-none');
-                        //                 input_c_company_name.classList.remove('d-none');
-                        //                 input_commercial_registration.classList.remove('d-none');
-
-
-                        //                 document.querySelector('#c_surname').required = false;
-                        //                 document.querySelector('#c_name').required = false;
-                        //                 document.querySelector('#c_surname').value = "";
-                        //                 document.querySelector('#c_name').value = "";
-                        //                 document.querySelector('#c_company_name').required = true;
-                        //                 document.querySelector('#commercial_registration').required = true;
-                        //                 document.querySelector('#div_id_no').classList.add('d-none');
-                        //                 document.querySelector('#c_idno').value = "";
-                        //             }
-                        //         }
-                        //     });
-                        // });
-                    </script>
+                    <hr class="mt-0 addDataperson addDatacompany" id="hrAddData">
+                    <div id="create_type_company" class="mt-0 addDatacompany">
+                        <div class="card-title d-flex align-items-center ">
+                            <div>
+                                <img src="{{asset('img/icon/iconHeaderCustomerSlash.png')}}" alt="User" class="me-1" width="22.5">
+                            </div>
+                            <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบริษัท</h5>
+                        </div>
+                        <div class="row g-3 mt-3 addDatacompany">
+                            <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 mb-4">
+                                <div class="input-group">
+                                    <div class="inputGroup w-100">
+                                        <input name="c_company_name" type="text" id="c_company_name" value="{{ isset($customer->c_company_name) ? $customer->c_company_name : '' }}" required="" autocomplete="off" >
+                                        <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 mb-4 addDatacompany">
+                                <div class="input-group ">
+                                    <div class="inputGroup w-100">
+                                        <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off" >
+                                        <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขประจำตัวผู้เสียภาษี <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">ลักษณะการกระทำความผิด <span class="text-danger">*</span></label>
                     </div>
@@ -511,7 +414,7 @@
                                     <div class="d-flex align-items-center font-tab">
                                         <div class="tab-icon"><i class="fa-solid fa-user-shield"></i>
                                         </div>
-                                        <div class="tab-title">&nbsp;หมวดทุจริต</div>
+                                        <div class="tab-title">&nbsp;1.หมวดทุจริต</div>
                                     </div>
                                 </a>
                             </li>
@@ -520,7 +423,7 @@
                                     <div class="d-flex align-items-center font-tab">
                                         <div class="tab-icon"><i class="fa-regular fa-file-shield"></i>
                                         </div>
-                                        <div class="tab-title">&nbsp;หมวดบัญชีดำ</div>
+                                        <div class="tab-title">&nbsp;2.หมวดบัญชีดำ</div>
                                     </div>
                                 </a>
                             </li>
@@ -918,11 +821,11 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/id-card.png')}}" alt="สำเนาบัตรประชาชน" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>สำเนาบัตรประชาชน / <br> PassPort</span>
+                                        <span class="number-upload">1.</span><span>สำเนาบัตรประชาชน / <br> PassPort</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item">
+                            <div class="item" id="item_c_pic_company_certificate">
                                 <!-- <h6>ภาพใบบังคับคดี</h6> -->
                                 <div class="file-upload-box upload-lease">
                                     <div id="clear-button" style="display: none;">
@@ -947,7 +850,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/company.png')}}" alt="สำเนาหนังสือรับรองบริษัท" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>สำเนาหนังสือรับรองบริษัท</span>
+                                        <span class="number-upload">2.</span><span>สำเนาหนังสือรับรองบริษัท</span>
                                     </div>
                                 </div>
                             </div>
@@ -978,7 +881,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/legal.png')}}" alt="คำฟ้องหรือใบร้องทุกข์ดำเนินดคี" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>คำฟ้องหรือใบร้องทุกข์ <br> แจ้งความดำเนินคดี</span>
+                                        <span class="number-upload">3.</span><span>คำฟ้องหรือใบร้องทุกข์ <br> แจ้งความดำเนินคดี</span>
                                     </div>
                                 </div>
                             </div>
@@ -1007,7 +910,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/chat.png')}}" alt="หลักฐานการพูด-คุย" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>หลักฐานการพูด-คุย</span>
+                                        <span class="number-upload">4.</span><span>หลักฐานการพูด-คุย</span>
                                     </div>
                                 </div>
                             </div>
@@ -1036,7 +939,7 @@
                                         <div class="w-100 d-flex justify-content-center mb-3">
                                             <img src="{{asset('img/icon/other.png')}}" alt="อื่นๆ" class="imgUpLoad" width="50">
                                         </div>
-                                        <span>อื่นๆ</span>
+                                        <span class="number-upload">5.</span><span>อื่นๆ</span>
                                     </div>
                                 </div>
                             </div>
@@ -1240,66 +1143,59 @@
             }
 
 
-            const c_name = document.getElementById('c_name');
-            const c_surname = document.getElementById('c_surname');
-            const c_idno = document.getElementById('c_idno');
-            const c_company_name = document.getElementById('c_company_name');
-            const commercial_registration = document.getElementById('commercial_registration');
-            const addDataperson = document.querySelectorAll('.addDataperson');
-            const addDatacompany = document.querySelectorAll('.addDatacompany');
+            // const c_name = document.getElementById('c_name');
+            // const c_surname = document.getElementById('c_surname');
+            // const c_idno = document.getElementById('c_idno');
+            // const c_company_name = document.getElementById('c_company_name');
+            // const commercial_registration = document.getElementById('commercial_registration');
+            // const  = document.querySelectorAll('.');
+            // const  = document.querySelectorAll('.');
 
 
 
-            function handleInputs(inputElement) {
+            // function handleInputs(inputElement) {
 
-                if (inputElement === c_name || inputElement === c_surname || inputElement === c_idno) {
-                    if (c_name.value !== "" || c_surname.value !== "" || c_idno.value !== "") {
-                        addDatacompany.forEach(element => {
-                            element.classList.add('d-none');
-                        });
-                        c_company_name.value = "";
-                        c_company_name.required = false;
+            //     if (inputElement === c_name || inputElement === c_surname || inputElement === c_idno) {
+            //         if (c_name.value !== "" || c_surname.value !== "" || c_idno.value !== "") {
+            //             .forEach(element => {
+            //                 element.classList.add('d-none');
+            //             });
+            //             c_company_name.value = "";
+            //             c_company_name.required = false;
 
-                        commercial_registration.value = "";
-                        commercial_registration.required = false;
-                    } else {
-                        addDatacompany.forEach(element => {
-                            element.classList.remove('d-none');
-                            c_company_name.required = true;
-                            commercial_registration.required = true;
+            //             commercial_registration.value = "";
+            //             commercial_registration.required = false;
+            //         } else {
+            //             .forEach(element => {
+            //                 element.classList.remove('d-none');
+            //                 c_company_name.required = true;
+            //                 commercial_registration.required = true;
 
-                        });
-                    }
-                } else if (inputElement === c_company_name || inputElement === commercial_registration) {
-                    if (c_company_name.value !== "" || commercial_registration.value !== "") {
-                        addDataperson.forEach(element => {
-                            element.classList.add('d-none');
-                        });
-                        // c_name.classList.add('d-none');
-                        // c_surname.classList.add('d-none');
-                        // c_idno.classList.add('d-none');
-                        c_name.value = "";
-                        c_name.required = false;
+            //             });
+            //         }
+            //     } else if (inputElement === c_company_name || inputElement === commercial_registration) {
+            //         if (c_company_name.value !== "" || commercial_registration.value !== "") {
+            //             .forEach(element => {
+            //                 element.classList.add('d-none');
+            //             });
+            //             c_name.value = "";
+            //             c_name.required = false;
 
-                        c_surname.value = "";
-                        c_surname.required = false;
+            //             c_surname.value = "";
+            //             c_surname.required = false;
 
-                        c_idno.value = "";
-                        c_idno.required = false;
-                    } else {
-                        addDataperson.forEach(element => {
-                            element.classList.remove('d-none');
-                        });
-                        c_name.required = true;
-                        c_surname.required = true;
-                        c_idno.required = true;
-
-                        // c_name.classList.remove('d-none');
-                        // c_surname.classList.remove('d-none');
-                        // c_idno.classList.remove('d-none');
-                    }
-                }
-            }
+            //             c_idno.value = "";
+            //             c_idno.required = false;
+            //         } else {
+            //             .forEach(element => {
+            //                 element.classList.remove('d-none');
+            //             });
+            //             c_name.required = true;
+            //             c_surname.required = true;
+            //             c_idno.required = true;
+            //         }
+            //     }
+            // }
 
 
             // function checkValueInput() {
@@ -1582,6 +1478,92 @@
         }
     }
 </style>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const type_create = urlParams.get('type_create');
+    const containerLogin = document.getElementById('containerLogin');
+    const radioInputs = document.getElementsByName("typeLoginMoblie");
+
+    if (type_create === "company") {
+        document.getElementById("create_type_person").remove();        
+        document.getElementById("hrAddData").remove();
+
+    } else if (type_create === "person") {
+        document.getElementById("create_type_company").remove();        
+        document.getElementById("hrAddData").remove();
+        const uploadBoxes = document.querySelectorAll('.carouselSelectPhoto .item');
+
+        uploadBoxes[1].remove();
+
+        let count = 1;
+        uploadBoxes.forEach((box, index) => {
+            if (index !== 1) { // ข้ามกล่องที่ถูกลบไป
+                const uploadText = box.querySelector('.upload-text .number-upload');
+                if (uploadText) {
+                    uploadText.textContent = `${count}.`;
+                    count++;
+                }
+            }
+        });
+    } else {
+
+        const c_name = document.getElementById('c_name');
+        const c_surname = document.getElementById('c_surname');
+        const c_idno = document.getElementById('c_idno');
+        const c_company_name = document.getElementById('c_company_name');
+        const commercial_registration = document.getElementById('commercial_registration');
+        const addDataperson = document.querySelectorAll('.addDataperson');
+        const addDatacompany = document.querySelectorAll('.addDatacompany');
+
+        c_name.setAttribute('oninput', 'handleInputs(this);');
+        c_surname.setAttribute('oninput', 'handleInputs(this);');
+        c_idno.setAttribute('oninput', 'handleInputs(this);');
+        c_company_name.setAttribute('oninput', 'handleInputs(this);');
+        commercial_registration.setAttribute('oninput', 'handleInputs(this);');
+
+        function handleInputs(inputElement) {
+            if (inputElement === c_name || inputElement === c_surname || inputElement === c_idno) {
+                if (c_name.value !== "" || c_surname.value !== "" || c_idno.value !== "") {
+                    addDatacompany.forEach(element => {
+                        element.classList.add('d-none');
+                    });
+                    c_company_name.value = "";
+                    c_company_name.required = false;
+                    commercial_registration.value = "";
+                    commercial_registration.required = false;
+                } else {
+                    addDatacompany.forEach(element => {
+                        element.classList.remove('d-none');
+                        c_company_name.required = true;
+                        commercial_registration.required = true;
+
+                    });
+                }
+            } else if (inputElement === c_company_name || inputElement === commercial_registration) {
+                if (c_company_name.value !== "" || commercial_registration.value !== "") {
+                    addDataperson.forEach(element => {
+                        element.classList.add('d-none');
+                    });
+                    c_name.value = "";
+                    c_name.required = false;
+
+                    c_surname.value = "";
+                    c_surname.required = false;
+
+                    c_idno.value = "";
+                    c_idno.required = false;
+                } else {
+                    addDataperson.forEach(element => {
+                        element.classList.remove('d-none');
+                    });
+                    c_name.required = true;
+                    c_surname.required = true;
+                    c_idno.required = true;
+                }
+            }
+        }
+    }
+</script>
 <!-- 
 {{-- <div class="form-group {{ $errors->has('rentname') ? 'has-error' : ''}}">
 <label for="rentname" class="control-label">{{ 'Rentname' }}</label>

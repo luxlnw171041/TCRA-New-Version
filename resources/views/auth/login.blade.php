@@ -63,6 +63,11 @@
 			display: inline-block;
 		}
 
+		.radio-input-mobile-login label.customer-login:has(input:checked)~.selection-type-login {
+			background-color: #e62e2e !important;
+			display: inline-block;
+		}
+
 		.radio-input-mobile-login label:nth-child(1):has(input:checked)~.selection-type-login {
 			transform: translateX(calc(0%));
 		}
@@ -139,7 +144,31 @@
 			background-color: transparent;
 			border-color: #FFFFFF;
 		}
+		.btnSwipDanger {
+			border-radius: 20px;
+			border: 1px solid #e62e2e;
+			background-color: #e62e2e;
+			color: #FFFFFF;
+			font-size: 12px;
+			font-weight: bold;
+			padding: 12px 45px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			transition: transform 80ms ease-in;
+		}
 
+		.btnSwipDanger:active {
+			transform: scale(0.95);
+		}
+
+		.btnSwipDanger:focus {
+			outline: none;
+		}
+
+		.btnSwipDanger.ghost {
+			background-color: transparent;
+			border-color: #FFFFFF;
+		}
 		.formLogin {
 			background-color: #FFFFFF;
 			display: flex;
@@ -250,6 +279,10 @@
 
 		.containerLogin.right-panel-active .overlay {
 			transform: translateX(50%);
+			background: #e62e2e !important;
+			background: -webkit-linear-gradient(to right, #e62e2e, #e62e2e) !important;
+			background: linear-gradient(to right, #e62e2e, #e62e2e) !important;
+
 		}
 
 		.overlay-panel {
@@ -329,6 +362,8 @@
 	100% {
 		transform: scale(1);
 	}
+}.authentication-header-danger {
+    background: #A11D1D !important;
 }
 </style>
 
@@ -351,7 +386,7 @@
 				<div class="form-container sign-up-container">
 					<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
 						@csrf
-						<h1 class="headerLogin text-tcra">เข้าสู่ระบบ</h1>
+						<h1 class="headerLogin text-danger">เข้าสู่ระบบ</h1>
 						<!-- <input class="inputLogin" type="text" placeholder="Name" />
 							<input class="inputLogin" type="email" placeholder="Email" />
 							<input class="inputLogin" type="password" placeholder="Password" /> -->
@@ -386,7 +421,7 @@
 							</a>
 						</div>
 						@endif
-						<button class="btnSwip mt-2" type="submit">Login</button>
+						<button class="btnSwipDanger mt-2" type="submit">Login</button>
 						
 					</form>
 					@if($error_login == "YES")
@@ -475,7 +510,6 @@
 
 <!-- LOGIN MOBILE -->
 <div class="wrapper loginMobile">
-	<div class="authentication-header"></div>
 	<div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
 		<div class="container-fluid">
 			<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
@@ -489,7 +523,7 @@
 								<div class="text-center">
 									<h3 class="font-weight-bolder">เข้าสู่ระบบ</h3>
 									<div class="radio-input-mobile-login mb-4">
-										<label>
+										<label class="customer-login">
 											<input type="radio" id="typeLoginMoblie" name="typeLoginMoblie" value="customer">
 											<span>กลุ่มมิจฉาชีพ(เช่ารถ)</span>
 										</label>
@@ -531,7 +565,7 @@
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Login</button>
+													<button type="submit" class="btn btn-primary btn-login-mobile"><i class="bx bxs-lock-open"></i>Login</button>
 												</div>
 											</div>
 												@if($error_login == "YES")
@@ -591,6 +625,7 @@
 		const radioInputs = document.getElementsByName("typeLoginMoblie");
 
 		if (loginParam === "customer") {
+			document.querySelector(".authentication-header").classList.add("authentication-header-danger");
 			containerLogin.classList.add("right-panel-active");
 			for (var i = 0; i < radioInputs.length; i++) {
 				if (radioInputs[i].value === "customer") {
@@ -609,6 +644,28 @@
 		} else {
 			// ถ้าไม่ตรงกับ "customer" และ "drivers" ให้แสดงข้อความผิดพลาด
 			console.log("เกิดข้อผิดพลาด: ค่าใน loginParam ไม่ถูกต้อง");
+		}
+
+
+		let typeLoginMoblie = document.getElementsByName('typeLoginMoblie');
+
+		for (let i = 0; i < typeLoginMoblie.length; i++) {
+		typeLoginMoblie[i].addEventListener('change', function() {
+			checkTypeLogin();
+		});
+		}
+
+		function checkTypeLogin() {
+			for (let i = 0; i < typeLoginMoblie.length; i++) {
+				if (typeLoginMoblie[i].checked) {
+					let selectedValue = typeLoginMoblie[i].value;
+					if(selectedValue == "customer"){
+						document.querySelector('.btn-login-mobile').classList.add('btn-danger');
+					}else{
+						document.querySelector('.btn-login-mobile').classList.remove('btn-danger');
+					}
+				}
+			}
 		}
 	</script>
 	

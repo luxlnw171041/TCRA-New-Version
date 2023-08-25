@@ -82,6 +82,7 @@
                     </li>
                 @endif
                 @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" || Auth::user()->member_role == "member" )
+                
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
@@ -94,8 +95,13 @@
                             (เช่ารถ)
                         </div>
                     </a>
+                    
                     <ul>
-                        <li> <a href="{{ url('/customer/create') }}"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
+                        <li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>เพิ่มข้อมูล</a>
+                        <ul class="mm-collapse">
+								<li> <a href="{{ url('/customer/create') }}?type_create=person""><i class="bx bx-right-arrow-alt"></i>ในนามบุคคล</a></li>
+                                <li> <a href="{{ url('/customer/create') }}?type_create=company""><i class="bx bx-right-arrow-alt"></i>ในนามบริษัท</a></li>
+							</ul>
                         </li>
                         <li> <a href="{{ url('/customer/') }}"><i class="bx bx-right-arrow-alt"></i>ค้นหาข้อมูล</a>
                         </li>

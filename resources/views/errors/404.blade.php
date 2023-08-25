@@ -12,8 +12,8 @@
                                 <p>ลิงก์อาจจะเสีย
                                 <br>หรือเพจอาจถูกลบออกแล้ว
                                 <br>โปรดตรวจดูว่าลิงก์ที่คุณพยายามเปิดเป็นลิงก์ที่ถูกต้อง</p>
-                            <div class="mt-5"> <a href="{{}}" class="btn btn-primary btn-lg px-md-5 radius-30">Go Home</a>
-                                <a href="javascript:;" class="btn btn-outline-dark btn-lg ms-3 px-md-5 radius-30">Back</a>
+                            <div class="mt-5"> <a href="{{url('/')}}" class="btn btn-primary btn-lg px-md-5 radius-30">Go Home</a>
+                                <a href="{{ url()->previous() }}" class="btn btn-outline-dark btn-lg ms-3 px-md-5 radius-30">Back</a>
                             </div>
                         </div>
                     </div>
