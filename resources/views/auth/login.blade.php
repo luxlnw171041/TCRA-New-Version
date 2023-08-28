@@ -670,8 +670,12 @@
 					let selectedValue = typeLoginMoblie[i].value;
 					if(selectedValue == "customer"){
 						document.querySelector('.btn-login-mobile').classList.add('btn-danger');
+						document.querySelector(".authentication-header").classList.add("authentication-header-danger");
+
 					}else{
 						document.querySelector('.btn-login-mobile').classList.remove('btn-danger');
+						document.querySelector(".authentication-header").classList.remove("authentication-header-danger");
+
 					}
 				}
 			}
