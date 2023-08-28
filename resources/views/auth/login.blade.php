@@ -387,10 +387,12 @@
 				}
 			@endphp
 			
-
+				<!-- ////////////////////////////////////////////////////////// -->
+				<!-- ////////////////////////CUSTOMER LOGIN//////////////////// -->
+				<!-- ////////////////////////////////////////////////////////// -->
 			<div class="containerLogin" id="containerLogin">
 				<div class="form-container sign-up-container">
-					<form class="formLogin" action="#" method="POST" action="{{ route('login') }}">
+					<form class="formLogin row g-3" action="#" method="POST" action="{{ route('login') }}">
 						@csrf
 						<h1 class="headerLogin text-danger">เข้าสู่ระบบ</h1>
 						<!-- <input class="inputLogin" type="text" placeholder="Name" />
@@ -428,7 +430,6 @@
 						</div>
 						@endif
 						<button class="btnSwipDanger mt-2" type="submit">Login</button>
-						
 					</form>
 					@if($error_login == "YES")
 						<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-1" style="left:5%;width:90%;position: absolute; top:82%;">
@@ -444,6 +445,10 @@
 						</div>
 					@endif
 				</div>
+
+				<!-- ////////////////////////////////////////////////////////// -->
+				<!-- //////////////////////// DRIVER LOGIN //////////////////// -->
+				<!-- ////////////////////////////////////////////////////////// -->
 				<div class="form-container sign-in-container">
 					<form class="formLogin row g-3" action="#" method="POST" action="{{ route('login') }}">
 						@csrf
