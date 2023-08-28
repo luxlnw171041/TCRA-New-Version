@@ -370,6 +370,8 @@
 	}
 }.authentication-header-danger {
     background: #A11D1D !important;
+}.password-input{
+	border-radius: 3px !important;
 }
 </style>
 
@@ -411,7 +413,7 @@
 								<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword"><i class='bx bx-hide'></i></a>
 							</div> -->
 
-						<div class="input-group" id="show_hide_password">
+						<div class="input-group p-0" id="show_hide_password">
 							<input type="password" class="form-control border-end-0 inputLogin @error('password') is-invalid @enderror password-input" id="password" name="password" value="" placeholder="Password" required autocomplete="current-password">
 							<a href="javascript:;" class="input-group-text bg-transparent border-end-0 iconShowPassword toggle-password"><i class='bx bx-hide'></i></a>
 						</div>
