@@ -7,7 +7,8 @@
 
         <div class="card forgot-box" style="width:500px;">
             <div class="card-body">
-                <div class="p-4 rounded">
+                <!-- INPUT RESET PASSWORD -->
+                <!-- <div class="p-4 rounded d-none">
                     <div class="text-center">
                         <img src="{{ url('/img/icon/padlock.png') }}" width="120" alt="">
                     </div>
@@ -19,9 +20,6 @@
                     @endif
 
                     @error('email')
-                        <!-- <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span> -->
                         <div class="alert bg-danger bg-gradient mt-3" role="alert">
                             <p class="mb-0 text-white">ไม่พบอีเมลนี้ในระบบ กรุณาตรวจสอบใหม่อีกครั้ง!</p>
                         </div>
@@ -50,13 +48,22 @@
                             </a>
                         </div>
                     </form>
+                    
+                </div> -->
+                <div class="p-4 rounded text-center">
+                    <img src="{{ url('/img/icon/padlock.png') }}" width="120" alt="">
                     <br>
-                    <span class="text-secondary">หรือติดต่อเจ้าหน้าที่ TCRA</span>
-                    <br>
-                    <a href="mailto:thaitcra@gmail.com" class="text-info">
-                        Email : thaitcra@gmail.com
-                    </a>
-
+                    <h2 class="text-secondary m-4">ติดต่อเจ้าหน้าที่ TCRA</h2>
+                    <h5>
+                        <a href="mailto:thaitcra@gmail.com" class="text-info">
+                            <i class="fa-sharp fa-solid fa-inbox-in" style="color: #ea2e2e;"></i> Email :  thaitcra@gmail.com
+                        </a>
+                    </h5>
+                    <h5>
+                        <a href="https://line.me/ti/p/Ih-sEDkHe2" class="text-info" target="bank">
+                            <i class="fa-brands fa-line" style="color: #44ad53;"></i> Line : TCRA
+                        </a>
+                    </h5>
                 </div>
             </div>
         </div>

@@ -598,7 +598,7 @@ button:focus.btnAddUser {
                         <span class="text-danger d-none" id="text_alert_input_Name">ss</span>
                     </div>
                     <div class="col-12">
-                        <label for="inputEmailAddress" class="form-label">Email Address <span class="text-danger">*</span></label>
+                        <label for="inputEmailAddress" class="form-label">Email Address
                         <div class="input-group "> <span class="input-group-text bg-transparent"><i class="bx bxs-message"></i></span>
                             <input type="text" class="form-control border-start-0" id="email" name="email" placeholder="Email" required oninput="on_inputData();" onchange="check_email();">
                         </div>
@@ -1176,7 +1176,7 @@ button:focus.btnAddUser {
 
         let Username = document.querySelector('#Username').value ;
         let Name = document.querySelector('#Name').value ;
-        let email = document.querySelector('#email').value ;
+        // let email = document.querySelector('#email').value ;
         let member_status = document.querySelector('#member_status').value ;
         let member_role = document.querySelector('#member_role').value ;
         let no_member = document.querySelector('#no_member').value ;
@@ -1186,9 +1186,9 @@ button:focus.btnAddUser {
         let member_addr = document.querySelector('#member_addr').value ;
 
 
-        if (!no_member || !Username || !Name || !email|| !member_status || !member_role || !member_co || !member_tel || !member_addr) {
+        if (!no_member || !Username || !Name || !member_status || !member_role || !member_co || !member_tel || !member_addr) {
 
-            checkConditions(Username , Name , email , member_status , member_role , no_member , member_co , member_tel , member_addr);
+            checkConditions(Username , Name , member_status , member_role , no_member , member_co , member_tel , member_addr);
 
         }else{
 
@@ -1204,6 +1204,9 @@ button:focus.btnAddUser {
         let Username = document.querySelector('#Username').value ;
         let Name = document.querySelector('#Name').value ;
         let email = document.querySelector('#email').value ;
+        if(!email){
+            email = 'กรุณาเพิ่มอีเมล' ;
+        }
         let member_status = document.querySelector('#member_status').value ;
         let member_role = document.querySelector('#member_role').value ;
 
@@ -1644,7 +1647,7 @@ button:focus.btnAddUser {
         fetch("{{ url('/') }}/api/check_email/"+email)
             .then(response => response.text())
             .then(result => {
-                console.log(result);
+                // console.log(result);
                 if(result == "มีข้อมูลอีเมลนี้แล้ว"){
                     document.querySelector('#div_text_alert_email').classList.remove('d-none');
                     document.querySelector('#email').classList.add('is-invalid');
@@ -1656,7 +1659,7 @@ button:focus.btnAddUser {
             });
     }
 
-    function checkConditions(Username , Name , email , member_status , member_role , no_member , member_co , member_tel , member_addr) {
+    function checkConditions(Username , Name , member_status , member_role , no_member , member_co , member_tel , member_addr) {
 
         if (!no_member) {
             document.querySelector('#text_alert_input_no_member').innerHTML = 'กรุณากรอกข้อมูล : เลขที่สมาชิก';
@@ -1673,12 +1676,14 @@ button:focus.btnAddUser {
             document.querySelector('#text_alert_input_Name').classList.remove('d-none');
             document.querySelector('#Name').focus();
             return false;
-        }else if (!email) {
-            document.querySelector('#text_alert_input_email').innerHTML = 'กรุณากรอกข้อมูล : email';
-            document.querySelector('#text_alert_input_email').classList.remove('d-none');
-            document.querySelector('#email').focus();
-            return false;
-        }else if (!member_status) {
+        }
+        // else if (!email) {
+        //     document.querySelector('#text_alert_input_email').innerHTML = 'กรุณากรอกข้อมูล : email';
+        //     document.querySelector('#text_alert_input_email').classList.remove('d-none');
+        //     document.querySelector('#email').focus();
+        //     return false;
+        // }
+        else if (!member_status) {
             document.querySelector('#text_alert_input_member_status').innerHTML = 'กรุณากรอกข้อมูล : สถานะลงชื่อเข้าใช้';
             document.querySelector('#text_alert_input_member_status').classList.remove('d-none');
             document.querySelector('#member_status').focus();

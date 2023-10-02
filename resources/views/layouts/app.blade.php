@@ -20,6 +20,9 @@
     <link href="{{asset('theme/css/app.css')}}" rel="stylesheet">
     <link href="{{asset('theme/css/icons.css')}}" rel="stylesheet">
 
+    <!-- fontawesome icon -->
+    <link href="https://kit-pro.fontawesome.com/releases/v6.2.1/css/pro.min.css" rel="stylesheet">
+    
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -293,17 +293,19 @@
                             <p class="ms-auto mb-0 text-purple">{{ intval($user->count_search) }} ครั้ง</p>
                         </div>
                         
-                        @if(Auth::user()->id == $user->id)
                         <div class="d-grid mt-3">
                             <br>
                             <div class="row text-center">
+                                @if(Auth::user()->id == $user->id || Auth::user()->member_role == "admin")
                                 <div class="col-6">
                                     <a href="{{ url('/user/' . $user->id . '/edit') }}" style="width:100%;" class="btn btn-warning radius-15">
                                         แก้ไขข้อมูล <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                 </div>
+                                @endif
+
+                                @if(Auth::user()->member_role == "admin")
                                 <div class="col-6">
-                                    
                                     <div class="accordion accordion-flush" id="card_change_passcord" >
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="change_passcord">
@@ -314,6 +316,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+                                @if(Auth::user()->member_role == "admin")
                                 <div class="col-12">
                                     <div id="flush_change_passcord" class="collapse mt-5" aria-labelledby="change_passcord" data-bs-parent="#card_change_passcord">
                                         <div class="input-group mb-2" style="background-color: lightblue;">
@@ -369,9 +373,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -532,7 +536,7 @@
             }).then(function (response){
                 return response.text();
             }).then(function(data){
-                console.log(data);
+                // console.log(data);
 
                 setTimeout(function() {
                     if(data == "เสร็จสิ้น"){

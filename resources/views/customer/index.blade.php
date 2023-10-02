@@ -628,7 +628,7 @@
 <div class="container">
     <div class="main-body">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
@@ -694,6 +694,89 @@
                                 </ul> -->
                     </div>
                 </div>
+                @if(Auth::user()->member_role == "admin")
+                <div class="card" style="border: 1px solid red;border-radius: 10px;">
+                    <div class="card-body">
+                        <div class="card radius-10 bg-danger bg-gradient">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <p class="mb-0 text-white">* เห็นเฉพาะแอดมิน TCRA</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="m-2 d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-secondary mt-2">
+                                    <b class="text-dark" style="font-size:22px;">ผู้ลงข้อมูล</b>
+                                </span>
+                            </li>
+                            <hr>
+                            <li class="m-2 d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-secondary">
+                                    <b class="text-danger" style="font-size:18px;">บริษัท</b>
+                                    <br>
+                                    {{ $customers->user->member_co }}
+                                </span>
+                            </li>
+                            <li class="m-2 d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-secondary">
+                                    <b class="text-danger" style="font-size:18px;">เบอร์ติดต่อ</b>
+                                    <br>
+                                    {{ $customers->user->member_tel }}
+                                </span>
+                            </li>
+                            <li class="m-2 d-flex justify-content-between align-items-center flex-wrap">
+                                <span class="text-secondary">
+                                    <b class="text-danger" style="font-size:18px;">เลขที่สมาชิก</b>
+                                    <br>
+                                    {{ $customers->user->no_member }}
+                                </span>
+                            </li>
+                            <li class="m-2 d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <b class="text-danger" style="font-size:18px;">หมวดหมู่สมาชิก / สถานะ</b>
+                                    </div>
+                                    <div class="col-6 text-center mt-2">
+                                        <!-- บทบาทของสมาชิก -->
+                                        @if($customers->user->member_role == "admin")
+                                            <span class="btn bg-light-info text-info" style="font-size:12px;">
+                                                Admin
+                                            </span>
+                                        @elseif($customers->user->member_role == "member")
+                                            <span class="btn bg-light-success text-success" style="font-size:12px;">
+                                                member
+                                            </span>
+                                        @elseif($customers->user->member_role == "customer")
+                                            <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                                customer
+                                            </span>
+                                        @else
+                                            <span class="btn bg-light-warning text-warning" style="font-size:12px;">
+                                                driver
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="col-6 text-center mt-2">
+                                        <!-- สถานะของสมาชิก -->
+                                        @if($customers->user->member_status == "Active")
+                                            <span  class="btn bg-light-success text-success" style="font-size:12px;">
+                                                Active
+                                            </span>
+                                        @else
+                                            <span class="btn bg-light-danger text-danger" style="font-size:12px;">
+                                                Inactive
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                @endif
             </div>
             <style>
                  .group-danger{
@@ -710,7 +793,7 @@
                     color: #a17a06;
                 }
             </style>
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-3">
