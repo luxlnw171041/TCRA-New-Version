@@ -324,7 +324,7 @@
                                             <span class="input-group-text bg-transparent">
                                                 <i class="fa-solid fa-unlock"></i> &nbsp;รหัสผ่านเดิม&nbsp;
                                             </span>
-                                            <input type="password" class="form-control border-start-0" id="old_key" oninput="check_input_pass();">
+                                            <input type="password" class="form-control border-start-0" id="old_key" oninput="check_input_pass();" autocomplete="off">
                                             <span id="view_pass_old_key" class="input-group-text" style="cursor: pointer;" onclick="view_pass('old_key');">
                                                 <i class="fa-solid fa-eye-slash"></i>
                                             </span>
