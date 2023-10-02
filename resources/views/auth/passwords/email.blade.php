@@ -2,10 +2,18 @@
 
 @section('content')
 
+<style>
+    .araikodai{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>
+
 <div class="wrapper">
     <div class="authentication-forgot d-flex align-items-center justify-content-center">
 
-        <div class="card forgot-box" style="width:500px;">
+        <div class="card forgot-box" style="width:800px;">
             <div class="card-body">
                 <!-- INPUT RESET PASSWORD -->
                 <!-- <div class="p-4 rounded d-none">
@@ -54,14 +62,13 @@
                     <img src="{{ url('/img/icon/padlock.png') }}" width="120" alt="">
                     <br>
                     <h2 class="text-secondary m-4">ติดต่อเจ้าหน้าที่ TCRA</h2>
-                    <h5>
+                    <h5 class="mt-3 araikodai">
                         <a href="mailto:thaitcra@gmail.com" class="text-info">
-                            <i class="fa-sharp fa-solid fa-inbox-in" style="color: #ea2e2e;"></i> Email :  thaitcra@gmail.com
+                            <i class="fa-sharp fa-solid fa-inbox-in" style="color: #ea2e2e;font-size: 35px;"></i>&nbsp; Email : thaitcra@gmail.com
                         </a>
-                    </h5>
-                    <h5>
+                        &nbsp;&nbsp;&nbsp;
                         <a href="https://line.me/ti/p/Ih-sEDkHe2" class="text-info" target="bank">
-                            <i class="fa-brands fa-line" style="color: #44ad53;"></i> Line : TCRA
+                            <i class="fa-brands fa-line" style="color: #44ad53;font-size: 40px;"></i>&nbsp; Line : TCRA
                         </a>
                     </h5>
                 </div>
