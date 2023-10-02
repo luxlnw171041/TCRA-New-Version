@@ -432,8 +432,11 @@
 
     document.addEventListener('DOMContentLoaded', (event) => {
         // console.log("START");
-        document.querySelector('#new_key').value = '';
-        document.querySelector('#new_key_again').value = '';
+        setTimeout(function() {
+            document.querySelector('#new_key').value = '';
+            document.querySelector('#new_key_again').value = '';
+        }, 1500);
+        
     });
 
 
