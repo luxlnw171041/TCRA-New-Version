@@ -253,7 +253,7 @@
                                 <span class="input-group-text bg-transparent">
                                     <i class="fa-solid fa-key"></i> &nbsp;รหัสผ่านใหม่&nbsp;
                                 </span>
-                                <input type="password" autocomplete="off" class="form-control border-start-0" id="new_key" oninput="check_input_pass();">
+                                <input type="password" class="form-control border-start-0" id="new_key" oninput="check_input_pass();">
                                 <span id="view_pass_new_key" class="input-group-text" style="cursor: pointer;" onclick="view_pass('new_key');">
                                     <i class="fa-solid fa-eye-slash"></i>
                                 </span>
@@ -262,7 +262,7 @@
                                 <span class="input-group-text bg-transparent">
                                     <i class="fa-duotone fa-key"></i> &nbsp;กรอกอีกครั้ง
                                 </span>
-                                <input type="password" autocomplete="off" class="form-control border-start-0" id="new_key_again" oninput="check_input_pass();">
+                                <input type="password" class="form-control border-start-0" id="new_key_again" oninput="check_input_pass();">
                                 <span id="view_pass_new_key_again" class="input-group-text" style="cursor: pointer;" onclick="view_pass('new_key_again');">
                                     <i class="fa-solid fa-eye-slash"></i>
                                 </span>
@@ -429,6 +429,13 @@
 <script>
                         
     let delay_check_input_pass ;
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // console.log("START");
+        document.querySelector('#new_key').value = '';
+        document.querySelector('#new_key_again').value = '';
+    });
+
 
     function check_input_pass(){
         
