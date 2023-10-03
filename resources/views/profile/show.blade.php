@@ -296,12 +296,19 @@
                         <div class="d-grid mt-3">
                             <br>
                             <div class="row text-center">
-                                @if(Auth::user()->id == $user->id || Auth::user()->member_role == "admin")
-                                <div class="col-6">
-                                    <a href="{{ url('/user/' . $user->id . '/edit') }}" style="width:100%;" class="btn btn-warning radius-15">
+
+                                @if(Auth::user()->id == $user->id && Auth::user()->member_role != "admin")
+                                <div class="col-12">
+                                    <a href="{{ url('/user/' . $user->id . '/edit') }}" style="width:60%;" class="btn btn-warning radius-15">
                                         แก้ไขข้อมูล <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                 </div>
+                                @elseif(Auth::user()->id == $user->id && Auth::user()->member_role == "admin")
+                                    <div class="col-6">
+                                        <a href="{{ url('/user/' . $user->id . '/edit') }}" style="width:100%;" class="btn btn-warning radius-15">
+                                            แก้ไขข้อมูล <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </div>
                                 @endif
 
                                 @if(Auth::user()->member_role == "admin")
