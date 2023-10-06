@@ -239,7 +239,7 @@
                     </div>
                     <div class="row">
                         @if(Auth::user()->member_role == "admin")
-                        <div class="col-12">
+                        <div id="div_create_new_password" class="col-12">
                             <div class="input-group mb-2" style="background-color: lightblue;">
                                 <span class="input-group-text bg-transparent">
                                     <i class="fa-solid fa-unlock"></i> &nbsp;รหัสผ่านเดิม&nbsp;
@@ -524,6 +524,7 @@ Password : ${new_key}`;
 
                             document.querySelector('#copy_new_password').innerHTML = text_username;
 
+                            document.querySelector('#div_create_new_password').classList.add('d-none');
                             document.querySelector('#div_new_password').classList.remove('d-none');
                         }, 1500);
 
