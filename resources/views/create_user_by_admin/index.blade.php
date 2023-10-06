@@ -880,7 +880,7 @@ button:focus.btnAddUser {
                             <table id="table_show_member" class="table table-striped table-bordered align-middle text-center">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ <i class="fa-duotone fa-sort d-none" style="font-size:10px;cursor: pointer;"></i></th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">เลขที่สมาชิก <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">บริษัท <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">สิทธิ์การใช้งาน <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
@@ -899,7 +899,7 @@ button:focus.btnAddUser {
                                 <tbody id="list_member">
                                     @foreach($data_member as $item)
                                     <tr>
-                                        <td>
+                                        <td class="d-none">
                                             {{ $item->id }}
                                         </td>
                                         <td>
@@ -1006,7 +1006,7 @@ button:focus.btnAddUser {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="1"></th>
+                                        <th class="d-none" rowspan="1"></th>
                                         <th rowspan="1">เลขที่สมาชิก</th>
                                         <th rowspan="1">บริษัท</th>
                                         <th rowspan="1">สิทธิ์การใช้งาน</th>
@@ -1071,12 +1071,12 @@ button:focus.btnAddUser {
                 { type: "num", targets: 0 }, // กำหนดประเภทของข้อมูลในคอลัมน์ที่ 0 เป็นรูปแบบตัวเลข
                 { targets: [8, 9], orderable: false } // ปิดการเรียงลำดับสำหรับคอลัมน์ 9 และ 10
             ],
-            order: [[0, 'desc']], // เรียงลำดับคอลัมน์ที่ 0 จากมากไปน้อย
+            order: [[1, 'desc']], // เรียงลำดับคอลัมน์ที่ 0 จากมากไปน้อย
             buttons: [
                 {
                     text: "คืนค่าเริ่มต้น", // ข้อความที่จะแสดงในปุ่ม
                     action: function () {
-                        table.order([[0, 'desc']]).draw(); // เรียกใช้การเรียงลำดับเริ่มต้นและวาดตารางใหม่
+                        table.order([[1, 'desc']]).draw(); // เรียกใช้การเรียงลำดับเริ่มต้นและวาดตารางใหม่
                         count_active_inactive(); // คำนวณ Active และ Inactive ใหม่
                     }
                 },
@@ -1397,7 +1397,7 @@ button:focus.btnAddUser {
 
                     let  html_list_member = `
                         <tr class="flashing_border">
-                            <td>
+                            <td class="d-none">
                                 `+loop_i+`
                             </td>
                             <td>
