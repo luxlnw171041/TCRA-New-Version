@@ -880,7 +880,7 @@ button:focus.btnAddUser {
                             <table id="table_show_member" class="table table-striped table-bordered align-middle text-center">
                                 <thead>
                                     <tr>
-                                        <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
+                                        <!-- <th rowspan="2" style="font-size:18px;vertical-align: middle;">ลำดับ <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th> -->
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">เลขที่สมาชิก <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">บริษัท <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
                                         <th rowspan="2" style="font-size:18px;vertical-align: middle;padding:0;">สิทธิ์การใช้งาน <i class="fa-duotone fa-sort" style="font-size:10px;cursor: pointer;"></i></th>
@@ -899,9 +899,9 @@ button:focus.btnAddUser {
                                 <tbody id="list_member">
                                     @foreach($data_member as $item)
                                     <tr>
-                                        <td>
+                                        <!-- <td>
                                             {{ $item->id }}
-                                        </td>
+                                        </td> -->
                                         <td>
                                             {{ $item->no_member }}
                                         </td>
@@ -1006,7 +1006,7 @@ button:focus.btnAddUser {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="1"></th>
+                                        <!-- <th rowspan="1"></th> -->
                                         <th rowspan="1">เลขที่สมาชิก</th>
                                         <th rowspan="1">บริษัท</th>
                                         <th rowspan="1">สิทธิ์การใช้งาน</th>
@@ -1395,11 +1395,12 @@ button:focus.btnAddUser {
                         `;
                     }
 
+                    // <td>
+                    //     `+loop_i+`
+                    // </td>
+                            
                     let  html_list_member = `
                         <tr class="flashing_border">
-                            <td>
-                                `+loop_i+`
-                            </td>
                             <td>
                                 `+data.no_member+`
                             </td>
