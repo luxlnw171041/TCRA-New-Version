@@ -122,7 +122,7 @@
                     </ul>
                 </li>
                 @endif
-                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "driver" || Auth::user()->member_role == "member" )
+                @if(Auth::check() && (Auth::user()->member_role == "admin" || Auth::user()->member_role == "driver" || Auth::user()->member_role == "member") )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
