@@ -67,7 +67,7 @@
             </div>
             <!--navigation-->
             <ul class="metismenu" id="menu">
-                @if(Auth::user()->member_role == "admin")
+                @if(Auth::check() && Auth::user()->member_role == "admin")
                     <li>
                         <a href="javascript:;" class="has-arrow">
                             <div class="parent-icon"><i class="fa-solid fa-user-shield"></i>
