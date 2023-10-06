@@ -1006,7 +1006,6 @@ button:focus.btnAddUser {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th class="d-none" rowspan="1"></th>
                                         <th rowspan="1">เลขที่สมาชิก</th>
                                         <th rowspan="1">บริษัท</th>
                                         <th rowspan="1">สิทธิ์การใช้งาน</th>
