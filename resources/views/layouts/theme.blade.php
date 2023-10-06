@@ -81,7 +81,7 @@
                         </ul>
                     </li>
                 @endif
-                @if( Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" || Auth::user()->member_role == "member" )
+                @if( Auth::check() && (Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" || Auth::user()->member_role == "member") )
                 
                 <li>
                     <a id="menu_main_addData_cus" href="javascript:;" class="has-arrow">
