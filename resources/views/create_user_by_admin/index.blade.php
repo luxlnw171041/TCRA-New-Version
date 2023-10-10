@@ -1398,9 +1398,6 @@ button:focus.btnAddUser {
                     let  html_list_member = `
                         <tr class="flashing_border">
                             <td>
-                                `+loop_i+`
-                            </td>
-                            <td>
                                 `+data.no_member+`
                             </td>
                             <td style="width: 250px;">
