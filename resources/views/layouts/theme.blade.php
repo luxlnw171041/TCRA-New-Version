@@ -79,6 +79,31 @@
                                 <a href="{{ url('/create_user_by_admin') }}"><i class="fa-solid fa-user-plus"></i>เพิ่มสมาชิก</a>
                             </li>
                         </ul>
+                        <ul>
+                            <li>
+                                <a href="javascript:;" class="has-arrow">
+                                    <i class="fa-solid fa-ban"></i>ข้อมูล Blacklist
+                                </a>
+                                <ul class="mm-collapse">
+                                    <li>
+                                        <a href="{{ url('/view_data_all/customers') }}">
+                                            <i class="bx bx-right-arrow-alt"></i>
+                                            ข้อมูลมิจฉาชีพ
+                                            <br>
+                                            (เช่ารถ)
+                                        </a>
+                                    </li>
+                                    <li> 
+                                        <a href="{{ url('/view_data_all/drivers') }}">
+                                            <i class="bx bx-right-arrow-alt"></i>
+                                            ข้อมูล Blacklist
+                                            <br>
+                                            พนักงานขับรถ
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 @endif
                 @if( Auth::check() && (Auth::user()->member_role == "admin" || Auth::user()->member_role == "customer" || Auth::user()->member_role == "member") )
@@ -144,6 +169,38 @@
                     </ul>
                 </li>
                 @endif
+
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon">
+                            <i class="fa-solid fa-ban"></i>
+                        </div>
+                        <div class="menu-title">
+                            ข้อมูล Blacklist
+                            <br>
+                            ของฉัน
+                        </div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ url('/view_data_for_user/customers') }}">
+                                <i class="bx bx-right-arrow-alt"></i>
+                                ข้อมูลมิจฉาชีพ
+                                <br>
+                                (เช่ารถ)
+                            </a>
+                        </li>
+                        <li> 
+                            <a href="{{ url('/view_data_for_user/drivers') }}">
+                                <i class="bx bx-right-arrow-alt"></i>
+                                ข้อมูล Blacklist
+                                <br>
+                                พนักงานขับรถ
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
             <!--end navigation-->
         </div>

@@ -125,6 +125,8 @@ class DriverController extends Controller
 
         $requestData['demerit'] = $demerit;
         
+        $requestData['d_idno'] = str_replace("-","",$requestData['d_idno']);
+
         Driver::create($requestData);
 
         // return redirect('driver')->with('flash_message', 'Driver added!');

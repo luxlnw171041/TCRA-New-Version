@@ -367,10 +367,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 mt-md-0 mb-4 ">
+                            <div class="col-md-4 mt-md-0 mb-4 " style="position:relative;">
+                                <span id="warning_c_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                    <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                    หมายเลขบัตรประชาชนไม่ถูกต้อง
+                                </span>
                                 <div class="input-group  addDataperson">
                                     <div class="inputGroup w-100">
-                                        <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}" >
+                                        <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}" onchange="check_amount_c_idno();">
                                         <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
                                     </div>
                                 </div>
@@ -394,10 +398,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 mb-4 addDatacompany">
+                            <div class="col-md-6 col-lg-4 col-xl-4 mt-md-0 mb-4 addDatacompany" style="position:relative;">
+                                <span id="warning_commercial_registration" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                    <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                    เลขประจำตัวผู้เสียภาษีไม่ถูกต้อง
+                                </span>
                                 <div class="input-group ">
                                     <div class="inputGroup w-100">
-                                        <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off" >
+                                        <input name="commercial_registration" type="text" id="commercial_registration" value="{{ isset($customer->commercial_registration) ? $customer->commercial_registration : '' }}" required="" autocomplete="off" onchange="check_amount_commercial_registration();">
                                         <label for="commercial_registration" class="text-overflow"><i class="fa-solid fa-user"></i> เลขประจำตัวผู้เสียภาษี <span class="text-danger">*</span></label>
                                     </div>
                                 </div>
@@ -803,7 +811,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_id_card" name="c_pic_id_card" value="{{ isset($customer->c_pic_id_card) ? $customer->c_pic_id_card : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_id_card" name="c_pic_id_card[]" value="{{ isset($customer->c_pic_id_card) ? $customer->c_pic_id_card : ''}}" accept="image/*" multiple style="display: none;" onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -833,7 +841,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_company_certificate" name="c_pic_company_certificate" value="{{ isset($customer->c_pic_company_certificate) ? $customer->c_pic_company_certificate : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_company_certificate" name="c_pic_company_certificate[]" value="{{ isset($customer->c_pic_company_certificate) ? $customer->c_pic_company_certificate : ''}}" accept="image/*" style="display: none;" multiple onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -863,7 +871,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_indictment" name="c_pic_indictment" value="{{ isset($customer->c_pic_indictment) ? $customer->c_pic_indictment : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_indictment" name="c_pic_indictment[]" value="{{ isset($customer->c_pic_indictment) ? $customer->c_pic_indictment : ''}}" multiple accept="image/*" style="display: none;" onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -893,7 +901,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_cap" name="c_pic_cap" value="{{ isset($customer->c_pic_cap) ? $customer->c_pic_cap : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_cap" name="c_pic_cap[]" value="{{ isset($customer->c_pic_cap) ? $customer->c_pic_cap : ''}}" accept="image/*" multiple style="display: none;" onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -922,7 +930,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="c_pic_other" name="c_pic_other" value="{{ isset($customer->c_pic_other) ? $customer->c_pic_other : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="c_pic_other" name="c_pic_other[]" value="{{ isset($customer->c_pic_other) ? $customer->c_pic_other : ''}}" multiple accept="image/*" style="display: none;" onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -1136,7 +1144,28 @@
                     event.preventDefault(); // ป้องกันการส่งฟอร์ม   
                     dangerAlert("กรุณาเลือกลักษณะการกระทำความผิดอย่างน้อย 1 อย่าง");
                 } else {
-                    checkdemerit = true;
+
+                    let cIdnoInput = document.getElementById('c_idno');
+                    let commercial_registration = document.getElementById('commercial_registration');
+
+                    // ใส่เลขบัตร ปชช
+                    if(cIdnoInput){
+                        cIdnoInput = cIdnoInput.value.replaceAll("-","");
+                        if(cIdnoInput.length != 13){
+                            document.getElementById('c_idno').focus();
+                        }else{
+                            checkdemerit = true;
+                        }
+                    }
+                    // ใส่เลขประจำตัวผู้เสียภาษี
+                    else if(commercial_registration){
+                        if(commercial_registration.value.length != 13){
+                            document.getElementById('commercial_registration').focus();
+                        }else{
+                            checkdemerit = true;
+                        }
+                    }
+
 
                     // console.log('ยืนยัน')
                 }
@@ -1564,6 +1593,147 @@
         }
     }
 </script>
+
+<script>
+    function checkFileCount(input) {
+        // รับจำนวนไฟล์ที่เลือก
+        let fileCount = input.files.length;
+        let name_input = input.name;
+            name_input = name_input.replace("[]", "");
+            // console.log(name_input);
+            // console.log(fileCount);
+
+        // กำหนดจำนวนสูงสุดที่ต้องการ
+        let maxFileCount ; 
+        let text_name_input ; 
+
+        switch(name_input) {
+            case "c_pic_id_card":
+                maxFileCount = 2 ;
+                text_name_input = "ภาพบัตรประชาชน" ;
+            break;
+            case "c_pic_company_certificate":
+                maxFileCount = 5 ;
+                text_name_input = "สำเนาหนังสือรับรองบริษัท" ;
+            break;
+            case "c_pic_indictment":
+                maxFileCount = 5 ;
+                text_name_input = "คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี" ;
+            break;
+            case "c_pic_cap":
+                maxFileCount = 10 ;
+                text_name_input = "หลักฐานการพูด-คุย" ;
+            break;
+            case "c_pic_other":
+                maxFileCount = 3 ;
+                text_name_input = "อื่นๆ" ;
+            break;
+        }
+        
+        
+        
+        if (fileCount > maxFileCount) {
+            alert('คุณสามารถเลือก' + text_name_input + 'ได้สูงสุด ' + maxFileCount + ' ไฟล์');
+            // ล้าง input ให้ว่าง
+            input.value = '';
+        }
+    }
+</script>
+
+
+<!-- เลขบัตรประจำตัวประชาชน -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let cIdnoInput = document.getElementById('c_idno');
+
+        if(cIdnoInput){
+            cIdnoInput.addEventListener('input', function() {
+                document.querySelector('#warning_c_idno').classList.add('d-none');
+                let inputValue = cIdnoInput.value;
+                let formattedValue = formatCIDNO(inputValue);
+                cIdnoInput.value = formattedValue;
+            });
+
+            cIdnoInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Backspace') {
+                    // ตรวจสอบถ้าผู้ใช้กดปุ่ม Backspace ให้ลบตัวอักษรหรือเครื่องหมาย "-"
+                    let inputValue = cIdnoInput.value;
+                    let caretPosition = cIdnoInput.selectionStart;
+
+                    if (caretPosition > 0 && (inputValue[caretPosition - 1] === '-' || inputValue[caretPosition] === '-')) {
+                        let newValue = inputValue.substring(0, caretPosition - 1) + inputValue.substring(caretPosition);
+                        cIdnoInput.value = newValue;
+                        cIdnoInput.setSelectionRange(caretPosition - 1, caretPosition - 1);
+                    }
+                }
+            });
+        }
+
+        function formatCIDNO(input) {
+            let formattedValue = '';
+            let characterCount = 0;
+
+            for (let i = 0; i < input.length; i++) {
+                if (/[0-9]/.test(input[i])) {
+                    characterCount++;
+                    if (characterCount === 1) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 5) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 10) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 12) {
+                        formattedValue += input[i] + '-';
+                    } else {
+                        formattedValue += input[i];
+                    }
+                }
+            }
+
+            return formattedValue;
+        }
+    });
+
+    function check_amount_c_idno(){
+        let cIdnoInput = document.getElementById('c_idno').value;
+            cIdnoInput = cIdnoInput.replaceAll("-","");
+
+        if(cIdnoInput.length != 13){
+            document.querySelector('#warning_c_idno').classList.remove('d-none');
+        }
+    }
+</script>
+
+<!-- เลขประจำตัวผู้เสียภาษี -->
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let commercial_registration = document.getElementById('commercial_registration');
+
+        if(commercial_registration){
+            commercial_registration.addEventListener('input', function() {
+                document.querySelector('#warning_commercial_registration').classList.add('d-none');
+            });
+        }
+    });
+
+    function check_amount_commercial_registration(){
+        let commercial_registration = document.getElementById('commercial_registration').value;
+            commercial_registration = commercial_registration.replaceAll("-","");
+
+        if(commercial_registration.length != 13){
+            document.querySelector('#warning_commercial_registration').classList.remove('d-none');
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
 <!-- 
 {{-- <div class="form-group {{ $errors->has('rentname') ? 'has-error' : ''}}">
 <label for="rentname" class="control-label">{{ 'Rentname' }}</label>

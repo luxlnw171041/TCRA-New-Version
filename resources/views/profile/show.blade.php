@@ -218,11 +218,8 @@
                                     <img class="profile-pic" src="{{asset('img/icon/user.jpg')}}" alt="Profile Picture">
                                 @endif
                             </div>
-                            <h4 class="mb-1 mt-3">
-                                U-name : <b>{{ $user->username }}</b>
-                            </h4>
                             <p class="mb-1 mt-2">
-                                {{ $user->no_member }}
+                                รหัสสมาชิก : {{ $user->no_member }}
                             </p>
                             <p class="mb-1 mt-2">
                                 @if( $user->member_role == "customer" )
@@ -396,14 +393,14 @@
                         </div>
                     </div>
 
-                    <div class="p-3 mb-3">
+                    <div class="p-3 mb-2">
                         
                         <div class="card radius-10 border shadow-none">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div>
-                                        <p class="mb-0 text-secondary">ชื่อ-นามสกุล</p>
-                                        <h4 class="mb-0">{{ $user->member_name }}</h4>
+                                        <p class="mb-0 text-secondary">Username (สำหรับลงชื่อเข้าใช้)</p>
+                                        <h4 class="mb-0">{{ $user->username }}</h4>
                                     </div>
                                     <div class="widgets-icons bg-light-primary text-primary ms-auto">
                                         <i class="fa-solid fa-signature"></i>

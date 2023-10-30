@@ -208,11 +208,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mt-md-4">
+                    <div class="col-md-4 mt-md-4" style="position:relative;">
                         <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
+                        <span id="warning_d_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                            <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                            หมายเลขบัตรประชาชนไม่ถูกต้อง
+                        </span>
                         <div class="input-group ">
                             <div class="inputGroup w-100">
-                                <input type="text" required="" autocomplete="off" name="d_idno" id="d_idno" value="{{ isset($customer->d_idno) ? $customer->d_idno : '' }}">
+                                <input type="text" required="" autocomplete="off" name="d_idno" id="d_idno" value="{{ isset($customer->d_idno) ? $customer->d_idno : '' }}" onchange="check_amount_d_idno();">
                                 <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
                             </div>
                         </div>
@@ -1335,7 +1339,14 @@
                     dangerAlert("กรุณาเลือกลักษณะการกระทำความผิด อย่างน้อย 1 อย่าง");
 
                 } else {
-                    checkdemerit = true;
+                    let dIdnoInput = document.getElementById('d_idno').value;
+                        dIdnoInput = dIdnoInput.replaceAll("-","");
+
+                    if(dIdnoInput.length != 13){
+                        document.getElementById('d_idno').focus();
+                    }else{
+                        checkdemerit = true;
+                    }
                 }
             }
 
@@ -1378,6 +1389,68 @@
     </div>
 </div>
 
+
+
+<!-- เลขบัตรประจำตัวประชาชน -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let dIdnoInput = document.getElementById('d_idno');
+
+        dIdnoInput.addEventListener('input', function() {
+            document.querySelector('#warning_d_idno').classList.add('d-none');
+            let inputValue = dIdnoInput.value;
+            let formattedValue = format_dIDNO(inputValue);
+            dIdnoInput.value = formattedValue;
+        });
+
+        dIdnoInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Backspace') {
+                // ตรวจสอบถ้าผู้ใช้กดปุ่ม Backspace ให้ลบตัวอักษรหรือเครื่องหมาย "-"
+                let inputValue = dIdnoInput.value;
+                let caretPosition = dIdnoInput.selectionStart;
+
+                if (caretPosition > 0 && (inputValue[caretPosition - 1] === '-' || inputValue[caretPosition] === '-')) {
+                    let newValue = inputValue.substring(0, caretPosition - 1) + inputValue.substring(caretPosition);
+                    dIdnoInput.value = newValue;
+                    dIdnoInput.setSelectionRange(caretPosition - 1, caretPosition - 1);
+                }
+            }
+        });
+
+        function format_dIDNO(input) {
+            let formattedValue = '';
+            let characterCount = 0;
+
+            for (let i = 0; i < input.length; i++) {
+                if (/[0-9]/.test(input[i])) {
+                    characterCount++;
+                    if (characterCount === 1) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 5) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 10) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 12) {
+                        formattedValue += input[i] + '-';
+                    } else {
+                        formattedValue += input[i];
+                    }
+                }
+            }
+
+            return formattedValue;
+        }
+    });
+
+    function check_amount_d_idno(){
+        let dIdnoInput = document.getElementById('d_idno').value;
+            dIdnoInput = dIdnoInput.replaceAll("-","");
+
+        if(dIdnoInput.length != 13){
+            document.querySelector('#warning_d_idno').classList.remove('d-none');
+        }
+    }
+</script>
 
 
 

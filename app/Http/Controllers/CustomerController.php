@@ -107,22 +107,82 @@ class CustomerController extends Controller
 
         $requestData = $request->all();
         // ddd($requestData);
+
         if ($request->hasFile('c_pic_id_card')) {
-            $requestData['c_pic_id_card'] = $request->file('c_pic_id_card')->store('uploads', 'public');
+            
+            $c_pic_id_card = $request->file('c_pic_id_card');
+            $requestData['c_pic_id_card'] = '' ;
+
+            foreach ($c_pic_id_card as $file) {
+                if( empty($requestData['c_pic_id_card']) ){
+                    $requestData['c_pic_id_card'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_id_card'] = $requestData['c_pic_id_card'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
         }
+
         if ($request->hasFile('c_pic_company_certificate')) {
-            $requestData['c_pic_company_certificate'] = $request->file('c_pic_company_certificate')->store('uploads', 'public');
+            
+            $c_pic_company_certificate = $request->file('c_pic_company_certificate');
+            $requestData['c_pic_company_certificate'] = '' ;
+
+            foreach ($c_pic_company_certificate as $file) {
+                if( empty($requestData['c_pic_company_certificate']) ){
+                    $requestData['c_pic_company_certificate'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_company_certificate'] = $requestData['c_pic_company_certificate'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
         }
+
         if ($request->hasFile('c_pic_indictment')) {
-            $requestData['c_pic_indictment'] = $request->file('c_pic_indictment')->store('uploads', 'public');
+            
+            $c_pic_indictment = $request->file('c_pic_indictment');
+            $requestData['c_pic_indictment'] = '' ;
+
+            foreach ($c_pic_indictment as $file) {
+                if( empty($requestData['c_pic_indictment']) ){
+                    $requestData['c_pic_indictment'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_indictment'] = $requestData['c_pic_indictment'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
         }
+
         if ($request->hasFile('c_pic_cap')) {
-            $requestData['c_pic_cap'] = $request->file('c_pic_cap')->store('uploads', 'public');
+            
+            $c_pic_cap = $request->file('c_pic_cap');
+            $requestData['c_pic_cap'] = '' ;
+
+            foreach ($c_pic_cap as $file) {
+                if( empty($requestData['c_pic_cap']) ){
+                    $requestData['c_pic_cap'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_cap'] = $requestData['c_pic_cap'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
         }
+
         if ($request->hasFile('c_pic_other')) {
-            $requestData['c_pic_other'] = $request->file('c_pic_other')->store('uploads', 'public');
+            
+            $c_pic_other = $request->file('c_pic_other');
+            $requestData['c_pic_other'] = '' ;
+
+            foreach ($c_pic_other as $file) {
+                if( empty($requestData['c_pic_other']) ){
+                    $requestData['c_pic_other'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_other'] = $requestData['c_pic_other'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
         }
-        
+
         $demerit = implode(',', array_unique($request->demerit));
 
         $requestData['demerit'] = $demerit;
@@ -132,6 +192,10 @@ class CustomerController extends Controller
             $requestData['rentname'] = "บุคคล" ;
         }else{
             $requestData['rentname'] = "บริษัท" ;
+        }
+
+        if(!empty($requestData['c_idno'])){
+            $requestData['c_idno'] = str_replace("-","",$requestData['c_idno']);
         }
         
         Customer::create($requestData);

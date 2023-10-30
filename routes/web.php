@@ -36,11 +36,15 @@ Route::get('/customer_test', 'CustomerController@customer_test');
 Route::middleware(['auth'])->group(function () {
 	Route::resource('user', 'UserController');
 	Route::get('show_profile/{id}', 'UserController@show_profile');
+	Route::get('/view_data_for_user/{customers}', 'HomeController@view_data_for_user');
+	Route::get('/view_data_for_user/{drivers}', 'HomeController@view_data_for_user');
 });
 
 // admin
 Route::middleware(['auth', 'member_role:admin'])->group(function () {
 	Route::resource('create_user_by_admin', 'Create_user_by_adminController')->except(['show','create','edit','view']);
+	Route::get('/view_data_all/{customers}', 'HomeController@view_data_all');
+	Route::get('/view_data_all/{drivers}', 'HomeController@view_data_all');
 });
 
 // customer

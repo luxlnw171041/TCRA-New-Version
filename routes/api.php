@@ -25,3 +25,4 @@ Route::get('/change_status_to/{change_to}/{user_id}', 'UserController@change_sta
 Route::get('/search_member', 'UserController@search_member');
 Route::post('/submit_change_pass', 'UserController@submit_change_pass');
 Route::get('/update_pass', 'UserController@update_pass');
+Route::get('/delete_member/{user_id}', 'UserController@delete_member');

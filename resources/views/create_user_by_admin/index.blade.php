@@ -426,6 +426,31 @@ button:focus.btnAddUser {
                                 </div>
                             </div>
 
+                            @php
+                                $check_add_data = 'No';
+
+                                $data_customers = App\Models\Customer::where('user_id' , $item_modal->id)->first();
+                                $data_drivers = App\Models\Driver::where('user_id' , $item_modal->id)->first();
+
+                                if(!empty($data_customers->user_id)){
+                                    $check_add_data = 'Yes';
+                                }
+
+                                if(!empty($data_drivers->user_id)){
+                                    $check_add_data = 'Yes';
+                                }
+                            @endphp
+
+                            @if($check_add_data == 'No')
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="btn bg-danger float-end text-white px-3" onclick="delete_member('{{ $item_modal->id }}');">
+                                        <i class="fa-solid fa-delete-right mr-2"></i> ลบบัญชีนี้
+                                    </span>
+                                </div>
+                            </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -1120,7 +1145,10 @@ button:focus.btnAddUser {
 
         document.querySelector('#table_show_member').classList.remove('dataTable');
         document.querySelector('#table_show_member').setAttribute('style',"width: 100%;");
-        document.querySelector('#table_show_member_info').classList.add('mt-2','mb-2');
+        
+        if(document.querySelector('#table_show_member_info')){
+            document.querySelector('#table_show_member_info').classList.add('mt-2','mb-2');
+        }
     } );
 
     function count_active_inactive(){
@@ -1759,6 +1787,31 @@ button:focus.btnAddUser {
             }else{
                 document.querySelector('.btn_status_Inactive_'+id).click();
             }
+    }
+
+    function delete_member(user_id){
+
+        fetch("{{ url('/') }}/api/delete_member" + "/" + user_id)
+            .then(response => response.text())
+            .then(result => {
+                // console.log(result);
+                if( result == "ok" ){
+                    // console.log(result);
+
+                    document.querySelector('#alert_text').innerHTML = "ลบบัญชีผู้ใช้นี้เรียบร้อยแล้ว";
+                    document.querySelector('#alert_copy').classList.add('up_down');
+
+                    const animated = document.querySelector('.up_down');
+                    animated.onanimationend = () => {
+                        document.querySelector('#alert_copy').classList.remove('up_down');
+                    };
+
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                }
+            });
+
     }
 
 </script>

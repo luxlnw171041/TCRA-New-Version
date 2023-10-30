@@ -193,9 +193,7 @@
                                     </label>
                                     <input type="file" name="member_pic" id="member_pic" class="d-none">
                                 </div>
-                                <h4 class="mb-1 mt-3">
-                                    U-name : <b>{{ $user->username }}</b>
-                                </h4>
+
                                 <p class="mb-1 mt-2">
                                     @if( $user->member_role == "customer" )
                                         <span class="badge bg-light-danger text-danger" style="font-size:13px;">
@@ -231,9 +229,34 @@
                                         }
                                     });
                                 </script>
-
                             </div>
                             <!-- <hr class="my-4"> -->
+                            <hr>
+                            <div class="d-flex align-items-center mt-3 mb-3">
+                                <div style="width:100%;">
+                                    <p class="mb-0 text-secondary float-start">
+                                        Username (สำหรับลงชื่อเข้าใช้)
+                                    </p>
+                                    <input type="text" style="width:100%;" class="form-control" name="username" value="{{ $user->username }}">
+                                </div>
+                            </div>
+                            <!-- <div class="d-flex align-items-center mt-3 mb-3">
+                                <div style="width:100%;">
+                                    <p class="mb-0 text-secondary">
+                                        Name (สำหรับแสดงในระบบ)
+                                    </p>
+                                    <input type="text" style="width:100%;" class="form-control" name="member_name" value="{{ $user->member_name }}">
+                                </div>
+                            </div> -->
+                            <div class="d-flex align-items-center">
+                                <div style="width:100%;" >
+                                    <p class="mb-0 text-secondary">
+                                        ชื่อโปรไฟล์ (สำหรับแสดงในระบบ)
+                                    </p>
+                                    <input type="text" style="width:100%;" class="form-control" name="name" value="{{ $user->name }}">
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -334,32 +357,6 @@
                                 </div>
                             @endif
                             
-                            <div class="card radius-10 border shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div style="width:90%;">
-                                            <p class="mb-0 text-secondary">ชื่อ-นามสกุล</p>
-                                            <input type="text" style="width:100%;" class="form-control" name="member_name" value="{{ $user->member_name }}">
-                                        </div>
-                                        <div class="widgets-icons bg-light-primary text-primary ms-auto">
-                                            <i class="fa-solid fa-signature"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card radius-10 border shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div style="width:90%;" >
-                                            <p class="mb-0 text-secondary">ชื่อโปรไฟล์</p>
-                                            <input type="text" style="width:100%;" class="form-control" name="name" value="{{ $user->name }}">
-                                        </div>
-                                        <div class="widgets-icons bg-light-success text-success ms-auto">
-                                            <i class="fa-sharp fa-solid fa-input-text"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="card radius-10 border shadow-none">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">

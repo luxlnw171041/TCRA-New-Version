@@ -343,4 +343,12 @@ class UserController extends Controller
 
     }
 
+    function delete_member($user_id){
+
+        User::where('id' , $user_id)->delete();
+        Create_user_by_admin::where('user_id' , $user_id)->delete();
+
+        return "ok" ;
+    }
+
 }

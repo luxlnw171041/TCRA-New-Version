@@ -46,7 +46,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent1">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"> <a class="nav-link active" aria-current="page" href="https://www.tcra.or.th/"><i class='bx bx-home-alt me-1'></i>Home</a>
+                            <li class="nav-item" style="font-size:18px;"> 
+                                @php
+                                    $loginValue = '';
+
+                                    if(!empty( request()->input('back') )){
+                                        $loginValue = request()->input('back');
+                                        $loginValue = explode("login=",$loginValue)[1];
+                                    }elseif(!empty( explode("login=",url()->full())[1] )){
+                                        $loginValue = explode("login=",url()->full())[1];
+                                    }
+                                @endphp
+                                <a class="nav-link active text-success" aria-current="page" href="{{ url('/') . '/'. 'login?login=' . $loginValue }}">
+                                    กลับเข้าสู่ระบบ
+                                </a>
                             </li>
                         </ul>
                     </div>
