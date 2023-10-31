@@ -621,87 +621,231 @@
                                 @endif
                             </div>
 
-                        </div>
-                    </div>
-                    @if(!empty($driver->d_pic_id_card) || !empty($driver->d_pic_indictment)  || !empty($driver->d_pic_cap) || !empty($driver->d_pic_other))
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="d-flex align-items-center mb-3">หลักฐานการกระทำความผิด</h5>
-                                    <div class="owl-carousel owl-theme carouselSPhoto">
-                                        @if(!empty($driver->d_pic_id_card))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_id_card }}" alt="ภาพบัตรประชาชน">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_id_card }}" alt="ภาพบัตรประชาชน">
-                                                <div class="infoImg">
-                                                    <span class="m-0">1.ภาพบัตรประชาชน</span>
+                            <hr>
+
+                            @php
+                                $check_active_menu_1 = '';
+                                $check_active_show_data_1 = '';
+                                $check_active_menu_2 = '';
+                                $check_active_show_data_2 = '';
+                                $check_active_menu_3 = '';
+                                $check_active_show_data_3 = '';
+                                $check_active_menu_4 = '';
+                                $check_active_show_data_4 = '';
+                                $check_active_menu_5 = '';
+                                $check_active_show_data_5 = '';
+
+                                if(!empty($driver->d_pic_id_card)){
+                                    $check_active_menu_1 = 'active';
+                                    $check_active_show_data_1 = 'show active';
+                                }else if(!empty($driver->d_pic_company_certificate)){
+                                    $check_active_menu_2 = 'active';
+                                    $check_active_show_data_2 = 'show active';
+                                }else if(!empty($driver->d_pic_indictment)){
+                                    $check_active_menu_3 = 'active';
+                                    $check_active_show_data_3 = 'show active';
+                                }else if(!empty($driver->d_pic_cap)){
+                                    $check_active_menu_4 = 'active';
+                                    $check_active_show_data_4 = 'show active';
+                                }else if(!empty($driver->d_pic_other)){
+                                    $check_active_menu_5 = 'active';
+                                    $check_active_show_data_5 = 'show active';
+                                }
+                            @endphp
+
+                            @if(!empty($driver->d_pic_id_card) || !empty($driver->d_pic_company_certificate) || !empty($driver->d_pic_indictment) || !empty($driver->d_pic_cap) || !empty($driver->d_pic_other))
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="">
+                                        <h5 class="mb-3">หลักฐานการกระทำความผิด</h5>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <ul class="nav nav-tabs nav-primary" role="tablist">
+                                        @if( !empty($driver->d_pic_id_card) )
+                                        @php
+                                            $d_pic_id_card_ex = explode(',', $driver->d_pic_id_card);
+                                            $count_d_pic_id_card = count($d_pic_id_card_ex);
+                                        @endphp
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link {{ $check_active_menu_1 }}" data-bs-toggle="tab" href="#d_pic_id_card_{{ $driver->id }}" role="tab" aria-selected="true">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-title">สำเนาบัตรประชาชน / PassPort ({{ $count_d_pic_id_card }})</div>
                                                 </div>
                                             </a>
+                                        </li>
+                                        @endif
+                                        @if( !empty($driver->d_pic_company_certificate) )
+                                        @php
+                                            $d_pic_company_certificate_ex = explode(',', $driver->d_pic_company_certificate);
+                                            $count_d_pic_company_certificate = count($d_pic_company_certificate_ex);
+                                        @endphp
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link {{ $check_active_menu_2 }}" data-bs-toggle="tab" href="#d_pic_company_certificate_{{ $driver->id }}" role="tab" aria-selected="false">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-title">สำเนาหนังสือรับรองบริษัท ({{ $count_d_pic_company_certificate }})</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if( !empty($driver->d_pic_indictment) )
+                                        @php
+                                            $d_pic_indictment_ex = explode(',', $driver->d_pic_indictment);
+                                            $count_d_pic_indictment = count($d_pic_indictment_ex);
+                                        @endphp
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link {{ $check_active_menu_3 }}" data-bs-toggle="tab" href="#d_pic_indictment_{{ $driver->id }}" role="tab" aria-selected="false">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-title">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี ({{ $count_d_pic_indictment }})</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if( !empty($driver->d_pic_cap) )
+                                        @php
+                                            $d_pic_cap_ex = explode(',', $driver->d_pic_cap);
+                                            $count_d_pic_cap = count($d_pic_cap_ex);
+                                        @endphp
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link {{ $check_active_menu_4 }}" data-bs-toggle="tab" href="#d_pic_cap_{{ $driver->id }}" role="tab" aria-selected="false">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-title">หลักฐานการพูด-คุย ({{ $count_d_pic_cap }})</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                        @if( !empty($driver->d_pic_other) )
+                                        @php
+                                            $d_pic_other_ex = explode(',', $driver->d_pic_other);
+                                            $count_d_pic_other = count($d_pic_other_ex);
+                                        @endphp
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link {{ $check_active_menu_5 }}" data-bs-toggle="tab" href="#d_pic_other_{{ $driver->id }}" role="tab" aria-selected="false">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="tab-title">อื่นๆ ({{ $count_d_pic_other }})</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                    <div class="tab-content py-3">
+                                        @if( !empty($driver->d_pic_id_card) )
+                                        <div class="tab-pane fade {{ $check_active_show_data_1 }}" id="d_pic_id_card_{{ $driver->id }}" role="tabpanel">
+                                            <div class="owl-carousel owl-theme carouselSPhoto">
+                                                @foreach($d_pic_id_card_ex as $driver_1 => $value_1)
+                                                    <div class="item">
+                                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort">
+                                                            <img class="file-preview" src="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort">
+                                                            <div class="infoImg">
+                                                                <span class="m-0">สำเนาบัตรประชาชน / PassPort</span>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                         @endif
-                                        
-                                        @if(!empty($driver->d_pic_indictment))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_indictment }}" alt="ภาพใบบังคับคดี">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_indictment }}" alt="ใบบังคับคดี">
-                                                <div class="infoImg">
-                                                    <span class="m-0">2.คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
-                                                </div>
-                                            </a>
+                                        @if( !empty($driver->d_pic_company_certificate) )
+                                        <div class="tab-pane fade {{ $check_active_show_data_2 }}" id="d_pic_company_certificate_{{ $driver->id }}" role="tabpanel">
+                                            <div class="owl-carousel owl-theme carouselSPhoto">
+                                                @foreach($d_pic_company_certificate_ex as $driver_2 => $value_2)
+                                                    <div class="item">
+                                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
+                                                            <img class="file-preview" src="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
+                                                            <div class="infoImg">
+                                                                <span class="m-0">สำเนาหนังสือรับรองบริษัท</span>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                         @endif
-                                        @if(!empty($driver->d_pic_cap))
-                                        <div class="item">
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
-                                                <div class="infoImg">
-                                                    <span class="m-0">3.หลักฐานการพูด-คุย</span>
-                                                </div>
-                                            </a>
+                                        @if( !empty($driver->d_pic_indictment) )
+                                        <div class="tab-pane fade {{ $check_active_show_data_3 }}" id="d_pic_indictment_{{ $driver->id }}" role="tabpanel">
+                                            <div class="owl-carousel owl-theme carouselSPhoto">
+                                                @foreach($d_pic_indictment_ex as $driver_3 => $value_3)
+                                                    <div class="item">
+                                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_3 }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
+                                                            <img class="file-preview" src="{{ url('storage')}}/{{ $value_3 }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
+                                                            <div class="infoImg">
+                                                                <span class="m-0">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                         @endif
-                                        @if(!empty($driver->d_pic_other))
-                                        <div class="item">
-                                            @php
-                                                // ข้อความที่ต้องการตรวจสอบ
-                                                $text = $driver->d_pic_other;
-
-                                                // คำที่ต้องการตรวจสอบ
-                                                $keyword = "uploads";
-                                                $check_uploads = "";
-
-                                                // ตรวจสอบว่าคำที่ต้องการอยู่ในข้อความหรือไม่
-                                                if (strpos($text, $keyword) !== false) {
-                                                    $check_uploads =  "Yes";
-                                                } else {
-                                                    $check_uploads =  "No";
-                                                }
-                                            @endphp
-
-                                            @if($check_uploads == "Yes")
-                                            <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
-                                                <img class="file-preview" src="{{ url('storage')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
-                                                <div class="infoImg">
-                                                    <span class="m-0">4.อื่นๆ</span>
+                                        @if( !empty($driver->d_pic_cap) )
+                                        <div class="tab-pane fade {{ $check_active_show_data_4 }}" id="d_pic_cap_{{ $driver->id }}" role="tabpanel">
+                                            <div class="owl-carousel owl-theme carouselSPhoto">
+                                                @foreach($d_pic_cap_ex as $driver_4 => $value_4)
+                                                <div class="item">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_4 }}" alt="ภาพหลักฐานการพูด-คุย">
+                                                        <img class="file-preview" src="{{ url('storage')}}/{{ $value_4 }}" alt="ภาพหลักฐานการพูด-คุย">
+                                                        <div class="infoImg">
+                                                            <span class="m-0">หลักฐานการพูด-คุย</span>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                            @else
-                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
-                                                <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
-                                                <div class="infoImg">
-                                                    <span class="m-0">4.อื่นๆ</span>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if( !empty($driver->d_pic_other) )
+                                        <div class="tab-pane fade {{ $check_active_show_data_5 }}" id="d_pic_other_{{ $driver->id }}" role="tabpanel">
+                                            <div class="owl-carousel owl-theme carouselSPhoto">
+                                                @php
+                                                    // ข้อความที่ต้องการตรวจสอบ
+                                                    $text = $driver->d_pic_other;
+
+                                                    // คำที่ต้องการตรวจสอบ
+                                                    $keyword = "uploads";
+                                                    $check_uploads = "";
+
+                                                    // ตรวจสอบว่าคำที่ต้องการอยู่ในข้อความหรือไม่
+                                                    if (strpos($text, $keyword) !== false) {
+                                                        $check_uploads =  "Yes";
+                                                    } else {
+                                                        $check_uploads =  "No";
+                                                    }
+                                                @endphp
+                                                
+                                                @if($check_uploads == "Yes")
+                                                    @foreach($d_pic_other_ex as $driver_5 => $value_5)
+                                                    <div class="item">
+                                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_5 }}" alt="ภาพอื่นๆ">
+                                                            <img class="file-preview" src="{{ url('storage')}}/{{ $value_5 }}" alt="ภาพอื่นๆ">
+                                                            <div class="infoImg">
+                                                                <span class="m-0">อื่นๆ</span>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    @endforeach
+                                                @else
+                                                <div class="item">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
+                                                        <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $driver->d_pic_other }}" alt="ภาพอื่นๆ">
+                                                        <div class="infoImg">
+                                                            <span class="m-0">อื่นๆ</span>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </a>
-                                            @endif
+                                                @endif
+                                            
+                                            </div>
                                         </div>
                                         @endif
                                     </div>
+
                                 </div>
                             </div>
+                            @endif
+
                         </div>
                     </div>
-                    @endif
+
                 </div>
             </div>
         </div>

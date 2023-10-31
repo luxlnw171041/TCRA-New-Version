@@ -851,111 +851,230 @@
                             @endif
                         </div>
 
-                    </div>
-                </div>
-                @if(!empty($customers->c_pic_id_card) || !empty($customers->c_pic_company_certificate) || !empty($customers->c_pic_indictment) || !empty($customers->c_pic_cap) || !empty($customers->c_pic_other))
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="d-flex align-items-center mb-3">หลักฐานการกระทำความผิด</h5>
-                                <div class="owl-carousel owl-theme carouselSPhoto">
-                                    @if(!empty($customers->c_pic_id_card))
-                                    <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_id_card }}" alt="ภาพบัตรประชาชน">
-                                            <div class="infoImg">
-                                                <span class="m-0">1.ภาพบัตรประชาชน</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    @endif
-                                    @if(!empty($customers->c_pic_company_certificate))
-                                    <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="สำเนาหนังสือรับรองบริษัท">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_company_certificate }}" alt="สำเนาหนังสือรับรองบริษัท">
-                                            <div class="infoImg">
-                                                <span class="m-0">2.สำเนาหนังสือรับรองบริษัท</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    @endif
-                                    @if(!empty($customers->c_pic_indictment))
-                                    <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="ภาพสัญญาเช่า">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_indictment }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
-                                            <div class="infoImg">
-                                                @if($customers->rentname == "บุคคล")
-                                                    <span class="m-0">2.คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
-                                                @else
-                                                    <span class="m-0">3.คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
-                                                @endif
-                                            </div>
-                                        </a>
-                                    </div>
-                                    @endif
-                                    @if(!empty($customers->c_pic_cap))
-                                    <div class="item">
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_cap }}" alt="ภาพหลักฐานการพูด-คุย">
-                                            <div class="infoImg">
-                                                @if($customers->rentname == "บุคคล")
-                                                    <span class="m-0">3.หลักฐานการพูด-คุย</span>
-                                                @else
-                                                    <span class="m-0">4.หลักฐานการพูด-คุย</span>
-                                                @endif
-                                            </div>
-                                        </a>
-                                    </div>
-                                    @endif
-                                    @if(!empty($customers->c_pic_other))
+                        <hr>
+
+                        @php
+                            $check_active_menu_1 = '';
+                            $check_active_show_data_1 = '';
+                            $check_active_menu_2 = '';
+                            $check_active_show_data_2 = '';
+                            $check_active_menu_3 = '';
+                            $check_active_show_data_3 = '';
+                            $check_active_menu_4 = '';
+                            $check_active_show_data_4 = '';
+                            $check_active_menu_5 = '';
+                            $check_active_show_data_5 = '';
+
+                            if(!empty($customers->c_pic_id_card)){
+                                $check_active_menu_1 = 'active';
+                                $check_active_show_data_1 = 'show active';
+                            }else if(!empty($customers->c_pic_company_certificate)){
+                                $check_active_menu_2 = 'active';
+                                $check_active_show_data_2 = 'show active';
+                            }else if(!empty($customers->c_pic_indictment)){
+                                $check_active_menu_3 = 'active';
+                                $check_active_show_data_3 = 'show active';
+                            }else if(!empty($customers->c_pic_cap)){
+                                $check_active_menu_4 = 'active';
+                                $check_active_show_data_4 = 'show active';
+                            }else if(!empty($customers->c_pic_other)){
+                                $check_active_menu_5 = 'active';
+                                $check_active_show_data_5 = 'show active';
+                            }
+                        @endphp
+
+                        @if(!empty($customers->c_pic_id_card) || !empty($customers->c_pic_company_certificate) || !empty($customers->c_pic_indictment) || !empty($customers->c_pic_cap) || !empty($customers->c_pic_other))
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="">
+                                    <h5 class="mb-3">หลักฐานการกระทำความผิด</h5>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <ul class="nav nav-tabs nav-danger" role="tablist">
+                                    @if( !empty($customers->c_pic_id_card) )
                                     @php
-                                        // ข้อความที่ต้องการตรวจสอบ
-                                        $text = $customers->c_pic_other;
-
-                                        // คำที่ต้องการตรวจสอบ
-                                        $keyword = "uploads";
-                                        $check_uploads = "";
-
-                                        // ตรวจสอบว่าคำที่ต้องการอยู่ในข้อความหรือไม่
-                                        if (strpos($text, $keyword) !== false) {
-                                            $check_uploads =  "Yes";
-                                        } else {
-                                            $check_uploads =  "No";
-                                        }
+                                        $c_pic_id_card_ex = explode(',', $customers->c_pic_id_card);
+                                        $count_c_pic_id_card = count($c_pic_id_card_ex);
                                     @endphp
-                                    <div class="item">
-                                        @if($check_uploads == "Yes")
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
-                                            <img class="file-preview" src="{{ url('storage')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
-                                            <div class="infoImg">
-                                                @if($customers->rentname == "บุคคล")
-                                                    <span class="m-0">4.อื่นๆ</span>
-                                                @else
-                                                    <span class="m-0">5.อื่นๆ</span>
-                                                @endif
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link {{ $check_active_menu_1 }}" data-bs-toggle="tab" href="#c_pic_id_card_{{ $customers->id }}" role="tab" aria-selected="true">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-title">สำเนาบัตรประชาชน / PassPort ({{ $count_c_pic_id_card }})</div>
                                             </div>
                                         </a>
-                                        @else
-                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
-                                            <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
-                                            <div class="infoImg">
-                                                @if($customers->rentname == "บุคคล")
-                                                    <span class="m-0">4.อื่นๆ</span>
-                                                @else
-                                                    <span class="m-0">5.อื่นๆ</span>
-                                                @endif
+                                    </li>
+                                    @endif
+                                    @if( !empty($customers->c_pic_company_certificate) )
+                                    @php
+                                        $c_pic_company_certificate_ex = explode(',', $customers->c_pic_company_certificate);
+                                        $count_c_pic_company_certificate = count($c_pic_company_certificate_ex);
+                                    @endphp
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link {{ $check_active_menu_2 }}" data-bs-toggle="tab" href="#c_pic_company_certificate_{{ $customers->id }}" role="tab" aria-selected="false">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-title">สำเนาหนังสือรับรองบริษัท ({{ $count_c_pic_company_certificate }})</div>
                                             </div>
                                         </a>
-                                        @endif
+                                    </li>
+                                    @endif
+                                    @if( !empty($customers->c_pic_indictment) )
+                                    @php
+                                        $c_pic_indictment_ex = explode(',', $customers->c_pic_indictment);
+                                        $count_c_pic_indictment = count($c_pic_indictment_ex);
+                                    @endphp
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link {{ $check_active_menu_3 }}" data-bs-toggle="tab" href="#c_pic_indictment_{{ $customers->id }}" role="tab" aria-selected="false">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-title">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี ({{ $count_c_pic_indictment }})</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if( !empty($customers->c_pic_cap) )
+                                    @php
+                                        $c_pic_cap_ex = explode(',', $customers->c_pic_cap);
+                                        $count_c_pic_cap = count($c_pic_cap_ex);
+                                    @endphp
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link {{ $check_active_menu_4 }}" data-bs-toggle="tab" href="#c_pic_cap_{{ $customers->id }}" role="tab" aria-selected="false">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-title">หลักฐานการพูด-คุย ({{ $count_c_pic_cap }})</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    @if( !empty($customers->c_pic_other) )
+                                    @php
+                                        $c_pic_other_ex = explode(',', $customers->c_pic_other);
+                                        $count_c_pic_other = count($c_pic_other_ex);
+                                    @endphp
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link {{ $check_active_menu_5 }}" data-bs-toggle="tab" href="#c_pic_other_{{ $customers->id }}" role="tab" aria-selected="false">
+                                            <div class="d-flex align-items-center">
+                                                <div class="tab-title">อื่นๆ ({{ $count_c_pic_other }})</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endif
+                                </ul>
+                                <div class="tab-content py-3">
+                                    @if( !empty($customers->c_pic_id_card) )
+                                    <div class="tab-pane fade {{ $check_active_show_data_1 }}" id="c_pic_id_card_{{ $customers->id }}" role="tabpanel">
+                                        <div class="owl-carousel owl-theme carouselSPhoto">
+                                            @foreach($c_pic_id_card_ex as $customers_1 => $value_1)
+                                                <div class="item">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort">
+                                                        <img class="file-preview" src="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort">
+                                                        <div class="infoImg">
+                                                            <span class="m-0">สำเนาบัตรประชาชน / PassPort</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if( !empty($customers->c_pic_company_certificate) )
+                                    <div class="tab-pane fade {{ $check_active_show_data_2 }}" id="c_pic_company_certificate_{{ $customers->id }}" role="tabpanel">
+                                        <div class="owl-carousel owl-theme carouselSPhoto">
+                                            @foreach($c_pic_company_certificate_ex as $customers_2 => $value_2)
+                                                <div class="item">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
+                                                        <img class="file-preview" src="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
+                                                        <div class="infoImg">
+                                                            <span class="m-0">สำเนาหนังสือรับรองบริษัท</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if( !empty($customers->c_pic_indictment) )
+                                    <div class="tab-pane fade {{ $check_active_show_data_3 }}" id="c_pic_indictment_{{ $customers->id }}" role="tabpanel">
+                                        <div class="owl-carousel owl-theme carouselSPhoto">
+                                            @foreach($c_pic_indictment_ex as $customers_3 => $value_3)
+                                                <div class="item">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_3 }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
+                                                        <img class="file-preview" src="{{ url('storage')}}/{{ $value_3 }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
+                                                        <div class="infoImg">
+                                                            <span class="m-0">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if( !empty($customers->c_pic_cap) )
+                                    <div class="tab-pane fade {{ $check_active_show_data_4 }}" id="c_pic_cap_{{ $customers->id }}" role="tabpanel">
+                                        <div class="owl-carousel owl-theme carouselSPhoto">
+                                            @foreach($c_pic_cap_ex as $customers_4 => $value_4)
+                                            <div class="item">
+                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_4 }}" alt="ภาพหลักฐานการพูด-คุย">
+                                                    <img class="file-preview" src="{{ url('storage')}}/{{ $value_4 }}" alt="ภาพหลักฐานการพูด-คุย">
+                                                    <div class="infoImg">
+                                                        <span class="m-0">หลักฐานการพูด-คุย</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if( !empty($customers->c_pic_other) )
+                                    <div class="tab-pane fade {{ $check_active_show_data_5 }}" id="c_pic_other_{{ $customers->id }}" role="tabpanel">
+                                        <div class="owl-carousel owl-theme carouselSPhoto">
+                                            @php
+                                                // ข้อความที่ต้องการตรวจสอบ
+                                                $text = $customers->c_pic_other;
+
+                                                // คำที่ต้องการตรวจสอบ
+                                                $keyword = "uploads";
+                                                $check_uploads = "";
+
+                                                // ตรวจสอบว่าคำที่ต้องการอยู่ในข้อความหรือไม่
+                                                if (strpos($text, $keyword) !== false) {
+                                                    $check_uploads =  "Yes";
+                                                } else {
+                                                    $check_uploads =  "No";
+                                                }
+                                            @endphp
+                                            
+                                            @if($check_uploads == "Yes")
+                                                @foreach($c_pic_other_ex as $customers_5 => $value_5)
+                                                <div class="item">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_5 }}" alt="ภาพอื่นๆ">
+                                                        <img class="file-preview" src="{{ url('storage')}}/{{ $value_5 }}" alt="ภาพอื่นๆ">
+                                                        <div class="infoImg">
+                                                            <span class="m-0">อื่นๆ</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                @endforeach
+                                            @else
+                                            <div class="item">
+                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
+                                                    <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
+                                                    <div class="infoImg">
+                                                        <span class="m-0">อื่นๆ</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @endif
+                                            
+                                        </div>
                                     </div>
                                     @endif
                                 </div>
+
                             </div>
                         </div>
+                        @endif
+
                     </div>
                 </div>
-                @endif
             </div>
         </div>
     </div>

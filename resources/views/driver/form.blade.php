@@ -925,7 +925,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="d_pic_id_card" name="d_pic_id_card" value="{{ isset($driver->d_pic_id_card) ? $driver->d_pic_id_card : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_id_card" name="d_pic_id_card[]" value="{{ isset($driver->d_pic_id_card) ? $driver->d_pic_id_card : ''}}" accept="image/*" style="display: none;" multiple onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -955,7 +955,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="d_pic_indictment" name="d_pic_indictment" value="{{ isset($driver->d_pic_indictment) ? $driver->d_pic_indictment : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_indictment" name="d_pic_indictment[]" value="{{ isset($driver->d_pic_indictment) ? $driver->d_pic_indictment : ''}}" accept="image/*" style="display: none;" multiple onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -986,7 +986,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="d_pic_cap" name="d_pic_cap" value="{{ isset($driver->d_pic_cap) ? $driver->d_pic_cap : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_cap" name="d_pic_cap[]" value="{{ isset($driver->d_pic_cap) ? $driver->d_pic_cap : ''}}" accept="image/*" style="display: none;" multiple onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -1015,7 +1015,7 @@
                                             <i class="fa-solid fa-xmark"></i>
                                         </span>
                                     </div>
-                                    <input type="file" id="d_pic_other" name="d_pic_other" value="{{ isset($driver->d_pic_other) ? $driver->d_pic_other : ''}}" accept="image/*" style="display: none;">
+                                    <input type="file" id="d_pic_other" name="d_pic_other[]" value="{{ isset($driver->d_pic_other) ? $driver->d_pic_other : ''}}" accept="image/*" style="display: none;" multiple onchange="checkFileCount(this)">
                                     <div class="loader">
                                         <div class="spinner"></div>
                                         <p>กำลังอัปโหลด...</p>
@@ -1389,6 +1389,52 @@
     </div>
 </div>
 
+
+<script>
+    function checkFileCount(input) {
+        // รับจำนวนไฟล์ที่เลือก
+        let fileCount = input.files.length;
+        let name_input = input.name;
+            name_input = name_input.replace("[]", "");
+            // console.log(name_input);
+            // console.log(fileCount);
+
+        // กำหนดจำนวนสูงสุดที่ต้องการ
+        let maxFileCount ; 
+        let text_name_input ; 
+
+        switch(name_input) {
+            case "d_pic_id_card":
+                maxFileCount = 2 ;
+                text_name_input = "ภาพบัตรประชาชน" ;
+            break;
+            case "d_pic_company_certificate":
+                maxFileCount = 5 ;
+                text_name_input = "สำเนาหนังสือรับรองบริษัท" ;
+            break;
+            case "d_pic_indictment":
+                maxFileCount = 5 ;
+                text_name_input = "คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี" ;
+            break;
+            case "d_pic_cap":
+                maxFileCount = 10 ;
+                text_name_input = "หลักฐานการพูด-คุย" ;
+            break;
+            case "d_pic_other":
+                maxFileCount = 3 ;
+                text_name_input = "อื่นๆ" ;
+            break;
+        }
+        
+        
+        
+        if (fileCount > maxFileCount) {
+            alert('คุณสามารถเลือก' + text_name_input + 'ได้สูงสุด ' + maxFileCount + ' ไฟล์');
+            // ล้าง input ให้ว่าง
+            input.value = '';
+        }
+    }
+</script>
 
 
 <!-- เลขบัตรประจำตัวประชาชน -->

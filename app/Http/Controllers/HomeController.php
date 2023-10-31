@@ -43,11 +43,14 @@ class HomeController extends Controller
     function view_data_for_user($type)
     {
         $user_id = Auth::user()->id;
+        
+        if($type == "customers"){
+            $data = Customer::where('user_id' , $user_id)->orderBy('id' , 'DESC')->get();
+        }else if($type == "drivers"){
+            $data = Driver::where('user_id' , $user_id)->orderBy('id' , 'DESC')->get();
+        }
 
-        $data_Customer = Customer::where('user_id' , "!=" , $user_id)->orderBy('id' , 'DESC')->get();
-        $data_Driver = Driver::where('user_id' , "!=" , $user_id)->orderBy('id' , 'DESC')->get();
-
-        return view('view_data_for_user', compact('data_Customer' , 'data_Driver','type'));
+        return view('view_data_for_user', compact('data' , 'type'));
 
     }
 
