@@ -897,10 +897,15 @@
                                         $c_pic_id_card_ex = explode(',', $customers->c_pic_id_card);
                                         $count_c_pic_id_card = count($c_pic_id_card_ex);
                                     @endphp
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_id_card');">
                                         <a class="nav-link {{ $check_active_menu_1 }}" data-bs-toggle="tab" href="#c_pic_id_card_{{ $customers->id }}" role="tab" aria-selected="true">
                                             <div class="d-flex align-items-center">
-                                                <div class="tab-title">สำเนาบัตรประชาชน / PassPort ({{ $count_c_pic_id_card }})</div>
+                                                <span id="title_nav_c_pic_id_card" class="d-none">
+                                                    สำเนาบัตร..({{ $count_c_pic_id_card }})
+                                                </span>
+                                                <div id="name_nav_c_pic_id_card" class="tab-title">
+                                                    สำเนาบัตรประชาชน / PassPort ({{ $count_c_pic_id_card }})
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
@@ -910,10 +915,15 @@
                                         $c_pic_company_certificate_ex = explode(',', $customers->c_pic_company_certificate);
                                         $count_c_pic_company_certificate = count($c_pic_company_certificate_ex);
                                     @endphp
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_company_certificate');">
                                         <a class="nav-link {{ $check_active_menu_2 }}" data-bs-toggle="tab" href="#c_pic_company_certificate_{{ $customers->id }}" role="tab" aria-selected="false">
                                             <div class="d-flex align-items-center">
-                                                <div class="tab-title">สำเนาหนังสือรับรองบริษัท ({{ $count_c_pic_company_certificate }})</div>
+                                                <span id="title_nav_c_pic_company_certificate" class="">
+                                                    สำเนาหนังสือ..({{ $count_c_pic_company_certificate }})
+                                                </span>
+                                                <div id="name_nav_c_pic_company_certificate" class="tab-title d-none">
+                                                    สำเนาหนังสือรับรองบริษัท ({{ $count_c_pic_company_certificate }})
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
@@ -923,10 +933,15 @@
                                         $c_pic_indictment_ex = explode(',', $customers->c_pic_indictment);
                                         $count_c_pic_indictment = count($c_pic_indictment_ex);
                                     @endphp
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_indictment');">
                                         <a class="nav-link {{ $check_active_menu_3 }}" data-bs-toggle="tab" href="#c_pic_indictment_{{ $customers->id }}" role="tab" aria-selected="false">
                                             <div class="d-flex align-items-center">
-                                                <div class="tab-title">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี ({{ $count_c_pic_indictment }})</div>
+                                                <span id="title_nav_c_pic_indictment" class="">
+                                                    คำฟ้อง..({{ $count_c_pic_indictment }})
+                                                </span>
+                                                <div id="name_nav_c_pic_indictment" class="tab-title d-none">
+                                                    คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี ({{ $count_c_pic_indictment }})
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
@@ -936,10 +951,15 @@
                                         $c_pic_cap_ex = explode(',', $customers->c_pic_cap);
                                         $count_c_pic_cap = count($c_pic_cap_ex);
                                     @endphp
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_cap');">
                                         <a class="nav-link {{ $check_active_menu_4 }}" data-bs-toggle="tab" href="#c_pic_cap_{{ $customers->id }}" role="tab" aria-selected="false">
                                             <div class="d-flex align-items-center">
-                                                <div class="tab-title">หลักฐานการพูด-คุย ({{ $count_c_pic_cap }})</div>
+                                                <span id="title_nav_c_pic_cap" class="">
+                                                    หลักฐาน..({{ $count_c_pic_cap }})
+                                                </span>
+                                                <div id="name_nav_c_pic_cap" class="tab-title d-none">
+                                                    หลักฐานการพูด-คุย ({{ $count_c_pic_cap }})
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
@@ -949,10 +969,15 @@
                                         $c_pic_other_ex = explode(',', $customers->c_pic_other);
                                         $count_c_pic_other = count($c_pic_other_ex);
                                     @endphp
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_other');">
                                         <a class="nav-link {{ $check_active_menu_5 }}" data-bs-toggle="tab" href="#c_pic_other_{{ $customers->id }}" role="tab" aria-selected="false">
                                             <div class="d-flex align-items-center">
-                                                <div class="tab-title">อื่นๆ ({{ $count_c_pic_other }})</div>
+                                                <span id="title_nav_c_pic_other" class="">
+                                                    อื่นๆ ({{ $count_c_pic_other }})
+                                                </span>
+                                                <div id="name_nav_c_pic_other" class="tab-title d-none">
+                                                    อื่นๆ ({{ $count_c_pic_other }})
+                                                </div>
                                             </div>
                                         </a>
                                     </li>
@@ -1222,5 +1247,52 @@ $class_show = '';
     });
 
     feather.replace();
+</script>
+
+<script>
+    function change_name_nav(type){
+
+        if(document.querySelector('#name_nav_c_pic_id_card')){
+            document.querySelector('#name_nav_c_pic_id_card').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_c_pic_indictment')){
+            document.querySelector('#name_nav_c_pic_indictment').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_c_pic_cap')){
+            document.querySelector('#name_nav_c_pic_cap').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_c_pic_other')){
+            document.querySelector('#name_nav_c_pic_other').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_c_pic_company_certificate')){
+            document.querySelector('#name_nav_c_pic_company_certificate').classList.add('d-none');
+        }
+        // ----
+
+        if(document.querySelector('#title_nav_c_pic_id_card')){
+            document.querySelector('#title_nav_c_pic_id_card').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_c_pic_indictment')){
+            document.querySelector('#title_nav_c_pic_indictment').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_c_pic_cap')){
+            document.querySelector('#title_nav_c_pic_cap').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_c_pic_other')){
+            document.querySelector('#title_nav_c_pic_other').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_c_pic_company_certificate')){
+            document.querySelector('#title_nav_c_pic_company_certificate').classList.remove('d-none');
+        }
+
+        // เปิด text ที่ถูกเลือก
+        if(document.querySelector('#name_nav_'+type)){
+            document.querySelector('#name_nav_'+type).classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_'+type)){
+            document.querySelector('#title_nav_'+type).classList.add('d-none');
+        }
+
+    }
 </script>
 @endsection

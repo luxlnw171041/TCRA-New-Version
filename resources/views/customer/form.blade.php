@@ -153,11 +153,11 @@
 
     .file-upload-box {
         position: relative;
-        width: 100%;
+/*        width: 80%;*/
         height: 200px;
         border: 2px dashed #ccc;
         border-radius: 10px;
-        /* text-align: center; */
+/*        text-align: center; */
         cursor: pointer;
         overflow: hidden;
         display: flex;
@@ -210,7 +210,7 @@
     .file-preview {
         max-width: 100%;
         max-height: 100%;
-        display: none;
+/*        display: none;*/
         cursor: pointer;
         object-fit: contain;
     }
@@ -307,7 +307,19 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .col {
+        flex: 3 0 0% !important;
+    }
 </style>
+
+@php
+    $type_create = '' ;
+
+    if (isset($_GET['type_create'])) {
+        $type_create = $_GET['type_create'];
+    }
+@endphp
 
 <div class="d-none form-group {{ $errors->has('user_id') ? 'has-error' : '' }}">
     <label for="user_id" class="control-label">{{ 'User Id' }}</label>
@@ -460,7 +472,7 @@
                             <div class="tab-pane fade active show" id="corrupt" role="tabpanel">
                                 <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="1.ฉ้อโกงหรือยักยอกรถยนต์">
+                                        <input class="radio-input demerit" type="checkbox" name="demerit[]" id="demerit" value="1.ฉ้อโกงหรือยักยอกรถยนต์">
                                         <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
@@ -468,7 +480,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="2.ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์">
+                                        <input class="radio-input demerit" type="checkbox" name="demerit[]" id="demerit" value="2.ลักทรัพย์หรือเปลี่ยนแปลงอุปกรณ์ภายในรถยนต์">
                                         <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
@@ -476,7 +488,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="3.ความผิดในคดีอาญาอื่นๆ">
+                                        <input class="radio-input demerit" type="checkbox" name="demerit[]" id="demerit" value="3.ความผิดในคดีอาญาอื่นๆ">
                                         <span class="radio-tile radio-danger">
                                             <span class="radio-icon">
                                             </span>
@@ -496,7 +508,7 @@
                             <div class="tab-pane fade" id="discipline" role="tabpanel">
                                 <div class="groupOffense">
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="4.ไม่บำรุงรักษารถยนต์">
+                                        <input class="radio-input demerit" type="checkbox" name="demerit[]" id="demerit" value="4.ไม่บำรุงรักษารถยนต์">
                                         <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
@@ -504,7 +516,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="5.ไม่ชำระค่าเช่า">
+                                        <input class="radio-input demerit" type="checkbox" name="demerit[]" id="demerit" value="5.ไม่ชำระค่าเช่า">
                                         <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
@@ -512,7 +524,7 @@
                                         </span>
                                     </label>
                                     <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="6.อื่นๆ">
+                                        <input class="radio-input demerit" type="checkbox" name="demerit[]" id="demerit" value="6.อื่นๆ">
                                         <span class="radio-tile radio-warning">
                                             <span class="radio-icon">
                                             </span>
@@ -528,216 +540,12 @@
                                 </div>
                             </div>
                         </div>
-
-
-                        <!-- <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade active show" id="corrupt" role="tabpanel">
-                                <div class="groupOffense">
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ลักลอบนำรถยนต์ไปใช้ส่วนตัว">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">1.ลักลอบนำรถยนต์ไปใช้ส่วนตัว</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทุจริตโอที/บิลน้ำมัน">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">2.ทุจริตโอที/บิลน้ำมัน</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="เสพสารเสพติด">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">3.เสพสารเสพติด</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="เมาสุรา">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">4.เมาสุรา</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="เล่นการพนัน">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">5.เล่นการพนัน</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">อื่นๆ</span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="discipline" role="tabpanel">
-                                <div class="groupOffense">
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ยืมเงินลูกค้า">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">6.ยืมเงินลูกค้า</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทิ้งงาน">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">7.ทิ้งงาน</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทะเลาะวิวาท">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">8.ทะเลาะวิวาท</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="โกหกบ่อยครั้ง">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">9.โกหกบ่อยครั้ง</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่เก็บความลับ">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">10.ไม่เก็บความลับ</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ปิดมือถือติดต่อไม่ได้">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">11.ปิดมือถือติดต่อไม่ได้</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">อื่นๆ</span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="service" role="tabpanel">
-                                <div class="groupOffense">
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ขับรถอันตราย">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">12.ขับรถอันตราย</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="มาสาย">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">13.มาสาย</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ไม่รู้เส้นทาง">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">14.ไม่รู้เส้นทาง</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="สตาร์ทรถรอลูกค้า">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">15.สตาร์ทรถรอลูกค้า</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ทัศนะคติ/การบริการไม่ดี">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">16.ทัศนะคติ/การบริการไม่ดี</span>
-                                        </span>
-                                    </label>
-
-                                    <div class="col-12 mt-3">
-                                        <label for="inputLastName1" class="form-label">ลักษณะกระทำความผิด <span class="text-danger">*</span></label>
-                                    </div>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ขัดคำสั่ง ลูกค้า/นายจ้าง">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">17.ขัดคำสั่ง ลูกค้า/นายจ้าง</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="แต่งกาย/คำพูด ไม่สุภาพ">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">18.แต่งกาย/คำพูด ไม่สุภาพ</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="ฟ้องนายจ้าง หรือ ร้องตรวจแรงงานที่เป็นเท็จ">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">19.ฟ้องนายจ้าง หรือ ร้องตรวจแรงงานที่เป็นเท็จ</span>
-                                        </span>
-                                    </label>
-                                    <label>
-                                        <input class="radio-input" type="checkbox" name="demerit[]" id="demerit" value="อื่นๆ">
-                                        <span class="radio-tile">
-                                            <span class="radio-icon">
-                                            </span>
-                                            <span class="radio-label">อื่นๆ</span>
-                                        </span>
-                                    </label>
-                                </div>
-
-                            </div>
-                            <div class="row col-12 my-3" id="divdemeritdetail">
-                                <label for="demeritdetail" class="col-sm-12 col-form-label subHeaderCustomer">รายละเอียดการกระทำความผิด</label>
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" id="demeritdetail" name="demeritdetail" rows="3" placeholder="กรอกรายละเอียดการกระทำความผิด"></textarea>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
 
                     <div class="col-12 mt-0 ">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">วัน/เดือน/ปี ที่กระทำความผิด <span class="text-danger">*</span></label>
                     </div>
                     <div class="col-md-6 mt-md-1  mb-md-2">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
                         <div class="input-group ">
                             <div class="inputGroup ">
                                 <input name="c_date" id="c_date" class="selectDate" type="date" required>
@@ -747,557 +555,263 @@
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">แนบหลักฐานการกระทำความผิด</label>
                     </div>
-                    <style>
 
-                    </style>
-                    <div class="selectPhoto">
-
-                        <div class="owl-carousel owl-theme carouselSelectPhoto">
-
-                            <div class="item">
-                                <!-- <input type="file" id="avatar" name="avatar"accept="image/png, image/jpeg"> -->
-                                <!-- <label class="inputSelectFile" for="c_pic_execution">d</label>
-                                <input class="form-control d-none" name="c_pic_execution" type="file" id="c_pic_execution" value="{{ isset($customer->c_pic_execution) ? $customer->c_pic_execution : '' }}"> -->
-                                <style>
-                                    .imgUpLoad {
-                                        width: 75px !important;
-                                        height: 75px !important;
-                                    }
-
-                                    .upload-id-card:hover {
-                                        background-color: rgb(114, 85, 206, 0.2) !important;
-                                    }
-
-                                    .upload-id-card:hover .upload-text {
-                                        color: #7255ce !important;
-                                    }
-
-                                    .upload-lease:hover {
-                                        background-color: rgb(39, 166, 255, 0.2) !important;
-                                    }
-
-                                    .upload-lease:hover .upload-text {
-                                        color: #1f496e !important;
-                                    }
-
-                                    .upload-execution:hover {
-                                        background-color: rgb(221, 125, 0, 0.2) !important;
-                                    }
-
-                                    .upload-execution:hover .upload-text {
-                                        color: #dd7d00 !important;
-                                    }
-
-                                    .upload-capture:hover {
-                                        background-color: rgb(0, 51, 112, 0.2) !important;
-
-                                    }
-
-                                    .upload-capture:hover .upload-text {
-                                        color: #003370 !important;
-                                    }
-
-                                    .upload-other:hover {
-                                        background-color: rgb(255, 68, 68, 0.2) !important;
-                                    }
-
-                                    .upload-other:hover .upload-text {
-                                        color: #ff4444 !important;
-                                    }
-                                </style>
-                                <div class="file-upload-box upload-id-card">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="c_pic_id_card" name="c_pic_id_card[]" value="{{ isset($customer->c_pic_id_card) ? $customer->c_pic_id_card : ''}}" accept="image/*" multiple style="display: none;" onchange="checkFileCount(this)">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/id-card.png')}}" alt="สำเนาบัตรประชาชน" class="imgUpLoad" width="50">
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <ul class="nav nav-tabs nav-danger" role="tablist">
+                                <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_id_card');">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#nav_c_pic_id_card" role="tab" aria-selected="true">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">
+                                                1.
+                                                <span id="title_nav_c_pic_id_card" class="d-none">
+                                                    สำเนาบัตร..
+                                                </span>
+                                            </div>
+                                            <div id="name_nav_c_pic_id_card" class="tab-title">สำเนาบัตรประชาชน / PassPort</div>
                                         </div>
-                                        <span class="number-upload">1.</span><span>สำเนาบัตรประชาชน / <br> PassPort</span>
+                                    </a>
+                                </li>
+                                @if($type_create == "company")
+                                <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_company_certificate');">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#nav_c_pic_company_certificate" role="tab" aria-selected="false">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">
+                                                2.
+                                                <span id="title_nav_c_pic_company_certificate" class="">
+                                                    สำเนาหนังสือ..
+                                                </span>
+                                            </div>
+                                            <div id="name_nav_c_pic_company_certificate" class="tab-title d-none">สำเนาหนังสือรับรองบริษัท</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endif
+                                <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_indictment');">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#nav_c_pic_indictment" role="tab" aria-selected="false">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">
+                                                @if($type_create == "person")
+                                                2.
+                                                @else
+                                                3.
+                                                @endif
+                                                <span id="title_nav_c_pic_indictment" class="">
+                                                    คำฟ้อง..
+                                                </span>
+                                            </div>
+                                            <div id="name_nav_c_pic_indictment" class="tab-title d-none">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_cap');">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#nav_c_pic_cap" role="tab" aria-selected="false">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">
+                                                @if($type_create == "person")
+                                                3.
+                                                @else
+                                                4.
+                                                @endif
+                                                <span id="title_nav_c_pic_cap" class="">
+                                                    หลักฐาน..
+                                                </span>
+                                            </div>
+                                            <div id="name_nav_c_pic_cap" class="tab-title d-none">หลักฐานการพูด-คุย</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation" onclick="change_name_nav('c_pic_other');">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#nav_c_pic_other" role="tab" aria-selected="false">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-title">
+                                                @if($type_create == "person")
+                                                4.
+                                                @else
+                                                5.
+                                                @endif
+                                                <span id="title_nav_c_pic_other" class="">
+                                                    อื่นๆ
+                                                </span>
+                                            </div>
+                                            <div id="name_nav_c_pic_other" class="tab-title d-none">อื่นๆ</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content py-3">
+                                <!-- เพิ่มสำเนาบัตรประชาชน -->
+                                <div class="tab-pane fade show active" id="nav_c_pic_id_card" role="tabpanel">
+                                    <input class="d-none" type="file" id="c_pic_id_card" name="c_pic_id_card[]" accept="image/*" multiple onchange="on_select_file_input('c_pic_id_card');">
+                                    <div class="row">
+                                        <h6 class="mt-2 mb-2">
+                                            สำเนาบัตรประชาชน / PassPort (สูงสุด 2 ไฟล์)
+                                        </h6>
+                                        @for($i=1; $i < 3; $i++)
+                                            @php 
+                                                if($i == 1){
+                                                    $class_div_id_card = '' ;
+                                                }else{
+                                                    $class_div_id_card = 'd-none' ;
+                                                }
+                                            @endphp
+                                            <div class="p-1 col-4">
+                                                <div id="img_c_pic_id_card_{{ $i }}" class=" file-upload-box upload-id-card {{ $class_div_id_card }}" onclick="document.querySelector('#c_pic_id_card').click();" >
+                                                    <div class="upload-text text-center">
+                                                        <div class="w-100 d-flex justify-content-center mb-3" >
+                                                            <img src="{{asset('img/icon/id-card.png')}}" alt="User" class="imgUpLoad" width="50">
+                                                        </div>
+                                                        <span>
+                                                            <i class="fa-sharp fa-solid fa-plus mr-2"></i> เพิ่มสำเนาบัตรประชาชน / PassPort 
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                </div>
+                                <!-- เพิ่มสำเนาหนังสือรับรองบริษัท -->
+                                @if($type_create == "company")
+                                <div class="tab-pane fade" id="nav_c_pic_company_certificate" role="tabpanel">
+                                    <input class="d-none" type="file" id="c_pic_company_certificate" name="c_pic_company_certificate[]" accept="image/*" multiple onchange="on_select_file_input('c_pic_company_certificate');">
+                                    <div class="row">
+                                        <h6 class="mt-2 mb-2">
+                                            สำเนาหนังสือรับรองบริษัท (สูงสุด 5 ไฟล์)
+                                        </h6>
+                                        @for($i=1; $i < 6; $i++)
+                                            @php 
+                                                if($i == 1){
+                                                    $class_div_id_card = '' ;
+                                                }else{
+                                                    $class_div_id_card = 'd-none' ;
+                                                }
+                                            @endphp
+                                            <div class="p-1 col-4">
+                                                <div id="img_c_pic_company_certificate_{{ $i }}" class=" file-upload-box upload-id-card {{ $class_div_id_card }}" onclick="document.querySelector('#c_pic_company_certificate').click();" >
+                                                    <div class="upload-text text-center">
+                                                        <div class="w-100 d-flex justify-content-center mb-3" >
+                                                            <img src="{{asset('img/icon/company.png')}}" alt="User" class="imgUpLoad" width="50">
+                                                        </div>
+                                                        <span>
+                                                            <i class="fa-sharp fa-solid fa-plus mr-2"></i> เพิ่มสำเนาหนังสือรับรองบริษัท
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                </div>
+                                @endif
+                                <!-- คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี -->
+                                <div class="tab-pane fade" id="nav_c_pic_indictment" role="tabpanel">
+                                    <input class="d-none" type="file" id="c_pic_indictment" name="c_pic_indictment[]" accept="image/*" multiple onchange="on_select_file_input('c_pic_indictment');">
+                                    <div class="row">
+                                        <h6 class="mt-2 mb-2">
+                                            คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี (สูงสุด 5 ไฟล์)
+                                        </h6>
+                                        @for($i=1; $i < 6; $i++)
+
+                                            @php 
+                                                if($i == 1){
+                                                    $class_div_certificate = '' ;
+                                                }else{
+                                                    $class_div_certificate = 'd-none' ;
+                                                }
+                                            @endphp
+                                            <div class="p-1 col-4">
+                                                <div id="img_c_pic_indictment_{{ $i }}" class="file-upload-box upload-id-card {{ $class_div_certificate }}" onclick="document.querySelector('#c_pic_indictment').click();">
+                                                    <div class="upload-text text-center">
+                                                        <div class="w-100 d-flex justify-content-center mb-3" >
+                                                            <img src="{{asset('img/icon/legal.png')}}" alt="User" class="imgUpLoad" width="50">
+                                                        </div>
+                                                        <span>
+                                                            <i class="fa-sharp fa-solid fa-plus mr-2"></i> เพิ่มคำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav_c_pic_cap" role="tabpanel">
+                                    <input class="d-none" type="file" id="c_pic_cap" name="c_pic_cap[]" accept="image/*" multiple onchange="on_select_file_input('c_pic_cap');">
+                                    <div class="row">
+                                        <h6 class="mt-2 mb-2">
+                                            หลักฐานการพูด-คุย (สูงสุด 10 ไฟล์)
+                                        </h6>
+                                        @for($i=1; $i < 11; $i++)
+
+                                            @php 
+                                                if($i == 1){
+                                                    $class_div_c_pic_cap = '' ;
+                                                }else{
+                                                    $class_div_c_pic_cap = 'd-none' ;
+                                                }
+                                            @endphp
+                                            <div class="p-1 col-4">
+                                                <div id="img_c_pic_cap_{{ $i }}" class="file-upload-box upload-id-card {{ $class_div_c_pic_cap }}" onclick="document.querySelector('#c_pic_cap').click();">
+                                                    <div class="upload-text text-center">
+                                                        <div class="w-100 d-flex justify-content-center mb-3" >
+                                                            <img src="{{asset('img/icon/chat.png')}}" alt="User" class="imgUpLoad" width="50">
+                                                        </div>
+                                                        <span>
+                                                            <i class="fa-sharp fa-solid fa-plus mr-2"></i> เพิ่มหลักฐานการพูด-คุย
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endfor
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav_c_pic_other" role="tabpanel">
+                                    <input class="d-none" type="file" id="c_pic_other" name="c_pic_other[]" accept="image/*" multiple onchange="on_select_file_input('c_pic_other');">
+                                    <div class="row">
+                                        <h6 class="mt-2 mb-2">
+                                            อื่นๆ (สูงสุด 10 ไฟล์)
+                                        </h6>
+                                        @for($i=1; $i < 11; $i++)
+
+                                            @php 
+                                                if($i == 1){
+                                                    $class_div_c_pic_other = '' ;
+                                                }else{
+                                                    $class_div_c_pic_other = 'd-none' ;
+                                                }
+                                            @endphp
+                                            <div class="p-1 col-4">
+                                                <div id="img_c_pic_other_{{ $i }}" class="file-upload-box upload-id-card {{ $class_div_c_pic_other }}" onclick="document.querySelector('#c_pic_other').click();">
+                                                    <div class="upload-text text-center">
+                                                        <div class="w-100 d-flex justify-content-center mb-3" >
+                                                            <img src="{{asset('img/icon/other.png')}}" alt="User" class="imgUpLoad" width="50">
+                                                        </div>
+                                                        <span>
+                                                            <i class="fa-sharp fa-solid fa-plus mr-2"></i> เพิ่มอื่นๆ
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endfor
                                     </div>
                                 </div>
                             </div>
-                            <div class="item" id="item_c_pic_company_certificate">
-                                <!-- <h6>ภาพใบบังคับคดี</h6> -->
-                                <div class="file-upload-box upload-lease">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="c_pic_company_certificate" name="c_pic_company_certificate[]" value="{{ isset($customer->c_pic_company_certificate) ? $customer->c_pic_company_certificate : ''}}" accept="image/*" style="display: none;" multiple onchange="checkFileCount(this)">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/company.png')}}" alt="สำเนาหนังสือรับรองบริษัท" class="imgUpLoad" width="50">
-                                        </div>
-                                        <span class="number-upload">2.</span><span>สำเนาหนังสือรับรองบริษัท</span>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="item">
-                                <!-- <h6>สัญญาเช่า</h6> -->
-                                <div class="file-upload-box upload-execution">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="c_pic_indictment" name="c_pic_indictment[]" value="{{ isset($customer->c_pic_indictment) ? $customer->c_pic_indictment : ''}}" multiple accept="image/*" style="display: none;" onchange="checkFileCount(this)">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/legal.png')}}" alt="คำฟ้องหรือใบร้องทุกข์ดำเนินดคี" class="imgUpLoad" width="50">
-                                        </div>
-                                        <span class="number-upload">3.</span><span>คำฟ้องหรือใบร้องทุกข์ <br> แจ้งความดำเนินคดี</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- <h6>ภาพแคป</h6> -->
-                                <div class="file-upload-box upload-capture">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="c_pic_cap" name="c_pic_cap[]" value="{{ isset($customer->c_pic_cap) ? $customer->c_pic_cap : ''}}" accept="image/*" multiple style="display: none;" onchange="checkFileCount(this)">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/chat.png')}}" alt="หลักฐานการพูด-คุย" class="imgUpLoad" width="50">
-                                        </div>
-                                        <span class="number-upload">4.</span><span>หลักฐานการพูด-คุย</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <!-- <h6>ภาพอื่นๆ</h6> -->
-                                <div class="file-upload-box upload-other">
-                                    <div id="clear-button" style="display: none;">
-                                        <span class="clear-button">
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </span>
-                                    </div>
-                                    <input type="file" id="c_pic_other" name="c_pic_other[]" value="{{ isset($customer->c_pic_other) ? $customer->c_pic_other : ''}}" multiple accept="image/*" style="display: none;" onchange="checkFileCount(this)">
-                                    <div class="loader">
-                                        <div class="spinner"></div>
-                                        <p>กำลังอัปโหลด...</p>
-                                    </div>
-                                    <img class="file-preview" src="#" alt="ภาพตัวอย่าง" style="display: none;">
-                                    <div class="infoImg" style="display: none;">
-                                        <span class="m-0 imgName"></span>
-                                        <p class="m-0">
-                                            <span class="imgSize"></span>
-                                            <span class="imgFile"></span>
-                                        </p>
-                                    </div>
-                                    <div class="upload-text text-center">
-                                        <div class="w-100 d-flex justify-content-center mb-3">
-                                            <img src="{{asset('img/icon/other.png')}}" alt="อื่นๆ" class="imgUpLoad" width="50">
-                                        </div>
-                                        <span class="number-upload">5.</span><span>อื่นๆ</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
-                    <script>
-                        function handleFileUpload(fileUploadBox) {
-                            const fileInput = fileUploadBox.querySelector('input[type="file"]');
-                            const loader = fileUploadBox.querySelector('.loader');
-                            const filePreview = fileUploadBox.querySelector('.file-preview');
-                            const uploadText = fileUploadBox.querySelector('.upload-text');
-                            const infoImg = fileUploadBox.querySelector('.infoImg');
-                            const clearButton = fileUploadBox.querySelector('#clear-button');
-                            let isClearButtonClicked = false;
-                            let isFileSelected = false;
-
-                            clearButton.addEventListener('click', function() {
-                                fileInput.value = null;
-                                resetPreview();
-                                isClearButtonClicked = true;
-                                isFileSelected = false;
-                            });
-
-                            fileUploadBox.addEventListener('click', function() {
-                                if (!isClearButtonClicked) {
-                                    fileInput.click();
-                                }
-                                resetPreview();
-                            });
-
-                            fileInput.addEventListener('change', function(event) {
-                                const file = event.target.files[0];
-                                // Inside the fileInput.addEventListener('change', function (event) { ... }) block
-
-                                if (file) {
-                                    if (file.type.includes('image')) {
-                                        isFileSelected = true;
-                                        const reader = new FileReader();
-                                        loader.style.display = 'block';
-                                        filePreview.style.display = 'none';
-                                        infoImg.style.display = 'none';
-                                        uploadText.style.display = 'none';
-                                        clearButton.style.display = 'none';
-
-                                        reader.onload = function(e) {
-                                            setTimeout(function() {
-                                                if (isFileSelected) {
-                                                    loader.style.display = 'none';
-                                                    filePreview.src = e.target.result;
-                                                    filePreview.style.display = 'block';
-                                                    infoImg.style.display = 'block';
-                                                    clearButton.style.display = 'block';
-
-                                                    const fileName = file.name;
-                                                    const fileSize = formatFileSize(file.size);
-                                                    const fileExtension = getFileExtension(fileName);
-                                                    const imgName = fileUploadBox.querySelector('.imgName');
-                                                    const imgSize = fileUploadBox.querySelector('.imgSize');
-                                                    const imgFile = fileUploadBox.querySelector('.imgFile'); // Add this line
-
-                                                    const lastDotIndex = fileName.lastIndexOf('.');
-                                                    const fileNameWithoutExtension = fileName.substring(0, lastDotIndex);
-
-                                                    imgName.textContent = fileNameWithoutExtension;
-                                                    imgSize.textContent = fileSize + ' | ';
-                                                    imgFile.textContent = fileExtension; // Update this line
-                                                }
-                                            }, 2000);
-                                        };
-
-                                        reader.readAsDataURL(file);
-                                    } else {
-                                        upload_file_error();
-                                    }
-                                } else {
-                                    resetPreview();
-                                }
-
-                            });
-
-                            function resetPreview() {
-                                fileInput.value = null;
-                                loader.style.display = 'none';
-                                filePreview.style.display = 'none';
-                                uploadText.style.display = 'block';
-                                clearButton.style.display = 'none';
-                                infoImg.style.display = 'none';
-                                isClearButtonClicked = false;
-                                isFileSelected = false;
-                            }
-                        }
-
-                        const fileUploadBoxes = document.querySelectorAll('.file-upload-box');
-                        fileUploadBoxes.forEach(function(fileUploadBox) {
-                            handleFileUpload(fileUploadBox);
-                        });
-
-                        function formatFileSize(fileSize) {
-                            if (fileSize === 0) return '0 Bytes';
-
-                            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-                            const k = 1024;
-                            const i = Math.floor(Math.log(fileSize) / Math.log(k));
-
-                            return parseFloat((fileSize / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-                        }
-
-                        function getFileExtension(fileName) {
-                            return fileName.slice((fileName.lastIndexOf('.') - 1 >>> 0) + 2);
-                        }
-                    </script>
-                    <script>
-                        $(function() {
-                            // Owl Carousel
-                            var owl = $(".carouselSelectPhoto");
-                            owl.owlCarousel({
-                                margin: 10,
-                                loop: false,
-                                nav: true,
-                                // autoWidth: true,
-                                // items: 4,
-                                dots: false,
-                                responsive: {
-                                    0: {
-                                        items: 1
-                                    },
-                                    600: {
-                                        items: 2
-                                    },
-                                    900: {
-                                        items: 2
-                                    },
-                                    1000: {
-                                        items: 3
-                                    },
-                                    2000: {
-                                        items: 4
-                                    }
-                                }
-                            });
-                        });
-                    </script>
                     <div class="col-12">
-                        <a id="btnSubmitFormCreateCustomer" onclick="checkvaluedemerit(); " type="submit" class="btn btn-danger px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</a>
+                        <!-- <a id="btnSubmitFormCreateCustomer" onclick="checkvaluedemerit(); " type="submit" class="btn btn-danger px-5 float-end" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">ยืนยัน</a> -->
+
+                        <a id="btnSubmitFormCreateCustomer" onclick="checkvaluedemerit();"class="btn btn-danger px-5 float-end">ยืนยัน</a>
+
+                        <span id="span_on_submit" class="btn btn-sm btn-info d-none" onclick="on_submit();">
+                            on_submit
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script>
-            const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]');
-            const formCreateCustomer = document.getElementById('formCreateCustomer');
-            const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
-            var checkdemerit = false;
-            var checkisGroupPersonAndCompany = false;
-
-            otherCheckboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        // ตั้งค่า checked เป็น true สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
-                        otherCheckboxes.forEach(function(otherCheckbox) {
-                            otherCheckbox.checked = true;
-                        });
-                    } else {
-                        // ตั้งค่า checked เป็น false สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
-                        otherCheckboxes.forEach(function(otherCheckbox) {
-                            otherCheckbox.checked = false;
-                        });
-                    }
-                });
-            });
-
-            // demeritCheckboxes.forEach(function(checkbox) {
-            // checkbox.addEventListener('change', function() {
-            //     const demeritCheckboxes = document.querySelectorAll('input[name="demerit[]"]:checked');
-
-            //     if (checkedCheckboxes.length > 0) {
-            //         errorText.style.display = 'none';
-            //     } else {
-            //         errorText.style.display = 'block';
-            //     }
-            // });
-            // });
-
-
-
-            function checkvaluedemerit() {
-                const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
-                if (demeritCheckboxes.length === 0) {
-                    // console.log('โปรดเลือก');
-                    checkdemerit = false;
-
-                    event.preventDefault(); // ป้องกันการส่งฟอร์ม   
-                    dangerAlert("กรุณาเลือกลักษณะการกระทำความผิดอย่างน้อย 1 อย่าง");
-                } else {
-
-                    let cIdnoInput = document.getElementById('c_idno');
-                    let commercial_registration = document.getElementById('commercial_registration');
-
-                    // ใส่เลขบัตร ปชช
-                    if(cIdnoInput){
-                        cIdnoInput = cIdnoInput.value.replaceAll("-","");
-                        if(cIdnoInput.length != 13){
-                            document.getElementById('c_idno').focus();
-                        }else{
-                            checkdemerit = true;
-                        }
-                    }
-                    // ใส่เลขประจำตัวผู้เสียภาษี
-                    else if(commercial_registration){
-                        if(commercial_registration.value.length != 13){
-                            document.getElementById('commercial_registration').focus();
-                        }else{
-                            checkdemerit = true;
-                        }
-                    }
-
-
-                    // console.log('ยืนยัน')
-                }
-            }
-
-
-            // const c_name = document.getElementById('c_name');
-            // const c_surname = document.getElementById('c_surname');
-            // const c_idno = document.getElementById('c_idno');
-            // const c_company_name = document.getElementById('c_company_name');
-            // const commercial_registration = document.getElementById('commercial_registration');
-            // const  = document.querySelectorAll('.');
-            // const  = document.querySelectorAll('.');
-
-
-
-            // function handleInputs(inputElement) {
-
-            //     if (inputElement === c_name || inputElement === c_surname || inputElement === c_idno) {
-            //         if (c_name.value !== "" || c_surname.value !== "" || c_idno.value !== "") {
-            //             .forEach(element => {
-            //                 element.classList.add('d-none');
-            //             });
-            //             c_company_name.value = "";
-            //             c_company_name.required = false;
-
-            //             commercial_registration.value = "";
-            //             commercial_registration.required = false;
-            //         } else {
-            //             .forEach(element => {
-            //                 element.classList.remove('d-none');
-            //                 c_company_name.required = true;
-            //                 commercial_registration.required = true;
-
-            //             });
-            //         }
-            //     } else if (inputElement === c_company_name || inputElement === commercial_registration) {
-            //         if (c_company_name.value !== "" || commercial_registration.value !== "") {
-            //             .forEach(element => {
-            //                 element.classList.add('d-none');
-            //             });
-            //             c_name.value = "";
-            //             c_name.required = false;
-
-            //             c_surname.value = "";
-            //             c_surname.required = false;
-
-            //             c_idno.value = "";
-            //             c_idno.required = false;
-            //         } else {
-            //             .forEach(element => {
-            //                 element.classList.remove('d-none');
-            //             });
-            //             c_name.required = true;
-            //             c_surname.required = true;
-            //             c_idno.required = true;
-            //         }
-            //     }
-            // }
-
-
-            // function checkValueInput() {
-            //     const inputsGroupPerson = [document.getElementById('c_name'), document.getElementById('c_surname'), document.getElementById('c_idno')];
-            //     const inputsGroupCompany = [document.getElementById('c_company_name'), document.getElementById('commercial_registration')];
-            //     let isGroupPersonValid = true;
-            //     let isGroupCompanyValid = true;
-
-            //     for (const input of inputsGroupPerson) {
-            //         if (!input.value) {
-            //             isGroupPersonValid = false;
-            //             break;
-            //         }
-            //     }
-
-            //     for (const input of inputsGroupCompany) {
-            //         if (!input.value) {
-            //             isGroupCompanyValid = false;
-            //             break;
-            //         }
-            //     }
-
-            //     if (isGroupPersonValid && isGroupCompanyValid) {
-            //         checkisGroupPersonAndCompany = false;
-            //         event.preventDefault();
-            //         dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัท');
-            //     } else if (!isGroupPersonValid && !isGroupCompanyValid) {
-            //         checkisGroupPersonAndCompany = false;
-            //         event.preventDefault();
-            //         dangerAlert('กรุณากรอกข้อมูล บุคคล หรือ บริษัทให้ครบถ้วน');
-
-            //     } else {
-            //         checkisGroupPersonAndCompany = true;
-            //         if (isGroupPersonValid) {
-            //             for (const input of inputsGroupCompany) {
-            //                 input.removeAttribute('required');
-            //             }
-            //         } else {
-            //             for (const input of inputsGroupPerson) {
-            //                 input.removeAttribute('required');
-            //             }
-            //         }
-            //     }
-
-            //     // เพิ่มเงื่อนไขเช็คว่าถ้ามีการกรอกชุดใดชุดนึงครบแล้ว แต่ก็ยังกรอกอีกช่องนึงให้แจ้งเตือน
-            //     if (isGroupPersonValid && !isGroupCompanyValid) {
-            //         if (inputsGroupCompany.some(input => input.value)) {
-            //             checkisGroupPersonAndCompany = false;
-            //             event.preventDefault();
-            //             dangerAlert('คุณกรอกข้อมูลในชุด บุคคล ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
-
-            //         }
-            //     } else if (!isGroupPersonValid && isGroupCompanyValid) {
-            //         if (inputsGroupPerson.some(input => input.value)) {
-            //             checkisGroupPersonAndCompany = false;
-            //             event.preventDefault();
-            //             dangerAlert('คุณกรอกข้อมูลในชุด บริษัท ครบแล้ว กรุณาเลือกเพียงชุดเดียวเท่านั้น');
-            //         }
-            //     }
-
-            //     // ตรวจสอบหากมีการกรอกข้อมูลแล้วลบออก แล้วกดบันทึก
-            //     formCreateCustomer.addEventListener('submit', function(event) {
-            //         if (isGroupPersonValid && isGroupCompanyValid) {
-            //             for (const input of inputsGroupPerson) {
-            //                 input.removeAttribute('required');
-            //             }
-            //             for (const input of inputsGroupCompany) {
-            //                 input.removeAttribute('required');
-            //             }
-            //         }
-            //     });
-            // }
-        </script>
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -1403,54 +917,6 @@
         border-radius: 20px;
     }
 </style>
-<!-- Modal -->
-<div class="modal fade" id="saveDataSuccess" tabindex="-1" role="dialog" aria-labelledby="saveDataSuccessTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content radius-20">
-            <div class="modal-body p-5">
-                <div class="loading-container">
-                    <div class="loading-spinner"></div>
-
-                    <div class="contrainerCheckmark d-none">
-                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                        </svg>
-                        <center>
-                            <h5 class="mt-5">เสร็จสิ้น</h5>
-                        </center>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $("#btnSubmitFormCreateCustomer").click(function() {
-        if ($("#formCreateCustomer")[0].checkValidity())
-            if (checkdemerit) {
-                // console.log('sucess');
-                $('#saveDataSuccess').modal('show');
-
-                setTimeout(function() {
-                    document.querySelector(".loading-spinner").style.display = "none";
-                    document.querySelector(".contrainerCheckmark").classList.remove('d-none');
-                }, 3000);
-
-                setTimeout(function() {
-                    formCreateCustomer.submit();
-                }, 4000);
-
-                // formCreateCustomer.submit();
-            } else {
-                // console.log('un_sucess');
-            }
-        else
-            //Validate Form
-            $("#formCreateCustomer")[0].reportValidity()
-    });
-</script>
 
 <style>
     .checkmark__circle {
@@ -1507,6 +973,413 @@
         }
     }
 </style>
+
+<!-- Modal -->
+<div class="modal fade" id="saveDataSuccess" tabindex="-1" role="dialog" aria-labelledby="saveDataSuccessTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content radius-20">
+            <div class="modal-body p-5">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+
+                    <div class="contrainerCheckmark d-none">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                        <center>
+                            <h5 class="mt-5">เสร็จสิ้น</h5>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- เช็คข้อมูลครบถ้วนหรือไม่ -->
+<script>
+    $("#btnSubmitFormCreateCustomer").click(function() {
+        if ($("#formCreateCustomer")[0].checkValidity())
+            if (checkdemerit) {
+                // console.log('sucess');
+                $('#saveDataSuccess').modal('show');
+
+                setTimeout(function() {
+                    document.querySelector(".loading-spinner").style.display = "none";
+                    document.querySelector(".contrainerCheckmark").classList.remove('d-none');
+                }, 3000);
+
+                setTimeout(function() {
+                    // formCreateCustomer.submit();
+                    document.querySelector('#span_on_submit').click();
+                }, 4000);
+
+                // formCreateCustomer.submit();
+            } else {
+                // console.log('un_sucess');
+            }
+        else
+            //Validate Form
+            $("#formCreateCustomer")[0].reportValidity()
+    });
+</script>
+
+<!-- ON SUBMIT -->
+<script>
+    function on_submit(){
+
+        let user_id = document.querySelector('#user_id');
+        let c_name = document.querySelector('#c_name');
+        let c_surname = document.querySelector('#c_surname');
+        let c_idno = document.querySelector('#c_idno');
+        
+        let c_company_name = document.querySelector('#c_company_name');
+        let commercial_registration = document.querySelector('#commercial_registration');
+
+        // textaarea
+        let demeritdetail = document.querySelector('#demeritdetail');
+        // date
+        let c_date = document.querySelector('#c_date');
+
+        // array checkbox
+        let demerit = document.getElementsByClassName('demerit');
+        let all_demerit = "" ;
+
+            for (let i = 0; i < demerit.length; i++) {
+                if (demerit[i].checked) {
+                    if (all_demerit === "") {
+                        all_demerit = demerit[i].value ;
+                    }else{
+                        all_demerit = all_demerit + "," +  demerit[i].value ;
+                    }
+                }
+            }
+
+        // add DATA to formData
+        if(document.querySelector('#c_name')){
+            formData.append('c_name', c_name.value);
+            formData.append('c_surname', c_surname.value);
+            formData.append('c_idno', c_idno.value);
+        }else if(document.querySelector('#c_company_name')){
+            formData.append('c_company_name', c_company_name.value);
+            formData.append('commercial_registration', commercial_registration.value);
+        }
+
+        formData.append('user_id', user_id.value);
+        formData.append('demeritdetail', demeritdetail.value);
+        formData.append('c_date', c_date.value);
+        formData.append('demerit', all_demerit);
+
+        // เพิ่มไฟล์รูปภาพ เข้า formData เพื่อเตรียมส่งข้อมูล
+        for (let file_1 of all_files['c_pic_id_card']) {
+            formData.append('c_pic_id_card[]', file_1);
+        }
+
+        for (let file_2 of all_files['c_pic_company_certificate']) {
+            formData.append('c_pic_company_certificate[]', file_2);
+        }
+
+        for (let file_3 of all_files['c_pic_indictment']) {
+            formData.append('c_pic_indictment[]', file_3);
+        }
+
+        for (let file_4 of all_files['c_pic_cap']) {
+            formData.append('c_pic_cap[]', file_4);
+        }
+
+        for (let file_5 of all_files['c_pic_other']) {
+            formData.append('c_pic_other[]', file_5);
+        }
+
+        // ส่งข้อมูล
+        const apiUrl = "{{ url('/') }}/api/customer_upload_api";
+
+        fetch(apiUrl, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+          // ทำอะไรกับข้อมูลที่ได้รับหลังจากอัพโหลดสำเร็จ
+          // console.log(data);
+          window.location.reload();
+        })
+        .catch(error => {
+          // แสดงข้อความผิดพลาดหรือทำอะไรกับข้อผิดพลาด
+          console.error('เกิดข้อผิดพลาด: ', error);
+        });
+
+    }
+
+</script>
+
+<script>
+
+    var formData = new FormData();
+
+    var all_files = [] ;
+        all_files['c_pic_id_card'] = [];
+        all_files['c_pic_company_certificate'] = [];
+        all_files['c_pic_indictment'] = [];
+        all_files['c_pic_cap'] = [];
+        all_files['c_pic_other'] = [];
+
+    function on_select_file_input(name_input) {
+        let input = document.querySelector('#' + name_input);
+        let files = Array.from(input.files);
+
+        let max_of_name_input = check_max_of_name_input(name_input);
+        let maxFileCount = max_of_name_input.split(',')[0];
+        let text_name_input = max_of_name_input.split(',')[1];
+
+        if (all_files[name_input].length >= maxFileCount) {
+            // console.log('เพิ่มรูป ผลรวมเดิม เกิน');
+            alert('คุณสามารถเลือก ' + text_name_input + ' ได้สูงสุด ' + maxFileCount + ' ไฟล์');
+        } else {
+            // console.log('เพิ่มรูป ผลรวมเดิม ผ่าน');
+
+            let sum_length_file = files.length + all_files[name_input].length;
+
+            if (sum_length_file > maxFileCount) {
+                alert('คุณสามารถเลือก ' + text_name_input + ' ได้สูงสุด ' + maxFileCount + ' ไฟล์');
+            } else {
+
+                // เพิ่มไฟล์ใหม่เข้าไปใน existingFiles
+                files.forEach((file) => {
+                    // เช็คไฟล์ซ้ำไม่ให้เพิ่ม
+                    let check_file_double = '';
+                    for (let iii = 0; iii < all_files[name_input].length; iii++) {
+                        if(file.name == all_files[name_input][iii].name){
+                            check_file_double = 'Yes' ;
+                        }
+                    }
+
+                    if(check_file_double !== 'Yes'){
+                        all_files[name_input].push(file);
+                    }else{
+                        // console.log('มีไฟล์ซ้ำ');
+                    }
+                });
+
+                // แสดงตัวอย่างรูปภาพ
+                preview_img(name_input);
+
+            }
+        }
+
+    }
+
+    function preview_img(name_input){
+
+        // console.log('preview_img file length >> ' + all_files[name_input].length);
+
+        let for_add_onclick = all_files[name_input].length + 1 ;
+
+        let count = 1 ;
+        // แสดงตัวอย่างรูปภาพ
+        all_files[name_input].forEach((file) => {
+
+            document.querySelector('#img_'+name_input+'_' + count).innerHTML = '';
+
+            let fileSize = formatFileSize(file.size);
+
+            let html_img = `
+                <img class="file-preview" src="`+URL.createObjectURL(file)+`" alt="ภาพตัวอย่าง" >
+                <div class="infoImg">
+                    <div class="row">
+                        <div class="col-10">
+                            <span class="imgSize">`+fileSize+`</span>
+                        </div>
+                        <div class="col-2">
+                            <i class="fa-solid fa-circle-xmark fa-xl" onclick="drop_img('`+name_input+`' , '`+file.name+`' ,'`+count+`');"></i>
+                        </div>
+                        <div class="col-12">
+                            <p class="m-0">
+                                <span class="m-0 imgName">`+file.name+`</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.querySelector('#img_'+name_input+'_' + count).insertAdjacentHTML('beforeend', html_img);
+            document.querySelector('#img_'+name_input+'_' + count).classList.remove('d-none');
+
+            document.querySelector('#img_'+name_input+'_'+count).setAttribute('onclick' , '');
+            count = count+1 ;
+        });
+
+        if(document.querySelector('#img_'+name_input+'_' + for_add_onclick) ){
+            document.querySelector('#img_'+name_input+'_' + for_add_onclick).classList.remove('d-none');
+
+            setTimeout(function() {
+                    document.querySelector('#img_'+name_input+'_'+ for_add_onclick).setAttribute('onclick' , 
+                "document.querySelector('#"+name_input+"').click();");
+            }, 1000);
+            
+        }
+
+        // console.log("-- สรุปไฟล์ "+name_input+" --");
+        // console.log( all_files[name_input] );
+        // console.log("------ END ------");
+
+    }
+
+    function drop_img(name_input , file_name , count){
+
+        // console.log('name_input >> ' + name_input);
+
+        // ลบองค์ประกอบที่มี name เท่ากับ file_name
+        all_files[name_input] = all_files[name_input].filter(file => file.name !== file_name);
+
+        if(all_files[name_input].length == 0){
+            all_files[name_input] = [] ;
+        }
+
+        let max_of_name_input = check_max_of_name_input(name_input);
+        let maxFileCount = max_of_name_input.split(',')[0];
+        let text_name_input = max_of_name_input.split(',')[1];
+        let icon = max_of_name_input.split(',')[2];
+
+        document.querySelector('#img_'+name_input+'_' + count).innerHTML = '';
+
+        let html_add_img = `
+            <div class="upload-text text-center">
+                <div class="w-100 d-flex justify-content-center mb-3" >
+                    <img src="{{asset('img/icon/`+icon+`')}}" alt="User" class="imgUpLoad" width="50">
+                </div>
+                <span>
+                    <i class="fa-sharp fa-solid fa-plus mr-2"></i> `+text_name_input+`
+                </span>
+            </div>
+        `;
+
+        let max = parseInt(maxFileCount)+ 1 ;
+
+        for (let i = 1; i < max; i++) {
+            // console.log('innerHTML >> ' + i);
+            document.querySelector('#img_'+name_input+'_' + i).innerHTML = '';
+            document.querySelector('#img_'+name_input+'_' + i).insertAdjacentHTML('beforeend', html_add_img);
+
+            document.querySelector('#img_'+name_input+'_' + i).classList.add('d-none');
+        }
+
+        preview_img(name_input);
+
+    }
+
+
+    function check_max_of_name_input(name_input){
+
+        switch(name_input) {
+            case "c_pic_id_card":
+                maxFileCount = 2 ;
+                text_name_input = "สำเนาบัตรประชาชน / PassPort" ;
+                icon = 'id-card.png' ;
+            break;
+            case "c_pic_company_certificate":
+                maxFileCount = 5 ;
+                text_name_input = "สำเนาหนังสือรับรองบริษัท" ;
+                icon = 'company.png' ;
+            break;
+            case "c_pic_indictment":
+                maxFileCount = 5 ;
+                text_name_input = "คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี" ;
+                icon = 'legal.png' ;
+            break;
+            case "c_pic_cap":
+                maxFileCount = 10 ;
+                text_name_input = "หลักฐานการพูด-คุย" ;
+                icon = 'chat.png' ;
+            break;
+            case "c_pic_other":
+                maxFileCount = 10 ;
+                text_name_input = "อื่นๆ" ;
+                icon = 'other.png' ;
+            break;
+        }
+
+        return maxFileCount + "," + text_name_input + "," + icon ;
+
+    }
+
+</script>
+
+<script>
+    function change_name_nav(type){
+
+        document.querySelector('#name_nav_c_pic_id_card').classList.add('d-none');
+        document.querySelector('#name_nav_c_pic_indictment').classList.add('d-none');
+        document.querySelector('#name_nav_c_pic_cap').classList.add('d-none');
+        document.querySelector('#name_nav_c_pic_other').classList.add('d-none');
+
+        if(document.querySelector('#name_nav_c_pic_company_certificate')){
+            document.querySelector('#name_nav_c_pic_company_certificate').classList.add('d-none');
+        }
+
+        document.querySelector('#title_nav_c_pic_id_card').classList.remove('d-none');
+        document.querySelector('#title_nav_c_pic_indictment').classList.remove('d-none');
+        document.querySelector('#title_nav_c_pic_cap').classList.remove('d-none');
+        document.querySelector('#title_nav_c_pic_other').classList.remove('d-none');
+
+        if(document.querySelector('#title_nav_c_pic_company_certificate')){
+            document.querySelector('#title_nav_c_pic_company_certificate').classList.remove('d-none');
+        }
+
+        // เปิด text ที่ถูกเลือก
+        document.querySelector('#name_nav_'+type).classList.remove('d-none');
+        document.querySelector('#title_nav_'+type).classList.add('d-none');
+
+    }
+</script>
+
+<script>
+    function formatFileSize(fileSize) {
+        if (fileSize === 0) return '0 Bytes';
+
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const k = 1024;
+        const i = Math.floor(Math.log(fileSize) / Math.log(k));
+
+        return parseFloat((fileSize / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function getFileExtension(fileName) {
+        return fileName.slice((fileName.lastIndexOf('.') - 1 >>> 0) + 2);
+    }
+</script>
+<script>
+    $(function() {
+        // Owl Carousel
+        var owl = $(".carouselSelectPhoto");
+        owl.owlCarousel({
+            margin: 10,
+            loop: false,
+            nav: true,
+            // autoWidth: true,
+            // items: 4,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                900: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                },
+                2000: {
+                    items: 4
+                }
+            }
+        });
+    });
+</script>
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const type_create = urlParams.get('type_create');
@@ -1522,7 +1395,7 @@
         document.getElementById("hrAddData").remove();
         const uploadBoxes = document.querySelectorAll('.carouselSelectPhoto .item');
 
-        uploadBoxes[1].remove();
+        // uploadBoxes[1].remove();
 
         let count = 1;
         uploadBoxes.forEach((box, index) => {
@@ -1625,7 +1498,7 @@
                 text_name_input = "หลักฐานการพูด-คุย" ;
             break;
             case "c_pic_other":
-                maxFileCount = 3 ;
+                maxFileCount = 10 ;
                 text_name_input = "อื่นๆ" ;
             break;
         }
@@ -1723,6 +1596,67 @@
 
         if(commercial_registration.length != 13){
             document.querySelector('#warning_commercial_registration').classList.remove('d-none');
+        }
+    }
+</script>
+
+<script>
+    const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]');
+    const formCreateCustomer = document.getElementById('formCreateCustomer');
+    const otherCheckboxes = document.querySelectorAll('input[id="demerit"][value="อื่นๆ"]');
+    var checkdemerit = false;
+    var checkisGroupPersonAndCompany = false;
+
+    otherCheckboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                // ตั้งค่า checked เป็น true สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                otherCheckboxes.forEach(function(otherCheckbox) {
+                    otherCheckbox.checked = true;
+                });
+            } else {
+                // ตั้งค่า checked เป็น false สำหรับ checkbox อื่นๆ ที่มี value เป็น "อื่นๆ"
+                otherCheckboxes.forEach(function(otherCheckbox) {
+                    otherCheckbox.checked = false;
+                });
+            }
+        });
+    });
+
+
+    function checkvaluedemerit() {
+        const demeritCheckboxes = document.querySelectorAll('input[id="demerit"]:checked');
+        if (demeritCheckboxes.length === 0) {
+            // console.log('โปรดเลือก');
+            checkdemerit = false;
+
+            event.preventDefault(); // ป้องกันการส่งฟอร์ม   
+            dangerAlert("กรุณาเลือกลักษณะการกระทำความผิดอย่างน้อย 1 อย่าง");
+        } else {
+
+            let cIdnoInput = document.getElementById('c_idno');
+            let commercial_registration = document.getElementById('commercial_registration');
+
+            // ใส่เลขบัตร ปชช
+            if(cIdnoInput){
+                cIdnoInput = cIdnoInput.value.replaceAll("-","");
+                if(cIdnoInput.length != 13){
+                    document.getElementById('c_idno').focus();
+                }else{
+                    checkdemerit = true;
+                }
+            }
+            // ใส่เลขประจำตัวผู้เสียภาษี
+            else if(commercial_registration){
+                if(commercial_registration.value.length != 13){
+                    document.getElementById('commercial_registration').focus();
+                }else{
+                    checkdemerit = true;
+                }
+            }
+
+
+            // console.log('ยืนยัน')
         }
     }
 </script>

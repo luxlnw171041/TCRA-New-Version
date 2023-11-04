@@ -108,14 +108,39 @@ class DriverController extends Controller
         
         $requestData = $request->all();
 
+        echo "<pre>";
+        print_r($requestData);
+        echo "<pre>";
+
+        if ($request->hasFile('d_pic_indictment')) {
+            
+            $d_pic_indictment = $request->file('d_pic_indictment');
+            $requestData['d_pic_indictment'] = '' ;
+
+            $count_d_pic_indictment = 'รอบแรก';
+
+            foreach ($d_pic_indictment as $file) {
+                if( $count_d_pic_indictment == 'รอบแรก' ){
+                    $requestData['d_pic_indictment'] = $file->store('uploads', 'public');
+                    $count_d_pic_indictment = 'รอบสอง';
+                }else{
+                    $requestData['d_pic_indictment'] = $requestData['d_pic_indictment'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
         if ($request->hasFile('d_pic_id_card')) {
             
             $d_pic_id_card = $request->file('d_pic_id_card');
             $requestData['d_pic_id_card'] = '' ;
 
+            $count_d_pic_id_card = 'รอบแรก';
+
             foreach ($d_pic_id_card as $file) {
-                if( empty($requestData['d_pic_id_card']) ){
+                if( $count_d_pic_id_card == 'รอบแรก' ){
                     $requestData['d_pic_id_card'] = $file->store('uploads', 'public');
+                    $count_d_pic_id_card = 'รอบสอง' ;
                 }else{
                     $requestData['d_pic_id_card'] = $requestData['d_pic_id_card'] . "," . $file->store('uploads', 'public');
                 }
@@ -123,20 +148,8 @@ class DriverController extends Controller
 
         }
 
-        if ($request->hasFile('d_pic_indictment')) {
-            
-            $d_pic_indictment = $request->file('d_pic_indictment');
-            $requestData['d_pic_indictment'] = '' ;
+        exit();
 
-            foreach ($d_pic_indictment as $file) {
-                if( empty($requestData['d_pic_indictment']) ){
-                    $requestData['d_pic_indictment'] = $file->store('uploads', 'public');
-                }else{
-                    $requestData['d_pic_indictment'] = $requestData['d_pic_indictment'] . "," . $file->store('uploads', 'public');
-                }
-            }
-
-        }
 
         if ($request->hasFile('d_pic_cap')) {
             
@@ -167,7 +180,7 @@ class DriverController extends Controller
             }
 
         }
-        
+
         $demerit = implode(',', array_unique($request->demerit));
 
         $requestData['demerit'] = $demerit;
@@ -239,5 +252,83 @@ class DriverController extends Controller
         Driver::destroy($id);
 
         return redirect('driver')->with('flash_message', 'Driver deleted!');
+    }
+
+    public function driver_upload_api(Request $request)
+    {
+        $requestData = $request->all();
+
+        if ($request->hasFile('d_pic_id_card')) {
+            
+            $d_pic_id_card = $request->file('d_pic_id_card');
+            $requestData['d_pic_id_card'] = '' ;
+
+            foreach ($d_pic_id_card as $file) {
+                if( empty($requestData['d_pic_id_card']) ){
+                    $requestData['d_pic_id_card'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['d_pic_id_card'] = $requestData['d_pic_id_card'] . "," . $file->store('uploads', 'public');
+                }
+            }
+        }
+
+        if ($request->hasFile('d_pic_indictment')) {
+            
+            $d_pic_indictment = $request->file('d_pic_indictment');
+            $requestData['d_pic_indictment'] = '' ;
+
+            foreach ($d_pic_indictment as $file) {
+                if( empty($requestData['d_pic_indictment']) ){
+                    $requestData['d_pic_indictment'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['d_pic_indictment'] = $requestData['d_pic_indictment'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
+        if ($request->hasFile('d_pic_cap')) {
+            
+            $d_pic_cap = $request->file('d_pic_cap');
+            $requestData['d_pic_cap'] = '' ;
+
+            foreach ($d_pic_cap as $file) {
+                if( empty($requestData['d_pic_cap']) ){
+                    $requestData['d_pic_cap'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['d_pic_cap'] = $requestData['d_pic_cap'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
+        if ($request->hasFile('d_pic_other')) {
+            
+            $d_pic_other = $request->file('d_pic_other');
+            $requestData['d_pic_other'] = '' ;
+
+            foreach ($d_pic_other as $file) {
+                if( empty($requestData['d_pic_other']) ){
+                    $requestData['d_pic_other'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['d_pic_other'] = $requestData['d_pic_other'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
+        if(!empty($requestData['d_idno'])){
+            $requestData['d_idno'] = str_replace("-","",$requestData['d_idno']);
+        }
+
+        // echo "<pre>";
+        // print_r($requestData);
+        // echo "<pre>";
+        // exit();
+        
+        Driver::create($requestData);
+
+        return "ok" ;
+
     }
 }

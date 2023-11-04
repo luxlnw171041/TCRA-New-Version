@@ -667,23 +667,15 @@
                                             $d_pic_id_card_ex = explode(',', $driver->d_pic_id_card);
                                             $count_d_pic_id_card = count($d_pic_id_card_ex);
                                         @endphp
-                                        <li class="nav-item" role="presentation">
+                                        <li class="nav-item" role="presentation" onclick="change_name_nav('d_pic_id_card');">
                                             <a class="nav-link {{ $check_active_menu_1 }}" data-bs-toggle="tab" href="#d_pic_id_card_{{ $driver->id }}" role="tab" aria-selected="true">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="tab-title">สำเนาบัตรประชาชน / PassPort ({{ $count_d_pic_id_card }})</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        @endif
-                                        @if( !empty($driver->d_pic_company_certificate) )
-                                        @php
-                                            $d_pic_company_certificate_ex = explode(',', $driver->d_pic_company_certificate);
-                                            $count_d_pic_company_certificate = count($d_pic_company_certificate_ex);
-                                        @endphp
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link {{ $check_active_menu_2 }}" data-bs-toggle="tab" href="#d_pic_company_certificate_{{ $driver->id }}" role="tab" aria-selected="false">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="tab-title">สำเนาหนังสือรับรองบริษัท ({{ $count_d_pic_company_certificate }})</div>
+                                                    <span id="title_nav_d_pic_id_card" class="d-none">
+                                                        สำเนาบัตร..({{ $count_d_pic_id_card }})
+                                                    </span>
+                                                    <div id="name_nav_d_pic_id_card" class="tab-title">
+                                                        สำเนาบัตรประชาชน / PassPort ({{ $count_d_pic_id_card }})
+                                                    </div>
                                                 </div>
                                             </a>
                                         </li>
@@ -693,10 +685,15 @@
                                             $d_pic_indictment_ex = explode(',', $driver->d_pic_indictment);
                                             $count_d_pic_indictment = count($d_pic_indictment_ex);
                                         @endphp
-                                        <li class="nav-item" role="presentation">
+                                        <li class="nav-item" role="presentation" onclick="change_name_nav('d_pic_indictment');">
                                             <a class="nav-link {{ $check_active_menu_3 }}" data-bs-toggle="tab" href="#d_pic_indictment_{{ $driver->id }}" role="tab" aria-selected="false">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="tab-title">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี ({{ $count_d_pic_indictment }})</div>
+                                                    <span id="title_nav_d_pic_indictment" class="">
+                                                        คำฟ้อง..({{ $count_d_pic_indictment }})
+                                                    </span>
+                                                    <div id="name_nav_d_pic_indictment" class="tab-title d-none">
+                                                        คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี ({{ $count_d_pic_indictment }})
+                                                    </div>
                                                 </div>
                                             </a>
                                         </li>
@@ -706,10 +703,15 @@
                                             $d_pic_cap_ex = explode(',', $driver->d_pic_cap);
                                             $count_d_pic_cap = count($d_pic_cap_ex);
                                         @endphp
-                                        <li class="nav-item" role="presentation">
+                                        <li class="nav-item" role="presentation" onclick="change_name_nav('d_pic_cap');">
                                             <a class="nav-link {{ $check_active_menu_4 }}" data-bs-toggle="tab" href="#d_pic_cap_{{ $driver->id }}" role="tab" aria-selected="false">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="tab-title">หลักฐานการพูด-คุย ({{ $count_d_pic_cap }})</div>
+                                                    <span id="title_nav_d_pic_cap" class="">
+                                                        หลักฐาน..({{ $count_d_pic_cap }})
+                                                    </span>
+                                                    <div id="name_nav_d_pic_cap" class="tab-title d-none">
+                                                        หลักฐานการพูด-คุย ({{ $count_d_pic_cap }})
+                                                    </div>
                                                 </div>
                                             </a>
                                         </li>
@@ -719,10 +721,15 @@
                                             $d_pic_other_ex = explode(',', $driver->d_pic_other);
                                             $count_d_pic_other = count($d_pic_other_ex);
                                         @endphp
-                                        <li class="nav-item" role="presentation">
+                                        <li class="nav-item" role="presentation" onclick="change_name_nav('d_pic_other');">
                                             <a class="nav-link {{ $check_active_menu_5 }}" data-bs-toggle="tab" href="#d_pic_other_{{ $driver->id }}" role="tab" aria-selected="false">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="tab-title">อื่นๆ ({{ $count_d_pic_other }})</div>
+                                                    <span id="title_nav_d_pic_other" class="">
+                                                        อื่นๆ ({{ $count_d_pic_other }})
+                                                    </span>
+                                                    <div id="name_nav_d_pic_other" class="tab-title d-none">
+                                                        อื่นๆ ({{ $count_d_pic_other }})
+                                                    </div>
                                                 </div>
                                             </a>
                                         </li>
@@ -738,22 +745,6 @@
                                                             <img class="file-preview" src="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort">
                                                             <div class="infoImg">
                                                                 <span class="m-0">สำเนาบัตรประชาชน / PassPort</span>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if( !empty($driver->d_pic_company_certificate) )
-                                        <div class="tab-pane fade {{ $check_active_show_data_2 }}" id="d_pic_company_certificate_{{ $driver->id }}" role="tabpanel">
-                                            <div class="owl-carousel owl-theme carouselSPhoto">
-                                                @foreach($d_pic_company_certificate_ex as $driver_2 => $value_2)
-                                                    <div class="item">
-                                                        <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
-                                                            <img class="file-preview" src="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
-                                                            <div class="infoImg">
-                                                                <span class="m-0">สำเนาหนังสือรับรองบริษัท</span>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -947,61 +938,51 @@
     feather.replace();
 </script>
 
+<script>
+    function change_name_nav(type){
 
-<!-- <div class="container">
-    <div class="row">
+        if(document.querySelector('#name_nav_d_pic_id_card')){
+            document.querySelector('#name_nav_d_pic_id_card').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_d_pic_indictment')){
+            document.querySelector('#name_nav_d_pic_indictment').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_d_pic_cap')){
+            document.querySelector('#name_nav_d_pic_cap').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_d_pic_other')){
+            document.querySelector('#name_nav_d_pic_other').classList.add('d-none');
+        }
+        if(document.querySelector('#name_nav_d_pic_company_certificate')){
+            document.querySelector('#name_nav_d_pic_company_certificate').classList.add('d-none');
+        }
+        // ----
 
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">Driver</div>
-                <div class="card-body">
-                    <a href="{{ url('/driver/create') }}" class="btn btn-success btn-sm" title="Add New Driver">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                    </a>
+        if(document.querySelector('#title_nav_d_pic_id_card')){
+            document.querySelector('#title_nav_d_pic_id_card').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_d_pic_indictment')){
+            document.querySelector('#title_nav_d_pic_indictment').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_d_pic_cap')){
+            document.querySelector('#title_nav_d_pic_cap').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_d_pic_other')){
+            document.querySelector('#title_nav_d_pic_other').classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_d_pic_company_certificate')){
+            document.querySelector('#title_nav_d_pic_company_certificate').classList.remove('d-none');
+        }
 
-                    <form method="GET" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                            <span class="input-group-append">
-                                <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
+        // เปิด text ที่ถูกเลือก
+        if(document.querySelector('#name_nav_'+type)){
+            document.querySelector('#name_nav_'+type).classList.remove('d-none');
+        }
+        if(document.querySelector('#title_nav_'+type)){
+            document.querySelector('#title_nav_'+type).classList.add('d-none');
+        }
 
-                    <br />
-                    <br />
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>User Id</th>
-                                    <th>Compname</th>
-                                    <th>Commercial Registration</th>
-                                    <th>D Name</th>
-                                    <th>D Surname</th>
-                                    <th>D Idno</th>
-                                    <th>Demerit</th>
-                                    <th>Demeritdetail</th>
-                                    <th>D Pic Id Card</th>
-                                    <th>D Pic Lease</th>
-                                    <th>D Pic Cap</th>
-                                    <th>D Pic Other</th>
-                                    <th>D Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
-                    </div>
+    }
+</script>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 @endsection

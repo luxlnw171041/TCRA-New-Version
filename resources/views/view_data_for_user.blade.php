@@ -157,7 +157,7 @@
 				                }
 				            </style>
 				            <div class="col-lg-12">
-				                <div class="card p-2" style="border:#f7606b solid 1px; ">
+				                <div class="card p-2" style="border:#f7606b solid 2px; ">
 				                    <div class="card-body">
 				                        <div class="row mb-3">
 				                            <div class="col-3" style="border-right:#857f80 solid 1px;">
@@ -250,9 +250,6 @@
 					                            </div>
 					                        </div>
 				                        </div>
-				                        <center>
-				                        	<hr style="width:95%;">
-				                        </center>
 
 				                        @php
 				                        	$check_active_menu_1 = '';
@@ -285,6 +282,11 @@
 				                        @endphp
 
 				                        @if(!empty($item->c_pic_id_card) || !empty($item->c_pic_company_certificate) || !empty($item->c_pic_indictment) || !empty($item->c_pic_cap) || !empty($item->c_pic_other))
+
+				                        <center>
+				                        	<hr style="width:95%;">
+				                        </center>
+				                        
 						                <div class="row">
 						                    <div class="col-12">
 						                    	<div class="">
@@ -505,7 +507,7 @@
 				                }
 				            </style>
 				            <div class="col-lg-12">
-				                <div class="card p-2" style="border:#4f82f0 solid 1px; ">
+				                <div class="card p-2" style="border:#4f82f0 solid 2px; ">
 				                    <div class="card-body">
 				                        <div class="row mb-3">
 				                            <div class="col-3" style="border-right:#857f80 solid 1px;">
@@ -579,9 +581,6 @@
 					                            </div>
 					                        </div>
 				                        </div>
-				                        <center>
-				                        	<hr style="width:95%;">
-				                        </center>
 
 				                        @php
 				                        	$check_active_menu_1 = '';
@@ -614,6 +613,11 @@
 				                        @endphp
 
 				                        @if(!empty($item->d_pic_id_card) || !empty($item->d_pic_company_certificate) || !empty($item->d_pic_indictment) || !empty($item->d_pic_cap) || !empty($item->d_pic_other))
+
+				                        <center>
+				                        	<hr style="width:95%;">
+				                        </center>
+
 						                <div class="row">
 						                    <div class="col-12">
 						                    	<div class="">

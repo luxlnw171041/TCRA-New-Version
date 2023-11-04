@@ -108,6 +108,12 @@ class CustomerController extends Controller
         $requestData = $request->all();
         // ddd($requestData);
 
+        // echo "<pre>";
+        // print_r($requestData);
+        // echo "<pre>";
+        // exit();
+
+
         if ($request->hasFile('c_pic_id_card')) {
             
             $c_pic_id_card = $request->file('c_pic_id_card');
@@ -120,7 +126,6 @@ class CustomerController extends Controller
                     $requestData['c_pic_id_card'] = $requestData['c_pic_id_card'] . "," . $file->store('uploads', 'public');
                 }
             }
-
         }
 
         if ($request->hasFile('c_pic_company_certificate')) {
@@ -274,5 +279,104 @@ class CustomerController extends Controller
         print_r($customer);
         echo "<pre>";
         exit();
+    }
+
+    public function customer_upload_api(Request $request)
+    {
+        $requestData = $request->all();
+
+        if ($request->hasFile('c_pic_id_card')) {
+            
+            $c_pic_id_card = $request->file('c_pic_id_card');
+            $requestData['c_pic_id_card'] = '' ;
+
+            foreach ($c_pic_id_card as $file) {
+                if( empty($requestData['c_pic_id_card']) ){
+                    $requestData['c_pic_id_card'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_id_card'] = $requestData['c_pic_id_card'] . "," . $file->store('uploads', 'public');
+                }
+            }
+        }
+
+        if ($request->hasFile('c_pic_company_certificate')) {
+            
+            $c_pic_company_certificate = $request->file('c_pic_company_certificate');
+            $requestData['c_pic_company_certificate'] = '' ;
+
+            foreach ($c_pic_company_certificate as $file) {
+                if( empty($requestData['c_pic_company_certificate']) ){
+                    $requestData['c_pic_company_certificate'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_company_certificate'] = $requestData['c_pic_company_certificate'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
+        if ($request->hasFile('c_pic_indictment')) {
+            
+            $c_pic_indictment = $request->file('c_pic_indictment');
+            $requestData['c_pic_indictment'] = '' ;
+
+            foreach ($c_pic_indictment as $file) {
+                if( empty($requestData['c_pic_indictment']) ){
+                    $requestData['c_pic_indictment'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_indictment'] = $requestData['c_pic_indictment'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
+        if ($request->hasFile('c_pic_cap')) {
+            
+            $c_pic_cap = $request->file('c_pic_cap');
+            $requestData['c_pic_cap'] = '' ;
+
+            foreach ($c_pic_cap as $file) {
+                if( empty($requestData['c_pic_cap']) ){
+                    $requestData['c_pic_cap'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_cap'] = $requestData['c_pic_cap'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
+        if ($request->hasFile('c_pic_other')) {
+            
+            $c_pic_other = $request->file('c_pic_other');
+            $requestData['c_pic_other'] = '' ;
+
+            foreach ($c_pic_other as $file) {
+                if( empty($requestData['c_pic_other']) ){
+                    $requestData['c_pic_other'] = $file->store('uploads', 'public');
+                }else{
+                    $requestData['c_pic_other'] = $requestData['c_pic_other'] . "," . $file->store('uploads', 'public');
+                }
+            }
+
+        }
+
+        if(!empty($requestData['c_name'])){
+            $requestData['rentname'] = "บุคคล" ;
+        }else{
+            $requestData['rentname'] = "บริษัท" ;
+        }
+
+        if(!empty($requestData['c_idno'])){
+            $requestData['c_idno'] = str_replace("-","",$requestData['c_idno']);
+        }
+
+        // echo "<pre>";
+        // print_r($requestData);
+        // echo "<pre>";
+        // exit();
+        
+        Customer::create($requestData);
+
+        return "ok" ;
+
     }
 }
