@@ -82,7 +82,9 @@
                         <ul>
                             <li>
                                 <a href="javascript:;" class="has-arrow">
-                                    <i class="fa-solid fa-ban"></i>ข้อมูล Blacklist
+                                    <i class="fa-solid fa-ban"></i> ข้อมูล Blacklist
+                                    <br>
+                                    ทั้งหมดที่สมาชิกลงข้อมูล
                                 </a>
                                 <ul class="mm-collapse">
                                     <li>
@@ -176,9 +178,9 @@
                             <i class="fa-solid fa-ban"></i>
                         </div>
                         <div class="menu-title">
-                            ข้อมูล Blacklist
+                            ประวัติการบันทึกข้อมูล
                             <br>
-                            ของฉัน
+                            Blacklist ของฉัน
                         </div>
                     </a>
                     <ul>
