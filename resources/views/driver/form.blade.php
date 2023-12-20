@@ -373,6 +373,10 @@
                             <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
                             หมายเลขบัตรประชาชนไม่ถูกต้อง
                         </span>
+                        <span id="success_d_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                            <i class="fa-solid fa-shield-check"></i>
+                            หมายเลขบัตรประชาชนครบถ้วนแล้ว
+                        </span>
                         <div class="input-group ">
                             <div class="inputGroup w-100">
                                 <input type="text" required="" autocomplete="off" name="d_idno" id="d_idno" value="{{ isset($customer->d_idno) ? $customer->d_idno : '' }}" onchange="check_amount_d_idno();">
@@ -1374,6 +1378,17 @@
             let inputValue = dIdnoInput.value;
             let formattedValue = format_dIDNO(inputValue);
             dIdnoInput.value = formattedValue;
+
+            let check_input_13 = dIdnoInput.value.replaceAll('-','');
+                // console.log(check_input_13.length);
+            if (check_input_13.length == 13) {
+                // console.log('ครบ 13');
+                document.querySelector('#success_d_idno').classList.remove('d-none');
+                document.querySelector('#warning_d_idno').classList.add('d-none');
+            }else{
+                // console.log('ยังไม่ครบ 13 หรือเกิน');
+                document.querySelector('#success_d_idno').classList.add('d-none');
+            }
         });
 
         dIdnoInput.addEventListener('keydown', function(event) {

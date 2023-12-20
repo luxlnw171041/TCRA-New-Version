@@ -26,6 +26,7 @@ Route::get('/search_member', 'UserController@search_member');
 Route::post('/submit_change_pass', 'UserController@submit_change_pass');
 Route::get('/update_pass', 'UserController@update_pass');
 Route::get('/delete_member/{user_id}', 'UserController@delete_member');
+Route::get('/delete_case/{id}/{type}', 'CustomerController@delete_case');
 
 Route::post('/customer_upload_api', 'CustomerController@customer_upload_api');
 Route::post('/driver_upload_api', 'DriverController@driver_upload_api');

@@ -526,7 +526,7 @@
     <div class="col-12 d-">
         <div class="card">
             <div class="card-body">
-                <form method="GET" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                <form method="GET" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-2 float-right" role="search">
                     <div class="align-items-center searchBar">
                         <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
                             <div class="w-100 d-flex justify-content-center">
@@ -553,12 +553,85 @@
                         </div>
                         <div class="col-sm-12 col-lg-3 col-xl-2 mx-2 divInputSearch">
                             <div class="input-group">
+                                <span id="warning_c_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                    <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                    หมายเลขบัตรประชาชนไม่ถูกต้อง
+                                </span>
+                                <span id="success_c_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 12px;">
+                                    <i class="fa-solid fa-shield-check"></i>
+                                    หมายเลขบัตรประชาชนครบถ้วนแล้ว
+                                </span>
                                 <div class="inputGroup w-100">
-                                    <input name="c_idno" id="c_idno" type="number" value="{{ request('c_idno') }}" autocomplete="off" oninput="clearInputName()">
+                                    <input name="c_idno" id="c_idno" type="text" value="{{ request('c_idno') }}" autocomplete="off" oninput="clearInputName()">
                                     <label for="c_id_no"><i class="fa-solid fa-id-card"></i>หมายเลขบัตรประชาชน</label>
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                            let cIdnoInput = document.getElementById('c_idno');
+
+                            if(cIdnoInput){
+                                cIdnoInput.addEventListener('input', function() {
+                                    document.querySelector('#warning_c_idno').classList.add('d-none');
+                                    let inputValue = cIdnoInput.value;
+                                    let formattedValue = formatCIDNO(inputValue);
+                                    cIdnoInput.value = formattedValue;
+
+                                    let check_input_13 = cIdnoInput.value.replaceAll('-','');
+                                        // console.log(check_input_13.length);
+                                    if (check_input_13.length == 13) {
+                                        // console.log('ครบ 13');
+                                        document.querySelector('#success_c_idno').classList.remove('d-none');
+                                        document.querySelector('#warning_c_idno').classList.add('d-none');
+                                    }else{
+                                        // console.log('ยังไม่ครบ 13 หรือเกิน');
+                                        document.querySelector('#warning_c_idno').classList.remove('d-none');
+                                        document.querySelector('#success_c_idno').classList.add('d-none');
+                                    }
+                                });
+
+                                cIdnoInput.addEventListener('keydown', function(event) {
+                                    if (event.key === 'Backspace') {
+                                        // ตรวจสอบถ้าผู้ใช้กดปุ่ม Backspace ให้ลบตัวอักษรหรือเครื่องหมาย "-"
+                                        let inputValue = cIdnoInput.value;
+                                        let caretPosition = cIdnoInput.selectionStart;
+
+                                        if (caretPosition > 0 && (inputValue[caretPosition - 1] === '-' || inputValue[caretPosition] === '-')) {
+                                            let newValue = inputValue.substring(0, caretPosition - 1) + inputValue.substring(caretPosition);
+                                            cIdnoInput.value = newValue;
+                                            cIdnoInput.setSelectionRange(caretPosition - 1, caretPosition - 1);
+                                        }
+                                    }
+                                });
+                            }
+
+                            function formatCIDNO(input) {
+                                let formattedValue = '';
+                                let characterCount = 0;
+
+                                for (let i = 0; i < input.length; i++) {
+                                    if (/[0-9]/.test(input[i])) {
+                                        characterCount++;
+                                        if (characterCount === 1) {
+                                            formattedValue += input[i] + '-';
+                                        } else if (characterCount === 5) {
+                                            formattedValue += input[i] + '-';
+                                        } else if (characterCount === 10) {
+                                            formattedValue += input[i] + '-';
+                                        } else if (characterCount === 12) {
+                                            formattedValue += input[i] + '-';
+                                        } else {
+                                            formattedValue += input[i];
+                                        }
+                                    }
+                                }
+
+                                return formattedValue;
+                            }
+                        });
+
+                        </script>
                         <div class="m-3 divInputSearch">
                             <p class="textOR"><span>หรือ</span></p>
                         </div>
@@ -585,11 +658,36 @@
                         <div class="col-sm-12 col-lg-3 col-xl-3 mx-2 divInputSearch d-none">
                             <div class="input-group">
                                 <div class="inputGroup w-100">
-                                    <input name="commercial_registration" id="commercial_registration" type="nunmber" value="{{ request('commercial_registration') }}" autocomplete="off" oninput="clearInputCompanyName()">
+                                    <span id="warning_commercial_registration" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                        <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                        เลขประจำตัวผู้เสียภาษีไม่ถูกต้อง
+                                    </span>
+                                    <span id="success_commercial_registration" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 12px;">
+                                        <i class="fa-solid fa-shield-check"></i>
+                                        เลขประจำตัวผู้เสียภาษีครบถ้วนแล้ว
+                                    </span>
+                                    <input name="commercial_registration" id="commercial_registration" type="text" value="{{ request('commercial_registration') }}" autocomplete="off" oninput="clearInputCompanyName()">
                                     <label for="commercial_registration"><i class="fa-solid fa-id-card"></i> เลขประจำตัวผู้เสียภาษี</label>
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            commercial_registration.addEventListener('input', function() {
+                                document.querySelector('#warning_commercial_registration').classList.add('d-none');
+
+                                let check_input_13 = commercial_registration.value.replaceAll('-','');
+                                    // console.log(check_input_13.length);
+                                if (check_input_13.length == 13) {
+                                    // console.log('ครบ 13');
+                                    document.querySelector('#success_commercial_registration').classList.remove('d-none');
+                                    document.querySelector('#warning_commercial_registration').classList.add('d-none');
+                                }else{
+                                    // console.log('ยังไม่ครบ 13 หรือเกิน');
+                                    document.querySelector('#warning_commercial_registration').classList.remove('d-none');
+                                    document.querySelector('#success_commercial_registration').classList.add('d-none');
+                                }
+                            });
+                        </script>
                         <div class="m-3 d-none divInputSearch">
                             <p class="textOR"><span>หรือ</span></p>
                         </div>
@@ -1170,6 +1268,8 @@ $class_show = '';
         document.getElementById("c_surname").value = "";
         document.getElementById('c_company_name').value = ''
         document.getElementById('commercial_registration').value = ''
+        document.querySelector('#success_commercial_registration').classList.add('d-none');
+        document.querySelector('#warning_commercial_registration').classList.add('d-none');
     }
 
     function clearInputCompanyName() {
@@ -1177,6 +1277,8 @@ $class_show = '';
         document.getElementById("c_name").value = "";
         document.getElementById("c_surname").value = "";
         document.getElementById('c_company_name').value = ''
+        document.querySelector('#success_c_idno').classList.add('d-none');
+        document.querySelector('#warning_c_idno').classList.add('d-none');
     }
 
     function clearInputCommercialRegistration() {

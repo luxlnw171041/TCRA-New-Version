@@ -401,7 +401,7 @@
     <div class="col-12 d-">
         <div class="card">
             <div class="card-body">
-                <form method="GET" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                <form method="GET" action="{{ url('/driver') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-2 float-right" role="search">
                     <div class="align-items-center searchBar">
                         <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
                             <div class="w-100 d-flex justify-content-center">
@@ -414,12 +414,85 @@
                         </div>
                         <div class="col-sm-12 col-lg-3 col-xl-2 mx-2 divInputSearch">
                             <div class="input-group">
+                                <span id="warning_d_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                    <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                    หมายเลขบัตรประชาชนไม่ถูกต้อง
+                                </span>
+                                <span id="success_d_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 12px;">
+                                    <i class="fa-solid fa-shield-check"></i>
+                                    หมายเลขบัตรประชาชนครบถ้วนแล้ว
+                                </span>
                                 <div class="inputGroup w-100">
-                                    <input name="d_idno" id="d_idno" type="number" value="{{ request('d_idno') }}" autocomplete="off" oninput="clearInputName()">
+                                    <input name="d_idno" id="d_idno" type="text" value="{{ request('d_idno') }}" autocomplete="off" oninput="clearInputName()">
                                     <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน</label>
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                            let cIdnoInput = document.getElementById('d_idno');
+
+                            if(cIdnoInput){
+                                cIdnoInput.addEventListener('input', function() {
+                                    document.querySelector('#warning_d_idno').classList.add('d-none');
+                                    let inputValue = cIdnoInput.value;
+                                    let formattedValue = formatCIDNO(inputValue);
+                                    cIdnoInput.value = formattedValue;
+
+                                    let check_input_13 = cIdnoInput.value.replaceAll('-','');
+                                        // console.log(check_input_13.length);
+                                    if (check_input_13.length == 13) {
+                                        // console.log('ครบ 13');
+                                        document.querySelector('#success_d_idno').classList.remove('d-none');
+                                        document.querySelector('#warning_d_idno').classList.add('d-none');
+                                    }else{
+                                        // console.log('ยังไม่ครบ 13 หรือเกิน');
+                                        document.querySelector('#warning_d_idno').classList.remove('d-none');
+                                        document.querySelector('#success_d_idno').classList.add('d-none');
+                                    }
+                                });
+
+                                cIdnoInput.addEventListener('keydown', function(event) {
+                                    if (event.key === 'Backspace') {
+                                        // ตรวจสอบถ้าผู้ใช้กดปุ่ม Backspace ให้ลบตัวอักษรหรือเครื่องหมาย "-"
+                                        let inputValue = cIdnoInput.value;
+                                        let caretPosition = cIdnoInput.selectionStart;
+
+                                        if (caretPosition > 0 && (inputValue[caretPosition - 1] === '-' || inputValue[caretPosition] === '-')) {
+                                            let newValue = inputValue.substring(0, caretPosition - 1) + inputValue.substring(caretPosition);
+                                            cIdnoInput.value = newValue;
+                                            cIdnoInput.setSelectionRange(caretPosition - 1, caretPosition - 1);
+                                        }
+                                    }
+                                });
+                            }
+
+                            function formatCIDNO(input) {
+                                let formattedValue = '';
+                                let characterCount = 0;
+
+                                for (let i = 0; i < input.length; i++) {
+                                    if (/[0-9]/.test(input[i])) {
+                                        characterCount++;
+                                        if (characterCount === 1) {
+                                            formattedValue += input[i] + '-';
+                                        } else if (characterCount === 5) {
+                                            formattedValue += input[i] + '-';
+                                        } else if (characterCount === 10) {
+                                            formattedValue += input[i] + '-';
+                                        } else if (characterCount === 12) {
+                                            formattedValue += input[i] + '-';
+                                        } else {
+                                            formattedValue += input[i];
+                                        }
+                                    }
+                                }
+
+                                return formattedValue;
+                            }
+                        });
+
+                        </script>
                         <div class="m-3">
                             <p class="textOR"><span>หรือ</span></p>
                         </div>

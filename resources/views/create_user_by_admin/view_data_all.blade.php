@@ -138,7 +138,7 @@
 		@if($type == "customers")
 
 			@foreach($data as $item)
-				<div class="container-fluid mt-2 mb-2">
+				<div id="div_id_{{ $item->id }}" class="container-fluid mt-2 mb-2">
 				    <div class="main-body">
 				        <div class="row">
 				            <style>
@@ -506,7 +506,7 @@
 			                                        {{ $item->user->no_member }}
 			                                    </span>
 			                                </div>
-			                                <div class="col-4 d-flex justify-content-between align-items-center flex-wrap">
+			                                <div class="col-3 d-flex justify-content-between align-items-center flex-wrap">
 			                                	<span class="text-secondary">
 			                                        <b class="text-danger" style="font-size:18px;">
 			                                        	หมวดหมู่สมาชิก / สถานะ
@@ -543,6 +543,12 @@
 		                                            @endif
 			                                    </span>
 			                                </div>
+			                                <div class="col-1 d-flex justify-content-between align-items-center flex-wrap">
+			                                	<button type="button" class="btn btn-danger float-end"
+			                                	onclick='delete_case("{{ $type }}" , "{{ $item->id }}");'>
+			                                		<i class="fa-solid fa-trash-xmark"></i>
+			                                	</button>
+			                                </div>
 			                            </div>
 
 				                    </div>
@@ -556,7 +562,7 @@
 		<!-- Drivers -->
 		@elseif($type == "drivers")
 			@foreach($data as $item)
-				<div class="container-fluid mt-2 mb-2">
+				<div id="div_id_{{ $item->id }}" class="container-fluid mt-2 mb-2">
 				    <div class="main-body">
 				        <div class="row">
 				            <style>
@@ -905,7 +911,7 @@
 			                                        {{ $item->user->no_member }}
 			                                    </span>
 			                                </div>
-			                                <div class="col-4 d-flex justify-content-between align-items-center flex-wrap">
+			                                <div class="col-3 d-flex justify-content-between align-items-center flex-wrap">
 			                                	<span class="text-secondary">
 			                                        <b class="text-danger" style="font-size:18px;">
 			                                        	หมวดหมู่สมาชิก / สถานะ
@@ -941,6 +947,12 @@
 		                                                </span>
 		                                            @endif
 			                                    </span>
+			                                </div>
+			                                <div class="col-1 d-flex justify-content-between align-items-center flex-wrap">
+			                                	<button type="button" class="btn btn-danger float-end"
+			                                	onclick='delete_case("{{ $type }}" , "{{ $item->id }}");'>
+			                                		<i class="fa-solid fa-trash-xmark"></i>
+			                                	</button>
 			                                </div>
 			                            </div>
 
@@ -1008,5 +1020,24 @@
     });
 
     feather.replace();
+</script>
+
+<script>
+	
+	function delete_case(type , id){
+		// console.log("ลบ ID : " + id + "ของ > " + type);
+
+        fetch("{{ url('/') }}/api/delete_case/" + id + "/" + type)
+            .then(response => response.text())
+            .then(result => {
+                // console.log(result);
+
+            	if(result == "success"){
+                	document.querySelector('#div_id_'+id).remove();
+                }
+        });
+
+	}
+
 </script>
 @endsection

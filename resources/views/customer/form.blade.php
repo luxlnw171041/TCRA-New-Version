@@ -384,6 +384,10 @@
                                     <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
                                     หมายเลขบัตรประชาชนไม่ถูกต้อง
                                 </span>
+                                <span id="success_c_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                    <i class="fa-solid fa-shield-check"></i>
+                                    หมายเลขบัตรประชาชนครบถ้วนแล้ว
+                                </span>
                                 <div class="input-group  addDataperson">
                                     <div class="inputGroup w-100">
                                         <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}" onchange="check_amount_c_idno();">
@@ -414,6 +418,10 @@
                                 <span id="warning_commercial_registration" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
                                     <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
                                     เลขประจำตัวผู้เสียภาษีไม่ถูกต้อง
+                                </span>
+                                <span id="success_commercial_registration" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                    <i class="fa-solid fa-shield-check"></i>
+                                    เลขประจำตัวผู้เสียภาษีครบถ้วนแล้ว
                                 </span>
                                 <div class="input-group ">
                                     <div class="inputGroup w-100">
@@ -1525,6 +1533,17 @@
                 let inputValue = cIdnoInput.value;
                 let formattedValue = formatCIDNO(inputValue);
                 cIdnoInput.value = formattedValue;
+
+                let check_input_13 = cIdnoInput.value.replaceAll('-','');
+                    // console.log(check_input_13.length);
+                if (check_input_13.length == 13) {
+                    // console.log('ครบ 13');
+                    document.querySelector('#success_c_idno').classList.remove('d-none');
+                    document.querySelector('#warning_c_idno').classList.add('d-none');
+                }else{
+                    // console.log('ยังไม่ครบ 13 หรือเกิน');
+                    document.querySelector('#success_c_idno').classList.add('d-none');
+                }
             });
 
             cIdnoInput.addEventListener('keydown', function(event) {
@@ -1586,6 +1605,17 @@
         if(commercial_registration){
             commercial_registration.addEventListener('input', function() {
                 document.querySelector('#warning_commercial_registration').classList.add('d-none');
+
+                let check_input_13 = commercial_registration.value.replaceAll('-','');
+                    // console.log(check_input_13.length);
+                if (check_input_13.length == 13) {
+                    // console.log('ครบ 13');
+                    document.querySelector('#success_commercial_registration').classList.remove('d-none');
+                    document.querySelector('#warning_commercial_registration').classList.add('d-none');
+                }else{
+                    // console.log('ยังไม่ครบ 13 หรือเกิน');
+                    document.querySelector('#success_commercial_registration').classList.add('d-none');
+                }
             });
         }
     });
@@ -1596,6 +1626,10 @@
 
         if(commercial_registration.length != 13){
             document.querySelector('#warning_commercial_registration').classList.remove('d-none');
+            document.querySelector('#success_commercial_registration').classList.add('d-none');
+        }else{
+            document.querySelector('#success_commercial_registration').classList.remove('d-none');
+            document.querySelector('#warning_commercial_registration').classList.add('d-none');
         }
     }
 </script>

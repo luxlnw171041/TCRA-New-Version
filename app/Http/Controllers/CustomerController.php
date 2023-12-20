@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Customer;
+use App\Models\Driver;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -378,5 +379,22 @@ class CustomerController extends Controller
 
         return "ok" ;
 
+    }
+
+    function delete_case($id , $type)
+    {
+        if ($type == "customers") {
+            $customer = Customer::where('id', $id)->first();
+            if ($customer) {
+                $customer->delete();
+            }
+        } else {
+            $driver = Driver::where('id', $id)->first();
+            if ($driver) {
+                $driver->delete();
+            }
+        }
+
+        return "success" ;
     }
 }

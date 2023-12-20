@@ -55,12 +55,8 @@
         <div class="sidebar-wrapper" data-simplebar="true">
             <div class="has-arrow">
                 <div class="sidebar-header">
-                    <a href="{{url('/home')}}">
-                        <img src="{{asset('img/logo/tcra.png')}}" style="width:50px;" alt="logo icon">
-                    </a>
-                    <a href="{{url('/home')}}">
-                        <h6 class="logo-text">สมาคม<br>รถเช่าไทย</h6>
-                    </a>
+                    <img src="{{asset('img/logo/tcra.png')}}" style="width:50px;" alt="logo icon">
+                    <h6 class="logo-text">สมาคม<br>รถเช่าไทย</h6>
                     <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
                     </div>
                 </div>
@@ -213,22 +209,15 @@
                 <nav class="navbar navbar-expand">
                     <div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
                     </div>
-                    <!-- <div class="top-menu-left d-none d-lg-block">
+                    <div class="top-menu-left d-none d-lg-block">
                         <ul class="nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="app-emailbox.html"><i class='bx bx-envelope'></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="app-chat-box.html"><i class='bx bx-message'></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="app-fullcalender.html"><i class='bx bx-calendar'></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="app-to-do.html"><i class='bx bx-check-square'></i></a>
+                                <a class="nav-link" href="{{url('/home')}}">
+                                    <i class="fa-solid fa-house text-white"></i>
+                                </a>
                             </li>
                         </ul>
-                    </div> -->
+                    </div>
                     <div class="search-bar flex-grow-1">
                         <div class="position-relative search-bar-box">
                             <input type="text" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
