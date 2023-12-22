@@ -100,6 +100,27 @@
     }
 @endphp
 
+<!-- Button trigger modal -->
+<button id="btn_delete_case" type="button" class="btn d-none" data-toggle="modal" data-target="#Modal_delete_case">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal_delete_case" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+	      	<div class="modal-body text-center">
+	      		<img src="{{ url('/img/icon/ask.png') }}" class="mt-3"  width="150" style="">
+	      		<h5 class="modal-title mt-3" id="exampleModalLabel">ยืนยันที่จะลบข้อมูลใช่หรือไม่</h5>
+	      		<div class="content_delete_case"></div>
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button id="btn_cf_delete_case" type="button" class="btn btn-primary" data-dismiss="modal">ยืนยัน</button>
+	        	<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+	      	</div>
+    	</div>
+  	</div>
+</div>
+
 <div class="card border-top border-0 border-4 {{ $class_border }}">
 	<div class="card-body p-3 mt-3" style="position:relative;">
 		<div class="row">
@@ -126,7 +147,7 @@
 				  	</a>
 				</div>
 				<span class="float-end mt-3" style="color:gray;font-size: 20px;">
-                	ทั้งหมด : {{ count($data) }} เคส
+                	ทั้งหมด : <span id="count_caes">{{ count($data) }}</span> เคส
                 </span>
 			</div>
 		</div>
@@ -1026,17 +1047,23 @@
 	
 	function delete_case(type , id){
 		// console.log("ลบ ID : " + id + "ของ > " + type);
+		document.querySelector('#btn_cf_delete_case').setAttribute('onclick' , 'cf_delete_case("'+type+'" , "'+id+'")')
+		document.querySelector('#btn_delete_case').click();
+	}
 
-        fetch("{{ url('/') }}/api/delete_case/" + id + "/" + type)
+	function cf_delete_case(type , id){
+		fetch("{{ url('/') }}/api/delete_case/" + id + "/" + type)
             .then(response => response.text())
             .then(result => {
                 // console.log(result);
 
             	if(result == "success"){
+            		let count_caes = document.querySelector('#count_caes').innerHTML ;
+            		let	new_count_caes = parseInt(count_caes) - 1 ;
+            		document.querySelector('#count_caes').innerHTML = new_count_caes ;
                 	document.querySelector('#div_id_'+id).remove();
                 }
         });
-
 	}
 
 </script>
