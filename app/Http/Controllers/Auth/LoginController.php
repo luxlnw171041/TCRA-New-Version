@@ -75,11 +75,17 @@ class LoginController extends Controller
             $full_url = $backurl;
 
             $full_url_ex = explode("error=",$full_url);
+            $full_url_ex_2 = explode("?login=",$full_url);
 
             if(!empty($full_url_ex[1])){
                 $backurl_new = $backurl ;
             }else{
-                $backurl_new = $backurl . "&error=Yes" ;
+
+                if( !empty($full_url_ex_2[1]) ){
+                    $backurl_new = $backurl . "&error=Yes" ;
+                }else{
+                    $backurl_new = $backurl . "?login=drivers&error=Yes" ;
+                }
             }
             return redirect($backurl_new);
         }
