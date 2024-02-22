@@ -44,7 +44,8 @@ class CustomerController extends Controller
         }
 
         if (!empty($requestData['c_idno'])) {
-            $c_id_no = $requestData['c_idno'];
+            // $c_id_no = $requestData['c_idno'];
+            $c_id_no = str_replace("-","",$requestData['c_idno']);
             $customers = Customer::where('c_idno', $c_id_no)->first();
 
             // ddd($customers);
