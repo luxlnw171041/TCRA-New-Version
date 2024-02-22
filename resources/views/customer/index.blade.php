@@ -1,8 +1,6 @@
 @extends('layouts.theme')
 
 @section('content')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 <style>
     .inputGroup {
         font-family: 'Segoe UI', sans-serif;
@@ -519,7 +517,41 @@
         opacity: 1;
         -webkit-transform: none;
         transform: none;
-    }
+    }.gslide-media.gslide-image img{
+		min-height: 100vh;
+		width: auto;
+		object-fit: contain;
+	}ul.img-glightbox {
+	display: flex;
+	flex-wrap: wrap;
+}
+.goverlay {
+	background-color: rgba(0,0,0,0.3);
+}
+.glightbox {
+	padding-left: 0;
+	margin-top:0;
+	margin-bottom: 0;
+	padding: 0 5px;
+	flex-basis: calc(100% / 5 - 10px);
+}
+.gcounter {
+	padding: .5rem;
+}
+.gcounter::after {
+	content: attr(data-indicator);
+	position: absolute;
+	top: .5rem;
+	left: .5rem;
+	color: white;
+	padding: 10px;
+	z-index: 10000000;
+	background-color: rgba(0,0,0,0.3);
+	border-radius: 50px;
+}
+.glightbox-closing .gcounter {
+	opacity:0;
+}
 </style>
 
 <div class="container">
@@ -1087,7 +1119,7 @@
                                         <div class="owl-carousel owl-theme carouselSPhoto">
                                             @foreach($c_pic_id_card_ex as $customers_1 => $value_1)
                                                 <div class="item">
-                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort" data-gallery="img_id_card-gallery_{{ $customers->id }}">
                                                         <img class="file-preview" src="{{ url('storage')}}/{{ $value_1 }}" alt="สำเนาบัตรประชาชน / PassPort">
                                                         <div class="infoImg">
                                                             <span class="m-0">สำเนาบัตรประชาชน / PassPort</span>
@@ -1103,7 +1135,7 @@
                                         <div class="owl-carousel owl-theme carouselSPhoto">
                                             @foreach($c_pic_company_certificate_ex as $customers_2 => $value_2)
                                                 <div class="item">
-                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท" data-gallery="img_company_certificate_-gallery_{{ $customers->id }}">
                                                         <img class="file-preview" src="{{ url('storage')}}/{{ $value_2 }}" alt="สำเนาหนังสือรับรองบริษัท">
                                                         <div class="infoImg">
                                                             <span class="m-0">สำเนาหนังสือรับรองบริษัท</span>
@@ -1119,7 +1151,7 @@
                                         <div class="owl-carousel owl-theme carouselSPhoto">
                                             @foreach($c_pic_indictment_ex as $customers_3 => $value_3)
                                                 <div class="item">
-                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_3 }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_3 }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี" data-gallery="img_indictment_gallery_{{ $customers->id }}">
                                                         <img class="file-preview" src="{{ url('storage')}}/{{ $value_3 }}" alt="คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี">
                                                         <div class="infoImg">
                                                             <span class="m-0">คำฟ้องหรือใบร้องทุกข์แจ้งความดำเนินดคี</span>
@@ -1135,7 +1167,7 @@
                                         <div class="owl-carousel owl-theme carouselSPhoto">
                                             @foreach($c_pic_cap_ex as $customers_4 => $value_4)
                                             <div class="item">
-                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_4 }}" alt="ภาพหลักฐานการพูด-คุย">
+                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_4 }}" alt="ภาพหลักฐานการพูด-คุย" data-gallery="img_cap-gallery_{{ $customers->id }}">
                                                     <img class="file-preview" src="{{ url('storage')}}/{{ $value_4 }}" alt="ภาพหลักฐานการพูด-คุย">
                                                     <div class="infoImg">
                                                         <span class="m-0">หลักฐานการพูด-คุย</span>
@@ -1168,7 +1200,7 @@
                                             @if($check_uploads == "Yes")
                                                 @foreach($c_pic_other_ex as $customers_5 => $value_5)
                                                 <div class="item">
-                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_5 }}" alt="ภาพอื่นๆ">
+                                                    <a class="glightbox show-img-box" data-type="image" href="{{ url('storage')}}/{{ $value_5 }}" alt="ภาพอื่นๆ" data-gallery="img_other_gallery_{{ $customers->id }}">
                                                         <img class="file-preview" src="{{ url('storage')}}/{{ $value_5 }}" alt="ภาพอื่นๆ">
                                                         <div class="infoImg">
                                                             <span class="m-0">อื่นๆ</span>
@@ -1178,7 +1210,7 @@
                                                 @endforeach
                                             @else
                                             <div class="item">
-                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
+                                                <a class="glightbox show-img-box" data-type="image" href="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ" data-gallery="img_other_gallery_{{ $customers->id }}">
                                                     <img class="file-preview" src="{{ url('/img/picture_old')}}/{{ $customers->c_pic_other }}" alt="ภาพอื่นๆ">
                                                     <div class="infoImg">
                                                         <span class="m-0">อื่นๆ</span>
@@ -1235,6 +1267,23 @@ $class_show = '';
     <h5 class="mt-3">กรุณาปรับการค้นหาและตรวจสอบอีกครั้ง</h5>
 </div>
 @endif
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css'><link rel="stylesheet" href="./style.css">
+<script src='https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js'></script><script  src="./script.js"></script>
+
+<script>const nav = document.createElement('div');
+nav.classList.add('gcounter');
+nav.dataset.indicator = '/';
+
+const slides = GLightbox({
+	onOpen: () => slides.modal.appendChild(nav),
+	afterSlideChange: function(prev, next) {
+		nav.dataset.indicator = `${next.index + 1} / ${slides.elements.length}`;
+		nav.classList.add('gcounter-added');
+	}
+});
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -1332,24 +1381,6 @@ $class_show = '';
     });
 </script>
 
-<script>
-    /* glightbox
-     */
-    var glightbox = GLightbox({
-        loop: true,
-        selector: ".glightbox",
-        openEffect: "zoom",
-        closeEffect: "fade",
-        startAt: 0,
-        closeOnOutsideClick: false,
-        zoomable: true,
-        height: "auto",
-        width: "100vw",
-        height: "100vh"
-    });
-
-    feather.replace();
-</script>
 
 <script>
     function change_name_nav(type){
