@@ -43,7 +43,8 @@ class DriverController extends Controller
             ]);
         }
         if (!empty($requestData['d_idno'])) {
-            $d_id_no = $requestData['d_idno'];
+            // $d_id_no = $requestData['d_idno'];
+            $d_id_no = str_replace("-","",$requestData['d_idno']);
             $driver = Driver::where('d_idno', $d_id_no)->first();
 
             return view('driver.index', compact('driver'));
