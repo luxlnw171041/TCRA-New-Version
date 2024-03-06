@@ -211,6 +211,10 @@
 						                                    {{ $item->c_name }} {{ $item->c_surname }}
 						                                    @elseif(!empty($item->c_company_name) )
 						                                    {{$item->c_company_name}}
+						                                    @elseif(!empty($item->c_name_other_nationalitie) )
+						                                    {{$item->c_name_other_nationalitie}}
+						                                    <br>
+						                                    <span class="text-info" style="font-size:14px;">(ต่างชาติ)</span>
 						                                    @endif
 						                                </h4>
 
@@ -218,6 +222,11 @@
 							                                <p class="text-secondary mb-1">
 							                                    {{$item->commercial_registration}}
 							                                </p>
+						                                @endif
+						                                @if(!empty($item->c_idno_other_nationalitie))
+						                                <p class="text-secondary mb-1">
+						                                    {{$item->c_idno_other_nationalitie}}
+						                                </p>
 						                                @endif
 						                                @if(!empty($item->c_idno))
 						                                    <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($item->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>

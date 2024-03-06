@@ -65,6 +65,7 @@ class CustomerController extends Controller
 
                 return view('customer.index', compact('customers'));
         }
+
         if (!empty($requestData['commercial_registration'])) {
             $commercial_registration = $requestData['commercial_registration'];
 
@@ -72,7 +73,9 @@ class CustomerController extends Controller
             ->first();
 
             return view('customer.index', compact('customers'));
-        } if (!empty($requestData['c_company_name'])) {
+        }
+
+        if (!empty($requestData['c_company_name'])) {
             $c_company_name = $requestData['c_company_name'];
 
             $customers = Customer::where('c_company_name', $c_company_name)
@@ -80,6 +83,25 @@ class CustomerController extends Controller
 
             return view('customer.index', compact('customers'));
         }
+
+        if (!empty($requestData['c_idno_other_nationalitie'])) {
+            $c_idno_other_nationalitie = $requestData['c_idno_other_nationalitie'];
+
+            $customers = Customer::where('c_idno_other_nationalitie', $c_idno_other_nationalitie)
+            ->first();
+
+            return view('customer.index', compact('customers'));
+        }
+
+        if (!empty($requestData['c_name_other_nationalitie'])) {
+            $c_name_other_nationalitie = $requestData['c_name_other_nationalitie'];
+
+            $customers = Customer::where('c_name_other_nationalitie', $c_name_other_nationalitie)
+            ->first();
+
+            return view('customer.index', compact('customers'));
+        }
+
         else{
 
             return view('customer.index');
@@ -363,7 +385,11 @@ class CustomerController extends Controller
 
         if(!empty($requestData['c_name'])){
             $requestData['rentname'] = "บุคคล" ;
-        }else{
+        }
+        else if(!empty($requestData['c_name_other_nationalitie'])){
+            $requestData['rentname'] = "บุคคล" ;
+        }
+        else{
             $requestData['rentname'] = "บริษัท" ;
         }
 

@@ -25,7 +25,7 @@ class Customer extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'rentname', 'compname', 'c_name', 'c_surname', 'c_idno', 'demerit', 'demeritdetail', 'c_pic_id_card', 'c_pic_company_certificate', 'c_pic_indictment', 'c_pic_cap', 'c_pic_other', 'c_date','c_company_name','commercial_registration'];
+    protected $fillable = ['user_id', 'rentname', 'compname', 'c_name', 'c_surname', 'c_idno', 'demerit', 'demeritdetail', 'c_pic_id_card', 'c_pic_company_certificate', 'c_pic_indictment', 'c_pic_cap', 'c_pic_other', 'c_date','c_company_name','commercial_registration','c_name_other_nationalitie','c_idno_other_nationalitie'];
 
     public function user()
     {

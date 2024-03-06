@@ -361,7 +361,71 @@
                             </div>
                             <h5 class="mb-0 headerCustomer">เพิ่มข้อมูลมิจฉาชีพ(เช่ารถ) ในนามบุคคล</h5>
                         </div>
-                        <div class="row g-3 mt-3">
+                        <div class="col-12">
+                            <button id="btn_input_data_thai" type="button" class="btn btn-sm btn-info" style="width:120px;" onclick="change_input_data('thai');">
+                                <img src="{{asset('img/icon/thailand.png')}}" style="width:20px;"> ไทย
+                            </button>
+                            <button id="btn_input_data_other" type="button" class="btn btn-sm btn-secondary" style="width:120px;" onclick="change_input_data('other');">
+                                <img src="{{asset('img/icon/flags.png')}}" style="width:20px;"> ต่างชาติ
+                            </button>
+                        </div>
+
+                        <script>
+                            var check_nationalitie = 'thai' ;
+                            function change_input_data(type){
+                                if(type == 'thai'){
+
+                                    check_nationalitie = 'thai' ;
+
+                                    document.querySelector('#btn_input_data_thai').classList.remove('btn-secondary');
+                                    document.querySelector('#btn_input_data_thai').classList.add('btn-info');
+
+                                    document.querySelector('#btn_input_data_other').classList.remove('btn-info');
+                                    document.querySelector('#btn_input_data_other').classList.add('btn-secondary');
+
+                                    document.querySelector('#input_data_thailand').classList.remove('d-none');
+                                    document.querySelector('#input_data_other_nationalitie').classList.add('d-none');
+
+                                    document.querySelector('#c_name').required = true;
+                                    document.querySelector('#c_surname').required = true;
+                                    document.querySelector('#c_idno').required = true;
+
+                                    document.querySelector('#c_name_other_nationalitie').required = false;
+                                    document.querySelector('#c_idno_other_nationalitie').required = false;
+
+                                    document.querySelector('#c_name_other_nationalitie').value = '';
+                                    document.querySelector('#c_idno_other_nationalitie').value = '';
+
+                                }
+                                else{
+
+                                    check_nationalitie = 'other' ;
+
+                                    document.querySelector('#btn_input_data_other').classList.add('btn-info');
+                                    document.querySelector('#btn_input_data_other').classList.remove('btn-secondary');
+
+                                    document.querySelector('#btn_input_data_thai').classList.remove('btn-info');
+                                    document.querySelector('#btn_input_data_thai').classList.add('btn-secondary');
+
+                                    document.querySelector('#input_data_other_nationalitie').classList.remove('d-none');
+                                    document.querySelector('#input_data_thailand').classList.add('d-none');
+
+                                    document.querySelector('#c_name').required = false;
+                                    document.querySelector('#c_surname').required = false;
+                                    document.querySelector('#c_idno').required = false;
+
+                                    document.querySelector('#c_name_other_nationalitie').required = true;
+                                    document.querySelector('#c_idno_other_nationalitie').required = true;
+
+                                    document.querySelector('#c_name').value = '';
+                                    document.querySelector('#c_surname').value = '';
+                                    document.querySelector('#c_idno').value = '';
+                                }
+                            }
+                        </script>
+
+                        <!-- ไทย -->
+                        <div id="input_data_thailand"  class="row g-3 mt-3">
                             <div class="col-md-4 mt-md-0 mb-4 ">
                                 <div class="input-group addDataperson">
                                     <div class="inputGroup w-100">
@@ -392,6 +456,27 @@
                                     <div class="inputGroup w-100">
                                         <input type="text" required="" autocomplete="off" name="c_idno" id="c_idno" value="{{ isset($customer->c_idno) ? $customer->c_idno : '' }}" onchange="check_amount_c_idno();">
                                         <label for="c_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ต่างชาติ -->
+                        <div id="input_data_other_nationalitie"  class="row g-3 mt-3 d-none">
+                            <div class="col-md-6 mt-md-0 mb-4">
+                                <div class="input-group addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input name="c_name_other_nationalitie" type="text" id="c_name_other_nationalitie" value="{{ isset($customer->c_name_other_nationalitie) ? $customer->c_name_other_nationalitie : '' }}"  autocomplete="off" >
+                                        <label for="c_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-md-0 mb-4 " style="position:relative;">
+                                <div class="input-group  addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input type="text" autocomplete="off" name="c_idno_other_nationalitie" id="c_idno_other_nationalitie" value="{{ isset($customer->c_idno_other_nationalitie) ? $customer->c_idno_other_nationalitie : '' }}">
+                                        <label for="c_idno_other_nationalitie"><i class="fa-solid fa-id-card"></i> หมายเลขพาสปอร์ต (Passport) <span class="text-danger">*</span></label>
                                     </div>
                                 </div>
                             </div>
@@ -1041,6 +1126,9 @@
         let c_name = document.querySelector('#c_name');
         let c_surname = document.querySelector('#c_surname');
         let c_idno = document.querySelector('#c_idno');
+
+        let c_name_other_nationalitie = document.querySelector('#c_name_other_nationalitie');
+        let c_idno_other_nationalitie = document.querySelector('#c_idno_other_nationalitie');
         
         let c_company_name = document.querySelector('#c_company_name');
         let commercial_registration = document.querySelector('#commercial_registration');
@@ -1066,10 +1154,16 @@
 
         // add DATA to formData
         if(document.querySelector('#c_name')){
-            formData.append('c_name', c_name.value);
-            formData.append('c_surname', c_surname.value);
-            formData.append('c_idno', c_idno.value);
-        }else if(document.querySelector('#c_company_name')){
+            if(check_nationalitie == "thai"){
+                formData.append('c_name', c_name.value);
+                formData.append('c_surname', c_surname.value);
+                formData.append('c_idno', c_idno.value);
+            }else{
+                formData.append('c_name_other_nationalitie', c_name_other_nationalitie.value);
+                formData.append('c_idno_other_nationalitie', c_idno_other_nationalitie.value);
+            }
+        }
+        else if(document.querySelector('#c_company_name')){
             formData.append('c_company_name', c_company_name.value);
             formData.append('commercial_registration', commercial_registration.value);
         }
@@ -1668,25 +1762,31 @@
             dangerAlert("กรุณาเลือกลักษณะการกระทำความผิดอย่างน้อย 1 อย่าง");
         } else {
 
-            let cIdnoInput = document.getElementById('c_idno');
-            let commercial_registration = document.getElementById('commercial_registration');
+            if(check_nationalitie == 'thai'){
 
-            // ใส่เลขบัตร ปชช
-            if(cIdnoInput){
-                cIdnoInput = cIdnoInput.value.replaceAll("-","");
-                if(cIdnoInput.length != 13){
-                    document.getElementById('c_idno').focus();
-                }else{
-                    checkdemerit = true;
+                let cIdnoInput = document.getElementById('c_idno');
+                let commercial_registration = document.getElementById('commercial_registration');
+
+                // ใส่เลขบัตร ปชช
+                if(cIdnoInput){
+                    cIdnoInput = cIdnoInput.value.replaceAll("-","");
+                    if(cIdnoInput.length != 13){
+                        document.getElementById('c_idno').focus();
+                    }else{
+                        checkdemerit = true;
+                    }
+                }
+                // ใส่เลขประจำตัวผู้เสียภาษี
+                else if(commercial_registration){
+                    if(commercial_registration.value.length != 13){
+                        document.getElementById('commercial_registration').focus();
+                    }else{
+                        checkdemerit = true;
+                    }
                 }
             }
-            // ใส่เลขประจำตัวผู้เสียภาษี
-            else if(commercial_registration){
-                if(commercial_registration.value.length != 13){
-                    document.getElementById('commercial_registration').focus();
-                }else{
-                    checkdemerit = true;
-                }
+            else{
+                checkdemerit = true;
             }
 
 

@@ -349,41 +349,129 @@
                 </div>
                 <hr>
                 <div class="row g-3">
-                    <div class="col-md-4 mt-md-4 ">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input name="d_name" type="text" id="d_name" value="{{ isset($customer->d_name) ? $customer->d_name : '' }}" required="" autocomplete="off">
-                                <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                    <div class="col-12">
+                        <button id="btn_input_data_thai" type="button" class="btn btn-sm btn-info" style="width:120px;" onclick="change_input_data('thai');">
+                            <img src="{{asset('img/icon/thailand.png')}}" style="width:20px;"> ไทย
+                        </button>
+                        <button id="btn_input_data_other" type="button" class="btn btn-sm btn-secondary" style="width:120px;" onclick="change_input_data('other');">
+                            <img src="{{asset('img/icon/flags.png')}}" style="width:20px;"> ต่างชาติ
+                        </button>
+                    </div>
+
+                    <script>
+                        var check_nationalitie = 'thai' ;
+                        function change_input_data(type){
+                            if(type == 'thai'){
+
+                                check_nationalitie = 'thai' ;
+
+                                document.querySelector('#btn_input_data_thai').classList.remove('btn-secondary');
+                                document.querySelector('#btn_input_data_thai').classList.add('btn-info');
+
+                                document.querySelector('#btn_input_data_other').classList.remove('btn-info');
+                                document.querySelector('#btn_input_data_other').classList.add('btn-secondary');
+
+                                document.querySelector('#input_data_thailand').classList.remove('d-none');
+                                document.querySelector('#input_data_other_nationalitie').classList.add('d-none');
+
+                                document.querySelector('#d_name').required = true;
+                                document.querySelector('#d_surname').required = true;
+                                document.querySelector('#d_idno').required = true;
+
+                                document.querySelector('#d_name_other_nationalitie').required = false;
+                                document.querySelector('#d_idno_other_nationalitie').required = false;
+
+                                document.querySelector('#d_name_other_nationalitie').value = '';
+                                document.querySelector('#d_idno_other_nationalitie').value = '';
+
+                            }
+                            else{
+
+                                check_nationalitie = 'other' ;
+
+                                document.querySelector('#btn_input_data_other').classList.add('btn-info');
+                                document.querySelector('#btn_input_data_other').classList.remove('btn-secondary');
+
+                                document.querySelector('#btn_input_data_thai').classList.remove('btn-info');
+                                document.querySelector('#btn_input_data_thai').classList.add('btn-secondary');
+
+                                document.querySelector('#input_data_other_nationalitie').classList.remove('d-none');
+                                document.querySelector('#input_data_thailand').classList.add('d-none');
+
+                                document.querySelector('#d_name').required = false;
+                                document.querySelector('#d_surname').required = false;
+                                document.querySelector('#d_idno').required = false;
+
+                                document.querySelector('#d_name_other_nationalitie').required = true;
+                                document.querySelector('#d_idno_other_nationalitie').required = true;
+
+                                document.querySelector('#d_name').value = '';
+                                document.querySelector('#d_surname').value = '';
+                                document.querySelector('#d_idno').value = '';
+                            }
+                        }
+                    </script>
+
+                    <!-- ไทย -->
+                    <div id="input_data_thailand" class="row g-3 mt-3">
+                        <div class="col-md-4 mt-md-4 ">
+                            <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
+                            <div class="input-group ">
+                                <div class="inputGroup w-100">
+                                    <input name="d_name" type="text" id="d_name" value="{{ isset($customer->d_name) ? $customer->d_name : '' }}" required="" autocomplete="off">
+                                    <label for="d_name"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-md-4 ">
+                            <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
+                            <div class="input-group ">
+                                <div class="inputGroup w-100">
+                                    <input name="d_surname" type="text" id="d_surname" value="{{ isset($customer->d_surname) ? $customer->d_surname : '' }}" required="" autocomplete="off">
+                                    <label for="d_surname"><i class="fa-solid fa-user"></i> นามสกุล <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-md-4" style="position:relative;">
+                            <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
+                            <span id="warning_d_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                หมายเลขบัตรประชาชนไม่ถูกต้อง
+                            </span>
+                            <span id="success_d_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                <i class="fa-solid fa-shield-check"></i>
+                                หมายเลขบัตรประชาชนครบถ้วนแล้ว
+                            </span>
+                            <div class="input-group ">
+                                <div class="inputGroup w-100">
+                                    <input type="text" required="" autocomplete="off" name="d_idno" id="d_idno" value="{{ isset($customer->d_idno) ? $customer->d_idno : '' }}" onchange="check_amount_d_idno();">
+                                    <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mt-md-4 ">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">นามสุกล</label> --}} -->
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input name="d_surname" type="text" id="d_surname" value="{{ isset($customer->d_surname) ? $customer->d_surname : '' }}" required="" autocomplete="off">
-                                <label for="d_surname"><i class="fa-solid fa-user"></i> นามสกุล <span class="text-danger">*</span></label>
+                    <!-- ต่างชาติ -->
+                    <div id="input_data_other_nationalitie" class="row g-3 mt-3 d-none">
+                        <div class="col-md-6 mt-md-0 mb-4">
+                                <div class="input-group addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input name="d_name_other_nationalitie" type="text" id="d_name_other_nationalitie" value="{{ isset($customer->d_name_other_nationalitie) ? $customer->d_name_other_nationalitie : '' }}"  autocomplete="off" >
+                                        <label for="d_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mt-md-4" style="position:relative;">
-                        <!-- {{-- <label for="inputLastName1" class="form-label">ชื่อ</label> --}} -->
-                        <span id="warning_d_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
-                            <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
-                            หมายเลขบัตรประชาชนไม่ถูกต้อง
-                        </span>
-                        <span id="success_d_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
-                            <i class="fa-solid fa-shield-check"></i>
-                            หมายเลขบัตรประชาชนครบถ้วนแล้ว
-                        </span>
-                        <div class="input-group ">
-                            <div class="inputGroup w-100">
-                                <input type="text" required="" autocomplete="off" name="d_idno" id="d_idno" value="{{ isset($customer->d_idno) ? $customer->d_idno : '' }}" onchange="check_amount_d_idno();">
-                                <label for="d_idno"><i class="fa-solid fa-id-card"></i> หมายเลขบัตรประชาชน <span class="text-danger">*</span></label>
+
+                            <div class="col-md-6 mt-md-0 mb-4 " style="position:relative;">
+                                <div class="input-group  addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input type="text" autocomplete="off" name="d_idno_other_nationalitie" id="d_idno_other_nationalitie" value="{{ isset($customer->d_idno_other_nationalitie) ? $customer->d_idno_other_nationalitie : '' }}">
+                                        <label for="d_idno_other_nationalitie"><i class="fa-solid fa-id-card"></i> หมายเลขพาสปอร์ต (Passport) <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                     </div>
+
+
                     <div class="col-12">
                         <label for="inputLastName1" class="form-label subHeaderCustomer">ลักษณะการกระทำความผิด  <span class="text-danger">*</span></label>
                     </div>
@@ -1025,11 +1113,16 @@
             dangerAlert("กรุณาเลือกลักษณะการกระทำความผิด อย่างน้อย 1 อย่าง");
 
         } else {
-            let dIdnoInput = document.getElementById('d_idno').value;
-                dIdnoInput = dIdnoInput.replaceAll("-","");
 
-            if(dIdnoInput.length != 13){
-                document.getElementById('d_idno').focus();
+            if(check_nationalitie == 'thai'){
+                let dIdnoInput = document.getElementById('d_idno').value;
+                    dIdnoInput = dIdnoInput.replaceAll("-","");
+
+                if(dIdnoInput.length != 13){
+                    document.getElementById('d_idno').focus();
+                }else{
+                    checkdemerit = true;
+                }
             }else{
                 checkdemerit = true;
             }
@@ -1069,7 +1162,10 @@
         let d_name = document.querySelector('#d_name');
         let d_surname = document.querySelector('#d_surname');
         let d_idno = document.querySelector('#d_idno');
-    
+        
+        let d_name_other_nationalitie = document.querySelector('#d_name_other_nationalitie');
+        let d_idno_other_nationalitie = document.querySelector('#d_idno_other_nationalitie');
+
         // textaarea
         let demeritdetail = document.querySelector('#demeritdetail');
         // date
@@ -1091,9 +1187,15 @@
 
         // add DATA to formData
         if(document.querySelector('#d_name')){
-            formData.append('d_name', d_name.value);
-            formData.append('d_surname', d_surname.value);
-            formData.append('d_idno', d_idno.value);
+            if(check_nationalitie == "thai"){
+                formData.append('d_name', d_name.value);
+                formData.append('d_surname', d_surname.value);
+                formData.append('d_idno', d_idno.value);
+            }else{
+                formData.append('d_name_other_nationalitie', d_name_other_nationalitie.value);
+                formData.append('d_idno_other_nationalitie', d_idno_other_nationalitie.value);
+            }
+            
         }
 
         formData.append('user_id', user_id.value);

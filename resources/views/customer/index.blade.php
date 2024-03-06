@@ -556,202 +556,145 @@
 
 <div class="container">
     <div class="col-12 d-">
+
         <div class="card">
             <div class="card-body">
-                <form method="GET" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-2 float-right" role="search">
-                    <div class="align-items-center searchBar">
-                        <div class="breadcrumb-title pe-3" style="margin-right:50px ;">
+                <form method="GET" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-inline" role="search">
+                    <div class="row">
+                        <div class="col-12 col-md-3" style="display: flex;align-items: center;">
                             <div class="w-100 d-flex justify-content-center">
                                 <div>
                                     <span style="font-size: 18px;" class="m-0 p-0">ข้อมูลมิจฉาชีพ(เช่ารถ)</span> <br>
-                                    <!-- <div class="checkbox-wrapper-35">
-                                            <input value="company" name="switchforSearch" id="switchforSearch" type="checkbox" class="switch"value="{{ request('switchforSearch') }}" onclick="toggleDivsswitchforSearch()">
-                                            <label for="switchforSearch">
-                                                <span class="switch-x-toggletext">
-                                                    <span class="switch-x-unchecked font-18"><span class="switch-x-hiddenlabel"></span>บุคคล</span>
-                                                    <span class="switch-x-checked font-18"><span class="switch-x-hiddenlabel"></span>บริษัท</span>
-                                                </span>
-                                            </label>
-                                        </div> -->
                                     <div class="">
-                                        <input class="form-check-input" type="radio" name="switchforSearch" value="person" id="switchforSearch1" checked="" onclick="toggleDivsswitchforSearch()">
+                                        <input class="form-check-input" type="radio" name="switchforSearch" value="person" id="switchforSearch1" checked="" onclick="toggleDivsswitchforSearch('person')">
                                         <label class="form-check-label" for="switchforSearch1">บุคคล</label>
 
-                                        <input class="form-check-input" type="radio" name="switchforSearch" value="company" id="switchforSearch2" onclick="toggleDivsswitchforSearch()">
+                                        <input class="form-check-input" type="radio" name="switchforSearch" value="company" id="switchforSearch2" onclick="toggleDivsswitchforSearch('company')">
                                         <label class="form-check-label" for="switchforSearch2">บริษัท</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-lg-3 col-xl-2 mx-2 divInputSearch">
-                            <div class="input-group">
-                                <span id="warning_c_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
-                                    <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
-                                    หมายเลขบัตรประชาชนไม่ถูกต้อง
-                                </span>
-                                <span id="success_c_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 12px;">
-                                    <i class="fa-solid fa-shield-check"></i>
-                                    หมายเลขบัตรประชาชนครบถ้วนแล้ว
-                                </span>
-                                <div class="inputGroup w-100">
-                                    <input name="c_idno" id="c_idno" type="text" value="{{ request('c_idno') }}" autocomplete="off" oninput="clearInputName()">
-                                    <label for="c_id_no"><i class="fa-solid fa-id-card"></i>หมายเลขบัตรประชาชน</label>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                            let cIdnoInput = document.getElementById('c_idno');
-
-                            if(cIdnoInput){
-                                cIdnoInput.addEventListener('input', function() {
-                                    document.querySelector('#warning_c_idno').classList.add('d-none');
-                                    let inputValue = cIdnoInput.value;
-                                    let formattedValue = formatCIDNO(inputValue);
-                                    cIdnoInput.value = formattedValue;
-
-                                    let check_input_13 = cIdnoInput.value.replaceAll('-','');
-                                        // console.log(check_input_13.length);
-                                    if (check_input_13.length == 13) {
-                                        // console.log('ครบ 13');
-                                        document.querySelector('#success_c_idno').classList.remove('d-none');
-                                        document.querySelector('#warning_c_idno').classList.add('d-none');
-                                    }else{
-                                        // console.log('ยังไม่ครบ 13 หรือเกิน');
-                                        document.querySelector('#warning_c_idno').classList.remove('d-none');
-                                        document.querySelector('#success_c_idno').classList.add('d-none');
-                                    }
-                                });
-
-                                cIdnoInput.addEventListener('keydown', function(event) {
-                                    if (event.key === 'Backspace') {
-                                        // ตรวจสอบถ้าผู้ใช้กดปุ่ม Backspace ให้ลบตัวอักษรหรือเครื่องหมาย "-"
-                                        let inputValue = cIdnoInput.value;
-                                        let caretPosition = cIdnoInput.selectionStart;
-
-                                        if (caretPosition > 0 && (inputValue[caretPosition - 1] === '-' || inputValue[caretPosition] === '-')) {
-                                            let newValue = inputValue.substring(0, caretPosition - 1) + inputValue.substring(caretPosition);
-                                            cIdnoInput.value = newValue;
-                                            cIdnoInput.setSelectionRange(caretPosition - 1, caretPosition - 1);
-                                        }
-                                    }
-                                });
-                            }
-
-                            function formatCIDNO(input) {
-                                let formattedValue = '';
-                                let characterCount = 0;
-
-                                for (let i = 0; i < input.length; i++) {
-                                    if (/[0-9]/.test(input[i])) {
-                                        characterCount++;
-                                        if (characterCount === 1) {
-                                            formattedValue += input[i] + '-';
-                                        } else if (characterCount === 5) {
-                                            formattedValue += input[i] + '-';
-                                        } else if (characterCount === 10) {
-                                            formattedValue += input[i] + '-';
-                                        } else if (characterCount === 12) {
-                                            formattedValue += input[i] + '-';
-                                        } else {
-                                            formattedValue += input[i];
-                                        }
-                                    }
-                                }
-
-                                return formattedValue;
-                            }
-                        });
-
-                        </script>
-                        <div class="m-3 divInputSearch">
-                            <p class="textOR"><span>หรือ</span></p>
-                        </div>
-                        <div class="col-sm-12 col-lg-3 col-xl-2 mx-2  divInputSearch">
-                            <div class="input-group">
-                                <div class="inputGroup w-100">
-                                    <input name="c_name" id="c_name" type="text" value="{{ request('c_name') }}" autocomplete="off" oninput="clearInputID()">
-                                    <label for="c_name"><i class="fa-solid fa-user"></i> ชื่อ </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-3 col-xl-2 mx-2  divInputSearch">
-                            <div class="input-group">
-                                <div class="inputGroup w-100">
-                                    <input name="c_surname" id="c_surname" type="text" value="{{ request('c_surname') }}" autocomplete="off" oninput="clearInputID()">
-                                    <label for="c_surname"><i class="fa-solid fa-user"></i> นามสกุล </label>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="col-sm-12 col-lg-3 col-xl-3 mx-2 divInputSearch d-none">
-                            <div class="input-group">
-                                <div class="inputGroup w-100">
-                                    <span id="warning_commercial_registration" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
-                                        <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
-                                        เลขประจำตัวผู้เสียภาษีไม่ถูกต้อง
-                                    </span>
-                                    <span id="success_commercial_registration" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 12px;">
-                                        <i class="fa-solid fa-shield-check"></i>
-                                        เลขประจำตัวผู้เสียภาษีครบถ้วนแล้ว
-                                    </span>
-                                    <input name="commercial_registration" id="commercial_registration" type="text" value="{{ request('commercial_registration') }}" autocomplete="off" oninput="clearInputCompanyName()">
-                                    <label for="commercial_registration"><i class="fa-solid fa-id-card"></i> เลขประจำตัวผู้เสียภาษี</label>
-                                </div>
-                            </div>
-                        </div>
-                        <script>
-                            commercial_registration.addEventListener('input', function() {
-                                document.querySelector('#warning_commercial_registration').classList.add('d-none');
-
-                                let check_input_13 = commercial_registration.value.replaceAll('-','');
-                                    // console.log(check_input_13.length);
-                                if (check_input_13.length == 13) {
-                                    // console.log('ครบ 13');
-                                    document.querySelector('#success_commercial_registration').classList.remove('d-none');
-                                    document.querySelector('#warning_commercial_registration').classList.add('d-none');
-                                }else{
-                                    // console.log('ยังไม่ครบ 13 หรือเกิน');
-                                    document.querySelector('#warning_commercial_registration').classList.remove('d-none');
-                                    document.querySelector('#success_commercial_registration').classList.add('d-none');
-                                }
-                            });
-                        </script>
-                        <div class="m-3 d-none divInputSearch">
-                            <p class="textOR"><span>หรือ</span></p>
-                        </div>
-                        <div class="col-sm-12 col-lg-3 col-xl-3 mx-2  divInputSearch d-none">
-                            <div class="input-group">
-                                <div class="inputGroup w-100">
-                                    <input name="c_company_name" id="c_company_name" type="text" value="{{ request('c_company_name') }}" autocomplete="off" oninput="clearInputCommercialRegistration()">
-                                    <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท </label>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <form method="GET" action="{{ url('/customer') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-append">
-                                    <button class="btn btn-secondary" type="submit">
-                                        <i class="fa fa-search"></i>
+                        <div id="div_person" class="col-12 col-md-9">
+                            <div class="row">
+                                <!-- เลือกสัญชาติ -->
+                                <div class="col-12 my-2">
+                                    <button id="btn_input_data_thai" type="button" class="btn btn-sm btn-info" style="width:120px;" onclick="change_input_data('thai');">
+                                        <img src="{{asset('img/icon/thailand.png')}}" style="width:20px;"> ไทย
                                     </button>
-                                </span>
+                                    <button id="btn_input_data_other" type="button" class="btn btn-sm btn-secondary" style="width:120px;" onclick="change_input_data('other');">
+                                        <img src="{{asset('img/icon/flags.png')}}" style="width:20px;"> ต่างชาติ
+                                    </button>
+                                    <br><br>
+                                </div>
+                                <!-- ไทย -->
+                                <div class="row col-12 col-md-12">
+                                    <div input_for="input_data_thailand" class="col-12 col-md-4">
+                                        <div class="input-group">
+                                            <span id="warning_c_idno" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                                <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                                หมายเลขบัตรประชาชนไม่ถูกต้อง
+                                            </span>
+                                            <span id="success_c_idno" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 12px;">
+                                                <i class="fa-solid fa-shield-check"></i>
+                                                หมายเลขบัตรประชาชนครบถ้วนแล้ว
+                                            </span>
+                                            <div class="inputGroup w-100">
+                                                <input name="c_idno" id="c_idno" type="text" value="{{ request('c_idno') }}" autocomplete="off" oninput="clearInputName()">
+                                                <label for="c_id_no"><i class="fa-solid fa-id-card"></i>หมายเลขบัตรประชาชน</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div input_for="input_data_thailand" class="col-12 col-md-2" style="display: flex;align-items: center;">
+                                        <p class="textOR"><span>หรือ</span></p>
+                                    </div>
+                                    <div input_for="input_data_thailand" class="col-12 col-md-3">
+                                        <div class="input-group">
+                                            <div class="inputGroup w-100">
+                                                <input name="c_name" id="c_name" type="text" value="{{ request('c_name') }}" autocomplete="off" oninput="clearInputID()">
+                                                <label for="c_name"><i class="fa-solid fa-user"></i> ชื่อ </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div input_for="input_data_thailand" class="col-12 col-md-3">
+                                        <div class="input-group">
+                                            <div class="inputGroup w-100">
+                                                <input name="c_surname" id="c_surname" type="text" value="{{ request('c_surname') }}" autocomplete="off" oninput="clearInputID()">
+                                                <label for="c_surname"><i class="fa-solid fa-user"></i> นามสกุล </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ต่างชาติ -->
+                                <div class="row col-12 col-md-12">
+                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-5 d-none">
+                                        <div class="input-group">
+                                            <div class="inputGroup w-100">
+                                                <input name="c_idno_other_nationalitie" id="c_idno_other_nationalitie" type="text" value="{{ request('c_idno_other_nationalitie') }}" autocomplete="off" oninput="clearInputName_nationalitie()">
+                                                <label for="c_idno_other_nationalitie"><i class="fa-solid fa-id-card"></i>หมายเลขพาสปอร์ต (Passport)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-2 d-none"  style="display: flex;align-items: center;">
+                                        <p class="textOR"><span>หรือ</span></p>
+                                    </div>
+                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-5 d-none">
+                                        <div class="input-group">
+                                            <div class="inputGroup w-100">
+                                                <input name="c_name_other_nationalitie" id="c_name_other_nationalitie" type="text" value="{{ request('c_name_other_nationalitie') }}" autocomplete="off" oninput="clearInputID_nationalitie()">
+                                                <label for="c_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อ </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </form> -->
-                        <div class="btn-group btnGroupSearch h-100" role="group" aria-label="Button group with nested dropdown">
-                            <div>
-                                <button type="submit" class="btn btn-primary  h-100 m-0"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
-                                <!-- <button type="submit" class="btn btn-danger  h-100 m-0" onclick="clearInput()"><i class="fa-solid fa-trash"></i> ล้าง</button> -->
-                                <a href="{{ url('/customer') }}" type="submit" class="btn btn-danger  h-100 m-0"><i class="fa-solid fa-trash"></i> ล้าง</a>
+                        </div>
+                        <div id="div_company" class="col-12 col-md-9 d-none">
+                            <br>
+                            <div class="row">
+                                <div class="col-12 col-md-5">
+                                    <div class="input-group">
+                                        <div class="inputGroup w-100">
+                                            <span id="warning_commercial_registration" class="text-danger d-none" style="position:absolute;bottom:-25px;font-size: 13px;">
+                                                <i class="fa-solid fa-triangle-exclamation fa-beat"></i>
+                                                เลขประจำตัวผู้เสียภาษีไม่ถูกต้อง
+                                            </span>
+                                            <span id="success_commercial_registration" class="text-success d-none" style="position:absolute;bottom:-25px;font-size: 12px;">
+                                                <i class="fa-solid fa-shield-check"></i>
+                                                เลขประจำตัวผู้เสียภาษีครบถ้วนแล้ว
+                                            </span>
+                                            <input name="commercial_registration" id="commercial_registration" type="text" value="{{ request('commercial_registration') }}" autocomplete="off" oninput="clearInputCompanyName()">
+                                            <label for="commercial_registration"><i class="fa-solid fa-id-card"></i> เลขประจำตัวผู้เสียภาษี</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2" style="display: flex;align-items: center;">
+                                    <p class="textOR"><span>หรือ</span></p>
+                                </div>
+                                <div class="col-12 col-md-5">
+                                    <div class="input-group">
+                                        <div class="inputGroup w-100">
+                                            <input name="c_company_name" id="c_company_name" type="text" value="{{ request('c_company_name') }}" autocomplete="off" oninput="clearInputCommercialRegistration()">
+                                            <label for="c_company_name"><i class="fa-solid fa-user"></i> ชื่อบริษัท </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="btn-group btnGroupSearch float-end" role="group" aria-label="Button group with nested dropdown">
+                                <div>
+                                    <button type="submit" class="btn btn-primary  h-100 m-0"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+                                    <!-- <button type="submit" class="btn btn-danger  h-100 m-0" onclick="clearInput()"><i class="fa-solid fa-trash"></i> ล้าง</button> -->
+                                    <a href="{{ url('/customer') }}" type="submit" class="btn btn-danger  h-100 m-0"><i class="fa-solid fa-trash"></i> ล้าง</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
+
     </div>
 </div>
 @if(!empty($customers))
@@ -768,6 +711,10 @@
                                     {{ $customers->c_name }} {{ $customers->c_surname }}
                                     @elseif(!empty($customers->c_company_name) )
                                     {{$customers->c_company_name}}
+                                    @elseif(!empty($customers->c_name_other_nationalitie) )
+                                    {{$customers->c_name_other_nationalitie}}
+                                    <br>
+                                    <span class="text-info" style="font-size:14px;">(ต่างชาติ)</span>
                                     @endif
                                 </h4>
 
@@ -775,6 +722,11 @@
                                 <h4>
                                     {{$customers->commercial_registration}}
                                 </h4>
+                                @endif
+                                @if(!empty($customers->c_idno_other_nationalitie))
+                                <p class="text-secondary mb-1">
+                                    {{$customers->c_idno_other_nationalitie}}
+                                </p>
                                 @endif
                                 @if(!empty($customers->c_idno))
                                     <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($customers->c_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
@@ -1246,18 +1198,31 @@ if (!empty($query_params['c_idno'])) {
 $c_idno = urldecode($query_params['c_idno']);
 $text_show = $c_idno;
 $class_show = '';
-}if (!empty($query_params['c_name']) || !empty($query_params['c_surname'])) {
+}
+if (!empty($query_params['c_name']) || !empty($query_params['c_surname'])) {
 $c_name = urldecode($query_params['c_name']);
 $c_surname = urldecode($query_params['c_surname']);
 $text_show = $c_name . ' ' . $c_surname;
 $class_show = '';
-}if (!empty($query_params['commercial_registration'])) {
+}
+if (!empty($query_params['commercial_registration'])) {
 $commercial_registration = urldecode($query_params['commercial_registration']);
 $text_show = $commercial_registration;
 $class_show = '';
-}if (!empty($query_params['c_company_name'])) {
+}
+if (!empty($query_params['c_company_name'])) {
 $c_company_name = urldecode($query_params['c_company_name']);
 $text_show = $c_company_name;
+$class_show = '';
+}
+if (!empty($query_params['c_idno_other_nationalitie'])) {
+$c_idno_other_nationalitie = urldecode($query_params['c_idno_other_nationalitie']);
+$text_show = $c_idno_other_nationalitie;
+$class_show = '';
+}
+if (!empty($query_params['c_name_other_nationalitie'])) {
+$c_name_other_nationalitie = urldecode($query_params['c_name_other_nationalitie']);
+$text_show = $c_name_other_nationalitie;
 $class_show = '';
 }
 @endphp
@@ -1292,17 +1257,25 @@ const slides = GLightbox({
         if (switchforSearch === "company") {
             // console.log('บริษัท');
             document.getElementById('switchforSearch2').checked = true;
-            toggleDivsswitchforSearch()
+            toggleDivsswitchforSearch('company')
             // console.log('บริษัท');
         }
     });
 
-    function toggleDivsswitchforSearch() {
+    function toggleDivsswitchforSearch(type) {
         var Search = document.querySelectorAll(".divInputSearch");
 
-        Search.forEach(function(div) {
-            div.classList.toggle('d-none');
-        });
+        // Search.forEach(function(div) {
+        //     div.classList.toggle('d-none');
+        // });
+
+        clearInput();
+
+        document.querySelector('#div_person').classList.add('d-none');
+        document.querySelector('#div_company').classList.add('d-none');
+
+        document.querySelector('#div_'+type).classList.remove('d-none');
+        
     }
 
 
@@ -1310,6 +1283,8 @@ const slides = GLightbox({
         document.getElementById("c_idno").value = "";
         document.getElementById('c_company_name').value = ''
         document.getElementById('commercial_registration').value = ''
+        document.querySelector('#success_c_idno').classList.add('d-none');
+        document.querySelector('#warning_c_idno').classList.add('d-none');
     }
 
     function clearInputName() {
@@ -1334,7 +1309,9 @@ const slides = GLightbox({
         document.getElementById("c_idno").value = "";
         document.getElementById("c_name").value = "";
         document.getElementById("c_surname").value = "";
-        document.getElementById('commercial_registration').value = ''
+        document.getElementById('commercial_registration').value = '';
+        document.querySelector('#success_commercial_registration').classList.add('d-none');
+        document.querySelector('#warning_commercial_registration').classList.add('d-none');
 
     }
 
@@ -1347,6 +1324,12 @@ const slides = GLightbox({
         document.getElementById("c_surname").value = "";
         document.getElementById('c_company_name').value = ''
         document.getElementById('commercial_registration').value = ''
+        document.getElementById('c_idno_other_nationalitie').value = ''
+        document.getElementById('c_name_other_nationalitie').value = ''
+        document.querySelector('#success_c_idno').classList.add('d-none');
+        document.querySelector('#warning_c_idno').classList.add('d-none');
+        document.querySelector('#success_commercial_registration').classList.add('d-none');
+        document.querySelector('#warning_commercial_registration').classList.add('d-none');
     }
 
 
@@ -1426,6 +1409,157 @@ const slides = GLightbox({
             document.querySelector('#title_nav_'+type).classList.add('d-none');
         }
 
+    }
+</script>
+
+<script>
+    var check_nationalitie = 'thai' ;
+    function change_input_data(type){
+        if(type == 'thai'){
+
+            check_nationalitie = 'thai' ;
+
+            document.querySelector('#btn_input_data_thai').classList.remove('btn-secondary');
+            document.querySelector('#btn_input_data_thai').classList.add('btn-info');
+
+            document.querySelector('#btn_input_data_other').classList.remove('btn-info');
+            document.querySelector('#btn_input_data_other').classList.add('btn-secondary');
+
+            let input_for = document.querySelectorAll('[input_for="input_data_thailand"]');
+                input_for.forEach(input_for => {
+                    input_for.classList.remove('d-none');
+                });
+
+            let input_for_other = document.querySelectorAll('[input_for="input_data_other_nationalitie"]');
+                input_for_other.forEach(input_for_other => {
+                    input_for_other.classList.add('d-none');
+                });
+
+            document.querySelector('#c_idno_other_nationalitie').value = '';
+            document.querySelector('#c_name_other_nationalitie').value = '';
+
+        }
+        else{
+
+            check_nationalitie = 'other' ;
+
+            document.querySelector('#success_c_idno').classList.add('d-none');
+            document.querySelector('#warning_c_idno').classList.add('d-none');
+
+            document.querySelector('#btn_input_data_other').classList.add('btn-info');
+            document.querySelector('#btn_input_data_other').classList.remove('btn-secondary');
+
+            document.querySelector('#btn_input_data_thai').classList.remove('btn-info');
+            document.querySelector('#btn_input_data_thai').classList.add('btn-secondary');
+
+            let input_for = document.querySelectorAll('[input_for="input_data_thailand"]');
+                input_for.forEach(input_for => {
+                    input_for.classList.add('d-none');
+                });
+
+            let input_for_other = document.querySelectorAll('[input_for="input_data_other_nationalitie"]');
+                input_for_other.forEach(input_for_other => {
+                    input_for_other.classList.remove('d-none');
+                });
+
+            document.querySelector('#c_name').value = '';
+            document.querySelector('#c_surname').value = '';
+            document.querySelector('#c_idno').value = '';
+        }
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let cIdnoInput = document.getElementById('c_idno');
+
+        if(cIdnoInput){
+            cIdnoInput.addEventListener('input', function() {
+                document.querySelector('#warning_c_idno').classList.add('d-none');
+                let inputValue = cIdnoInput.value;
+                let formattedValue = formatCIDNO(inputValue);
+                cIdnoInput.value = formattedValue;
+
+                let check_input_13 = cIdnoInput.value.replaceAll('-','');
+                    // console.log(check_input_13.length);
+                if (check_input_13.length == 13) {
+                    // console.log('ครบ 13');
+                    document.querySelector('#success_c_idno').classList.remove('d-none');
+                    document.querySelector('#warning_c_idno').classList.add('d-none');
+                }else{
+                    // console.log('ยังไม่ครบ 13 หรือเกิน');
+                    document.querySelector('#warning_c_idno').classList.remove('d-none');
+                    document.querySelector('#success_c_idno').classList.add('d-none');
+                }
+            });
+
+            cIdnoInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Backspace') {
+                    // ตรวจสอบถ้าผู้ใช้กดปุ่ม Backspace ให้ลบตัวอักษรหรือเครื่องหมาย "-"
+                    let inputValue = cIdnoInput.value;
+                    let caretPosition = cIdnoInput.selectionStart;
+
+                    if (caretPosition > 0 && (inputValue[caretPosition - 1] === '-' || inputValue[caretPosition] === '-')) {
+                        let newValue = inputValue.substring(0, caretPosition - 1) + inputValue.substring(caretPosition);
+                        cIdnoInput.value = newValue;
+                        cIdnoInput.setSelectionRange(caretPosition - 1, caretPosition - 1);
+                    }
+                }
+            });
+        }
+
+        function formatCIDNO(input) {
+            let formattedValue = '';
+            let characterCount = 0;
+
+            for (let i = 0; i < input.length; i++) {
+                if (/[0-9]/.test(input[i])) {
+                    characterCount++;
+                    if (characterCount === 1) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 5) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 10) {
+                        formattedValue += input[i] + '-';
+                    } else if (characterCount === 12) {
+                        formattedValue += input[i] + '-';
+                    } else {
+                        formattedValue += input[i];
+                    }
+                }
+            }
+
+            return formattedValue;
+        }
+    });
+
+</script>
+
+<script>
+    commercial_registration.addEventListener('input', function() {
+        document.querySelector('#warning_commercial_registration').classList.add('d-none');
+
+        let check_input_13 = commercial_registration.value.replaceAll('-','');
+            // console.log(check_input_13.length);
+        if (check_input_13.length == 13) {
+            // console.log('ครบ 13');
+            document.querySelector('#success_commercial_registration').classList.remove('d-none');
+            document.querySelector('#warning_commercial_registration').classList.add('d-none');
+        }else{
+            // console.log('ยังไม่ครบ 13 หรือเกิน');
+            document.querySelector('#warning_commercial_registration').classList.remove('d-none');
+            document.querySelector('#success_commercial_registration').classList.add('d-none');
+        }
+    });
+</script>
+
+<script>
+    function clearInputName_nationalitie(){
+        document.querySelector('#c_name_other_nationalitie').value = '';
+    }
+
+    function clearInputID_nationalitie(){
+        document.querySelector('#c_idno_other_nationalitie').value = '';
     }
 </script>
 @endsection
