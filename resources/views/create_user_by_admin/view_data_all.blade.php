@@ -659,8 +659,17 @@
 				                            <div class="col-3" style="border-right:#857f80 solid 1px;">
 				                            	<div class="d-flex flex-column align-items-center text-center">
 					                                <div class="mt-3">
-					                                    <h4>{{ $item->d_name }} {{ $item->d_surname }} </h4>
-					                                    <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($item->d_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
+					                                	@if( !empty($item->d_name) )
+					                                        <h4>{{ $item->d_name }} {{ $item->d_surname }}</h4>
+					                                        <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($item->d_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
+					                                    @elseif(!empty($item->d_name_other_nationalitie) )
+					                                        <h4>
+					                                            {{ $item->d_name_other_nationalitie }}
+					                                            <br>
+					                                            <span class="text-info" style="font-size:14px;">(ต่างชาติ)</span>
+					                                        </h4>
+					                                        <p class="text-secondary mb-1">{{ $item->d_idno_other_nationalitie }}</p>
+					                                    @endif
 					                                    <p class="text-muted font-size-sm">{{ thaidate("lที่ j F Y" , strtotime($item->d_date)) }}</p>
 					                                </div>
 					                            </div>
