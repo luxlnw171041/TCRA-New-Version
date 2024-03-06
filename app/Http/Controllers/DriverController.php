@@ -42,15 +42,15 @@ class DriverController extends Controller
                 'count_search_dri' => $count_search_driver,
             ]);
         }
+
         if (!empty($requestData['d_idno'])) {
             // $d_id_no = $requestData['d_idno'];
             $d_id_no = str_replace("-","",$requestData['d_idno']);
             $driver = Driver::where('d_idno', $d_id_no)->first();
 
             return view('driver.index', compact('driver'));
-            
-
-        } elseif (!empty($requestData['d_name']) and !empty($requestData['d_surname'])) {
+        }
+        else if (!empty($requestData['d_name']) and !empty($requestData['d_surname'])) {
 
             $d_name = $requestData['d_name'];
             $d_surname = $requestData['d_surname'];
@@ -60,7 +60,26 @@ class DriverController extends Controller
                 ->first();
 
                 return view('driver.index', compact('driver'));
-        }else{
+        }
+        else if (!empty($requestData['d_name_other_nationalitie'])) {
+
+            $d_name_other_nationalitie = $requestData['d_name_other_nationalitie'];
+
+            $driver = Driver::where('d_name_other_nationalitie', $d_name_other_nationalitie)
+                ->first();
+
+                return view('driver.index', compact('driver'));
+        }
+        else if (!empty($requestData['d_idno_other_nationalitie'])) {
+
+            $d_idno_other_nationalitie = $requestData['d_idno_other_nationalitie'];
+
+            $driver = Driver::where('d_idno_other_nationalitie', $d_idno_other_nationalitie)
+                ->first();
+
+                return view('driver.index', compact('driver'));
+        }
+        else{
 
             return view('driver.index');
         }
