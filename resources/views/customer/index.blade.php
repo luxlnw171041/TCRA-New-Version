@@ -681,7 +681,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-12 mt-3">
                             <div class="btn-group btnGroupSearch float-end" role="group" aria-label="Button group with nested dropdown">
                                 <div>
                                     <button type="submit" class="btn btn-primary  h-100 m-0"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
