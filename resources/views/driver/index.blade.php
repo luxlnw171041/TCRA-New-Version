@@ -500,7 +500,7 @@
 
                                 <!-- ต่างชาติ -->
                                 <div class="row col-12 col-md-12">
-                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-5 d-none">
+                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-4 d-none">
                                         <div class="input-group">
                                             <div class="inputGroup w-100">
                                                 <input name="d_idno_other_nationalitie" id="d_idno_other_nationalitie" type="text" value="{{ request('d_idno_other_nationalitie') }}" autocomplete="off" oninput="clearInputName_nationalitie()">
@@ -511,11 +511,20 @@
                                     <div input_for="input_data_other_nationalitie" class="col-12 col-md-2 d-none"  style="display: flex;align-items: center;">
                                         <p class="textOR"><span>หรือ</span></p>
                                     </div>
-                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-5 d-none">
+                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-3 d-none">
                                         <div class="input-group">
                                             <div class="inputGroup w-100">
                                                 <input name="d_name_other_nationalitie" id="d_name_other_nationalitie" type="text" value="{{ request('d_name_other_nationalitie') }}" autocomplete="off" oninput="clearInputID_nationalitie()">
-                                                <label for="d_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อ </label>
+                                                <label for="d_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อหน้า </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div input_for="input_data_other_nationalitie" class="col-12 col-md-3 d-none">
+                                        <div class="input-group">
+                                            <div class="inputGroup w-100">
+                                                <input name="d_surname_other_nationalitie" id="d_surname_other_nationalitie" type="text" value="{{ request('d_surname_other_nationalitie') }}" autocomplete="off" oninput="clearInputID_nationalitie()">
+                                                <label for="d_surname_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อหลัง </label>
                                             </div>
                                         </div>
                                     </div>
@@ -554,7 +563,7 @@
                                         <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($driver->d_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
                                     @elseif(!empty($driver->d_name_other_nationalitie) )
                                         <h4>
-                                            {{ $driver->d_name_other_nationalitie }}
+                                            {{ $driver->d_name_other_nationalitie }} {{ $driver->d_surname_other_nationalitie }}
                                             <br>
                                             <span class="text-info" style="font-size:14px;">(ต่างชาติ)</span>
                                         </h4>
@@ -957,9 +966,10 @@
             $text_show = $d_name . ' ' . $d_surname;
             $class_show = '';
         }
-        elseif (!empty($query_params['d_name_other_nationalitie'])) {
+        elseif (!empty($query_params['d_name_other_nationalitie']) || !empty($query_params['d_surname_other_nationalitie'])) {
             $d_name_other_nationalitie = urldecode($query_params['d_name_other_nationalitie']);
-            $text_show = $d_name_other_nationalitie ;
+            $d_surname_other_nationalitie = urldecode($query_params['d_surname_other_nationalitie']);
+            $text_show = $d_name_other_nationalitie . ' ' . $d_surname_other_nationalitie;
             $class_show = '';
         }
         elseif (!empty($query_params['d_idno_other_nationalitie'])) {
@@ -998,6 +1008,7 @@
 
         document.getElementById('d_idno_other_nationalitie').value = ''
         document.getElementById('d_name_other_nationalitie').value = ''
+        document.getElementById('d_surname_other_nationalitie').value = ''
         document.querySelector('#success_d_idno').classList.add('d-none');
         document.querySelector('#warning_d_idno').classList.add('d-none');
     }
@@ -1191,6 +1202,7 @@ const slides = GLightbox({
 
             document.querySelector('#d_idno_other_nationalitie').value = '';
             document.querySelector('#d_name_other_nationalitie').value = '';
+            document.querySelector('#d_surname_other_nationalitie').value = '';
 
         }
         else{
@@ -1226,6 +1238,7 @@ const slides = GLightbox({
 <script>
     function clearInputName_nationalitie(){
         document.querySelector('#d_name_other_nationalitie').value = '';
+        document.querySelector('#d_surname_other_nationalitie').value = '';
     }
 
     function clearInputID_nationalitie(){

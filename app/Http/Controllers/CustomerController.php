@@ -93,11 +93,13 @@ class CustomerController extends Controller
             return view('customer.index', compact('customers'));
         }
 
-        if (!empty($requestData['c_name_other_nationalitie'])) {
+        if (!empty($requestData['c_name_other_nationalitie']) and !empty($requestData['c_surname_other_nationalitie'])) {
             $c_name_other_nationalitie = $requestData['c_name_other_nationalitie'];
+            $c_surname_other_nationalitie = $requestData['c_surname_other_nationalitie'];
 
             $customers = Customer::where('c_name_other_nationalitie', $c_name_other_nationalitie)
-            ->first();
+                ->where('c_surname_other_nationalitie', $c_surname_other_nationalitie)
+                ->first();
 
             return view('customer.index', compact('customers'));
         }

@@ -61,11 +61,13 @@ class DriverController extends Controller
 
                 return view('driver.index', compact('driver'));
         }
-        else if (!empty($requestData['d_name_other_nationalitie'])) {
+        else if (!empty($requestData['d_name_other_nationalitie']) and !empty($requestData['d_surname_other_nationalitie'])) {
 
             $d_name_other_nationalitie = $requestData['d_name_other_nationalitie'];
+            $d_surname_other_nationalitie = $requestData['d_surname_other_nationalitie'];
 
             $driver = Driver::where('d_name_other_nationalitie', $d_name_other_nationalitie)
+                ->where('d_surname_other_nationalitie', $d_surname_other_nationalitie)
                 ->first();
 
                 return view('driver.index', compact('driver'));

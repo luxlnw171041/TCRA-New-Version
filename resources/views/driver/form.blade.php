@@ -379,9 +379,11 @@
                                 document.querySelector('#d_idno').required = true;
 
                                 document.querySelector('#d_name_other_nationalitie').required = false;
+                                document.querySelector('#d_surname_other_nationalitie').required = false;
                                 document.querySelector('#d_idno_other_nationalitie').required = false;
 
                                 document.querySelector('#d_name_other_nationalitie').value = '';
+                                document.querySelector('#d_surname_other_nationalitie').value = '';
                                 document.querySelector('#d_idno_other_nationalitie').value = '';
 
                             }
@@ -403,6 +405,7 @@
                                 document.querySelector('#d_idno').required = false;
 
                                 document.querySelector('#d_name_other_nationalitie').required = true;
+                                document.querySelector('#d_surname_other_nationalitie').required = true;
                                 document.querySelector('#d_idno_other_nationalitie').required = true;
 
                                 document.querySelector('#d_name').value = '';
@@ -452,23 +455,32 @@
                     </div>
                     <!-- ต่างชาติ -->
                     <div id="input_data_other_nationalitie" class="row g-3 mt-3 d-none">
-                        <div class="col-md-6 mt-md-0 mb-4">
-                                <div class="input-group addDataperson">
-                                    <div class="inputGroup w-100">
-                                        <input name="d_name_other_nationalitie" type="text" id="d_name_other_nationalitie" value="{{ isset($customer->d_name_other_nationalitie) ? $customer->d_name_other_nationalitie : '' }}"  autocomplete="off" >
-                                        <label for="d_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
-                                    </div>
+                        <div class="col-md-4 mt-md-0 mb-4">
+                            <div class="input-group addDataperson">
+                                <div class="inputGroup w-100">
+                                    <input name="d_name_other_nationalitie" type="text" id="d_name_other_nationalitie" value="{{ isset($customer->d_name_other_nationalitie) ? $customer->d_name_other_nationalitie : '' }}"  autocomplete="off" >
+                                    <label for="d_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อหน้า <span class="text-danger">*</span></label>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-md-6 mt-md-0 mb-4 " style="position:relative;">
-                                <div class="input-group  addDataperson">
-                                    <div class="inputGroup w-100">
-                                        <input type="text" autocomplete="off" name="d_idno_other_nationalitie" id="d_idno_other_nationalitie" value="{{ isset($customer->d_idno_other_nationalitie) ? $customer->d_idno_other_nationalitie : '' }}">
-                                        <label for="d_idno_other_nationalitie"><i class="fa-solid fa-id-card"></i> หมายเลขพาสปอร์ต (Passport) <span class="text-danger">*</span></label>
-                                    </div>
+                        <div class="col-md-4 mt-md-0 mb-4">
+                            <div class="input-group addDataperson">
+                                <div class="inputGroup w-100">
+                                    <input name="d_surname_other_nationalitie" type="text" id="d_surname_other_nationalitie" value="{{ isset($customer->d_surname_other_nationalitie) ? $customer->d_surname_other_nationalitie : '' }}"  autocomplete="off" >
+                                    <label for="d_surname_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อหลัง <span class="text-danger">*</span></label>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="col-md-4 mt-md-0 mb-4 " style="position:relative;">
+                            <div class="input-group  addDataperson">
+                                <div class="inputGroup w-100">
+                                    <input type="text" autocomplete="off" name="d_idno_other_nationalitie" id="d_idno_other_nationalitie" value="{{ isset($customer->d_idno_other_nationalitie) ? $customer->d_idno_other_nationalitie : '' }}">
+                                    <label for="d_idno_other_nationalitie"><i class="fa-solid fa-id-card"></i> หมายเลขพาสปอร์ต (Passport) <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -1164,6 +1176,7 @@
         let d_idno = document.querySelector('#d_idno');
         
         let d_name_other_nationalitie = document.querySelector('#d_name_other_nationalitie');
+        let d_surname_other_nationalitie = document.querySelector('#d_surname_other_nationalitie');
         let d_idno_other_nationalitie = document.querySelector('#d_idno_other_nationalitie');
 
         // textaarea
@@ -1193,6 +1206,7 @@
                 formData.append('d_idno', d_idno.value);
             }else{
                 formData.append('d_name_other_nationalitie', d_name_other_nationalitie.value);
+                formData.append('d_surname_other_nationalitie', d_surname_other_nationalitie.value);
                 formData.append('d_idno_other_nationalitie', d_idno_other_nationalitie.value);
             }
             

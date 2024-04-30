@@ -212,7 +212,7 @@
 						                                    @elseif(!empty($item->c_company_name) )
 						                                    {{$item->c_company_name}}
 						                                    @elseif(!empty($item->c_name_other_nationalitie) )
-						                                    {{$item->c_name_other_nationalitie}}
+						                                    {{$item->c_name_other_nationalitie}} {{$item->c_surname_other_nationalitie}}
 						                                    <br>
 						                                    <span class="text-info" style="font-size:14px;">(ต่างชาติ)</span>
 						                                    @endif
@@ -561,7 +561,7 @@
 					                                        <p class="text-secondary mb-1">{{ substr_replace(substr_replace(substr_replace(substr_replace($item->d_idno, '-', 1, 0), '-', 6, 0), '-', 12, 0), '-', 15, 0) }}</p>
 					                                    @elseif(!empty($item->d_name_other_nationalitie) )
 					                                        <h4>
-					                                            {{ $item->d_name_other_nationalitie }}
+					                                            {{ $item->d_name_other_nationalitie }} {{ $item->d_surname_other_nationalitie }}
 					                                            <br>
 					                                            <span class="text-info" style="font-size:14px;">(ต่างชาติ)</span>
 					                                        </h4>

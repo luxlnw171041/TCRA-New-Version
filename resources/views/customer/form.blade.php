@@ -391,9 +391,11 @@
                                     document.querySelector('#c_idno').required = true;
 
                                     document.querySelector('#c_name_other_nationalitie').required = false;
+                                    document.querySelector('#c_surname_other_nationalitie').required = false;
                                     document.querySelector('#c_idno_other_nationalitie').required = false;
 
                                     document.querySelector('#c_name_other_nationalitie').value = '';
+                                    document.querySelector('#c_surname_other_nationalitie').value = '';
                                     document.querySelector('#c_idno_other_nationalitie').value = '';
 
                                 }
@@ -415,6 +417,7 @@
                                     document.querySelector('#c_idno').required = false;
 
                                     document.querySelector('#c_name_other_nationalitie').required = true;
+                                    document.querySelector('#c_surname_other_nationalitie').required = true;
                                     document.querySelector('#c_idno_other_nationalitie').required = true;
 
                                     document.querySelector('#c_name').value = '';
@@ -463,16 +466,25 @@
 
                         <!-- ต่างชาติ -->
                         <div id="input_data_other_nationalitie"  class="row g-3 mt-3 d-none">
-                            <div class="col-md-6 mt-md-0 mb-4">
+                            <div class="col-md-4 mt-md-0 mb-4">
                                 <div class="input-group addDataperson">
                                     <div class="inputGroup w-100">
                                         <input name="c_name_other_nationalitie" type="text" id="c_name_other_nationalitie" value="{{ isset($customer->c_name_other_nationalitie) ? $customer->c_name_other_nationalitie : '' }}"  autocomplete="off" >
-                                        <label for="c_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อ <span class="text-danger">*</span></label>
+                                        <label for="c_name_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อหน้า <span class="text-danger">*</span></label>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-6 mt-md-0 mb-4 " style="position:relative;">
+                            <div class="col-md-4 mt-md-0 mb-4">
+                                <div class="input-group addDataperson">
+                                    <div class="inputGroup w-100">
+                                        <input name="c_surname_other_nationalitie" type="text" id="c_surname_other_nationalitie" value="{{ isset($customer->c_surname_other_nationalitie) ? $customer->c_surname_other_nationalitie : '' }}"  autocomplete="off" >
+                                        <label for="c_surname_other_nationalitie"><i class="fa-solid fa-user"></i> ชื่อหลัง <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mt-md-0 mb-4 " style="position:relative;">
                                 <div class="input-group  addDataperson">
                                     <div class="inputGroup w-100">
                                         <input type="text" autocomplete="off" name="c_idno_other_nationalitie" id="c_idno_other_nationalitie" value="{{ isset($customer->c_idno_other_nationalitie) ? $customer->c_idno_other_nationalitie : '' }}">
@@ -1128,6 +1140,7 @@
         let c_idno = document.querySelector('#c_idno');
 
         let c_name_other_nationalitie = document.querySelector('#c_name_other_nationalitie');
+        let c_surname_other_nationalitie = document.querySelector('#c_surname_other_nationalitie');
         let c_idno_other_nationalitie = document.querySelector('#c_idno_other_nationalitie');
         
         let c_company_name = document.querySelector('#c_company_name');
@@ -1160,6 +1173,7 @@
                 formData.append('c_idno', c_idno.value);
             }else{
                 formData.append('c_name_other_nationalitie', c_name_other_nationalitie.value);
+                formData.append('c_surname_other_nationalitie', c_surname_other_nationalitie.value);
                 formData.append('c_idno_other_nationalitie', c_idno_other_nationalitie.value);
             }
         }
